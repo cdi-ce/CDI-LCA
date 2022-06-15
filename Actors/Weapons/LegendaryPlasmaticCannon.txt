@@ -1,0 +1,197 @@
+Actor "Legendary Plasmatic Cannon" : Weapon
+{
+Tag "Legendary Plasmatic Cannon"
+Weapon.SelectionOrder 7985
+Weapon.KickBack 100
+Weapon.AmmoType "LDemonAmmo"
+Weapon.AmmoGive 100
+Weapon.AmmoUse 6
+Weapon.AmmoType2 "LDemonAmmo"
+Weapon.AmmoUse2 2
+Weapon.Upsound "legendarycannon/up"
+Weapon.PreferredSkin "LegendaryCannon-Marine"
+Inventory.PickupMessage "\c[z3]Legendary Plasmatic Cannon"
+Inventory.PickupSound "legendarycannon/up"
+Obituary "%o got turned into a pile of gold and blue meat slime by %k's Legendary Plasmatic Cannon."
+Decal DoomImpScorch
++INVENTORY.UNDROPPABLE
+States
+{
+  Spawn:
+    LEGW Z -1
+    Loop
+  Ready:
+    LCAN A 1 A_WeaponReady
+    Loop
+  Deselect:
+    TNT1 A 0 A_TakeInventory("HandGrenadeAction",1)
+	TNT1 A 0 A_TakeInventory("MineAction",1)
+	TNT1 A 0 A_TakeInventory("RailgunAction",1)
+	TNT1 A 0 A_Lower
+    LCAN A 1 A_Lower
+    Goto Deselect+1
+  Select:
+    TNT1 A 0 A_Raise
+    LCAN A 1 A_Raise
+    Loop
+  Fire:
+    TNT1 A 0 A_GunFlash
+	LCAN B 2 Bright
+	TNT1 A 0 A_PlaySound("legendarycannon/fire")
+	TNT1 A 0 Radius_Quake(2,2,0,1,0)
+    LCAN C 2 Bright A_FireCustomMissile("LegendaryCannonProj",0,1,0,0)
+    LCAN DE 2 Bright
+	LCAN F 2
+	LCAN GH 3
+	LCAN A 3 A_Refire
+    Goto Ready
+  AltFire:
+	LCAN A 15 Bright A_PlayWeaponSound("legendarycannon/charge")
+    LCAN C 2 Bright A_FireCustomMissile("LegendaryCannonBall",0,1,0,0)
+    LCAN DEF 2 Bright
+    LCAN C 2 Bright A_FireCustomMissile("LegendaryCannonBall",0,1,0,0)
+    LCAN DEF 2 Bright
+	LCAN C 2 Bright A_FireCustomMissile("LegendaryCannonBall",0,1,0,0)
+    LCAN DEF 2 Bright
+    LCAN C 2 Bright A_FireCustomMissile("LegendaryCannonBall",0,1,0,0)
+    LCAN DEF 2 Bright
+    LCAN C 2 Bright A_FireCustomMissile("LegendaryCannonBall",0,1,0,0)
+    LCAN DEF 2 Bright
+    LCAN C 2 Bright A_FireCustomMissile("LegendaryCannonBall",0,1,0,0)
+    LCAN DEF 2 Bright
+	LCAN C 2 Bright A_FireCustomMissile("LegendaryCannonBall",0,1,0,0)
+    LCAN DEF 2 Bright
+    LCAN C 2 Bright A_FireCustomMissile("LegendaryCannonBall",0,1,0,0)
+    LCAN DEF 2 Bright
+	LCAN C 2 Bright A_FireCustomMissile("LegendaryCannonBall",0,1,0,0)
+    LCAN DEF 2 Bright
+    LCAN C 2 Bright A_FireCustomMissile("LegendaryCannonBall",0,1,0,0)
+    LCAN DEF 2 Bright
+	TNT1 A 0 A_PlaySound ("legendarycannon/steam")
+	TNT1 A 0 A_FireCustomMissile("LegendaryCannonSmoke",0,0,1,6)
+	LCAN ABABABABABABABABABABA 3 A_FireCustomMissile("LegendaryCannonSmoke",0,0,1,6)
+    Goto Ready	
+  Flash:
+    TNT1 A 1 A_Light1
+    TNT1 A 1 A_Light2
+    TNT1 A 1 A_Light1
+    TNT1 A 1 A_Light0
+    Stop
+  }
+}
+
+ACTOR LegendaryCannonSmoke
+{
+	Scale 0.2
+	Alpha 0.6
+	+NOCLIP 
+	+NOGRAVITY
+	+NOTIMEFREEZE
+	Radius 1 
+	Height 1 
+	Speed 2
+	RenderStyle Translucent
+	States
+	{
+		Spawn:
+			TNT1 A 0
+			TNT1 A 0 ThrustThingZ (0, random(3, 6), 0, 0)
+            LCSM ABCD 1
+			TNT1 A 0
+			TNT1 A 0 A_Jump(256, 1, 2, 3, 4)
+			LCSM A 1 A_FadeOut(0.01)
+			Wait
+			LCSM B 1 A_FadeOut(0.01)
+			Wait
+			LCSM C 1 A_FadeOut(0.01)
+			Wait
+			LCSM D 1 A_FadeOut(0.01)
+			Wait
+		    Stop
+		Death:
+			LCSM R 1
+            Stop
+	}
+}
+
+Actor LegendaryCannonProj
+{
+Radius 8
+Height 10
+Speed 70
+Damage 70
+Scale 0.17
+Projectile 
++SEEKERMISSILE 
++RANDOMIZE
++EXTREMEDEATH
++DOOMBOUNCE
++THRUSPECIES
++FORCERADIUSDMG
++NOTIMEFREEZE
+BounceCount 4
+DeathSound "lrball3/exp"
+Species "Player"
+DamageType "Legendary"
+RenderStyle Add
+States
+{
+  Spawn:
+    LRBA A 0
+    LRBA A 0 bright A_SeekerMissile(15,8,SMF_LOOK)
+	LRB3 AA 1 bright A_SpawnItemEx("LegRevBall3Trail2",0,0,0,0,0,0,0,SXF_CLIENTSIDE)
+	LRBA A 0 bright A_SeekerMissile(1,8,SMF_LOOK)
+	LRB3 BB 1 bright A_SpawnItemEx("LegRevBall3Trail2",0,0,0,0,0,0,0,SXF_CLIENTSIDE)
+	LRBA A 0 bright A_SeekerMissile(15,8,SMF_LOOK)
+	LRB3 CC 1 bright A_SpawnItemEx("LegRevBall3Trail2",0,0,0,0,0,0,0,SXF_CLIENTSIDE)
+	LRBA A 0 bright A_SeekerMissile(15,8,SMF_LOOK)
+	LRB3 DD 1 bright A_SpawnItemEx("LegRevBall3Trail2",0,0,0,0,0,0,0,SXF_CLIENTSIDE)
+    loop
+  Death:
+    TNT1 A 0
+	TNT1 A 0 A_SpawnItemEx("BlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	TNT1 AAA 0 A_CustomMissile("Kaboom6", 0, 0, random(0,360), 2, random(0,360))
+	TNT1 AAA 0 A_CustomMissile("SmokeFX4", 0, 0, random(0,360), 2, random(0,360))
+    TNT1 I 8 bright A_Explode(64,80,0)
+    TNT1 J 6 bright
+    TNT1 K 4 bright
+    Stop
+  }
+}
+
+Actor LegendaryCannonBall
+{
+Radius 8
+Height 8
+Speed 42
+Damage 35
+Scale 1.5
+PROJECTILE
+RENDERSTYLE ADD
++SPAWNSOUNDSOURCE
++SEEKERMISSILE
++THRUSPECIES
++FORCERADIUSDMG
++NOTIMEFREEZE
+ALPHA 0.8
+Species "Player"
+DamageType "Legendary"
+SeeSound "lrball1/shot"
+DeathSound "lrball1/exp"
+Decal HeatScorch
+States
+{
+  Spawn:
+    LRB1 ABCD 2 A_CustomMissile("LegRevBallFX",0,0,0,0)
+    Loop	
+  Death:
+	LRB1 ABCD 4 A_SpawnItemEx("BlueParticleSpawner",0,0,0,0,0,0,0,128)
+	TNT1 A 0 A_Explode(64,32,0) 
+	TNT1 A 0 A_PlaySound("weapons/clrocketexplode")
+	TNT1 A 0 A_SpawnItemEx("BlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	TNT1 AAA 0 A_CustomMissile("Kaboom6", 0, 0, random(0,360), 2, random(0,360))
+	TNT1 AAA 0 A_CustomMissile("SmokeFX4", 0, 0, random(0,360), 2, random(0,360))	
+    LRB1 EFGHIJKLMNO 3
+    Stop
+    }
+}

@@ -1,0 +1,1034 @@
+ACTOR LegendaryBehemoth 7023
+{
+Monster
+Radius 48
+Height 64
+Health 2900
+PainChance 30
+Scale 1.25
+Speed 9
+DamageFactor "BeheComet", 0.0
+DamageFactor "FatFlamer", 0.0
+DamageFactor "Legendary", 0.0
+DamageFactor "LegendaryGuru", 0.0
+DamageFactor "LegendaryGuruPlayer", 0.3
+DamageFactor "LegendaryPlayer", 0.3
+DamageFactor "Legendary1", 0.0
+DamageFactor "PDTBFG", 0.25
+DamageFactor "PDTBFGTracer", 0.25
+DamageFactor "PlayerDevBall", 0.125
+DamageFactor "PlayerDevBall2", 0.125
+DamageFactor "PlayerDTBFGRailgunSlug", 0.125
+DamageFactor "PlayerDevTracer", 0.125
+DamageFactor "DBFG10K2", 0.65
+DamageFactor "PlayerDBFG10K2", 0.65
+DamageFactor "DBFG2", 0.65
+DamageFactor "PlayerDBFG2", 0.65
+DamageFactor 0.65
+DropItem "LifeEssence" 140
+DropItem "ArmorBonusMax" 140
+BloodColor "Blue"
+Species "Fatsos"
++FLOORCLIP
++BOSS
++BOSSDEATH
++MISSILEMORE
++MISSILEEVENMORE
++QUICKTORETALIATE
++DONTHURTSPECIES
++NOICEDEATH
++DONTGIB
++NOTARGET
++NORADIUSDMG
++NOTIMEFREEZE
++Bright
+Mass 1500
+SeeSound "FreezerBehe/Sight"
+PainSound "FreezerBehe/Pain"
+DeathSound "FreezerBehe/Death"
+ActiveSound "manc/idle"
+DropItem "LegendarySphere" 110 1
+DropItem "LegendaryRune" 110 1
+DropItem "LDemonAmmoBox" 256 
+DropItem "LDemonAmmo" 256 
+DropItem "BossLifeEssence" 256 
+DropItem "BossArmorBonusMax" 256 
+DropItem "Legendary Plasmatic Cannon" 180 1
+DropItem "LegTimeFreezeSphere" 80
+Obituary "%o was turned into a pile of gold and blue meat slime by a Legendary Behemoth."
+var int user_heal;
+var int user_music;
+States
+{
+    Spawn:
+	   LEG2 CCC 0 Bright A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 C 8 Bright A_Look
+	   LEG2 CCC 0 Bright A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 C 8 Bright A_Look
+	   LEG2 CCC 0 Bright A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEGI C 8 Bright A_Look
+	   LEGI CCC 0 Bright A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEGI C 8 Bright A_Look
+	   LEGI CCC 0 Bright A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+       Loop
+    See:
+	   TNT1 A 0 A_JumpIf(user_music == 1,3)
+       TNT1 A 0 ACS_ExecuteAlways(5432,0,11)
+	   TNT1 A 0 A_SetUserVar("user_music",1)
+	   TNT1 A 0 A_Jump(100,"Rush")
+       TNT1 A 0 A_SpawnItem("LegendaryBeefyStep",0,0,0,0)   
+	   LEG2 AAA 0 A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+       LEG2 AA 2 Bright A_Chase
+	   LEG2 AAA 0 A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 BB 2 Bright A_Chase
+	   LEG2 AAA 0 A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 CC 2 Bright A_Chase
+	   LEG2 AAA 0 A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 DD 2 Bright A_Chase
+       TNT1 A 0 A_SpawnItem("LegendaryBeefyStep",0,0,0,0)
+       LEG2 AAA 0 A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 EE 2 Bright A_Chase
+	   LEG2 AAA 0 A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 FF 2 Bright A_Chase
+	   TNT1 A 0 A_Jump(35,"Teleport")
+       Loop
+	Rush:
+       TNT1 A 0 A_SpawnItem("LegendaryBeefyStep",0,0,0,0)   
+	   LEG2 AAA 0 A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 AAAAA 0 A_Chase
+       LEG2 A 2 Bright A_SpawnItemEx("LBGhost",0,0,0,0,0,0,0,128)
+	   LEG2 AAA 0 A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 AAAAA 0 A_Chase
+       LEG2 B 2 Bright A_SpawnItemEx("LBGhost",0,0,0,0,0,0,0,128)
+	   LEG2 AAA 0 A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 AAAAA 0 A_Chase
+       LEG2 C 2 Bright A_SpawnItemEx("LBGhost",0,0,0,0,0,0,0,128)
+	   LEG2 AAA 0 A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 AAAAA 0 A_Chase
+       LEG2 D 2 Bright A_SpawnItemEx("LBGhost",0,0,0,0,0,0,0,128)
+       TNT1 A 0 A_SpawnItem("LegendaryBeefyStep",0,0,0,0)
+	   LEG2 AAA 0 A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 AAAAA 0 A_Chase
+       LEG2 E 2 Bright A_SpawnItemEx("LBGhost",0,0,0,0,0,0,0,128)
+	   LEG2 AAA 0 A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 AAAAA 0 A_Chase
+       LEG2 F 2 Bright A_SpawnItemEx("LBGhost",0,0,0,0,0,0,0,128)
+	   TNT1 A 0 A_Jump(30,"Teleport")
+	   TNT1 A 0 A_Jump(75,"See")
+       Loop   
+	Teleport:
+	   LEG2 A 1 Bright A_UnSetShootable
+	   LEG2 AAAA 0 A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 AAAAAAAAAA 1  A_FadeOut(0.1,0)
+	   LEG2 A 2 
+	   LEG2 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	   LEG2 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	   LEG2 A 1 A_PlayWeaponSound("boss/teleport")
+	   LEG2 AAAA 0 A_SpawnItemEx("LHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 AAAAAAAAAA 1 A_FadeIn(0.1)
+	   LEG2 A 1 Bright A_SetShootable
+	   Goto See		
+    Missile:
+       TNT1 A 0 A_SetShootable
+       TNT1 A 0 A_UnsetInvulnerable
+       TNT1 A 0 A_SetTranslucent(1)
+	   TNT1 A 0 A_JumpIfCloser(350,"BlueFlame")
+	   TNT1 A 0 A_Jump(32,"AssaultProjectile")
+	   TNT1 A 0 A_Jump(156,"BFGG","Cannon","Combo","Floor","Proton","AssaultProjectile")
+    Normal:
+       TNT1 A 0 A_PlaySound("monsters/volattack")
+       LEG2 G 15 Bright A_FaceTarget    
+       TNT1 A 0 A_FaceTarget 
+	   TNT1 A 0 A_PlayWeaponSound("legendarycannon/fire")
+       TNT1 A 0 A_CustomMissile("LegBehComet", 30, -30, Random(0, 6))
+       LEG2 H 2 Bright A_CustomMissile("LegBehComet", 30, 30, Random(0, -6))	   
+       TNT1 A 0 A_CustomMissile("LegBehComet", 30, 30, Random(-7, -12))
+       LEG2 H 6 Bright A_CustomMissile("LegBehComet", 30, -30, Random(7, 12))
+       LEG2 IG 8 Bright A_FaceTarget    
+	   TNT1 A 0 A_PlayWeaponSound("legendarycannon/fire")
+       TNT1 A 0 A_CustomMissile("LegBehComet", 30, -30, Random(0, 6))
+       LEG2 H 2 Bright A_CustomMissile("LegBehComet", 30, 30, Random(0, -6))	   
+       TNT1 A 0 A_CustomMissile("LegBehComet", 30, 30, Random(-7, -12))
+       LEG2 H 6 Bright A_CustomMissile("LegBehComet", 30, -30, Random(7, 12))
+       LEG2 IG 8 Bright A_FaceTarget
+	   TNT1 A 0 A_PlayWeaponSound("legendarycannon/fire")
+       TNT1 A 0 A_CustomMissile("LegBehComet", 30, -30, Random(0, 6))
+       LEG2 H 2 Bright A_CustomMissile("LegBehComet", 30, 30, Random(0, -6))	   
+       TNT1 A 0 A_CustomMissile("LegBehComet", 30, 30, Random(-7, -12))
+       LEG2 H 6 Bright A_CustomMissile("LegBehComet", 30, -30, Random(7, 12))
+       LEG2 IG 8 Bright A_Jump(48,"BFGG")
+       Goto See
+    BFGG:
+	   LEG2 G 1 Bright A_PlaySound("FreezerBehe/Sight")
+	   LEG2 G 0 A_SetInvulnerable
+	   LEG2 G 1 Bright A_FaceTarget
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+	   TNT1 A 0 A_PlaySound("monsters/volattack")
+	   TNT1 A 0 A_PlayWeaponSound("weapons/bfgf")
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_UnSetInvulnerable
+	   TNT1 A 0 A_ChangeFlag(NOPAIN,1)  
+	   LEG2 H 0 A_CustomMissile("LegBehBFGBall", 30, 30, 0)
+       LEG2 H 6 Bright A_CustomMissile("LegBehBFGBall", 30, -30, 0)
+	   TNT1 A 0 A_ChangeFlag(NOPAIN,0)
+       LEG2 IG 8 Bright A_Jump(80,"Cannon")
+       Goto See
+    Cannon:
+	   LEG2 G 1 Bright A_PlaySound("FreezerBehe/Sight")
+	   LEG2 G 0 A_SetInvulnerable
+	   LEG2 G 1 Bright A_FaceTarget
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+	   TNT1 A 0 A_PlaySound("monsters/volattack")
+	   TNT1 A 0 A_PlayWeaponSound("legendarycannon/charge")
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_UnSetInvulnerable
+	   TNT1 A 0 A_ChangeFlag(NOPAIN,1)
+	   LEG2 H 0 A_CustomMissile("NewLegCommanderProj",30,-30,7,0)
+	   LEG2 H 0 A_CustomMissile("NewLegCommanderProj",30,-30,-7,0)
+       LEG2 H 0 A_CustomMissile("NewLegCommanderProj",30,-30,0,0)
+	   LEG2 H 0 A_CustomMissile("NewLegCommanderProj",30,30,7,0)
+	   LEG2 H 0 A_CustomMissile("NewLegCommanderProj",30,30,-7,0)
+       LEG2 H 0 A_CustomMissile("NewLegCommanderProj",30,30,0,0)
+       LEG2 H 8 Bright A_PlaySoundEx("LegCannon/Fire2","Weapon")
+       LEG2 IG 8 Bright A_FaceTarget
+	   LEG2 H 0 A_CustomMissile("NewLegCommanderProj",30,-30,7,0)
+	   LEG2 H 0 A_CustomMissile("NewLegCommanderProj",30,-30,-7,0)
+       LEG2 H 0 A_CustomMissile("NewLegCommanderProj",30,-30,0,0)
+	   LEG2 H 0 A_CustomMissile("NewLegCommanderProj",30,30,7,0)
+	   LEG2 H 0 A_CustomMissile("NewLegCommanderProj",30,30,-7,0)
+       LEG2 H 0 A_CustomMissile("NewLegCommanderProj",30,30,0,0)
+       LEG2 H 8 Bright A_PlaySoundEx("LegCannon/Fire2","Weapon")
+       LEG2 IG 8 Bright A_FaceTarget
+	   LEG2 H 0 A_CustomMissile("NewLegCommanderProj",30,-30,7,0)
+	   LEG2 H 0 A_CustomMissile("NewLegCommanderProj",30,-30,-7,0)
+       LEG2 H 0 A_CustomMissile("NewLegCommanderProj",30,-30,0,0)
+	   LEG2 H 0 A_CustomMissile("NewLegCommanderProj",30,30,7,0)
+	   LEG2 H 0 A_CustomMissile("NewLegCommanderProj",30,30,-7,0)
+       LEG2 H 0 A_CustomMissile("NewLegCommanderProj",30,30,0,0)
+       LEG2 H 8 Bright A_PlaySoundEx("LegCannon/Fire2","Weapon")
+       LEG2 IG 8 Bright A_FaceTarget
+	   TNT1 A 0 A_ChangeFlag(NOPAIN,0)
+       LEG2 IG 8 Bright A_Jump(80,"Floor")
+       Goto See	
+	Floor:
+	   TNT1 A 0 A_PlaySound("monsters/volattack")
+       LEG2 G 15 Bright A_FaceTarget    
+       TNT1 A 0 A_FaceTarget    
+       TNT1 A 0 A_CustomMissile("LegBehFloorFire", 30, 30, 0)
+       LEG2 H 8 Bright A_CustomMissile("LegBehFloorFire", 30, -30, 0)
+       LEG2 IG 8 Bright A_FaceTarget      
+       TNT1 A 0 A_CustomMissile("LegBehFloorFire", 30, 30, 0)
+       LEG2 H 8 Bright A_CustomMissile("LegBehFloorFire", 30, -30, 0)
+       LEG2 IG 8 Bright A_Jump(80,"Combo")
+       Goto See
+    Combo:
+       TNT1 A 0 A_PlaySound("monsters/volattack")
+       LEG2 G 8 Bright A_FaceTarget    
+       TNT1 A 0 A_FaceTarget     
+       LEG2 H 4 Bright A_CustomMissile("LegBehBall", 30, 30, 0)
+       LEG2 IG 2 Bright A_FaceTarget
+	   LEG2 H 4 Bright A_CustomMissile("LegBehBall", 30, -30, 0)
+       LEG2 IG 2 Bright A_FaceTarget
+	   LEG2 H 4 Bright A_CustomMissile("LegBehBall", 30, 30, 0)
+       LEG2 IG 2 Bright A_FaceTarget
+	   LEG2 H 4 Bright A_CustomMissile("LegBehBall", 30, -30, 0)
+       LEG2 IG 2 Bright A_FaceTarget
+	   LEG2 H 4 Bright A_CustomMissile("LegBehBall", 30, 30, 0)
+       LEG2 IG 2 Bright A_FaceTarget
+	   LEG2 H 4 Bright A_CustomMissile("LegBehBall", 30, -30, 0)
+       LEG2 IG 2 Bright A_FaceTarget
+	   LEG2 H 4 Bright A_CustomMissile("LegBehBall", 30, 30, 0)
+       LEG2 IG 2 Bright A_FaceTarget
+	   LEG2 H 4 Bright A_CustomMissile("LegBehBall", 30, -30, 0)
+       LEG2 IG 2 Bright A_FaceTarget
+	   LEG2 H 4 Bright A_CustomMissile("LegBehBall", 30, 30, 0)
+       LEG2 IG 2 Bright A_FaceTarget
+	   LEG2 H 4 Bright A_CustomMissile("LegBehBall", 30, -30, 0)
+       LEG2 IG 2 Bright A_FaceTarget
+	   LEG2 H 4 Bright A_CustomMissile("LegBehBall", 30, 30, 0)
+       LEG2 IG 2 Bright A_FaceTarget
+	   LEG2 H 4 Bright A_CustomMissile("LegBehBall", 30, -30, 0)
+       LEG2 IG 2 Bright A_FaceTarget
+	   LEG2 H 4 Bright A_CustomMissile("LegBehBall", 30, 30, 0)
+       LEG2 IG 2 Bright A_FaceTarget
+	   LEG2 H 4 Bright A_CustomMissile("LegBehBall", 30, -30, 0)
+       LEG2 IG 2 Bright A_FaceTarget
+	   LEG2 H 4 Bright A_CustomMissile("LegBehBall", 30, 30, 0)
+       LEG2 IG 2 Bright A_FaceTarget
+	   LEG2 H 4 Bright A_CustomMissile("LegBehBall", 30, -30, 0)
+       LEG2 IG 2 Bright A_FaceTarget
+	   LEG2 I 0 A_Jump(80,"Proton")
+       Goto See
+   Proton:
+	   LEG2 G 1 Bright A_PlaySound("FreezerBehe/Sight")
+	   LEG2 G 0 A_SetInvulnerable
+	   LEG2 G 1 Bright A_FaceTarget
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+	   TNT1 A 0 A_PlaySound("monsters/volattack")
+	   TNT1 A 0 A_PlayWeaponSound("legproton/load")
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_UnSetInvulnerable
+	   TNT1 A 0 A_ChangeFlag(NOPAIN,1)
+	   TNT1 A 0 A_PlaySound("Petrovec/Fire",1)
+	   TNT1 A 0 A_PlaySound("Petrovec/AddFire",6)
+	   TNT1 A 0 A_PlaySound("Petrovec/Ambient",5)
+	   TNT1 A 0 A_CustomMissile("LehBehProntonBolt", 30, -30, Random(0, 6))
+       LEG2 H 2 Bright A_CustomMissile("LehBehProntonBolt", 30, 30, Random(0, -6))	   
+       TNT1 A 0 A_CustomMissile("LehBehProntonBolt", 30, 30, Random(-7, -12))
+       LEG2 H 6 Bright A_CustomMissile("LehBehProntonBolt", 30, -30, Random(7, 12))
+	   TNT1 A 0 A_ChangeFlag(NOPAIN,0)
+       LEG2 IG 8 Bright A_Jump(80,"Floor")
+       Goto See
+   AssaultProjectile:
+	   LEG2 G 1 Bright A_PlaySound("FreezerBehe/Sight")
+	   LEG2 G 0 A_SetInvulnerable
+	   LEG2 G 1 Bright A_FaceTarget
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("BHellionSmokeSpawner",random(-24,24),random(-24,24),0)
+	   LEG2 G 0 A_FaceTarget
+	   TNT1 A 0 A_PlaySound("monsters/volattack")
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_FaceTarget
+       LEG2 G 2 Bright A_SpawnItemEx("LBSFlameSpawner",random(-24,24),random(-24,24),-30)
+	   LEG2 G 0 A_UnSetInvulnerable
+	   TNT1 A 0 A_ChangeFlag(NOPAIN,1)
+       LEG2 H 0 A_PlayWeaponSound("LegendaryAssaultProjectile/Shot")
+       LEG2 H 0 A_CustomMissile("LegendaryAssaultProjectile",30,30,Random(0, -4))	   
+       LEG2 H 13 Bright A_CustomMissile("LegendaryAssaultProjectile",30,-30,Random(0,4))
+       LEG2 IG 13 Bright
+	   LPAI H 0 A_PlayWeaponSound("LegendaryAssaultProjectile/Shot")
+       LEG2 H 0 A_CustomMissile("LegendaryAssaultProjectile",30,30,Random(0, -4))	   
+       LEG2 H 13 Bright A_CustomMissile("LegendaryAssaultProjectile",30,-30,Random(0,4))
+       LEG2 IG 13 Bright
+	   TNT1 A 0 A_ChangeFlag(NOPAIN,0)
+       LEG2 IG 8 Bright A_Jump(80,"Floor")
+       Goto See  
+    BlueFlame:
+	   TNT1 A 0 A_Jump(148,"BFGG","Combo","Floor")
+	   TNT1 A 0 A_PlaySound("hectebus/flameready")
+	   LEG2 GG 5 Bright A_FaceTarget
+	   TNT1 A 0 A_PlaySound("monsters/fatsofire")
+       TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+       TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+	   TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+       TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+       TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+	   TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+       TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+	   TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+	   TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+       TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+       TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+	   TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+       TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+       TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+       TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+	   TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+       TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+       TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+       TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+	   TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET)
+       TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_CustomMissile("LegBehFlame", 30, 30, Random(6, -6), CMF_AIMOFFSET)
+       LEG2 H 1 Bright A_CustomMissile("LegBehFlame", 30, -30, Random(6, -6), CMF_AIMOFFSET) 
+	   LEG2 IG 12 Bright
+	   Goto See	   
+    Pain:	
+	   TNT1 A 0 A_Jump(45,"Teleport")
+	   TNT1 A 0 A_Jump(40,"Healing")
+       TNT1 A 0 A_Jump(156,"PainMissile")
+       LEG2 J 6 Bright A_Pain
+       Goto See
+    PainMissile:
+       LEG2 J 6 Bright A_Pain
+       Goto Missile
+	Healing:
+	   TNT1 A 0 A_JumpIf(user_heal >= 3,"See")
+       TNT1 A 0 A_PlaySoundEx("monsters/volsee","HEAL")
+	   TNT1 A 0 A_SetInvulnerable
+	   LEG2 J 0 A_SetUserVar("user_heal",user_heal+1)
+	   LEG2 J 2 Bright HealThing(300)
+       LEG2 JJJJJJJJJJJJJJJJJJJJJJJ 2 Bright A_SpawnItem("DarkAnniFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_UnSetInvulnerable
+	   LEG2 J 2 Bright
+       Goto See   
+    Death:
+	   LEG2 K 6 A_StopSound(6)
+	   TNT1 A 0 A_Explode(24,64,0)
+       LEG2 L 6 A_Scream
+       TNT1 A 0 A_SpawnItemEx("BlueGibbedGenerator",0,0,0,0,0,0,0,128,0)
+       LEG2 M 6 A_NoBlocking
+       TNT1 A 0 A_SpawnItemEx("BlueGibbedGenerator",0,0,0,0,0,0,0,128,0)
+       LEG2 NOPQR 6
+       LEG2 S 6
+       LEG2 T -1 A_KillMaster
+       Stop
+       }
+}
+
+ACTOR LegBehComet : Comet
+{
+Scale 0.55
+DamageType "BeheComet"
+MissileType ""
+RenderStyle Add
+Damage 15
+Alpha 0.85
++SEEKERMISSILE
++DOOMBOUNCE
++NOTIMEFREEZE
+BounceCount 3
+Speed 30
+DECAL Scorch
+States
+{
+Spawn:
+LHTB AAAAABBBBBB 1 Bright A_SpawnItemEx("LegBehCometTail", 0, 0, 0, 0, 0, 0, 0, 128)
+Fly:
+TNT1 A 0 A_SeekerMissile(15,8,SMF_LOOK)
+LHTB AAAAA 1 Bright A_SpawnItemEx("LegBehCometTail", 0, 0, 0, 0, 0, 0, 0, 128)
+TNT1 A 0 A_SeekerMissile(15,8,SMF_LOOK)
+LHTB BBBBB 1 Bright A_SpawnItemEx("LegBehCometTail", 0, 0, 0, 0, 0, 0, 0, 128)
+Loop
+Death:
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("LegendaryBlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+TNT1 AAAA 0 A_SpawnItemEx("LegendaryDebris",0,0,Random(20,40),Random(4,-4),Random(4,-4),Random(4,8),0,128)
+TNT1 AAA 0 A_CustomMissile("BlueKaboom", 0, 0, random(0,360), 2, random(0,360))	
+TNT1 AAA 0 A_CustomMissile("LegendarySmokeFX2", 0, 0, random(0,360), 2, random(0,360))
+BCOM DE 3 Bright
+Stop
+}
+}
+
+ACTOR LegBehCometTail : CometTail
+{
+Alpha 0.85
+Scale 0.75
++NOTIMEFREEZE
++CLIENTSIDEONLY
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+TNT1 A 1
+LBHT ABCDE 2 Bright A_FadeOut(0.12)
+Stop
+  Toaster:
+    TNT1 A 0
+	Stop	
+}
+}
+
+Actor LegBehCannonProj
+{
+Radius 8
+Height 10
+Speed 70
+Damage 25
+Scale 0.17
+Projectile 
++SEEKERMISSILE 
++RANDOMIZE
++EXTREMEDEATH
++DOOMBOUNCE
++FORCERADIUSDMG
++NOTIMEFREEZE
+BounceCount 2
+DeathSound "lrball3/exp"
+DamageType "BeheComet"
+RenderStyle Add
+States
+{
+  Spawn:
+    LRB3 A 0
+    LRB3 A 0 A_SeekerMissile(15,8,SMF_LOOK)
+	LRB3 AA 1 Bright A_SpawnItemEx("LegRevBall3Trail2",0,0,0,0,0,0,0,SXF_CLIENTSIDE)
+	LRB3 A 0 A_SeekerMissile(1,8,SMF_LOOK)
+	LRB3 BB 1 Bright A_SpawnItemEx("LegRevBall3Trail2",0,0,0,0,0,0,0,SXF_CLIENTSIDE)
+	LRB3 A 0 A_SeekerMissile(15,8,SMF_LOOK)
+	LRB3 CC 1 Bright A_SpawnItemEx("LegRevBall3Trail2",0,0,0,0,0,0,0,SXF_CLIENTSIDE)
+	LRB3 A 0 A_SeekerMissile(15,8,SMF_LOOK)
+	LRB3 DD 1 Bright A_SpawnItemEx("LegRevBall3Trail2",0,0,0,0,0,0,0,SXF_CLIENTSIDE)
+    loop
+  Death:
+    TNT1 A 0
+	TNT1 A 0 A_SpawnItemEx("LegendaryBlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	TNT1 AAA 0 A_CustomMissile("LegendaryKaboom6", 0, 0, random(0,360), 2, random(0,360))
+	TNT1 AAA 0 A_CustomMissile("LegendarySmokeFX4", 0, 0, random(0,360), 2, random(0,360))
+    TNT1 I 8 Bright A_Explode(32,80,0)
+    TNT1 J 6 Bright
+    TNT1 K 4 Bright
+    Stop
+  }
+}
+
+ACTOR LegBehBFGBall : BFGBall
+{
++EXTREMEDEATH
++FORCERADIUSDMG
++NOTIMEFREEZE
+DeathSound "lrball3/exp"
+Scale 1.4
+Speed 35
+DECAL BlueBFG9500Lightning
+DamageType "BeheComet"
+States
+{
+Spawn:
+    LTB1 A 0 A_CustomMissile("LegBehBFGBallTrail",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+	LTB1 AAA 1 Bright A_SpawnItemEx("BFGTrailParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	LTB1 B 0 A_CustomMissile("LegBehBFGBallTrail",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+	LTB1 BBB 1 Bright A_SpawnItemEx("BFGTrailParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+    Loop
+Death:
+    TNT1 A 0 A_Explode(48,156,0)
+	TNT1 A 0 A_PlaySound("lrball3/exp")
+    LTB1 CDEF 4 Bright A_SpawnItemEx("BFGTrailParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	TNT1 A 0 A_PlaySound("lrball3/exp")
+	TNT1 A 0 A_Explode(48,156,0)
+    LTB1 CDEF 4 Bright A_SpawnItemEx("BFGTrailParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	TNT1 A 0 A_PlaySound("lrball3/exp")
+	TNT1 A 0 A_Explode(48,156,0)
+    LTB1 CDEF 4 Bright A_SpawnItemEx("BFGTrailParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	TNT1 A 0 A_PlaySound("lrball3/exp")
+	TNT1 A 0 A_Explode(48,156,0)
+    LTB1 CDEF 4 Bright A_SpawnItemEx("BFGTrailParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	TNT1 A 0 A_PlaySound("lrball3/exp")
+	TNT1 A 0 A_Explode(48,156,0)
+    LTB1 CDEF 4 Bright A_SpawnItemEx("BFGTrailParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	TNT1 A 0 A_PlaySound("lrball3/exp")
+    TNT1 A 0 A_Explode(48,156,0)
+    LTB1 CDEF 4 Bright A_SpawnItemEx("BFGTrailParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	TNT1 A 0
+	TNT1 A 0 A_Explode(156,156,0)
+	TNT1 A 0 A_PlaySound("lrball3/exp")
+	TNT1 A 0 A_SpawnItemEx("LegendaryBlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	TNT1 AAAAAAAA 0 A_SpawnItemEx("BlueKaboom",random(-32,32),random(-40,40),random(8,16),random(-4,4),random(-4,4),random(0,4),0,SXF_TRANSFERPOINTERS)
+	TNT1 AAA 0 A_CustomMissile("LegendarySmokeFX4", 0, 0, random(0,360), 2, random(0,360))
+    LTB1 CDEF 4 Bright
+    Stop    
+    }
+}
+
+ACTOR BFGTrailParticleBlue : BFGTrailParticleGreen
+{
++NOTIMEFREEZE
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+SPKB A 2 Bright A_FadeOut(0.015)
+Loop
+}
+}
+
+Actor LegBehBFGBallTrail
+{
+  +NoBlockMap
+  +NoGravity
+  +ClientSideOnly
+  +NOTIMEFREEZE
+  Scale 1.5
+  RenderStyle Add
+  Radius 1
+  Height 2
+  States
+  {
+  Spawn:
+      TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    BDCR A 4 Bright A_FadeOut(0.1)
+    Loop
+  Toaster:
+    TNT1 A 0
+	Stop	
+  }
+}
+
+Actor LBGhost
+{
+Scale 1.15
+RENDERSTYLE Translucent
+Alpha 0.75
++NOGRAVITY
++CLIENTSIDEONLY
++DONTSPLASH
++NOINTERACTION
++NOCLIP
++NOTIMEFREEZE
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    LEG2 C 2 A_FadeOut(0.09)
+    Loop
+  Toaster:
+    TNT1 A 0
+	Stop	
+    }
+}
+
+ACTOR LegBehFlame : MagmaBreath
+{ 
+    Species "Fatsos"
+	DamageType "BeheComet"
+	Speed 34
+	Scale 0.65
+	+DOOMBOUNCE
+    +NOTIMEFREEZE
+	BounceCount 3
+    States 
+    { 
+    Spawn: 
+        FIB1 LKJIHGFEDCB 3 Bright A_Explode(Random(6,12),86)
+		FIB1 AA 2 Bright A_FadeOut(0.15)
+		Stop
+	Death:
+		FIB1 AA 2 Bright A_FadeOut(0.25)
+		Stop
+		} 
+}
+
+ACTOR LegBehFloorFire
+{
+Radius 13
+Height 8
+Speed 21
+Damage 10
+PROJECTILE
++RIPPER
++FLOORHUGGER
++SEEKERMISSILE
++NOTIMEFREEZE
+ReactionTime 170
+DamageType "BeheComet"
+SeeSound "weapons/diasht"
+DeathSound "weapons/firex3"
+States
+{
+   Spawn:
+    TNT1 A 0 A_PlaySoundEx("monster/ambientfire2","Voice",1)
+    TNT1 A 0 A_CustomMissile("LegBehBlueFire",0,0,0,CMF_AIMDIRECTION)
+	TNT1 A 0 A_CountDown
+	TNT1 A 2 A_SeekerMissile(2,2)
+    Loop
+   Death: 
+    TNT1 A 0
+	TNT1 A 0 A_StopSoundEx("Voice")
+    TNT1 A 0 A_SpawnItemEx("LegendaryBlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 AAAA 0 A_SpawnItemEx("LegendaryDebris",0,0,Random(20,40),Random(4,-4),Random(4,-4),Random(4,8),0,128)
+    TNT1 AAA 0 A_CustomMissile("BlueKaboom", 0, 0, random(0,360), 2, random(0,360))	
+    TNT1 AAA 0 A_CustomMissile("LegendarySmokeFX2", 0, 0, random(0,360), 2, random(0,360))
+    Stop
+	}
+}
+
+Actor LegBehBlueFire
+{
+DamageType "BeheComet"
+Radius 13
+Height 8
+Speed 0
+Damage 4
++NOGRAVITY
++FLOORCLIP
++RIPPER
++FORCERADIUSDMG
++BLOODLESSIMPACT
++NOTIMEFREEZE
+RENDERSTYLE ADD
+ALPHA 0.85
+Scale 0.75
+States
+{
+  Spawn:
+    BEFR A 2 Bright A_PlaySound("legendaryflame/crackle")
+    BEFR B 2 Bright A_Explode(6,84)
+    BEFR C 2 Bright A_PlaySound("legendaryflame/crackle")
+    BEFR D 2 Bright A_Explode(6,84)
+    BEFR E 2 Bright A_PlaySound("legendaryflame/crackle")
+    BEFR F 2 Bright A_Explode(6,84)
+    BEFR G 2 Bright A_PlaySound("legendaryflame/crackle")
+    BEFR H 2 Bright A_Explode(6,84)
+    BEFR I 2 Bright A_PlaySound("legendaryflame/crackle")
+    BEFR J 2 Bright A_Explode(6,84)
+    BEFR K 2 Bright A_PlaySound("legendaryflame/crackle")
+    BEFR L 2 Bright A_Explode(6,84)
+    BEFR M 2 Bright A_PlaySound("legendaryflame/crackle")
+    BEFR N 2 Bright A_Explode(6,84)
+    BEFR O 2 Bright A_PlaySound("legendaryflame/crackle")
+    BEFR P 2 Bright A_Explode(6,84)
+	BEFR Q 0 A_Jump(64,"Spawn")
+    BEFR QR 6 Bright
+    Stop
+	}
+}	
+
+Actor LegBehBall
+{
+    Radius 8
+    Height 8
+    Speed 42
+    Damage 5
+    Scale 1.5
+    PROJECTILE
+    RENDERSTYLE ADD
+    +SPAWNSOUNDSOURCE
+	+SEEKERMISSILE
+    +NOTIMEFREEZE
+    ALPHA 0.8
+    SeeSound "lrball1/shot"
+    DeathSound "lrball1/exp"
+    DamageType "BeheComet"
+    Decal CacoScorch
+    States
+    {
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(128,"Homing")	
+    Normal:
+        LRB1 ABCD 2 A_CustomMissile("LegRevBallFX",0,0,0,0)
+        Loop
+    Homing:
+	    TNT1 A 0 A_SeekerMissile(15,0)
+        LRB1 A 2 A_CustomMissile("LegRevBallFX",0,0,0,0)
+	    TNT1 A 0 A_SeekerMissile(15,0)
+        LRB1 B 2 A_CustomMissile("LegRevBallFX",0,0,0,0)
+	    TNT1 A 0 A_SeekerMissile(15,0)
+        LRB1 C 2 A_CustomMissile("LegRevBallFX",0,0,0,0)
+	    TNT1 A 0 A_SeekerMissile(15,0)
+        LRB1 D 2 A_CustomMissile("LegRevBallFX",0,0,0,0)		
+        Loop	
+    Death:
+	    LRB1 ABCD 4 A_SpawnItemEx("LegendaryBlueParticleSpawner",0,0,0,0,0,0,0,128)
+		TNT1 A 0 A_Explode(48,64,0) 
+		TNT1 A 0 A_PlaySound("weapons/clrocketexplode")
+	    TNT1 A 0 A_SpawnItemEx("LegendaryBlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	    TNT1 AAA 0 A_CustomMissile("LegendaryKaboom6", 0, 0, random(0,360), 2, random(0,360))
+	    TNT1 AAA 0 A_CustomMissile("LegendarySmokeFX4", 0, 0, random(0,360), 2, random(0,360))	
+        LRB1 EFGHIJKLMNO 3
+        Stop
+    }
+}
+
+ACTOR LehBehProntonBolt
+{
+Radius 7
+Height 3
+Speed 9
+Damage 6
+PROJECTILE
++SEEKERMISSILE
++DONTBLAST
++BOUNCEONACTORS
++DONTBLAST
++FORCERADIUSDMG
++SKYEXPLODE
++NOTIMEFREEZE
+BounceType Hexen
+BounceFactor 1.0
+WallBounceFactor 1.0
+BounceSound "Petrovec/Bounce"
+Renderstyle Add
+DamageType "BeheComet"
+ReactionTime 700
+Decal CacoScorch
+var int user_delay;
+Alpha 0.99
+Scale 0.9
+States
+{
+  Spawn:
+    TNT1 A 0 A_JumpIf(user_delay >= 70,"Fly")
+	TNT1 A 0 A_SetUserVar("user_delay",user_delay+1)
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltParticleTrail",frandom(3,-3),frandom(3,-3),frandom(3,-3))
+	TNT1 A 0 A_SpawnItemEx("PetrovecBoltRingTrail",frandom(2,-2),frandom(2,-2),frandom(2,-2))
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltSmokeTrail",-4+random(4,-4),random(4,-4),random(4,-4))
+	NPSB A 1 Bright
+	Loop
+  Fly:
+	TNT1 A 0
+	TNT1 A 0 A_PlaySound("Petrovec/Fly",5,1.0,1)
+	NPSB A 0 A_Jump(255,"SpawnA","SpawnB","SpawnC","SpawnD","SpawnE","SpawnF","SpawnG","SpawnH","SpawnI","SpawnJ","SpawnK","SpawnL")
+  SpawnA:
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltParticleTrail",frandom(3,-3),frandom(3,-3),frandom(3,-3))
+	TNT1 A 0 A_SpawnItemEx("PetrovecBoltRingTrail",frandom(2,-2),frandom(2,-2),frandom(2,-2))
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltSmokeTrail",-4+random(4,-4),random(4,-4),random(4,-4))
+	TNT1 A 0 A_SeekerMissile(5,10,SMF_LOOK|SMF_PRECISE,256,1)
+	NPSB A 1 Bright A_CountDown
+	Loop
+  SpawnB:
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltParticleTrail",frandom(3,-3),frandom(3,-3),frandom(3,-3))
+	TNT1 A 0 A_SpawnItemEx("PetrovecBoltRingTrail",frandom(2,-2),frandom(2,-2),frandom(2,-2))
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltSmokeTrail",-4+random(4,-4),random(4,-4),random(4,-4))
+	TNT1 A 0 A_SeekerMissile(5,10,SMF_LOOK|SMF_PRECISE,256,1)
+	NPSB B 1 Bright A_CountDown
+	Loop
+  SpawnC:
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltParticleTrail",frandom(3,-3),frandom(3,-3),frandom(3,-3))
+	TNT1 A 0 A_SpawnItemEx("PetrovecBoltRingTrail",frandom(2,-2),frandom(2,-2),frandom(2,-2))
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltSmokeTrail",-4+random(4,-4),random(4,-4),random(4,-4))
+	TNT1 A 0 A_SeekerMissile(5,10,SMF_LOOK|SMF_PRECISE,256,1)
+	NPSB C 1 Bright A_CountDown
+	Loop
+  SpawnD:
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltParticleTrail",frandom(3,-3),frandom(3,-3),frandom(3,-3))
+	TNT1 A 0 A_SpawnItemEx("PetrovecBoltRingTrail",frandom(2,-2),frandom(2,-2),frandom(2,-2))
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltSmokeTrail",-4+random(4,-4),random(4,-4),random(4,-4))
+	TNT1 A 0 A_SeekerMissile(5,10,SMF_LOOK|SMF_PRECISE,256,1)
+	NPSB D 1 Bright A_CountDown
+	Loop
+  SpawnE:
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltParticleTrail",frandom(3,-3),frandom(3,-3),frandom(3,-3))
+	TNT1 A 0 A_SpawnItemEx("PetrovecBoltRingTrail",frandom(2,-2),frandom(2,-2),frandom(2,-2))
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltSmokeTrail",-4+random(4,-4),random(4,-4),random(4,-4))
+	TNT1 A 0 A_SeekerMissile(5,10,SMF_LOOK|SMF_PRECISE,256,1)
+	NPSB E 1 Bright A_CountDown
+	Loop
+  SpawnF:
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltParticleTrail",frandom(3,-3),frandom(3,-3),frandom(3,-3))
+	TNT1 A 0 A_SpawnItemEx("PetrovecBoltRingTrail",frandom(2,-2),frandom(2,-2),frandom(2,-2))
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltSmokeTrail",-4+random(4,-4),random(4,-4),random(4,-4))
+	TNT1 A 0 A_SeekerMissile(5,10,SMF_LOOK|SMF_PRECISE,256,1)
+	NPSB F 1 Bright A_CountDown
+	Loop
+  SpawnG:
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltParticleTrail",frandom(3,-3),frandom(3,-3),frandom(3,-3))
+	TNT1 A 0 A_SpawnItemEx("PetrovecBoltRingTrail",frandom(2,-2),frandom(2,-2),frandom(2,-2))
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltSmokeTrail",-4+random(4,-4),random(4,-4),random(4,-4))
+	TNT1 A 0 A_SeekerMissile(5,10,SMF_LOOK|SMF_PRECISE,256,1)
+	NPSB G 1 Bright A_CountDown
+	Loop
+  SpawnH:
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltParticleTrail",frandom(3,-3),frandom(3,-3),frandom(3,-3))
+	TNT1 A 0 A_SpawnItemEx("PetrovecBoltRingTrail",frandom(2,-2),frandom(2,-2),frandom(2,-2))
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltSmokeTrail",-4+random(4,-4),random(4,-4),random(4,-4))
+	TNT1 A 0 A_SeekerMissile(5,10,SMF_LOOK|SMF_PRECISE,256,1)
+	NPSB H 1 Bright A_CountDown
+	Loop
+  SpawnI:
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltParticleTrail",frandom(3,-3),frandom(3,-3),frandom(3,-3))
+	TNT1 A 0 A_SpawnItemEx("PetrovecBoltRingTrail",frandom(2,-2),frandom(2,-2),frandom(2,-2))
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltSmokeTrail",-4+random(4,-4),random(4,-4),random(4,-4))
+	TNT1 A 0 A_SeekerMissile(5,10,SMF_LOOK|SMF_PRECISE,256,1)
+	NPSB I 1 Bright A_CountDown
+	Loop
+  SpawnJ:
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltParticleTrail",frandom(3,-3),frandom(3,-3),frandom(3,-3))
+	TNT1 A 0 A_SpawnItemEx("PetrovecBoltRingTrail",frandom(2,-2),frandom(2,-2),frandom(2,-2))
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltSmokeTrail",-4+random(4,-4),random(4,-4),random(4,-4))
+	TNT1 A 0 A_SeekerMissile(5,10,SMF_LOOK|SMF_PRECISE,256,1)
+	NPSB J 1 Bright A_CountDown
+	Loop
+  SpawnK:
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltParticleTrail",frandom(3,-3),frandom(3,-3),frandom(3,-3))
+	TNT1 A 0 A_SpawnItemEx("PetrovecBoltRingTrail",frandom(2,-2),frandom(2,-2),frandom(2,-2))
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltSmokeTrail",-4+random(4,-4),random(4,-4),random(4,-4))
+	TNT1 A 0 A_SeekerMissile(5,10,SMF_LOOK|SMF_PRECISE,256,1)
+	NPSB K 1 Bright A_CountDown
+	Loop
+  SpawnL:
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltParticleTrail",frandom(3,-3),frandom(3,-3),frandom(3,-3))
+	TNT1 A 0 A_SpawnItemEx("PetrovecBoltRingTrail",frandom(2,-2),frandom(2,-2),frandom(2,-2))
+	TNT1 AA 0 A_SpawnItemEx("PetrovecBoltSmokeTrail",-4+random(4,-4),random(4,-4),random(4,-4))
+	TNT1 A 0 A_SeekerMissile(5,10,SMF_LOOK|SMF_PRECISE,256,1)
+	NPSB L 1 Bright A_CountDown
+	Loop
+  Death:
+	TNT1 A 0
+	TNT1 A 0 A_StopSound(5)
+	TNT1 A 0 A_PlaySound("Petrovec/Hit")
+	TNT1 A 0 A_PlaySoundEx("Petrovec/Explode","SoundSlot6")
+	TNT1 A 0 A_Explode(175,128,0)
+	TNT1 A 0 A_SpawnItemEx("PetrovecBoltRingExp")
+	TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("PetrovecBoltParticleExp",random(11,-11),frandom(11,-11),frandom(9,-9),frandom(1,2),frandom(1,2),frandom(2,-2),random(0,359))
+	TNT1 AAAAAA 0 A_SpawnItemEx("PetrovecBoltExplode",random(19,-19),random(19,-19),random(12,-12),frandom(1,-1),frandom(1,-1),frandom(1,-1),random(0,359))
+	TNT1 A 10
+	TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("PetrovecBoltSmokeExp",random(12,-12),random(12,-12),random(7,-7),frandom(1,-1),frandom(1,-1),frandom(1,-1),random(0,359))
+	Stop
+	}
+}

@@ -1,0 +1,17 @@
+#library "LEGSKY"
+#include "zcommon.acs"
+
+script 647 (void)
+{
+	ChangeSky("LEGSKY00","LEGSKY00");
+	SetSkyScrollSpeed(1,128);
+	SetSkyScrollSpeed(2,128);
+}
+
+script 648 (void)
+{
+	ChangeSky("BASESKY1","BASESKY1");
+   SetSkyScrollSpeed(1,0);
+   SetSkyScrollSpeed(2,0);
+}
+

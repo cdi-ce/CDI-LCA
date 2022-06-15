@@ -1,0 +1,24 @@
+#library "TIMEFRZE"
+#include "zcommon.acs"
+
+#define SCR_TIMEFREEZE 320
+#define SCR_IS_TIMEFREEZE_ALLOWED 321
+#define SCR_TIMEFREEZE_TOOSOON 322
+#define HUD_TIMEFROZEN_LNG "TIMEFROZEN"
+
+bool timefreeze_started = false;
+
+script SCR_TIMEFREEZE (int delay_tics) {
+	timefreeze_started = true;
+	Delay(delay_tics*35);
+	timefreeze_started = false;
+}
+
+script SCR_IS_TIMEFREEZE_ALLOWED (void) {
+	if (timefreeze_started) { SetResultValue(1); }
+	else { SetResultValue(0); }
+}
+
+script SCR_TIMEFREEZE_TOOSOON (void) {
+	HudMessage(l:HUD_TIMEFROZEN_LNG; HUDMSG_FADEOUT, 3200, CR_ORANGE, 0.5, 0.5, 2.5, 5.0);
+}

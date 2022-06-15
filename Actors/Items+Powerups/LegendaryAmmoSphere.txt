@@ -1,0 +1,30 @@
+Actor LegAmmoSphere : CustomInventory
+{
+  Inventory.PickupMessage "\c[z3]Legendary Ammo Sphere"
+  Inventory.PickupSound "legammo/pickup"
+  Inventory.UseSound "legammo/use"
+  Inventory.Icon "INVLA0"
+  Inventory.MaxAmount 1
+  Tag "Legendary Ammo Sphere"
+  +FLOATBOB
+  +INVBAR
+  +COUNTITEM
+  +INVENTORY.BIGPOWERUP
+  +NOTIMEFREEZE
+  States
+  {
+ Use:
+    TNT1 A 0 A_GiveInventory("Backpack")
+    TNT1 A 0 A_GiveInventory("LegInfiniteAmmo")
+    Stop  	
+  Spawn:
+	AMSP ABCD 10 Bright A_CustomMissile ("LegendarySphereFlameSpawner", -20, 0, random(0,-360), 2, random(0,360)) 
+	Loop	
+  }
+}
+
+Actor LegInfiniteAmmo : PowerInfiniteAmmo
+{
+    Powerup.Duration -45
+    Powerup.Color Yellow 0.2
+}

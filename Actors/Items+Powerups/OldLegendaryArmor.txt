@@ -1,0 +1,59 @@
+ACTOR LegendaryArmor : RedArmor
+{
+	+INVENTORY.BIGPOWERUP
+	Scale 1.2
+	Mass 0x7FFFFFFF
+	DamageFactor "PDTBFG", 0.10
+	DamageFactor "PDTBFGTracer", 0.10
+	DamageFactor "Cyber10K", 0.01
+	DamageFactor "Legendary", 0.10
+	DamageFactor "Legendary1", 0.10
+	DamageFactor "LegendaryGuru", 0.10
+	DamageFactor "BFGSplash", 0.35
+	DamageFactor "BFGSpray", 0.35
+	DamageFactor "Explosion", 0.5
+	DamageFactor "Plasma", 0.5
+	DamageFactor 0.8
+	Inventory.Pickupmessage "\c[l5]Legendary Armor"
+	Inventory.Icon "LEGAA0"
+	Inventory.PickupSound "legendaryarmor/pickup"
+	Armor.SavePercent 200
+	Armor.SaveAmount 500
+	States
+	{
+		Spawn:
+			LEGA A 1
+			LEGA A 12 Bright A_CustomMissile("LegendaryArmorFlameSpawner", -20, 0, random(0,-360), 2, random(0,360)) 
+			Loop
+	}
+}	
+
+ACTOR LegendaryArmorFlame
+{
++MISSILE
++DONTSPLASH
++CLIENTSIDEONLY
++NOBLOCKMAP
++NOGRAVITY
++NOTELEPORT
++FORCEXYBILLBOARD
+RenderStyle Add
+Scale 0.3
+States
+{
+Spawn:
+LMKE ABCDEFGHIJKL 2 Bright A_FadeOut
+Stop
+}
+}
+
+ACTOR LegendaryArmorFlameSpawner 
+{
+  States
+  {
+  Spawn:
+    TNT1 AAAAAA 0 A_SpawnItemEx("LegendaryArmorFlame",random(20,-20),random(20,-20),random(20,40),0,0,random(2,6),0,128,0)
+    TNT1 A 0
+    Stop
+  }
+}

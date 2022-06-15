@@ -1,0 +1,6 @@
+#library "SPWNPR.acs"
+#include "zcommon.acs"
+
+Script 310 OPEN {
+	GiveInventory("SpawnProtectionGiver",1);
+}

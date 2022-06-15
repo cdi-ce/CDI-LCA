@@ -1,0 +1,445 @@
+//Necronomicon Mechanics by Strathos
+#library "NECROMEC"
+#include "zcommon.acs"
+
+#define MAXPLAYERS 63//== max players - 1
+#define CONTROLLED_RAISED 4//currently only works with 4
+#define RAISE_TRIES 4//stepping on a monster's body won't let it raise
+#define RAISE_DELAY 70//time being dead before raising
+#define CURSE_PERIOD 175//time between damnations
+#define CURSE_MIN_DAMAGE 75
+#define CURSE_MAX_DAMAGE 250//note: the lower of two random numbers in the dmg range is used
+
+str raisable[256] = { "FreezerZombie", "NewBabySentient", "NewBehemoth", "PlasmaGunner", "RailGunner", "DemonTechZombie", "RocketZombie", "ShotgunZombie", "AssaultShotgunZombie", "SuperShotgunZombie", "QuadShotgunZombie", "AssaultRifleZombie", "Chaingunner", "Minigunner", "Imp", "VoidImp", "Devil", "PhaseImp", "BullFiend", "CyberFiend", "MagmaFiend", "DTechFiend", "Spectre~", "Lurker", "Spook", "Cacodemon~", "Watcher", "Cacomental", "Hectebus", "Daedabus", "Behemoth", "Barbatos", "Dualachnotron", "Fusionite", "BabyDemolisher", "Guardian", "Cadaver", "HellfireRevenant", "HellArchon", "PyroDemon", "CyberNoble", "HellKnight~", "HellDuke", "BaronOfHell~", "BruiserDemon", "Afrit", "Cybruiser","Cybruiser2", "Guard", "SSNazi", "Mutant", "Officer", "NaziDog", "StealthZombieMan", "StealthShotgunGuy", "StealthChaingunGuy", "StealthDoomImp", "StealthDemon", "StealthCacodemon", "StealthFatso", "StealthArachnotron", "StealthRevenant", "StealthHellKnight", "StealthBaron", "list_end_don't_delete" };
+global int 1:RAISED_TIDS[];
+global int 2:PLAYER_TIDS[];
+global str 3:STRONGEST_MINION[];
+
+//Cursed mark routine
+script 22332 ( int cursedTID, int curseTimer, int cursedState )//called by the mark actor every frame
+{
+	int markTID = ActivatorTID();
+	markAttach( markTID, cursedTID );
+	//damnation
+	if( curseTimer == CURSE_PERIOD )
+	{
+		if( isAlive( cursedTID ) )//failsafe: sometimes the ThingSpecial doesn't execute
+		{
+			int defSpeed = GetUserVariable( 0, "user_cursedDefSpeed" );
+			if( cursedState == 0 )
+			{
+				curseTimer = -CURSE_PERIOD;
+				cursedState = damn( cursedTID, markTID, defSpeed );
+			}
+			else
+			{
+				curseTimer = 0;
+				cursedState = unDamn( cursedTID, markTID, defSpeed, cursedState );
+			}
+			SetUserVariable( 0, "user_cursedState", cursedState );
+		}else
+			Thing_Remove( 0 );
+	}
+	curseTimer++;
+	SetUserVariable( 0, "user_curseTimer", curseTimer );
+}
+
+//Cursed died: remove mark and undamn convert raise
+script 22333 ( int cursedTID, int pnum, int markTID )//called by the minion actor on death
+{
+	//reset cursed actor properties
+	SetActorProperty( cursedTID, APROP_Speed, GetUserVariable( markTID, "user_cursedDefSpeed" ) );
+	SetActorProperty( cursedTID, APROP_Frightened, 0 );
+	//remove the cursed mark
+	Thing_Remove( markTID );
+	//raise, imprint and set properties
+	bool raised = false;
+	for( int i = 0; i < RAISE_TRIES; i++ )
+	{
+		delay( RAISE_DELAY );
+		if( convert( cursedTID, pnum, true ) )
+		{
+			raised = true;
+			break;
+		}
+	}		
+	//create the friend mark actor
+	if( raised )
+	{
+		markTID = UniqueTID();
+		Spawn( "FriendMark", GetActorX( 0 ), GetActorY( 0 ), GetActorZ( 0 ), markTID );
+		SetUserVariable( markTID, "user_friendTID", cursedTID );
+		//reset the cursed actor death script
+		SetThingSpecial( cursedTID, ACS_ExecuteAlways, 22335, 0, markTID );
+	}
+}
+
+//Friend mark routine
+script 22334 ( int cursedTID )//called by the mark actor every frame
+{
+	markAttach( ActivatorTID(), cursedTID );
+}
+
+//Friendly died: remove mark
+script 22335 ( int markTID )//called by the minion actor on death
+{
+	Thing_Remove( markTID );
+}
+
+//Curse target
+script 22330 ( void )//called by Advanced Necronomicon's Ghost projectile
+{
+	//change activator to projectile to get the firing player's number
+	int pnum = -1;
+	int tempTID = UniqueTID();
+	Thing_ChangeTID( 0, tempTID );
+	
+	if( SetActivator( 0, AAPTR_TARGET ) )
+		pnum = PlayerNumber();
+	else
+		Thing_ChangeTID( tempTID, 0 );
+		
+	SetActivator( tempTID );//reset the activator to the ghost
+	
+	//mark if target && raisable. note: asumes that monster actors with assigned TIDs have already been marked or raised
+	if( pnum > -1 && SetActivator( 0, AAPTR_TRACER ) && ActivatorTID() == 0 && isRaisable( GetActorClass( 0 ) ) )
+	{
+		Thing_ChangeTID( tempTID, 0 );//free projectile's TID
+		//set TID
+		int thisTID = UniqueTID();
+		Thing_ChangeTID( 0, thisTID );
+		//Log( s:">Cursing class: ", s:GetActorClass(0), s:" set TID: ", d:thisTID );
+		//create the cursed mark actor
+		int markTID = UniqueTID();
+		Spawn( "CursedMark", GetActorX( 0 ), GetActorY( 0 ), GetActorZ( 0 ), markTID );
+		SetUserVariable( markTID, "user_curseTimer", 0 );
+		SetUserVariable( markTID, "user_cursedState", 0 );
+		SetUserVariable( markTID, "user_cursedTID", thisTID );
+		SetUserVariable( markTID, "user_cursedDefSpeed", GetActorProperty( thisTID, APROP_Speed ) );
+		//set the cursed actor death script
+		SetThingSpecial( thisTID, ACS_ExecuteAlways, 22333, 0, thisTID, pnum, markTID );
+	}//else Log( s:">> Can't curse: ", s:GetActorClass( 0 ) );	
+}
+
+//Recall raised TODO make the setPositions more dynamic
+script 22331 ( int ammoCost )//called by Advanced Necronomicon
+{
+	int pnum = PlayerNumber();
+	if ( hasMinions( pnum ) )
+	{
+		TakeInventory( "DemonAmmo", ammoCost );//decorate checks there's enough ammo
+		int thisX = GetActorX( 0 );
+		int thisY = GetActorY( 0 );
+		int thisZ = GetActorZ( 0 );
+		int rTID = 0;
+		int recallCount = 0;
+		int radius = 0;//GetActorProperty( rTID, APROP_Radius ) doesn't work :/
+		int radiusMin = fixed( 5 );
+		int radiusMax = fixed( 65 );
+		int radiusStep = fixed( 10 );
+		
+		SetActorState( PLAYER_TIDS[pnum], "Incorp" );//makes the player NOCLIP so minions can teleport closer
+		rTID = RAISED_TIDS[( pnum * CONTROLLED_RAISED )];
+		if( rTID != 0 && isAlive( rTID ) && GetActorProperty( rTID, APROP_Friendly ) )
+		{
+			radius = radiusMax;
+			while( !SetActorPosition( rTID, thisX + radius, thisY + radius, thisZ, 1 ) && radius > radiusMin )
+				radius -= radiusStep;
+				
+			if( radius > radiusMin )	recallCount++;
+		}
+			
+		rTID = RAISED_TIDS[( pnum * CONTROLLED_RAISED ) + 1];
+		if( rTID != 0 && isAlive( rTID ) && GetActorProperty( rTID, APROP_Friendly ) )
+		{
+			radius = radiusMax;
+			while( !SetActorPosition( rTID, thisX + radius, thisY - radius, thisZ, 1 ) && radius > radiusMin )
+				radius -= radiusStep;
+
+			if( radius > radiusMin )	recallCount++;
+		}
+		
+		rTID = RAISED_TIDS[( pnum * CONTROLLED_RAISED ) + 2];
+		if( rTID != 0 && isAlive( rTID ) && GetActorProperty( rTID, APROP_Friendly ) )
+		{
+			radius = radiusMax;
+			while( !SetActorPosition( rTID, thisX - radius, thisY + radius, thisZ, 1 ) && radius > radiusMin )
+				radius -= radiusStep;
+
+			if( radius > radiusMin )	recallCount++;
+		}
+		
+		rTID = RAISED_TIDS[( pnum * CONTROLLED_RAISED ) + 3];
+		if( rTID != 0 && isAlive( rTID ) && GetActorProperty( rTID, APROP_Friendly ) )
+		{
+			radius = radiusMax;
+			while( !SetActorPosition( rTID, thisX - radius, thisY - radius, thisZ, 1 ) && radius > radiusMin )
+				radius -= radiusStep;
+
+			if( radius > radiusMin )	recallCount++;
+		}
+				
+		//if there's room bring the strongest minion from the previous map
+		if( STRONGEST_MINION[pnum] != "" && recallCount < CONTROLLED_RAISED )
+		{
+			radius = radiusMax;
+			int newTID = UniqueTID();
+			while( !Spawn( STRONGEST_MINION[pnum], thisX - radius, thisY - radius, thisZ, newTID ) && radius > radiusMin )
+				radius -= radiusStep;
+
+			if( radius > radiusMin )
+			{
+				STRONGEST_MINION[pnum] = "";
+				convert( newTID, pnum, false );
+				Thing_Damage( newTID, 1, MOD_UNKNOWN );
+				int tele_x = GetActorX( newTID );
+				int tele_y = GetActorY( newTID );
+				int tele_z = GetActorZ( newTID );
+				Spawn( "TeleportFog", tele_x, tele_y, tele_z );
+				//create the friend mark actor
+				int markTID = UniqueTID();
+				Spawn( "FriendMark", tele_x, tele_y, tele_z, markTID );
+				SetUserVariable( markTID, "user_friendTID", newTID );
+				SetThingSpecial( newTID, ACS_ExecuteAlways, 22335, 0, markTID );
+			}
+		}
+		
+		SetActorState( PLAYER_TIDS[pnum], "Corp" );
+	}else
+		Print( s:"There are no minions under your command" );
+}
+
+function int damn( int thisTID, int markTID, int defSpeed )//cursed states
+{
+	int state;//used for translations
+	int damnRand =Random( 0, 9 );
+	if( damnRand < 2 )//hurt
+	{
+		state = 0;
+		int dmg = Random( CURSE_MIN_DAMAGE, CURSE_MAX_DAMAGE );
+		int dmg2 = Random( CURSE_MIN_DAMAGE, CURSE_MAX_DAMAGE );
+		if( dmg < dmg2 )
+			Thing_Damage( thisTID, dmg, MOD_UNKNOWN );
+		else
+			Thing_Damage( thisTID, dmg2, MOD_UNKNOWN );
+
+		//vfx
+		Spawn( "NecroDMG", GetActorX( thisTID ), GetActorY( thisTID ), GetActorZ( thisTID ) );
+	}
+	else	if( damnRand < 5 )//slow
+	{
+		state = 1;
+		Thing_SetTranslation( markTID, 2231 );
+		SetActorProperty( thisTID, APROP_Speed, FixedMul( defSpeed, 0.4 ) );
+	}
+	else if( damnRand < 9 )//frighten
+	{
+		state = 2;
+		Thing_SetTranslation( markTID, 2233 );
+		SetActorProperty( thisTID, APROP_Frightened, 1 );
+	}
+	else//confuse(temporarily friendly)
+	{
+		state = 3;
+		Thing_SetTranslation( markTID, 2235 );
+		SetActorProperty( thisTID, APROP_Friendly, 1 );
+	}
+	return state;
+}
+
+function int unDamn( int thisTID, int markTID, int defSpeed, int cursedState )
+{
+	//undamn and recolor mark
+	if( cursedState == 1 )
+	{
+		Thing_SetTranslation( markTID, 2232 );
+		SetActorProperty( thisTID, APROP_Speed, defSpeed );
+	}
+	else if( cursedState == 2 )
+	{
+		Thing_SetTranslation( markTID, 2234 );
+		SetActorProperty( thisTID, APROP_Frightened, 0 );
+	}
+	else if( cursedState == 3 )
+	{
+		Thing_SetTranslation( markTID, 2236 );
+		SetActorProperty( thisTID, APROP_Friendly, 0 );
+	}
+	return 0;
+}
+
+function bool convert( int thisTID, int pnum, bool raise )
+{
+	if( raise )
+	{
+		Thing_Raise( thisTID );
+		if( !isAlive( thisTID ) )
+			return false;
+	}
+
+	SetActorProperty( thisTID, APROP_Species, "Player" );//set species for no collision
+	SetActorProperty( thisTID, APROP_Friendly, 1 );
+	
+	//imprint to player
+	bool set = false;
+	//look for an usable raise slot
+	for( int raised = 0; raised < CONTROLLED_RAISED; raised++ )
+	{
+		int rTID = RAISED_TIDS[( pnum * CONTROLLED_RAISED ) + raised];
+		if( rTID == 0 || !isAlive( rTID ) )
+		{
+			RAISED_TIDS[( pnum * CONTROLLED_RAISED ) + raised] = thisTID;
+			set = true;
+			break;
+		}
+	}
+
+	//there was no room: replace for weakest minion
+	if( !set )
+	{
+		int weakestIndex = 0;
+		int lowestHP = 99999;
+		for( raised = 0; raised < CONTROLLED_RAISED; raised++ )
+		{
+			int hp = GetActorProperty( RAISED_TIDS[( pnum * CONTROLLED_RAISED ) + raised], APROP_Health );
+			if( hp < lowestHP )
+			{
+				weakestIndex = raised;
+				lowestHP = hp;
+			}
+		}
+		Thing_Destroy( RAISED_TIDS[( pnum * CONTROLLED_RAISED ) + weakestIndex], 0, 0 );
+		RAISED_TIDS[( pnum * CONTROLLED_RAISED ) + weakestIndex] = thisTID;
+	}
+	
+	return true;
+}
+
+function void markAttach( int TIDmark, int TIDobjective )
+{
+	int mark_z = GetActorZ( TIDobjective ) + fixed( 90 );//TODO use GetActorProperty( TIDobjective, APROP_Height ) when it's fixed
+	int ceiling_z = GetActorCeilingZ( TIDobjective );
+	if( mark_z < ceiling_z )
+		SetActorPosition( TIDmark, GetActorX( TIDobjective ), GetActorY( TIDobjective ), mark_z, false );
+	else
+		SetActorPosition( TIDmark, GetActorX( TIDobjective ), GetActorY( TIDobjective ), ceiling_z, false );
+}
+
+function bool hasMinions( int pnum )
+{
+	for( int raised = 0; raised < CONTROLLED_RAISED; raised++ )
+	{
+		int rTID = RAISED_TIDS[( pnum * CONTROLLED_RAISED ) + raised];
+		if( rTID != 0 && isAlive( rTID ) )
+			return true;
+	}
+	return STRONGEST_MINION[pnum] != "";
+}
+
+function bool isRaisable( str name )//TODO replace for CanRaiseActor() when it's made available
+{
+	int i = 0;
+	while( raisable[i] != "list_end_don't_delete" )
+	{
+		if( name == raisable[i] )
+			return true;
+		i++;
+	}
+	return false;
+}
+
+function bool isAlive( int TID )
+{
+	//return GetActorProperty( TID, APROP_Health ) > 0;
+	return ClassifyActor( TID ) & ACTOR_ALIVE;
+}
+
+//hooks
+Script 22340 ENTER
+{
+	int pnum = PlayerNumber();
+	int cTID = ActivatorTID();
+	//set player TID if not assigned one
+	if( cTID == 0 )
+	{
+		cTID = UniqueTID();
+		Thing_ChangeTID( 0, cTID );
+	}
+	PLAYER_TIDS[pnum] = cTID;
+
+	//set raised TIDs to 0
+	for( int raised = 0; raised < CONTROLLED_RAISED; raised++ )
+		RAISED_TIDS[( pnum * CONTROLLED_RAISED ) + raised] = 0;
+	//reset strongest if garbage on variable
+	if( !isRaisable( STRONGEST_MINION[pnum] ) )
+		STRONGEST_MINION[pnum] = "";
+}
+
+script 22341 RESPAWN
+{
+	int pnum = PlayerNumber();
+	int cTID = ActivatorTID();
+	//set player TID if not assigned one
+	if( cTID == 0 )
+	{
+		cTID = UniqueTID();
+		Thing_ChangeTID( 0, cTID );
+	}
+	PLAYER_TIDS[pnum] = cTID;
+}
+
+Script 22342 OPEN
+{
+	//Translations for mark colors
+	//red to gold
+	CreateTranslation( 2230, 176:191=160:166 );
+	//green to/from blue
+	CreateTranslation( 2231, 112:124 = 192:200 );
+	CreateTranslation( 2232, 192:200 =112:124 );
+	//green to/from yellow
+	CreateTranslation( 2233, 112:121=226:231 );
+	CreateTranslation( 2234, 226:231=112:121 );
+	//green to/from purple
+	CreateTranslation( 2235, 112:122=250:254 );
+	CreateTranslation( 2236, 250:254=112:122 );
+}
+
+Script 22343 UNLOADING
+{
+	//save strongest minions
+	for( int pnum = 0; pnum < MAXPLAYERS; pnum++ )
+	{
+		int pTID = PLAYER_TIDS[pnum];
+		if( isAlive( pTID ) && CheckActorInventory( pTID, "Advanced Necronomicon" ) )
+		{
+			int strongestTID = 0;
+			int highestHP = 0;
+			for( int raised = 0; raised < CONTROLLED_RAISED; raised++ )
+			{
+				int thisTID = RAISED_TIDS[( pnum * CONTROLLED_RAISED ) + raised];
+				if( isAlive( thisTID ) )
+				{
+					int hp = GetActorProperty( thisTID, APROP_SpawnHealth );
+					if( hp > highestHP )
+					{
+						strongestTID = thisTID;
+						highestHP = hp;
+					}
+				}
+			}
+			
+			if( highestHP > 0 )
+				STRONGEST_MINION[pnum] = GetActorClass( strongestTID );
+		}
+	}
+}
+
+//helper functions
+function int integer( int num )
+{ return num & 65535.0; }
+
+function int floor( int num )
+{ return (num>>16); }
+
+function int fixed( int num )
+{ return num << 16; }

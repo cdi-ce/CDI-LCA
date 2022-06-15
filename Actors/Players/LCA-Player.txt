@@ -1,0 +1,288 @@
+ACTOR ComplexDoomPlayer2 : DoomPlayer
+{
+Speed 1
+Health 100
+GibHealth 50
+Radius 16
+Height 56
+Mass 100
+PainChance 255
+Species "Player"
+DamageFactor "Player", 0.0
+DamageFactor "Players", 0.0
+DamageFactor "PlayerDevBall", 0.0
+DamageFactor "PlayerDevBall2", 0.0
+DamageFactor "PlayerDevTracer", 0.0
+DamageFactor "PlayerExplosive", 0.0
+DamageFactor "PDTBFG", 0.0
+DamageFactor "PDTBFGTracer", 0.0
+DamageFactor "LegendaryPlayer", 0.0
+DamageFactor "LegendaryGuruPlayer", 0.0
++NOSKIN
++THRUSPECIES//could conflict with PVP gamemodes
++DONTHARMSPECIES//could conflict with PVP gamemodes
++MTHRUSPECIES//could conflict with PVP gamemodes
+Player.SoundClass "Marine"
+Player.ColorRange 112, 127
+Player.DisplayName "Doom Guy"
+Player.CrouchSprite "PLYC"
+Player.StartItem "Handgun"
+//Player.StartItem "Frag Grenade"
+Player.StartItem "HandGrenadeAmmo" 2
+//Player.StartItem "Land Mine"
+Player.StartItem "MineAmmo" 2
+Player.StartItem "NewMelee"
+Player.StartItem "BulletMag" 60
+Player.StartItem "PistolMagazine" 16
+Player.StartItem "ShotgunMagazine" 9
+Player.StartItem "SSGShell" 2
+Player.StartItem "ShotgunDrum" 16
+Player.StartItem "QuadShell" 4
+Player.StartItem "HexaShell" 6
+Player.StartItem "ARMagazine" 41
+Player.StartItem "RocketDrum" 7
+Player.StartItem "GrenadeDrum" 7
+Player.StartItem "PlasmaCell" 50
+Player.StartItem "DemonMagazine" 60
+Player.StartItem "CellCharge" 50
+Player.StartItem "MP40Mag" 33
+Player.StartItem "StartingArmor"
+States {
+	Spawn:
+			PLAY A 5 
+			TNT1 A 0 A_SpawnItem("LPlayerSmokeSpawner",0,0,0,0)
+			Loop
+	See:
+			PLAY A 5
+			TNT1 A 0 Bright A_SpawnItem("LPlayerSmokeSpawner",0,0,0,0)
+			PLAY B 5
+			TNT1 A 0 Bright A_SpawnItem("LPlayerSmokeSpawner",0,0,0,0)
+			PLAY C 5
+			TNT1 A 0 Bright A_SpawnItem("LPlayerSmokeSpawner",0,0,0,0)
+			PLAY D 5
+			TNT1 A 0 Bright A_SpawnItem("LPlayerSmokeSpawner",0,0,0,0)
+			TNT1 A 0
+			Goto Spawn
+	Missile:
+			TNT1 A 0 Bright A_SpawnItem("LPlayerSmokeSpawner",0,0,0,0)
+			PLAY E 1
+			TNT1 A 0 A_JumpIfInventory("kickAnim",1,"Kick")
+			PLAY E 5
+			TNT1 A 0 Bright A_SpawnItem("LPlayerSmokeSpawner",0,0,0,0)
+			PLAY E 5
+			TNT1 A 0 Bright A_SpawnItem("LPlayerSmokeSpawner",0,0,0,0)
+			PLAY E 1
+			Goto Spawn
+	Melee:
+			PLAY F 1 Bright
+			TNT1 A 0 A_JumpIfInventory("kickAnim",1,"Kick")
+			TNT1 A 0 Bright A_SpawnItem("LPlayerSmokeSpawner",0,0,0,0)
+			PLAY F 5 Bright
+			Goto Missile
+	Kick:
+			TNT1 A 0 A_TakeInventory("kickAnim",1)
+			TNT1 A 0 A_JumpIfInventory("PowerStrength",1,"KickBerserked")
+			PLAY X 6
+			TNT1 A 0 Bright A_SpawnItem("LPlayerSmokeSpawner",0,0,0,0)
+			PLAY Y 6
+			TNT1 A 0 Bright A_SpawnItem("LPlayerSmokeSpawner",0,0,0,0)
+			PLAY Z 6
+			TNT1 A 0 Bright A_SpawnItem("LPlayerSmokeSpawner",0,0,0,0)
+			PLAY Y 6
+			TNT1 A 0 Bright A_SpawnItem("LPlayerSmokeSpawner",0,0,0,0)
+			PLAY X 6
+			Goto Spawn
+	KickBerserked:
+			PLAY XY 3
+			TNT1 A 0 Bright A_SpawnItem("LPlayerSmokeSpawner",0,0,0,0)
+			PLAY ZY 3
+			TNT1 A 0 Bright A_SpawnItem("LPlayerSmokeSpawner",0,0,0,0)
+			PLAY X 6
+			Goto Spawn
+	Pain:
+			PLAY G 4
+			TNT1 A 0 Bright A_SpawnItem("LPlayerSmokeSpawner",0,0,0,0)
+			PLAY G 4 A_Pain
+			TNT1 A 0 Bright A_SpawnItem("LPlayerSmokeSpawner",0,0,0,0)
+			TNT1 A 0
+			Goto Spawn      
+	Death:
+			TNT1 A 0
+			TNT1 A 0 A_TakeInventory("HandGrenadeAction",1)
+			TNT1 A 0 A_TakeInventory("MineAction",1)
+			TNT1 A 0 A_TakeInventory("RailgunAction",1)
+			TNT1 A 0 A_TakeInventory("LegendaryRuneItem",1)
+			PLAY H 8
+			PLAY I 8 A_PlayerScream
+			PLAY J 8 A_NoBlocking
+			PLAY K 8
+			PLAY L 8 A_SpawnItem("BodyCrash",0,0,0,0)
+			PLAY M 8
+			PLAY N -1
+			Stop
+	XDeath:
+			TNT1 A 0
+			TNT1 A 0 A_TakeInventory("HandGrenadeAction",1)
+			TNT1 A 0 A_TakeInventory("MineAction",1)
+			TNT1 A 0 A_TakeInventory("RailgunAction",1)
+			TNT1 A 0 A_TakeInventory("LegendaryRuneItem",1)
+			TNT1 A 0 A_SpawnItemEx("GibbedGenerator",0,0,0,0,0,0,0,128,0)
+			PLAY P 3 A_XScream
+			PLAY Q 3 A_NoBlocking
+			PLAY RSTUV 3
+			PLAY W -1
+			Stop
+	Incorp:
+		TNT1 A 0 A_ChangeFlag("SOLID", FALSE)
+		Goto Spawn      
+	Corp:		
+		TNT1 A 0 A_ChangeFlag("SOLID", TRUE)
+		Goto Spawn        
+	}
+}
+
+ACTOR NewMelee : Melee replaces Melee {
+	Tag "Melee"
+    Weapon.PreferredSkin "Fist2-Marine"
+    Obituary "%o was brutally beaten by %k."
+	States {
+	Deselect:
+		PKFS A 1 A_Lower
+		TNT1 A 0 A_Lower
+		Loop
+	Select:
+		PKFS A 1 A_Raise
+		TNT1 A 0 A_Raise
+		Loop
+    Ready:
+		TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+		TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+		PKFS A 1 A_WeaponReady
+		Loop		
+	Fire:
+		TNT1 A 0 A_JumpIfInventory("PowerStrength",1,"Berserked")
+		TNT1 A 0 A_Jump(256,"NormalFist","NormalKick")
+		Goto Ready
+	NormalFist:
+		PKFS LBCD 1
+		PKFS E 2 A_CustomPunch(2*Random(1,10),TRUE,0,"NewFistPuff",64)
+		PKFS FGHI 2
+		PKFS JKL 1
+		PKFS A 1 A_ReFire
+		Goto Ready
+	NormalKick:
+		TNT1 A 0 A_GiveInventory("kickAnim",1)
+		KICK A 1 A_PlaySound("weapons/kick")
+		TNT1 A 0 A_Light0
+		KICK BCDEF 1
+		KICK G 5 A_CustomPunch(2*Random(11,20),TRUE,0,"NewFootPuff",96)	
+		KICK EDCBA 2
+		PKFS A 1
+		PKFS A 5 A_ReFire
+		Goto Ready		
+	Berserked:
+	    TNT1 A 0 A_Jump(256,"BerserkFist","BerserkKick")
+		Goto Ready
+	BerserkFist:
+	    PKFS L 1 A_PlaySound("weapons/fistwiff")
+		PKFS BCD 1
+		PKFS E 2 A_CustomPunch(25*Random(1,10),TRUE,0,"NewFistPuff",64)		 
+		PKFS FGHIJKL 1
+		PKFS A 1 A_ReFire
+		Goto Ready
+	BerserkKick:
+		TNT1 A 0 A_GiveInventory("kickAnim",1)
+		KICK A 1 A_PlaySound("weapons/berserkkick")
+		KICK BCDEF 1
+		KICK G 5 A_CustomPunch(25*Random(11,20),TRUE,0,"NewFootPuff",96)		
+		KICK EDCBA 1
+		PKFS A 1
+		PKFS A 5 A_ReFire
+		Goto Ready
+   GrenadeCheck:
+	    TNT1 A 0 A_JumpIfInventory("HandGrenadeAmmo",1,"GrenadeToss")
+		TNT1 A 0 A_TakeInventory("HandGrenadeAction",1)
+	    Goto Ready
+   GrenadeToss:
+	    PKFR CBA 1
+	    TNT1 A 4
+	    HGRN ABC 1
+	    HGRN D 2
+	    HGRN EFG 1
+		HGRN HI 2
+	    TNT1 A 15 A_PlayWeaponSound("weapons/hgrenadepin")
+	    TNT1 A 0 A_PlayWeaponSound("weapons/hgrenadethrow")
+	    TNT1 A 0 A_TakeInventory("HandGrenadeAmmo",1)
+		HGNE A 1 A_FireCustomMissile("ThrownGrenade",0,0,0,0)
+		HGRN J 1
+		HGRN KLM 2
+		HGRN NO 1
+	    TNT1 A 6
+	    TNT1 A 0 A_JumpIfInventory("HandGrenadeAmmo",1,2)
+        TNT1 A 0 A_TakeInventory("Hand Grenade",1)
+	    TNT1 A 0 A_TakeInventory("HandGrenadeAction",1)
+	    TNT1 A 0
+	    Goto Ready
+   MineCheck:
+	    TNT1 A 0 A_JumpIfInventory("MineAmmo",1,"MineToss")
+		TNT1 A 0 A_TakeInventory("MineAction",1)
+	    Goto Ready
+   MineToss:
+	    PKFR CBA 1
+	    TNT1 A 8
+	    TNT1 A 0 A_PlayWeaponSound("weapons/hgrenadethrow")
+	    MINE ABCDEF 1		
+	    TNT1 A 0 A_TakeInventory("MineAmmo",1)	  
+	    MINE G 1 A_FireCustomMissile("ThrownMine",0,0,0,0)
+	    MINE HI 1
+	    MINE JK 2
+	    TNT1 A 0 A_JumpIfInventory("MineAmmo",1,2)
+        TNT1 A 0 A_TakeInventory("Land Mine",1)
+		TNT1 A 0 A_TakeInventory("MineAction",1)
+	    TNT1 A 0
+		TNT1 A 5
+	    Goto Ready	
+	    }
+}
+ACTOR "kickAnim" : Inventory {
+    Inventory.MaxAmount 1
+}
+ACTOR NewFistPuff : FistPuff
+{
+DamageType "Melee"
+States
+{
+Spawn:
+Melee:
+    TNT1 A 1
+	Stop
+	}
+}
+
+ACTOR NewFootPuff : NewFistPuff
+{
+}
+
+ACTOR FFPlayer {
+	Scale 1
+	Health 999
+	Mass 9999
+	Radius 96
+	Height 96
+	Species Player
+	Alpha 0.2
+	+SHOOTABLE
+	+DONTGIB
+	+NOBLOOD
+	+THRUSPECIES
+	+NOBLOCKMONST
+	+MTHRUSPECIES
+	States {
+	Spawn:
+		FFLD A -1 
+		Loop
+	Death:
+		TNT1 A 0
+		Stop
+	}
+}

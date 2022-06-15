@@ -1,0 +1,497 @@
+//INHERITANCE
+
+ACTOR ArcSmokeInheritance
+{
+	+NOINTERACTION
+	+NOGRAVITY
+	+FORCERADIUSDMG
+	Renderstyle Add
+	States
+	{
+	Spawn:
+	TNT1 A 0
+	TNT1 A 1 A_Jump(255,"Spawn1","Spawn2","Spawn3","Spawn4","Spawn5","Spawn6")
+	Stop
+	Spawn1:
+	 TNT1 A 0 //A_SetScale(ScaleX +0.003, ScaleY +0.003)
+	 THD1 A 0 A_Explode(15,128)
+	 THD1 A 4 Bright A_FadeOut(0.009)
+	 Loop
+	Spawn2:
+	 TNT1 A 0 //A_SetScale(ScaleX +0.003, ScaleY +0.003)
+	 THD1 A 0 A_Explode(15,128)
+	 THD2 A 4 Bright A_FadeOut(0.007)
+	 Loop
+	Spawn3:
+	 TNT1 A 0 //A_SetScale(ScaleX +0.003, ScaleY +0.003)
+	 THD1 A 0 A_Explode(15,128)
+	 THD3 A 4 Bright A_FadeOut(0.006)
+	 Loop
+	Spawn4:
+	 TNT1 A 0 //A_SetScale(ScaleX -0.003, ScaleY -0.003)
+	 THD1 A 0 A_Explode(15,128)
+	 THD1 A 4 Bright A_FadeOut(0.0075)
+	 Loop
+	Spawn5:
+	 TNT1 A 0 //A_SetScale(ScaleX -0.001, ScaleY -0.001)
+	 THD1 A 0 A_Explode(15,128)
+	 THD2 A 4 Bright A_FadeOut(0.0065)
+	 Loop
+	Spawn6:
+	 TNT1 A 0 //A_SetScale(ScaleX -0.003, ScaleY -0.003)
+	 THD1 A 0 A_Explode(15,128)
+	 THD3 A 4 Bright A_FadeOut(0.008)
+	 Loop
+	}
+}
+
+
+
+ACTOR ArcBallLightningBolt1 : LCALightningBoltGreen
+{
+Scale 0.35
+}
+
+ACTOR ArcBallLightningBolt2 : LCALightningBolt
+{
+Scale 0.35
+}
+
+ACTOR ArcBallLightningBolt3 : LCALightningBoltPink
+{
+Scale 0.35
+}
+
+ACTOR ArcBallLightningBolt4 : LCALightningBoltGold
+{
+Scale 0.35
+}
+
+ACTOR ArcBallLightningBolt5 : LCALightningBoltRed
+{
+Scale 0.35
+}
+
+ACTOR ArcBFGLightningSpawner : LCABaseEffect
+{
++NOGRAVITY
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 Bright A_SpawnItemEx("ArcBallLightningBolt",Random(6,-6),Random(6,-6),Random(6,-6),0,0,0,0,128)
+    Stop
+    }
+}
+
+ACTOR ArcBallShockwave : LCAShockwave
+{
+  States
+  {
+    Spawn:
+      HBRG A 1 Bright A_FadeOut(0.04)
+      HBRB B 1 Bright A_FadeOut(0.04)
+      HBRP C 1 Bright A_FadeOut(0.04)
+      HBRY D 1 Bright A_FadeOut(0.04)
+      HBRR E 1 Bright A_FadeOut(0.04)
+      HBRG F 1 Bright A_FadeOut(0.04)
+      HBRB G 1 Bright A_FadeOut(0.04)
+      HBRP H 1 Bright A_FadeOut(0.04)
+      HBRY I 1 Bright A_FadeOut(0.04)
+      HBRR J 1 Bright A_FadeOut(0.04)
+      HBRG K 1 Bright A_FadeOut(0.04)
+      HBRB L 1 Bright A_FadeOut(0.04)
+      HBRP M 1 Bright A_FadeOut(0.04)
+      HBRY N 1 Bright A_FadeOut(0.04)
+      HBRR O 1 Bright A_FadeOut(0.04)
+      HBRG P 1 Bright A_FadeOut(0.04)
+      HBRB Q 1 Bright A_FadeOut(0.04)
+      HBRP R 1 Bright A_FadeOut(0.04)
+      Stop
+  }
+}
+
+ACTOR ArcBallShockwaveLrg : ArcBallShockwave
+{
+  Scale 2.5
+  Alpha 0.85
+  States
+  {
+    Spawn:
+      HBRG A 2 Bright A_FadeOut(0.04)
+      HBRB B 2 Bright A_FadeOut(0.04)
+      HBRP C 2 Bright A_FadeOut(0.04)
+      HBRY D 2 Bright A_FadeOut(0.04)
+      HBRR E 2 Bright A_FadeOut(0.04)
+      HBRG F 2 Bright A_FadeOut(0.04)
+      HBRB G 2 Bright A_FadeOut(0.04)
+      HBRP H 2 Bright A_FadeOut(0.04)
+      HBRY I 2 Bright A_FadeOut(0.04)
+      HBRR J 2 Bright A_FadeOut(0.04)
+      HBRG K 2 Bright A_FadeOut(0.04)
+      HBRB L 2 Bright A_FadeOut(0.04)
+      HBRP M 2 Bright A_FadeOut(0.04)
+      HBRY N 2 Bright A_FadeOut(0.04)
+      HBRR O 2 Bright A_FadeOut(0.04)
+      HBRG P 2 Bright A_FadeOut(0.04)
+      HBRB Q 2 Bright A_FadeOut(0.04)
+      HBRP R 2 Bright A_FadeOut(0.04)
+      Stop
+  }
+}
+
+ACTOR ArcBallFluxShockwave : ArcBallShockwave
+{
+  Scale 0.75
+  Alpha 1.0
+  Projectile
+}
+
+
+////////
+//FIRE//
+////////
+
+
+//PROJECTILE
+
+ACTOR UltraBall
+{
+  Radius 11
+  Height 6
+  Speed 10 // 10
+  DamageType "Legendary"
+  Damage 125
+  Projectile
+  RenderStyle Add
+  +FORCERADIUSDMG
+  +FOILINVUL
+  +RIPPER
+  +BLOODLESSIMPACT
+  //+DONTBLAST
+  -RANDOMIZE
+  Scale 1.0
+  Alpha 1.0
+  MissileType "ArcLesserProjectileTrail"
+  SeeSound "Ultra/BFGFire"
+  States
+  {
+  Spawn:
+	TNT1 A 0
+
+    // Green
+	TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",5,1.0,True)
+	TNT1 A 0 A_Explode(600,64,0,1)
+	TNT1 A 0 A_SpawnItemEx("ArcTrail",5,0,0,0,0,0,0,0,0)
+    TNT1 A 0 A_Jump(224, 2)
+	TNT1 A 0 A_SpawnItemEx("ArcBallFluxShockwave",0,0,0,10,0,0,0,0,0)
+    TNT1 A 0 A_Jump(32, 2)
+    TNT1 A 0 A_SpawnItemEx("ArcBallLightningBolt1",Random(6,-6),Random(6,-6),Random(16,8),0,0,0,0,128)
+
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticleGreen",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL A 1 Bright
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticleGreen",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL A 1 Bright
+
+    // Blue
+	//TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",5,1.0,1)
+	TNT1 A 0 A_Explode(600,64,0,1)
+	TNT1 A 0 A_SpawnItemEx("ArcTrail",5,0,0,0,0,0,0,0,0)
+    TNT1 A 0 A_SpawnItemEx("ArcBallTrailParticleGreen",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+    TNT1 A 0 A_Jump(224, 2)
+	TNT1 A 0 A_SpawnItemEx("ArcBallFluxShockwave",0,0,0,10,0,0,0,0,0)
+    TNT1 A 0 A_Jump(32, 2)
+    TNT1 A 0 A_SpawnItemEx("ArcBallLightningBolt2",Random(6,-6),Random(6,-6),Random(16,8),0,0,0,0,128)
+
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticleBlue",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticleBlue",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright
+ 
+    // Pink
+	//TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",5,1.0,1)
+	TNT1 A 0 A_Explode(600,64,0,1)
+	TNT1 A 0 A_SpawnItemEx("ArcTrail",5,0,0,0,0,0,0,0,0)
+    TNT1 A 0 A_Jump(224, 2)
+	TNT1 A 0 A_SpawnItemEx("ArcBallFluxShockwave",0,0,0,10,0,0,0,0,0)
+    TNT1 A 0 A_Jump(32, 2)
+    TNT1 A 0 A_SpawnItemEx("ArcBallLightningBolt3",Random(6,-6),Random(6,-6),Random(16,8),0,0,0,0,128)
+
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticlePink",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL C 1 Bright
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticlePink",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL C 1 Bright
+
+    // Gold
+	//TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",5,1.0,1)
+	TNT1 A 0 A_Explode(600,64,0,1)
+	TNT1 A 0 A_SpawnItemEx("ArcTrail",5,0,0,0,0,0,0,0,0)
+    TNT1 A 0 A_Jump(224, 2)
+	TNT1 A 0 A_SpawnItemEx("ArcBallFluxShockwave",0,0,0,10,0,0,0,0,0)
+    TNT1 A 0 A_Jump(32, 2)
+    TNT1 A 0 A_SpawnItemEx("ArcBallLightningBolt4",Random(6,-6),Random(6,-6),Random(16,8),0,0,0,0,128)
+
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticleGold",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticleGold",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright
+
+    // Red
+	//TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",5,1.0,1)
+	TNT1 A 0 A_Explode(600,64,0,1)
+	TNT1 A 0 A_SpawnItemEx("ArcTrail",5,0,0,0,0,0,0,0,0)
+    TNT1 A 0 A_Jump(224, 2)
+	TNT1 A 0 A_SpawnItemEx("ArcBallFluxShockwave",0,0,0,10,0,0,0,0,0)
+    TNT1 A 0 A_Jump(32, 2)
+    TNT1 A 0 A_SpawnItemEx("ArcBallLightningBolt5",Random(6,-6),Random(6,-6),Random(16,8),0,0,0,0,128)
+
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticleRed",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL E 1 Bright
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticleRed",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL E 1 Bright
+	Loop
+  Death:
+	//COLLATERAL DAMAGE EFFECTS
+	TNT1 A 0
+	TNT1 A 0 A_StopSound(5)
+	TNT1 A 0 A_SpawnItem("Darkdesnuke")
+	TNT1 A 0 A_Explode(6000,486,0,1)
+	TNT1 A 0 A_BFGSpray("ArcSpray",15,20)
+
+	//IMPACT STUFF
+	TNT1 A 0 A_SpawnItemEx("ArcStruckGlowX",0,0,10,0,0,0,0,128,0)
+	TNT1 A 0 A_SpawnItemEx("ArcStruckGlowY",0,0,10,0,0,0,0,128,0)
+	TNT1 AAAAAAAAAAA 0 A_SpawnItemEx("ArcSphereSmoke",random(126,-126),random(126,-126),random(66,-66),0.00001*random(100000,-100000),0.00001*random(100000,-100000),0.00001*random(100000,-100000),random(0,359),0,0)
+	TNT1 AAAAAAAAAAA 0 A_SpawnItemEx("ArcChunkSpark",random(126,-126),random(126,-126),random(66,-66),0,0,0,0,0,0)
+	TNT1 AAAAAAAAAAAAAAAAAAA 2 A_SpawnItemEx("ArcChunkSpark",random(126,-126),random(126,-126),random(66,-66),0,0,0,0,0,0)
+	Stop
+  }
+}
+
+ACTOR UltraBallCharging : UltraBall
+{
+  Speed 0
+  -MISSILE
+  -SOLID
+  +THRUACTORS
+  +NOINTERACTION
+  +NOGRAVITY
+  +NOBLOCKMAP
+  +NOTELEPORT
+  +NOCLIP
+  +NONETID
+  States
+  {
+  Spawn:
+    // Green
+	TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",CHAN_BODY,1.0,False)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleGreen",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL A 1 Bright A_FadeOut(0.01)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleGreen",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL A 1 Bright
+
+    // Blue
+	//TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",5,1.0,1)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright A_FadeOut(0.01)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright
+ 
+    // Pink
+	//TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",5,1.0,1)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticlePink",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL C 1 Bright A_FadeOut(0.01)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticlePink",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL C 1 Bright
+
+    // Gold
+	//TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",5,1.0,1)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright A_FadeOut(0.01)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright
+
+    // Red
+	//TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",5,1.0,1)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleRed",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL E 1 Bright A_FadeOut(0.01)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleRed",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL E 1 Bright
+	Loop
+  Death:
+    TNT1 A 1
+	Stop
+  }
+}
+
+ACTOR UltraBallCharging1 : UltraBallCharging
+{
+  Scale 0.25
+}
+
+ACTOR UltraBallCharging2 : UltraBallCharging
+{
+  Scale 0.35
+}
+
+ACTOR UltraBallCharging3 : UltraBallCharging
+{
+  Scale 0.45
+}
+
+ACTOR UltraBallCharging4 : UltraBallCharging
+{
+  Scale 0.55
+}
+
+ACTOR UltraBallCharging5 : UltraBallCharging
+{
+  Scale 0.65
+  States
+  {
+  Spawn:
+    // Green
+	TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",CHAN_BODY,1.0,False)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleGreen",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL A 1 Bright A_FadeOut(0.02)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleGreen",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL A 1 Bright
+
+    // Blue
+	//TNT1 A 0 A_PlaySound("Ultra/BFGBall",5,1.0,1)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright A_FadeOut(0.01)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright
+ 
+    // Pink
+	//TNT1 A 0 A_PlaySound("Ultra/BFGBall",5,1.0,1)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticlePink",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL C 1 Bright A_FadeOut(0.02)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticlePink",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL C 1 Bright
+
+    // Gold
+	//TNT1 A 0 A_PlaySound("Ultra/BFGBall",5,1.0,1)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright A_FadeOut(0.01)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright
+
+    // Red
+	//TNT1 A 0 A_PlaySound("Ultra/BFGBall",5,1.0,1)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleRed",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL E 1 Bright A_FadeOut(0.02)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleRed",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL E 1 Bright
+	Loop
+
+  }
+}
+
+//TRAIL
+
+ACTOR ArcTrail : LCABaseEffect
+{
+	Alpha 0.50
+	Renderstyle Add
+	+CLIENTSIDEONLY
+	Scale 0.90
+	States
+	{
+	Spawn:
+	TNT1 A 0
+	TNT1 A 0 //A_SetScale(ScaleX -0.01, ScaleY -0.01)
+	UBAL ABCDE 1 Bright A_FadeOut(0.05)
+	Loop
+	}
+}
+
+//IMPACT
+
+ACTOR ArcStruckGlowY : LCABaseEffect
+{
+	Alpha 0.5
+	+CLIENTSIDEONLY
+	Scale 0.2
+	States
+	{
+	Spawn:
+	CBUM A 0
+	YBUM A 0 //A_SetScale(ScaleX +0.025, ScaleY +0.1)
+	YBUM A 1 Bright A_FadeOut(0.01)
+	Loop
+	}
+}
+
+ACTOR ArcStruckGlowX : LCABaseEffect
+{
+	Alpha 0.5
+	+CLIENTSIDEONLY
+	Scale 0.2
+	States
+	{
+	Spawn:
+	CBUM A 0
+	YBUM A 0 //A_SetScale(ScaleX +0.1, ScaleY +0.025)
+	YBUM A 1 Bright A_FadeOut(0.01)
+	Loop
+	}
+}
+
+//SPRAY
+
+ACTOR ArcSpray : LCABaseEffect
+{
+	States
+	{
+	Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_SpawnItemEx("ArcSprayGlowX",0,0,0,0,0,0,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ArcSprayGlowY",0,0,0,0,0,0,0,0,0)
+	TNT1 AAAAAA 3 A_SpawnItemEx("ArcSpraySpark",random(24,-24),random(24,-24),random(24,-24),0,0,0,0,0,0)
+	Stop
+	}
+}
+
+ACTOR ArcSpraySpark : LCABaseEffect
+{
+	Scale 0.25
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+	YELE ABCDEF 2 Bright A_FadeOut(0.1)
+	Stop
+	}
+}
+
+ACTOR ArcSprayGlowY : ArcStruckGlowX
+{
+	Alpha 0.35
+	+CLIENTSIDEONLY
+	Scale 0.025
+	States
+	{
+	Spawn:
+	CBUM A 0
+	YBUM A 0 //A_SetScale(ScaleX +0.05, ScaleY +0.01)
+	YBUM A 1 Bright A_FadeOut(0.01)
+	Loop
+	}
+}
+
+ACTOR ArcSprayGlowX : ArcStruckGlowY
+{
+	Alpha 0.35
+	Scale 0.025
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+	CBUM A 0
+	YBUM A 0 //A_SetScale(ScaleX +0.01, ScaleY +0.05)
+	YBUM A 1 Bright A_FadeOut(0.01)
+	Loop
+	}
+}

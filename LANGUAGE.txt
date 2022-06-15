@@ -1,0 +1,5 @@
+[enu default]
+TIMEFROZEN = "Sorry, you're already in frozen time.";
+
+[fr]
+TIMEFROZEN = "Désolé, vous êtes déjà dans le temps gelé.";

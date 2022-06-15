@@ -1,0 +1,677 @@
+ACTOR Cardihilator : Cyberdemon //3120 Get another number Cardinal got that one already
+{ 
+   Health 6500
+   Speed 10
+   FloatSpeed 8
+   PainChance 15
+   PainChance "PDTBFG", 10
+   PainChance "SoulToxic", 3
+   PainChance "FatFlamer", 3
+   PainChance "FiendFire", 3
+   PainChance "Explosion", 35
+   Species "Cybers"
+   DamageFactor "Cyber10K", 0.0
+   DamageFactor "PDTBFG", 0.1
+   DamageFactor "PDTBFGTracer", 0.3
+   DamageFactor "PlayerDevBall", 0.05
+   DamageFactor "PlayerDevBall2", 0.05
+   DamageFactor "PlayerDevTracer", 0.05
+   DropItem "BossLifeEssence" 204 25
+   DropItem "BossArmorBonusMax" 204 1
+   DropItem "DemonAmmoBox" 128 200
+   DropItem "DemonicChalice" 128
+   SeeSound "Cardihilator/Sight"
+   PainSound "Cardihilator/Pain"
+   DeathSound "Cardihilator/Death"
+   ActiveSound "Cardinal/Active"
+   Scale 1.1
+   Mass 2500
+   +MISSILEEVENMORE
+   +LOOKALLAROUND
+   +QUICKTORETALIATE
+   +BOSS
+   +BOSSDEATH
+   +FLOAT
+   +NOGRAVITY	
+   -FLOORCLIP
+   Obituary "%o was turned into a mere spec of dust by the Cardihilator." 
+   var int user_fusionnuke;
+   States 
+   { 
+   Spawn:
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH A 2 Bright A_Look
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH B 2 Bright A_Look	  
+      Loop
+   See:
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH A 2 Bright A_Chase
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH B 2 Bright A_Chase  
+      Loop	  
+   Missile:
+      TNT1 A 0 A_SetShootable
+      TNT1 A 0 A_UnsetInvulnerable
+      TNT1 A 0 A_SetTranslucent(1)
+      TNT1 A 0 A_Jump(128,"Seekers","Railgun","BFG10K","DTBFG10K","Devastator")
+	  TNT1 A 0 A_Jump(1,"Nukes")
+   Normal:
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget   
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget	  
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 A_CustomMissile("CardinalRocket", 40, -26, Random(-6, 6))
+      CARH D 6 Bright A_CustomMissile("CardinalRocket", 40, 26, Random(-6, 6))
+	  CARH D 2 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)	  
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget	  
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 A_CustomMissile("CardinalRocket", 40, -26, Random(-6, 6))
+      CARH D 6 Bright A_CustomMissile("CardinalRocket", 40, 26, Random(-6, 6))
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)	  
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget	  
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      TNT1 A 0 A_CustomMissile("CardinalRocket", 40, -26, Random(-6, 6))
+      CARH D 6 Bright A_CustomMissile("CardinalRocket", 40, 26, Random(-6, 6))
+	  CARH D 2 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)	  
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget	  
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      TNT1 A 0 A_CustomMissile("CardinalRocket", 40, -26, Random(-6, 6))
+      CARH D 6 Bright A_CustomMissile("CardinalRocket", 40, 26, Random(-6, 6))
+	  CARH D 2 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)	  
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget	  
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      TNT1 A 0 A_CustomMissile("CardinalRocket", 40, -26, Random(-6, 6))
+      CARH D 6 Bright A_CustomMissile("CardinalRocket", 40, 26, Random(-6, 6))
+	  CARH D 2 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)	  
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget	  
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      TNT1 A 0 A_CustomMissile("CardinalRocket", 40, -26, Random(-6, 6))
+      CARH D 6 Bright A_CustomMissile("CardinalRocket", 40, 26, Random(-6, 6))
+	  CARH D 2 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH CCC 2 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 A_Jump(128,"Seekers","Railgun","BFG10K","DTBFG10K")
+      Goto See
+   Seekers:
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget	  
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 A_CustomMissile("CardinalHomingRocket", 40, -26, Random(-8, 8))
+      CARH D 6 Bright A_CustomMissile("CardinalHomingRocket", 40, 26, Random(-8, 8))
+	  CARH D 2 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      TNT1 A 0 A_CustomMissile("CardinalHomingRocket", 40, -26, Random(-8, 8))
+      CARH D 6 Bright A_CustomMissile("CardinalHomingRocket", 40, 26, Random(-8, 8))
+	  CARH D 2 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 A_CustomMissile("CardinalHomingRocket", 40, -26, Random(-8, 8))
+      CARH D 6 Bright A_CustomMissile("CardinalHomingRocket", 40, 26, Random(-8, 8))
+	  CARH D 2 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget	  
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 A_CustomMissile("CardinalHomingRocket", 40, -26, Random(-8, 8))
+      CARH D 6 Bright A_CustomMissile("CardinalHomingRocket", 40, 26, Random(-8, 8))
+	  CARH D 2 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 A_CustomMissile("CardinalHomingRocket", 40, -26, Random(-8, 8))
+      CARH D 6 Bright A_CustomMissile("CardinalHomingRocket", 40, 26, Random(-8, 8))
+	  CARH D 2 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget	  
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 A_CustomMissile("CardinalHomingRocket", 40, -26, Random(-8, 8))
+      CARH D 6 Bright A_CustomMissile("CardinalHomingRocket", 40, 26, Random(-8, 8))
+	  CARH D 2 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH CCC 2 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)	  
+	  TNT1 A 0 A_Jump(128,"Railgun","BFG10K","DTBFG10K")
+      Goto See
+   Railgun:
+	  TNT1 A 0 A_PlaySound("weapons/rgcharge")
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_CustomMissile("CardinalRail",40,-26,0)
+      CARH D 2 Bright A_CustomMissile("CardinalRail",40,26,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH D 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH D 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH D 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH D 5 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_CustomMissile("CardinalRail",40,-26,0)
+      CARH D 2 Bright A_CustomMissile("CardinalRail",40,26,0)
+      CARH CCCCCCC 2 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 A_Jump(128,"BFG10K","DTBFG10K")
+	  Goto See	  
+   BFG10K:
+	  TNT1 A 0 A_PlaySound("weapons/charge15k")
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 4 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 4 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 4 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 4 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 4 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 4 Bright A_FaceTarget	  
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 4 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_PlaySound("weapons/bfg15kfire")
+	  TNT1 A 0 A_CustomMissile("Cardinal10K", 40, -26, Random(4, -4))
+      CARH D 3 Bright A_CustomMissile("Cardinal10K", 40, 26, Random(4, -4))
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 4 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_PlaySound("weapons/bfg15kfire")
+	  TNT1 A 0 A_CustomMissile("Cardinal10K", 40, -26, Random(4, -4))
+      CARH D 3 Bright A_CustomMissile("Cardinal10K", 40, 26, Random(4, -4))
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 4 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_PlaySound("weapons/bfg15kfire")
+	  TNT1 A 0 A_CustomMissile("Cardinal10K", 40, -26, Random(4, -4))
+      CARH D 3 Bright A_CustomMissile("Cardinal10K", 40, 26, Random(4, -4))
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 4 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_PlaySound("weapons/bfg15kfire")
+	  TNT1 A 0 A_CustomMissile("Cardinal10K", 40, -26, Random(4, -4))
+      CARH D 3 Bright A_CustomMissile("Cardinal10K", 40, 26, Random(4, -4))
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 4 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_PlaySound("weapons/bfg15kfire")
+	  TNT1 A 0 A_CustomMissile("Cardinal10K", 40, -26, Random(4, -4))
+      CARH D 3 Bright A_CustomMissile("Cardinal10K", 40, 26, Random(4, -4))
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH C 4 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_PlaySound("weapons/bfg15kfire")
+	  TNT1 A 0 A_CustomMissile("Cardinal10K", 40, -26, Random(4, -4))
+      CARH D 3 Bright A_CustomMissile("Cardinal10K", 40, 26, Random(4, -4))
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 A_PlaySound("weapons/bfg15kcooldown",CHAN_AUTO)
+	  CARH CCCCC 4 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 A_Jump(128,"DTBFG10K")
+      Goto See	  
+   DTBFG10K:
+   	  TNT1 A 0 A_PlaySound("Cardinal/9k")
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 4 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 4 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 4 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 4 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 4 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH D 4 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)  
+	  CARH D 4 Bright A_FaceTarget	  
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 A_CustomMissile("CardinalDTBFG10KBall", 40, -26, 0)
+      CARH D 4 Bright A_CustomMissile("CardinalDTBFG10KBall", 40, 26, 0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)	
+	  CARH DCC 4 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0) 
+      Goto See
+	Devastator:
+	  TNT1 A 0 A_PlaySound("devastator/charge")
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  CARH C 2 Bright A_FaceTarget
+	  CARH C 0 A_PlaySound ("devastator/fire")
+	  TNT1 A 0 A_CustomMissile("FusionDevastatorBall", 40, -26, 0)
+      CARH D 4 Bright A_CustomMissile("FusionDevastatorBall", 40, 26, 0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)	
+	  CARH DCC 4 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0) 
+      Goto See  
+Nukes:
+    TNT1 A 0 A_JumpIf(user_fusionnuke == 1, "Missile")
+    TNT1 A 0 A_SetUserVar("user_fusionnuke", 2)
+    TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	TNT1 A 0 A_PlaySound("weapons/nuclearmissilecharge",0,10.0)
+	CARH F 3 Bright A_PlaySound("Cardihilator/Sight", CHAN_AUTO, 1.0, False, ATTN_NONE)
+	TNT1 A 0 Radius_Quake(50,150,0,24,0)
+	CARH FF 2 Bright A_FaceTarget
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget	
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget	
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget	
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget	
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget	
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget	
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget	
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget	
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget	
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget	
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget	
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	CARH FF 2 Bright A_FaceTarget	
+	TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	TNT1 A 0 A_PlaySoundEx("Cardihilator/NukeFire", 1, 0, 2)
+	CARH D 0 A_CustomMissile("FusionNuke", 40, -26, 0)
+	CARH D 6 Bright A_CustomMissile("FusionNuke", 40, 26, 0)
+	TNT1 A 1 A_TakeInventory("FusionNuke",1)
+	CARH CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC 2 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	Goto See	  
+	  
+   Pain:
+	  TNT1 A 0 A_Jump(16,"PainRage")
+	  TNT1 A 0 A_Jump(128,"PainMissile")
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH E 3 Bright A_Pain
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH E 3 Bright
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH E 3 Bright
+      Goto See
+   PainMissile:
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH E 3 Bright A_Pain
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH E 3 Bright
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH E 3 Bright	  
+      Goto Missile
+   PainRage:
+	  TNT1 A 0 A_JumpIfCloser(1000,1)
+	  Goto Pain+1
+   	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+      CARH E 3 Bright A_Pain
+	  TNT1 A 0 A_JumpIfInventory("CardinalToken",3,"See")	
+      CARH EEEE 3 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 A_GiveInventory("CardinalToken",1)
+	  TNT1 A 0 Bright A_SetInvulnerable
+	  TNT1 A 0 Bright Radius_Quake(10,80,0,24,0)
+	  TNT1 A 0 Bright A_GiveInventory("Health",750)
+      TNT1 A 0 Bright A_PlaySound("Cardinal/Laugh")	  
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  TNT1 A 0 Bright A_SpawnItem("CardinalRageFlameSpawner",0,0,0,0)
+	  CARH E 2 Bright A_SpawnItemEx("RainCometSpawner",Random(1250,-1250),Random(1250,-1250),0,0,0,0,SXF_NOCHECKPOSITION,0)
+	  TNT1 A 0 Bright A_UnSetInvulnerable
+      CARH EE 3 Bright A_SpawnItem("CardinalFireSpawner",0,0,0,0)
+	  Goto See
+   Death: 
+   	  TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(298) == 1, "AlwaysDrop")
+	  TNT1 A 0 A_Jump(52,2)
+	  TNT1 A 0 A_SpawnItem("Demon Tech Devastator",0,12)
+	  CARH E 10 A_Scream
+	  CARH F 10 A_NoBlocking
+	  TNT1 AA 0 A_SpawnItemEx("GibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)
+	  TNT1 AAA 0 A_CustomMissile("BigRedBloodCloud", random(10,80), 0, random(0,360), 2, random(0,360))
+      CARH GGGGG 2 Bright A_CustomMissile("Kaboom", random(20,80), random(20,-20), random(0,360), 2, random(0,360))
+	  TNT1 AA 0 A_SpawnItemEx("GibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)
+	  TNT1 AAA 0 A_CustomMissile("BigRedBloodCloud", random(10,80), 0, random(0,360), 2, random(0,360))
+      CARH HHHHH 2 Bright A_CustomMissile("Kaboom", random(20,80), random(20,-20), random(0,360), 2, random(0,360))
+	  TNT1 AA 0 A_SpawnItemEx("GibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)
+	  TNT1 AAA 0 A_CustomMissile("BigRedBloodCloud", random(10,80), 0, random(0,360), 2, random(0,360))		
+      CARH IIIII 2 Bright A_CustomMissile("Kaboom", random(20,80), random(20,-20), random(0,360), 2, random(0,360))
+	  TNT1 AA 0 A_SpawnItemEx("GibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)		
+	  TNT1 AAA 0 A_CustomMissile("BigRedBloodCloud", random(10,80), 0, random(0,360), 2, random(0,360))
+      CARH JJJJJ 1 Bright A_CustomMissile("Kaboom", random(20,80), random(20,-20), random(0,360), 2, random(0,360))
+	  TNT1 AA 0 A_SpawnItemEx("GibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)
+	  TNT1 AAA 0 A_CustomMissile("BigRedBloodCloud", random(10,80), 0, random(0,360), 2, random(0,360))
+      CARH KKKKK 1 Bright A_CustomMissile("Kaboom", random(20,80), random(20,-20), random(0,360), 2, random(0,360))
+	  TNT1 AAAA 0 A_SpawnItemEx("GibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)
+	  TNT1 AAAAAA 0 A_CustomMissile("BigRedBloodCloud", random(10,80), 0, random(0,360), 2, random(0,360))
+	  TNT1 AAAAAAAA 0 A_CustomMissile("SmokeFX3", Random(20,80), 0, random(0,360), 2, random(0,360))	
+      CARH L 2
+	  CARH M 3
+      TNT1 A -1 Bright A_KillMaster
+      Stop
+   AlwaysDrop:
+	  TNT1 A 0 A_SpawnItem("Demon Tech Devastator",0,12)
+	  Goto Death+3
+      } 
+}

@@ -1,0 +1,184 @@
+ACTOR ShotgunDrum2 : Ammo
+{
+Inventory.Amount 0
+Inventory.MaxAmount 12
+Ammo.BackpackAmount 0
+Ammo.BackpackMaxAmount 12
+Inventory.Icon "ASTHA0"
++IGNORESKILL
+}
+
+ACTOR "Assault Shotgun " : "Assault Shotgun" Replaces "Assault Shotgun"
+{
+  Scale 0.85
+  Weapon.PreferredSkin "AssaultSG-Marine"
+  Weapon.SelectionOrder 4500
+  Weapon.KickBack 80
+  Weapon.AmmoUse 1
+  Weapon.AmmoGive 12
+  Weapon.AmmoGive2 8
+  Weapon.AmmoType "ShotgunDrum2"
+  Weapon.AmmoType2 "NewShell"
+  Inventory.PickupSound "AShotgun/Cock"
+  Inventory.PickupMessage "Assault Shotgun"
+  Obituary "%o was blown away by %k's Assault Shotgun."
+  Decal BulletChip
+  +WEAPON.AMMO_OPTIONAL
+  +WEAPON.NOALERT
+  +INVENTORY.UNDROPPABLE
+  States
+  {
+  Ready:
+    TNT1 A 0 A_PlayWeaponSound("AShotgun/Cock")
+	ASGW A 1
+	ASGR ABCDE 1
+	TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+    SMAG A 1 A_WeaponReady
+    Goto Ready+7
+  Deselect: 
+    TNT1 A 0 A_PlayWeaponSound("weapons/weapondown")
+    SMAG A 1 A_Lower
+    Goto Deselect+1
+  Select:
+	TNT1 A 0 A_Raise
+    Wait	
+  Fire:
+	TNT1 A 0 A_JumpIfNoAmmo("Empty")
+	TNT1 A 0 A_PlaySound("AShotgun/Fire")
+	TNT1 A 0 A_AlertMonsters
+    TNT1 A 0 Radius_Quake(3,3,0,1,0)
+    TNT1 A 0 A_GunFlash
+	TNT1 A 0 A_Light1
+	TNT1 A 0 A_SpawnItemEx("ShellCasing",30,5,25,Random(2,4),Random(3,6),Random(3,6),0)
+	TNT1 AAAA 0 A_FireCustomMissile("SGTracer",Random(5,-5),0,0,Random(5,-5))
+    SMAF A 2 Bright A_FireBullets(5.0,3.0,7,Random(5,7),"ModdedBulletPuff")
+    SMAF B 2 Bright A_Light2
+	TNT1 A 0 A_Light0
+    SMAG BCDE 1
+	SMAG FA 2
+    Goto Ready+7
+  Empty:
+    SMAG A 10 A_PlayWeaponSound("weapons/click")	
+  AltFire:
+    TNT1 A 0 A_JumpIfInventory("ShotgunDrum2",12,2)
+    TNT1 A 0 A_JumpIfInventory("NewShell",1,2)
+	TNT1 A 0
+	Goto Ready+7
+	SMAR ABCD 1
+	SMAR EF 2
+	SMAR G 6
+	TNT1 A 0 A_JumpIfInventory("ShotgunDrum2",1,"Reload2")
+  Reload:   
+    SMAR HI 1
+	SMAR J 1 A_PlaySound("Weapons/ASGShellLoad")
+	SMAR K 1
+	TNT1 A 0 A_TakeInventory("NewShell",1)
+	TNT1 A 0 A_GiveInventory("ShotgunDrum2",1)
+	SMAR L 1
+	TNT1 A 0 A_JumpIfInventory("ShotgunDrum2",11,"FullCock")
+	SMAR MN 1
+	SMAR O 2
+	TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheckReloading")
+	TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheckReloading")
+	SMAR G 1 A_WeaponReady(WRF_NOBOB|WRF_NOSECONDARY)
+	TNT1 A 0 A_JumpIfInventory("NewShell",1,"Reload")
+  FullCock:
+    SMAR P 3
+    SMAR Q 2
+    SMAR CBA 1
+	SMAK A 1
+	SMAK B 2
+	SMAK C 3 A_PlayWeaponSound("AShotgun/Cock")
+	SMAK D 5
+	SMAK E 2
+	Goto Ready+7	
+  Reload2:   
+    SMAR HI 1
+	SMAR J 1 A_PlaySound("Weapons/ASGShellLoad")
+	SMAR K 1
+	TNT1 A 0 A_TakeInventory("NewShell",1)
+	TNT1 A 0 A_GiveInventory("ShotgunDrum2",1)
+	SMAR L 1
+	TNT1 A 0 A_JumpIfInventory("ShotgunDrum2",12,"Full")
+	SMAR MN 1
+	SMAR O 2
+	TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheckReloading")
+	TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheckReloading")
+	SMAR G 1 A_WeaponReady(WRF_NOBOB|WRF_NOSECONDARY)
+	TNT1 A 0 A_JumpIfInventory("NewShell",1,"Reload2")
+  Full:
+    SMAR P 3
+    SMAR Q 2
+    SMAR CBA 1
+	Goto Ready+7
+  GrenadeCheck:
+	TNT1 A 0 A_JumpIfInventory("HandGrenadeAmmo",1,"GrenadeToss")
+	TNT1 A 0 A_TakeInventory("HandGrenadeAction",1)
+	Goto Ready+7
+  GrenadeCheckReloading:
+	TNT1 A 0 A_JumpIfInventory("HandGrenadeAmmo",1,"GrenadeToss")
+	TNT1 A 0 A_TakeInventory("HandGrenadeAction",1)
+	Goto Reload	
+  GrenadeToss:
+  	TNT1 A 0 A_PlayWeaponSound("weapons/weapondown") 
+	ASGR EDCBA 1
+	ASGW A 1
+	TNT1 A 4
+	HGRN ABC 1
+	HGRN D 2
+	HGRN EFG 1
+	HGRN HI 2
+	TNT1 A 15 A_PlayWeaponSound("weapons/hgrenadepin")
+	TNT1 A 0 A_PlayWeaponSound("weapons/hgrenadethrow")
+	TNT1 A 0 A_TakeInventory("HandGrenadeAmmo",1)
+	HGNE A 1 A_FireCustomMissile("ThrownGrenade",0,0,0,0)
+	HGRN J 1
+	HGRN KLM 2
+	HGRN NO 1
+	TNT1 A 6
+	TNT1 A 0 A_JumpIfInventory("HandGrenadeAmmo",1,2)
+    TNT1 A 0 A_TakeInventory("Hand Grenade",1)
+	TNT1 A 0 A_TakeInventory("HandGrenadeAction",1)
+	TNT1 A 0
+	Goto Ready+1
+  MineCheck:
+	TNT1 A 0 A_JumpIfInventory("MineAmmo",1,"MineToss")
+	TNT1 A 0 A_TakeInventory("MineAction",1)
+	Goto Ready+7
+  MineCheckReloading:
+	TNT1 A 0 A_JumpIfInventory("MineAmmo",1,"MineToss")
+	TNT1 A 0 A_TakeInventory("MineAction",1)
+	Goto Reload
+  MineToss:
+  	TNT1 A 0 A_PlayWeaponSound("weapons/weapondown") 
+	ASGR EDCBA 1
+	ASGW A 1
+	TNT1 A 8
+	TNT1 A 0 A_PlayWeaponSound("weapons/hgrenadethrow")
+	MINE ABCDEF 1		
+	TNT1 A 0 A_TakeInventory("MineAmmo",1)	  
+	MINE G 1 A_FireCustomMissile("ThrownMine",0,0,0,0)
+	MINE HI 1
+	MINE JK 2
+	TNT1 A 0 A_JumpIfInventory("MineAmmo",1,2)
+    TNT1 A 0 A_TakeInventory("Land Mine",1)
+	TNT1 A 0 A_TakeInventory("MineAction",1)
+	TNT1 A 0
+	TNT1 A 5
+	Goto Ready+1
+  Spawn:
+    SMAP A -1
+    Stop
+  }
+}
+
+ACTOR AssaultShotgunMagazine : Ammo
+{
+Inventory.Amount 0
+Inventory.MaxAmount 12
+Ammo.BackpackAmount 0
+Ammo.BackpackMaxAmount 12
+Inventory.Icon "SHOTA0"
++IGNORESKILL
+}

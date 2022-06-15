@@ -1,0 +1,121 @@
+// Base white flare
+ACTOR LCABaseFlashFlare : LCABaseFlare
+{
+Scale 0.5
+RenderStyle Add
+States
+{
+  Spawn:
+    X055 AAAAAAAAAA 1 Bright A_FadeOut(0.1)
+    Stop
+}
+}
+
+ACTOR LCABaseFlashFlare4 : LCABaseFlashFlare { Scale 0.4 }
+ACTOR LCABaseFlashFlare3 : LCABaseFlashFlare { Scale 0.3 }
+ACTOR LCABaseFlashFlare2 : LCABaseFlashFlare { Scale 0.2 }
+ACTOR LCABaseFlashFlare1 : LCABaseFlashFlare { Scale 0.1 }
+ACTOR LCABaseFlashFlare6 : LCABaseFlashFlare { Scale 0.6 }
+ACTOR LCABaseFlashFlare7 : LCABaseFlashFlare { Scale 0.7 }
+ACTOR LCABaseFlashFlare8 : LCABaseFlashFlare { Scale 0.8 }
+ACTOR LCABaseFlashFlare9 : LCABaseFlashFlare { Scale 0.9 }
+
+// Base green flare
+ACTOR LCABaseGreenFlashFlare : LCABaseFlashFlare
+{
+States
+{
+  Spawn:
+    X050 AAAAAAAAAA 1 Bright A_FadeOut(0.1)
+    Stop
+}
+}
+
+ACTOR LCABaseGreenFlashFlare4 : LCABaseGreenFlashFlare { Scale 0.4 }
+ACTOR LCABaseGreenFlashFlare3 : LCABaseGreenFlashFlare { Scale 0.3 }
+ACTOR LCABaseGreenFlashFlare2 : LCABaseGreenFlashFlare { Scale 0.2 }
+ACTOR LCABaseGreenFlashFlare1 : LCABaseGreenFlashFlare { Scale 0.1 }
+ACTOR LCABaseGreenFlashFlare6 : LCABaseGreenFlashFlare { Scale 0.6 }
+ACTOR LCABaseGreenFlashFlare7 : LCABaseGreenFlashFlare { Scale 0.7 }
+ACTOR LCABaseGreenFlashFlare8 : LCABaseGreenFlashFlare { Scale 0.8 }
+ACTOR LCABaseGreenFlashFlare9 : LCABaseGreenFlashFlare { Scale 0.9 }
+
+// Base blue flare
+ACTOR LCABaseBlueFlashFlare : LCABaseFlashFlare
+{
+States
+{
+  Spawn:
+    X051 AAAAAAAAAA 1 Bright A_FadeOut(0.1)
+    Stop
+}
+}
+
+ACTOR LCABaseBlueFlashFlare4 : LCABaseBlueFlashFlare { Scale 0.4 }
+ACTOR LCABaseBlueFlashFlare3 : LCABaseBlueFlashFlare { Scale 0.3 }
+ACTOR LCABaseBlueFlashFlare2 : LCABaseBlueFlashFlare { Scale 0.2 }
+ACTOR LCABaseBlueFlashFlare1 : LCABaseBlueFlashFlare { Scale 0.1 }
+ACTOR LCABaseBlueFlashFlare6 : LCABaseBlueFlashFlare { Scale 0.6 }
+ACTOR LCABaseBlueFlashFlare7 : LCABaseBlueFlashFlare { Scale 0.7 }
+ACTOR LCABaseBlueFlashFlare8 : LCABaseBlueFlashFlare { Scale 0.8 }
+ACTOR LCABaseBlueFlashFlare9 : LCABaseBlueFlashFlare { Scale 0.9 }
+
+// Base pink flare
+ACTOR LCABasePinkFlashFlare : LCABaseFlashFlare
+{
+States
+{
+  Spawn:
+    X052 AAAAAAAAAA 1 Bright A_FadeOut(0.1)
+    Stop
+}
+}
+
+ACTOR LCABasePinkFlashFlare4 : LCABasePinkFlashFlare { Scale 0.4 }
+ACTOR LCABasePinkFlashFlare3 : LCABasePinkFlashFlare { Scale 0.3 }
+ACTOR LCABasePinkFlashFlare2 : LCABasePinkFlashFlare { Scale 0.2 }
+ACTOR LCABasePinkFlashFlare1 : LCABasePinkFlashFlare { Scale 0.1 }
+ACTOR LCABasePinkFlashFlare6 : LCABasePinkFlashFlare { Scale 0.6 }
+ACTOR LCABasePinkFlashFlare7 : LCABasePinkFlashFlare { Scale 0.7 }
+ACTOR LCABasePinkFlashFlare8 : LCABasePinkFlashFlare { Scale 0.8 }
+ACTOR LCABasePinkFlashFlare9 : LCABasePinkFlashFlare { Scale 0.9 }
+
+// Base red flare
+ACTOR LCABaseRedFlashFlare : LCABaseFlashFlare
+{
+States
+{
+  Spawn:
+    X053 AAAAAAAAAA 1 Bright A_FadeOut(0.1)
+    Stop
+}
+}
+
+ACTOR LCABaseRedFlashFlare4 : LCABaseRedFlashFlare { Scale 0.4 }
+ACTOR LCABaseRedFlashFlare3 : LCABaseRedFlashFlare { Scale 0.3 }
+ACTOR LCABaseRedFlashFlare2 : LCABaseRedFlashFlare { Scale 0.2 }
+ACTOR LCABaseRedFlashFlare1 : LCABaseRedFlashFlare { Scale 0.1 }
+ACTOR LCABaseRedFlashFlare6 : LCABaseRedFlashFlare { Scale 0.6 }
+ACTOR LCABaseRedFlashFlare7 : LCABaseRedFlashFlare { Scale 0.7 }
+ACTOR LCABaseRedFlashFlare8 : LCABaseRedFlashFlare { Scale 0.8 }
+ACTOR LCABaseRedFlashFlare9 : LCABaseRedFlashFlare { Scale 0.9 }
+
+// Base yellow flare
+ACTOR LCABaseYellowFlashFlare : LCABaseFlashFlare
+{
+States
+{
+  Spawn:
+    X054 AAAAAAAAAA 1 Bright A_FadeOut(0.1)
+    Stop
+}
+}
+
+ACTOR LCABaseYellowFlashFlare4 : LCABaseYellowFlashFlare { Scale 0.4 }
+ACTOR LCABaseYellowFlashFlare3 : LCABaseYellowFlashFlare { Scale 0.3 }
+ACTOR LCABaseYellowFlashFlare2 : LCABaseYellowFlashFlare { Scale 0.2 }
+ACTOR LCABaseYellowFlashFlare1 : LCABaseYellowFlashFlare { Scale 0.1 }
+ACTOR LCABaseYellowFlashFlare6 : LCABaseYellowFlashFlare { Scale 0.6 }
+ACTOR LCABaseYellowFlashFlare7 : LCABaseYellowFlashFlare { Scale 0.7 }
+ACTOR LCABaseYellowFlashFlare8 : LCABaseYellowFlashFlare { Scale 0.8 }
+ACTOR LCABaseYellowFlashFlare9 : LCABaseYellowFlashFlare { Scale 0.9 }

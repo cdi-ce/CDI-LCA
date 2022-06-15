@@ -1,0 +1,1 @@
+ACTOR "Demon Tech Rifle " : "Demon Tech Rifle" Replaces "Demon Tech Rifle" {Weapon.PreferredSkin "LCADemonTechRifle-Marine"}

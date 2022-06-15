@@ -1,0 +1,104 @@
+ACTOR Hexa-ShotgunZombie 7003
+{ 
+Health 203
+Radius 20
+Height 56
+Speed 10
+Mass 100
+PainChance 50
+DropItem "PortableMedkit" 166
+DropItem "ArmorPlate" 166
+DropItem "AmmoPack" 108
+DropItem "HandGrenadeAmmo" 200 1
+DropItem "MineAmmo" 200 1
+DropItem "NewShell" 256 
+DropItem "Hexa-Shotgun" 100 1
+DropItem "BackPack" 155 1
+DropItem "NewShellBox" 138 
+MONSTER 
++FLOORCLIP
++MISSILEMORE
++MISSILEEVENMORE
++QUICKTORETALIATE
+SeeSound "superzombie/sight"
+PainSound "superzombie/pain"
+DeathSound "superzombie/death"
+ActiveSound "superzombie/active"
+AttackSound ""
+Obituary "%o's body wasn't able to be identified after being shot by a Hexa-Shotgun Zombie."
+States
+{
+Spawn:
+    HSZM A 10 A_Look
+	HSZI A 10 A_Look
+    Loop
+See:
+    HSZM AABB 3 A_Chase
+    TNT1 A 0 A_SpawnItem("FootStep",0,0,0,0)
+    HSZM CCDD 3 A_Chase
+    TNT1 A 0 A_SpawnItem("FootStep",0,0,0,0)
+    Loop
+Missile:
+	TNT1 A 0 A_JumpIfInventory("Hexa-ZombieToken",3,"Reload")
+	TNT1 A 0 A_JumpIfCloser(325,"Hexa")
+Normal:
+    HSZM E 15 A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/qsgdoublefire")
+	TNT1 A 0 A_GiveInventory("Hexa-ZombieToken",1)
+	TNT1 AAAAAA 0 Bright A_CustomMissile("MonsterTracer2",Random(28,34),0,Random(6,-6),0)
+    HSZM F 5 Bright A_CustomBulletAttack(13.8,9.6,10,Random(1,4)*3) 
+    HSZM E 15 A_FaceTarget
+	TNT1 A 0 A_JumpIfInventory("Hexa-ZombieToken",3,"Reload")
+	Goto See
+Hexa:
+	TNT1 A 0 A_JumpIfInventory("Hexa-ZombieToken",1,"Normal")
+    HSZM E 15 A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/hsgfire")
+	TNT1 A 0 A_GiveInventory("Hexa-ZombieToken",3)
+	TNT1 AAAAAAAAAAAA 0 Bright A_CustomMissile("MonsterTracer2",Random(28,34),0,Random(6,-6),0)
+    HSZM F 5 Bright A_CustomBulletAttack(15.4,10.6,78,Random(1,4)*3)
+    HSZM E 25 A_FaceTarget	
+Reload:
+	TNT1 A 0 A_TakeInventory("Hexa-ZombieToken",3)
+	TNT1 A 0 A_PlaySound("weapons/qsgopen")	
+    HSZM E 15 A_FaceTarget
+    HSZM EEEEEE 0 A_SpawnItemEx("SSGShellCasing",25,-2,25,Random(2,4),Random(-3,-6),Random(3,6),0)
+    HSZM E 12 A_PlaySound("weapons/qsgshellslide")	
+    HSZM E 8
+    HSZM E 12 A_PlaySound("weapons/qsgshellslide")	
+    HSZM E 8
+	HSZM E 12 A_PlaySound("weapons/qsgshellslide")	
+    HSZM E 8
+    HSZM E 10 A_PlaySound("weapons/qsgclose")	
+    Goto See
+Pain:
+    HSZM G 6 A_Pain
+    Goto See
+Death:
+    HSZM H 5
+    HSZM I 5 A_Scream
+    HSZM J 5 A_Fall
+    HSZM K 5 A_SpawnItem("BodyCrash",0,0,0,0)
+    HSZM L -1
+    Stop
+XDeath:
+    HSZM M 3
+    HSZM N 3 A_XScream
+    HSZM O 3 A_SpawnItemEx("GibbedGenerator",0,0,0,0,0,0,0,128,0)
+	HSZM P 3 A_Fall
+    HSZM HRST 3
+    HSZM U -1 
+    Stop
+Raise:
+	TNT1 A 0
+	TNT1 A 0 A_SpawnItemEx("VileHealEffect",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+    HHZM TSRQPONM 5
+    Goto See
+    }
+}
+
+ACTOR Hexa-ZombieToken : Inventory
+{
+Inventory.Amount 1
+Inventory.MaxAmount 3
+}

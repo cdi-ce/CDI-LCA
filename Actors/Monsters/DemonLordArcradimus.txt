@@ -1,0 +1,2534 @@
+Actor Nuke
+{
+ Radius 8
+ Height 10
+ +NoBlockmap
+ +NoGravity
+ +ForceRadiusDmg
+ +ForceYBillBoard
+ DamageType "Hell"
+ scale 3.0
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 A 0 A_SetTranslucent(0.75,1)
+   TNT1 A 0 A_PlaySoundEx("Nuke/Boom", "Voice", 0, 2)
+   TNT1 A 1 //A_Explode(40000, 512, 1)
+   TNT1 A 0 Radius_Quake(7, 105, 0, 50, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeFloor", 0, 0, 0,0,0,0,0,128,0)
+   TNT1 A 0 A_SpawnItemEx("NukeFlare", 0, 0, 0,0,0,0,0,128,0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmokePillar", 0, 0, 0,0,0,4.8,0,128,0)
+   TNT1 A 0 A_SpawnItemEx("NukeMushroom2", 0, 0, 0,1.5,0,5,0,128,0)
+   TNT1 A 0 A_SpawnItemEx("NukeMushroom2", 0, 0, 0,1.5,0,5,90,128,0)
+   TNT1 A 0 A_SpawnItemEx("NukeMushroom2", 0, 0, 0,1.5,0,5,180,128,0)
+   TNT1 A 0 A_SpawnItemEx("NukeMushroom2", 0, 0, 0,1.5,0,5,270,128,0)
+   NKE1 ABCDEFGHIJKLMN 9 BRIGHT
+   TNT1 A 0 A_SpawnItemEx("NukeMushroom", 0, 0, 500,0,0,0.5,0,128,0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmokeMushroom", 0, 0, 500,0,0,0.5,0,128,0)
+   NKE1 OPQRSTU 8 BRIGHT A_FadeOut(0.05)
+   Stop
+ }
+}
+
+Actor NukeFire : Nuke
+{
+ RenderStyle Add
+ +NoInteraction
+ +ClientSideOnly
+ -ForceYBillBoard
+ Scale 0.75
+ States
+ {
+  Spawn:
+   TNT1 AA 0 A_Jump(196, "Spawn2", "Spawn3", "Spawn4")
+   FLA1 A 1 Bright A_FadeOut(0.015)
+   Wait
+  Spawn2:
+   FLA2 A 1 Bright A_FadeOut(0.015)
+   Wait
+  Spawn3:
+   FLA3 A 1 Bright A_FadeOut(0.015)
+   Wait
+  Spawn4:
+   FLA4 A 1 Bright A_FadeOut(0.015)
+   Wait
+ }
+}
+
+Actor DarkDesNuke : Nuke
+{
+ PROJECTILE
+ ReactionTime 1
+ DamageType "Hell"
+ States
+ {
+  Spawn:
+   TNT1 AAA 0 A_Countdown
+  Death:
+   TNT1 A 0
+   TNT1 A 0 A_PlaySoundEx("GoodGame/Mate", "Voice", 0, 2)
+   TNT1 A 1 A_Explode(7000, 1300, 1)
+   TNT1 A 0 Radius_Quake(7, 105, 0, 140, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperFlare", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+   TNT1 A 25 A_SpawnItemEx("NukeHyperFloor", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+   TNT1 AA 0 A_SpawnItemEx("NukeHyperSmokeFloor", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperPillar", 0, 0, 0, 0, 0, 10, 0, 128, 0)
+   TNT1 A 105 A_SpawnItemEx("NukeHyperSmokePillar", 0, 0, 0, 0, 0, 10, 0, 128, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperMushroom", 0, 0, 1000, 0, 0, 0, 0, 128, 0)
+   TNT1 AA 0 A_SpawnItemEx("NukeHyperSmokeMushroom", 0, 0, 1000, 0, 0, 0, 0, 128, 0)
+   Stop
+ }
+}
+
+Actor DarkDesNuke2 : DarkDesNuke
+{
+ DamageType "Cyber10K"
+}
+
+Actor NukeFlare : NukeFire
+{
+ Scale 16
+ +NoInteraction
+ States
+ {
+  Spawn:
+   FLAR A 1 Bright A_FadeOut(0.01)
+   Wait
+ }
+}
+
+Actor NukeFloor : Nuke
+{
+ +ClientSideOnly
+ +NoNetID
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeFire", 0, 0, 0, 0.00001 * Random(0, 300000), 0.00001 * Random(0, 300000), 0, Random(0, 359), 128, 0)
+   Stop
+ }
+}
+
+Actor NukeSmokeFloor : Nuke
+{
+ +ClientSideOnly
+ +NoNetID
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 0.00001 * Random(0, 300000), 0.00001 * Random(0, 300000), 0, Random(0, 359), 128, 0)
+   Stop
+ }
+}
+
+Actor NukePillar : Nuke
+{
+ +ClientSideOnly
+ +NoNetID
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeFire", 0, 0, 0, 0.00001 * Random(0, 100000), 0.00001 * Random(0, 100000), Random(0, -3), Random(0, 359), 128, 0)
+   TNT1 A 0 A_SpawnItem("NukeSmokering", 0, 0, 0)
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeFire", 0, 0, 0, 0.00001 * Random(0, 100000), 0.00001 * Random(0, 100000), Random(0, -3), Random(0, 359), 128, 0)
+   Stop
+ }
+}
+
+Actor NukeSmokePillar : Nuke
+{
+ +ClientSideOnly
+ +NoNetID
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 0.00001 * Random(0, 100000), 0.00001 * Random(0, 100000), 0.00001 * Random(0, -400000), Random(0, 359), 128, 0)
+   Stop
+ }
+}
+
+Actor NukeMushroom : Nuke
+{
+ +ClientSideOnly
+ +NoNetID
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeFire", 0, 0, 0, 0.00001 * Random(0, 250000), 0.00001 * Random(0, 250000), 0.00001 * Random(-100000, 100000), Random(0, 359), 128, 0)
+   Stop
+ }
+}
+
+Actor NukeSmokeMushroom : Nuke
+{
+ +ClientSideOnly
+ +NoNetID
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 0.00001 * Random(0, 250000), 0.00001 * Random(0, 250000), 0.00001 * Random(-100000, 100000), Random(0, 359), 128, 0)
+   Stop
+ }
+}
+
+Actor NukeMushroom2 : Nuke
+{
+ +ClientSideOnly
+ +HexenBounce //or else it'll look weird
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 2 A_SpawnItemEx("NukeFire", Random(0, 16), 0, 0, 0.00001 * Random(100000, 400000), 0, 0.00001 * Random(0, 100000), Random(0, 359), 128, 128)
+   Stop
+ }
+}
+
+Actor NukeSmokering : Nuke
+{
+ +ClientSideOnly
+ +NoNetID
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 0, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 20, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 40, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 60, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 80, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 100, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 120, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 140, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 160, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 180, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 200, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 220, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 240, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 260, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 280, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 300, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 320, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 340, 0, 0)
+   Stop
+ }
+}
+
+Actor NukeSmoke : Nuke
+{
+ Scale 3.5
+ +NoInteraction
+ +ClientSideOnly
+ -ForceYBillBoard
+ Alpha 0.5
+ States
+ {
+  Spawn:
+   TNT1 AA 0 A_Jump(196, "Spawn2", "Spawn3", "Spawn4")
+   SMOK A 5 A_FadeOut(0.015)
+   Wait
+  Spawn2:
+   SMOK B 5 A_FadeOut(0.015)
+   Wait
+  Spawn3:
+   SMOK C 5 A_FadeOut(0.015)
+   Wait
+  Spawn4:
+   SMOK D 5 A_FadeOut(0.015)
+   Wait
+ }
+}
+
+Actor NukeHyperFire : Nuke
+{
+ RenderStyle Add
+ +NoInteraction
+ +ClientSideOnly
+ -ForceYBillBoard
+ Scale 3
+ States
+ {
+  Spawn:
+   TNT1 AA 0 A_Jump(196, "Spawn2", "Spawn3", "Spawn4")
+   FLA1 A 1 Bright A_FadeOut(0.015)
+   Wait
+  Spawn2:
+   FLA2 A 1 Bright A_FadeOut(0.015)
+   Wait
+  Spawn3:
+   FLA3 A 1 Bright A_FadeOut(0.015)
+   Wait
+  Spawn4:
+   FLA4 A 1 Bright A_FadeOut(0.015)
+   Wait
+ }
+}
+
+Actor NukeHyperSmoke : Nuke
+{
+ Scale 15
+ +NoInteraction
+ +ClientSideOnly
+ -ForceYBillBoard
+ Alpha 0.5
+ States
+ {
+  Spawn:
+   TNT1 AA 0 A_Jump(196, "Spawn2", "Spawn3", "Spawn4")
+   SM0K A 5 A_FadeOut(0.015)
+   Wait
+  Spawn2:
+   SM0K B 5 A_FadeOut(0.015)
+   Wait
+  Spawn3:
+   SM0K C 5 A_FadeOut(0.015)
+   Wait
+  Spawn4:
+   SM0K D 5 A_FadeOut(0.015)
+   Wait
+ }
+}
+
+Actor NukeHyperFlare : NukeFire
+{
+ Scale 48
+ +NoInteraction
+ +ClientSideOnly
+ States
+ {
+  Spawn:
+   FLAR A 1 Bright A_FadeOut(0.05)
+   Wait
+ }
+}
+
+Actor NukeHyperFloor : Nuke
+{
+ +ClientSideOnly
+ +NoNetID
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeHyperFire", 0, 0, 0, 0.00001 * Random(0, 900000), 0.00001 * Random(0, 900000), 0, Random(0, 359), 128, 0)
+   Stop
+ }
+}
+
+Actor NukeHyperSmokeFloor : Nuke
+{
+ +ClientSideOnly
+ +NoNetID
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 0.00001 * Random(0, 900000), 0.00001 * Random(0, 900000), 0, Random(0, 359), 128, 0)
+   Stop
+  Toaster:
+   TNT1 A 0
+   Stop	
+ }
+}
+
+Actor NukeHyperPillar : Nuke
+{
+ +ClientSideOnly
+ +NoNetID
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1  A_SpawnItemEx("NukeHyperFire", 0, 0, 0, 0.00001 * Random(0, 300000), 0.00001 * Random(0, 300000), 0.00001 * Random(0, -600000), Random(0, 359), 128, 0)
+   TNT1 A 0 A_SpawnItem("NukeHyperSmokering", 0, 0, 0)
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeHyperFire", 0, 0, 0, 0.00001 * Random(0, 300000), 0.00001 * Random(0, 300000), 0.00001 * Random(0, -600000), Random(0, 359), 128, 0)
+   Stop
+ }
+}
+
+Actor NukeHyperSmokePillar : Nuke
+{
+ +ClientSideOnly
+ +NoNetID
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 0.00001 * Random(0, 300000), 0.00001 * Random(0, 300000), 0.00001 * Random(0, -600000), Random(0, 359), 128, 0)
+   Stop
+  Toaster:
+   TNT1 A 0
+   Stop	
+ }
+}
+
+Actor NukeHyperMushroom : Nuke
+{
+ +ClientSideOnly
+ +NoNetID
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeHyperFire", 0, 0, 0, 0.00001 * Random(0, 600000), 0.00001 * Random(0, 900000), 0.00001 * Random(-400000, 400000), Random(0, 359), 128, 0)
+   Stop
+ }
+}
+
+Actor NukeHyperSmokeMushroom : Nuke
+{
+ +ClientSideOnly
+ +NoNetID
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 0.00001 * Random(0, 600000), 0.00001 * Random(0, 900000), 0.00001 * Random(-400000, 400000), Random(0, 359), 128, 0)
+   Stop
+ }
+}
+
+Actor NukeHyperSmokering : Nuke
+{
+ +ClientSideOnly
+ +NoNetID
+ States
+ {
+  Spawn:
+   TNT1 A 0
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 0, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 20, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 40, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 60, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 80, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 100, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 120, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 140, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 160, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 180, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 200, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 220, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 240, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 260, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 280, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 300, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 320, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 340, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 10, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 30, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 50, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 70, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 90, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 110, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 130, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 150, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 170, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 190, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 210, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 230, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 250, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 270, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 290, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 310, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 330, 0, 0)
+   TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 350, 0, 0)
+   Stop
+ }
+}
+
+ACTOR Arcradimus 11026
+{ 
+//$Category Monsters
+//$Sprite ARCRA1C1
+//$Title "LCA - Arcradimus"
+  Health 15000
+  Radius 72 
+  Height 182 
+  Mass 0x7FFFFFFF
+  Speed 15 
+  Scale 3
+  PainChance 0
+  MONSTER
+  MeleeDamage 50
+  MeleeRange 100
+  MeleeSound "baron/melee" 
+  Species "Hell"
+  DamageFactor "NobleComet", 0.0
+  DamageFactor "HellComet", 0.0
+  DamageFactor "Hell", 0.0
+  DamageFactor "Cyber10K", 0.0
+  DamageFactor "Legendary", 0.01
+  DamageFactor "LegendaryGuru", 0.01
+  DamageFactor "LegendaryGuruPlayer", 0.01
+  DamageFactor "BFGSplash", 0.1
+  DamageFactor "BFGSpray", 0.1
+  DamageFactor "PDTBFG", 0.0
+  DamageFactor "PDTBFGTracer", 0.0
+  DamageFactor "PlayerDevBall", 0.0
+  DamageFactor "PlayerDevBall2", 0.0
+  DamageFactor "PlayerDTBFGRailgunSlug", 0.0
+  DamageFactor "PlayerDevTracer", 0.0
+  DamageFactor "Ice", 0.5
+  DamageFactor 0.35
+  Obituary "%o was given a one way ticket to hell by the Demon Lord Arcradimus."
+  HitObituary "%o was torn into meaty chunks by the Demon Lord Arcradimus."
+  BloodColor "Red"
+  MaxStepHeight 20
+  MaxDropOffHeight 20
+  +PIERCEARMOR
+  +NOTARGET
+  +NOTELEFRAG
+  +FLOORCLIP 
+  +MISSILEMORE
+  +NORADIUSDMG
+  +BOSS
+  +DONTHURTSPECIES
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +QUICKTORETALIATE
+  +DONTHARMSPECIES
+  +DROPOFF
+  +NOPAIN
+  +BOSSDEATH
+  +NOTIMEFREEZE
+  SeeSound "Arcradimus/Sight" 
+  ActiveSound "Arcradimus/Active"
+  PainSound "Arcradimus/Pain" 
+  DeathSound "Arcradimus/Death"
+  //SpawnID 174
+  var int user_HellPortal;
+  var int user_HellPortal2;
+States 
+   { 
+   Spawn: 
+       TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+       ARCR A 14 A_Look 
+	   TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+	   ARCR Z 14 A_Look 
+       Loop 
+   See:
+       TNT1 A 0 ACS_ExecuteAlways(5432,0,6)
+	   TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+       ARCR A 3 A_Chase
+	   TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+	   ARCR A 3 A_Chase
+	   TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+	   ARCR B 3 A_Chase
+	   TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+	   ARCR B 3 A_Chase
+	   TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_SpawnItem("HoofStep",0,0,0,0)
+	   ARCR C 3 A_Chase
+	   TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+	   ARCR C 3 A_Chase
+	   TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+	   ARCR D 3 A_Chase
+	   TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+	   ARCR D 3 A_Chase 
+	   TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_SpawnItem("HoofStep",0,0,0,0)
+	   TNT1 A 0 A_Jump(100,"Rush")
+	   TNT1 A 0 A_Jump(35,"Teleport")
+       Loop 
+   Rush:
+       ARCR A 0 A_SpawnItem("HoofStep",0,0,0,0)
+	   TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+	   ARCR AAA 0 A_Chase
+       ARCR A 2 A_SpawnItemEx("ArcradimusGhost",0,0,0,0,0,0,0,128)
+	   TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+	   ARCR AAA 0 A_Chase
+       ARCR A 2 A_SpawnItemEx("ArcradimusGhost",0,0,0,0,0,0,0,128)
+	   TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+	   ARCR AAA 0 A_Chase
+       ARCR B 2 A_SpawnItemEx("ArcradimusGhost",0,0,0,0,0,0,0,128)
+	   TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+	   ARCR AAA 0 A_Chase
+       ARCR B 2 A_SpawnItemEx("ArcradimusGhost",0,0,0,0,0,0,0,128)	   
+	   ARCR A 0 A_SpawnItem("HoofStep",0,0,0,0)
+	   TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+	   ARCR AAA 0 A_Chase
+       ARCR C 2 A_SpawnItemEx("ArcradimusGhost",0,0,0,0,0,0,0,128)
+	   TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+	   ARCR AAA 0 A_Chase
+       ARCR C 2 A_SpawnItemEx("ArcradimusGhost",0,0,0,0,0,0,0,128)
+	   TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+	   ARCR AAA 0 A_Chase
+       ARCR D 2 A_SpawnItemEx("ArcradimusGhost",0,0,0,0,0,0,0,128)
+	   TNT1 A 0 A_SpawnItem("ArcradimusFlameSpawner",0,0,0,0)
+	   ARCR AAA 0 A_Chase
+       ARCR D 2 A_SpawnItemEx("ArcradimusGhost",0,0,0,0,0,0,0,128)
+	   TNT1 A 0 A_Jump(25,"Teleport")
+	   TNT1 A 0 A_Jump(75,"See")	
+       Loop	
+   Teleport:
+       ARCR A 1 A_UnSetShootable
+	   ARCR AAAAAAAAAAAAA 0 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR AAAAAAAAAAA 1 A_FadeOut(0.1,0)
+	   ARCR AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	   ARCR AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+       ARCR A 1 A_PlayWeaponSound("boss/teleport")
+	   ARCR AAAAAAAAAAAAA 0 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR AAAAAAAAAAA 1 A_FadeIn(0.1)
+       ARCR A 1 A_SetShootable
+       Goto See
+   Missile: 
+       TNT1 A 0 A_SetShootable
+       TNT1 A 0 A_UnsetInvulnerable
+       TNT1 A 0 A_SetTranslucent(1)
+       TNT1 A 0 A_JumpIf(user_HellPortal == 1,2)
+       TNT1 A 0 A_JumpIfHealthLower(7500,"HellPortal")
+	   TNT1 A 0 A_JumpIf(user_HellPortal2 == 1,2)
+	   TNT1 A 0 A_JumpIfHealthLower(3750,"HellPortal2")
+	   TNT1 A 0 A_Jump(168,"ArcradComets")
+	   TNT1 A 0 A_Jump(50,"BFG")
+	   TNT1 A 0 A_Jump(162,"SuperFallingMeteors","FireBombs","CometCombo","FloorSweep")
+   Normal:
+       ARCR EF 4 A_FaceTarget 
+       ARCR G 0 A_CustomMissile ("ArcradShot",92,0,0,0,random(-18,18))
+       ARCR G 0 A_CustomMissile ("ArcradShot",92,0,-4,0,random(-18,18))
+       ARCR G 0 A_CustomMissile ("ArcradShot",92,0,4,0,random(-18,18))
+	   ARCR G 0 A_CustomMissile ("ArcradShot",92,0,-8,0,random(-18,18))
+       ARCR G 6 A_CustomMissile ("ArcradShot",92,0,8,0,random(-18,18))
+       ARCR ST 4 A_FaceTarget 
+       ARCR U 0 A_CustomMissile ("ArcradShot",92,0,0,0,random(-18,18))
+       ARCR U 0 A_CustomMissile ("ArcradShot",92,0,-4,0,random(-18,18))
+       ARCR U 0 A_CustomMissile ("ArcradShot",92,0,4,0,random(-18,18))
+	   ARCR U 0 A_CustomMissile ("ArcradShot",92,0,-8,0,random(-18,18))
+       ARCR U 6 A_CustomMissile ("ArcradShot",92,0,8,0,random(-18,18))
+       ARCR EF 4 A_FaceTarget
+       ARCR G 0 A_CustomMissile ("ArcradShot",92,0,0,0,random(-18,18))
+       ARCR G 0 A_CustomMissile ("ArcradShot",92,0,-4,0,random(-18,18))
+       ARCR G 0 A_CustomMissile ("ArcradShot",92,0,4,0,random(-18,18))
+	   ARCR G 0 A_CustomMissile ("ArcradShot",92,0,-8,0,random(-18,18))
+       ARCR G 6 A_CustomMissile ("ArcradShot",92,0,8,0,random(-18,18))
+       ARCR ST 4 A_FaceTarget 
+       ARCR U 0 A_CustomMissile ("ArcradShot",92,0,0,0,random(-18,18))
+       ARCR U 0 A_CustomMissile ("ArcradShot",92,0,-4,0,random(-18,18))
+       ARCR U 0 A_CustomMissile ("ArcradShot",92,0,4,0,random(-18,18))
+	   ARCR U 0 A_CustomMissile ("ArcradShot",92,0,-8,0,random(-18,18))
+       ARCR U 6 A_CustomMissile ("ArcradShot",92,0,8,0,random(-18,18))
+	   ARCR EF 4 A_FaceTarget 
+       ARCR G 0 A_CustomMissile ("ArcradShot",92,0,0,0,random(-18,18))
+       ARCR G 0 A_CustomMissile ("ArcradShot",92,0,-4,0,random(-18,18))
+       ARCR G 0 A_CustomMissile ("ArcradShot",92,0,4,0,random(-18,18))
+	   ARCR G 0 A_CustomMissile ("ArcradShot",92,0,-8,0,random(-18,18))
+       ARCR G 6 A_CustomMissile ("ArcradShot",92,0,8,0,random(-18,18))
+       ARCR ST 6 A_FaceTarget 
+       ARCR U 0 A_CustomMissile ("ArcradShot",92,0,0,0,random(-18,18))
+       ARCR U 0 A_CustomMissile ("ArcradShot",92,0,-4,0,random(-18,18))
+	   ARCR U 0 A_CustomMissile ("ArcradShot",92,0,4,0,random(-18,18))
+	   ARCR U 0 A_CustomMissile ("ArcradShot",92,0,-8,0,random(-18,18))
+       ARCR U 6 A_CustomMissile ("ArcradShot",92,0,8,0,random(-18,18))
+	   ARCR HI 4 A_FaceTarget
+       ARCR J 0 A_CustomMissile ("ArcradShot",92,0,-6,0)
+       ARCR J 0 A_CustomMissile ("ArcradShot",92,0,-4,0)
+       ARCR J 0 A_CustomMissile ("ArcradShot",92,0,-2,0)
+       ARCR J 0 A_CustomMissile ("ArcradShot",92,0,2,0)
+       ARCR J 0 A_CustomMissile ("ArcradShot",92,0,4,0)
+       ARCR J 0 A_CustomMissile ("ArcradShot",92,0,6,0)
+	   ARCR J 0 A_CustomMissile ("ArcradShot",92,0,8,0)
+	   ARCR J 6 A_CustomMissile ("ArcradShot",92,0,-8,0)
+	   TNT1 A 0 A_Jump(138,"ArcradComets")
+	   TNT1 A 0 A_Jump(128,"FireBombs")
+	   TNT1 A 0 A_Jump(122,"CometCombo")
+	   TNT1 A 0 A_Jump(105,"FloorSweep")
+	   TNT1 A 0 A_Jump(15,"BFG")
+       Goto See
+  BFG:
+       TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_SetInvulnerable
+       TNT1 A 0 A_PlaySound("Arcradimus/BFGCharge") // Global
+	   ARCR H 50 A_FaceTarget
+       TNT1 AA 0 A_SpawnItemEx("ThunderSpawner", Random(96,-96), Random(96,-96), Random(48,96), 0, 0, 0, Random(0,359))
+	   ARCR H 35 A_SpawnItemEx("ArcradimusBallCharging1", 32, 0, 92)
+       TNT1 A 0 A_SpawnItemEx("ThunderSpawner", Random(64,-64), Random(64,-64), Random(48,96), 0, 0, 0, Random(0,359))
+	   ARCR H 35 A_SpawnItemEx("ArcradimusBallCharging2", 40, 0, 92)
+       TNT1 A 0 A_SpawnItemEx("ThunderSpawner", Random(128,-128), Random(128,-128), Random(48,96), 0, 0, 0, Random(0,359))
+	   ARCR H 15 A_SpawnItemEx("ArcradimusBallCharging3", 48, 0, 92)
+       ARCR HH 10 A_SpawnItemEx("ThunderSpawner", Random(128,-128), Random(128,-128), Random(48,96), 0, 0, 0, Random(0,359))
+	   ARCR H 35 A_SpawnItemEx("ArcradimusBallCharging4", 56, 0, 92)
+       TNT1 A 0 A_SpawnItemEx("ThunderSpawner", Random(192,-192), Random(192,-192), Random(48,96), 0, 0, 0, Random(0,359))
+	   ARCR H 5 A_SpawnItemEx("ArcradimusBallCharging5", 64, 0, 92)
+       TNT1 AA 0 A_SpawnItemEx("ThunderSpawner", Random(144,-144), Random(144,-144), Random(48,96), 0, 0, 0, Random(0,359))
+       ARCR HHH 10 A_SpawnItemEx("ThunderSpawner", Random(128,-128), Random(128,-128), Random(48,96), 0, 0, 0, Random(0,359))
+	   ARCR H 10 A_SpawnItemEx("ArcradimusBallCharging5", 32, 0, 92)
+       ARCR H 8 A_SpawnItemEx("ThunderSpawner", Random(192,-192), Random(192,-192), Random(48,96), 0, 0, 0, Random(0,359))
+       ARCR H 8 A_SpawnItemEx("ThunderSpawner", Random(128,-128), Random(128,-128), Random(48,96), 0, 0, 0, Random(0,359))
+       ARCR H 8 A_SpawnItemEx("ThunderSpawner", Random(64,-64), Random(64,-64), Random(48,96), 0, 0, 0, Random(0,359))
+       ARCR HI 4 A_FaceTarget 
+	   TNT1 A 0 A_CustomMissile("ArcradimusBall",92,0,0,0)
+	   ARCR J 20 A_FaceTarget
+	   TNT1 A 0 A_UnsetInvulnerable
+	   Goto See
+   ArcradComets:
+       ARCR HI 8 A_FaceTarget
+	   ARCR J 7 A_Custommissile("ArcradimusComet",92,0,0)
+       ARCR HI 8 A_FaceTarget
+	   ARCR J 0 A_Custommissile("ArcradimusComet",92,0,0)
+	   ARCR J 0 A_Custommissile("ArcradimusComet",92,0,-10)
+	   ARCR J 7 A_Custommissile("ArcradimusComet",92,0,10)
+	   ARCR HI 8 A_FaceTarget
+       ARCR J 0 A_Custommissile("ArcradimusComet",92,0,0)
+	   ARCR J 0 A_Custommissile("ArcradimusComet",92,0,-10)
+	   ARCR J 0 A_Custommissile("ArcradimusComet",92,0,10)
+	   ARCR J 0 A_Custommissile("ArcradimusComet",92,0,15)
+	   ARCR J 0 A_Custommissile("ArcradimusComet",92,0,-5)
+	   ARCR J 7 A_Custommissile("ArcradimusComet",92,0,5)
+	   TNT1 A 0 A_Jump(132,"FireBombs")
+	   TNT1 A 0 A_Jump(100,"CometCombo")
+	   TNT1 A 0 A_Jump(76,"FloorSweep")
+	   TNT1 A 0 A_Jump(77,"Normal")
+	   TNT1 A 0 A_Jump(8,"BFG")
+       Goto See
+   FloorSweep:
+       TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_SetInvulnerable
+       ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR I 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR I 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR I 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR I 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR I 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR I 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR I 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR I 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR I 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR I 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR I 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR I 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR I 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR I 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_FaceTarget
+	   ARCR J 10 A_FaceTarget
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,0)
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,5)
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,-5)
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,10)
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,-10)
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,15)
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,-15)
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,20)
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,-20)
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,25)
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,-25)
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,30)
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,-30)
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,35)
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,-35)
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,40)
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,-40)
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,45)
+	   ARCR J 0 A_Custommissile("PyroFireSpawner",16,0,-45)
+	   TNT1 A 0 A_UnsetInvulnerable
+	   ARCR J 30 A_FaceTarget
+	   TNT1 A 0 A_Jump(35,"CometCombo")
+	   TNT1 A 0 A_Jump(5,"BFG")
+	   Goto See
+   HellPortal:
+       TNT1 A 0 A_SetUserVar("user_HellPortal",1)
+	   TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_SetInvulnerable
+       TNT1 A 0 A_PlaySound("Thunder/Hit", CHAN_VOICE, 1.0, False, ATTN_NONE) // Global
+       //TNT1 A 0 A_PlaySound("Thunder/Yell", CHAN_AUTO, 1.0, False, ATTN_NONE) // Global
+	   TNT1 A 0 A_SpawnItemEx("ThunderSpawner", Random(64,-64), Random(64,-64), Random(48,96), 0, 0, 0, Random(0,359))
+       ARCR H 152 A_SpawnItemEx("PortalParticleSpawner", 64, 0, 120)
+	   ARCR HH 15 A_SpawnItemEx("ThunderSpawner", Random(96,-96), Random(96,-96), Random(48,96), 0, 0, 0, Random(0,359))
+       // "Thunder/Yell" Sound Intro Length is 385 tics.  We're at 182 tics so far.
+	   ARCR H 45 A_SpawnItemEx("GatewaytoHellSpawner", 128, 0, 120)
+	   TNT1 A 0 A_SpawnItemEx("ThunderSpawner", Random(128,-128), Random(128,-128), Random(48,96), 0, 0, 0, Random(0,359))
+       ARCR H 52 A_SpawnItemEx("PortalParticleSpawner", 64, 0, 120)
+	   ARCR HHHH 25 A_SpawnItemEx("ThunderSpawner", Random(144,-144), Random(144,-144), Random(48,96), 0, 0, 0, Random(0,359))
+       ARCR H 47 A_SpawnItemEx("PortalParticleSpawner2", 64, 0, 120)
+	   ARCR HHHHH 20 A_SpawnItemEx("ThunderSpawner", Random(192,-192), Random(192,-192), Random(48,96), 0, 0, 0, Random(0,359))
+       ARCR H 30 A_SpawnItemEx("PortalParticleSpawner3", 64, 0, 120)
+	   ARCR HHHH 15 A_SpawnItemEx("ThunderSpawner", Random(192,192), Random(192,-192), Random(48,96), 0, 0, 0, Random(0,359))
+       ARCR H 47 A_SpawnItemEx("PortalParticleSpawner2", 64, 0, 120)
+	   ARCR HHHH 25 A_SpawnItemEx("ThunderSpawner", Random(144,-144), Random(144,-144), Random(48,96), 0, 0, 0, Random(0,359))
+       ARCR H 52 A_SpawnItemEx("PortalParticleSpawner", 64, 0, 120)
+	   TNT1 A 0 A_SpawnItemEx("ThunderSpawner", Random(128,-128), Random(128,-128), Random(48,96), 0, 0, 0, Random(0,359))
+	   TNT1 A 0 A_UnsetInvulnerable
+	   TNT1 A 0 A_Jump(5,"BFG")
+	   Goto See
+   HellPortal2:
+       TNT1 A 0 A_SetUserVar("user_HellPortal2",1)
+	   TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_SetInvulnerable
+       TNT1 A 0 A_PlaySound("Thunder/Hit", CHAN_VOICE, 1.0, False, ATTN_NONE) // Global
+       //TNT1 A 0 A_PlaySound("Thunder/Yell", CHAN_AUTO, 1.0, False, ATTN_NONE) // Global
+	   TNT1 A 0 A_SpawnItemEx("ThunderSpawner", Random(64,-64), Random(64,-64), Random(48,96), 0, 0, 0, Random(0,359))
+       ARCR H 152 A_SpawnItemEx("PortalParticleSpawner", 64, 0, 120)
+	   ARCR HH 15 A_SpawnItemEx("ThunderSpawner", Random(96,-96), Random(96,-96), Random(48,96), 0, 0, 0, Random(0,359))
+       // "Thunder/Yell" Sound Intro Length is 385 tics.  We're at 182 tics so far.
+	   ARCR H 45 A_SpawnItemEx("GatewaytoHellSpawner2", 128, 0, 120)
+	   TNT1 A 0 A_SpawnItemEx("ThunderSpawner", Random(128,-128), Random(128,-128), Random(48,96), 0, 0, 0, Random(0,359))
+       ARCR H 52 A_SpawnItemEx("PortalParticleSpawner", 64, 0, 120)
+	   ARCR HHHH 25 A_SpawnItemEx("ThunderSpawner", Random(144,-144), Random(144,-144), Random(48,96), 0, 0, 0, Random(0,359))
+       ARCR H 47 A_SpawnItemEx("PortalParticleSpawner2", 64, 0, 120)
+	   ARCR HHHHH 20 A_SpawnItemEx("ThunderSpawner", Random(192,-192), Random(192,-192), Random(48,96), 0, 0, 0, Random(0,359))
+       ARCR H 30 A_SpawnItemEx("PortalParticleSpawner3", 64, 0, 120)
+	   ARCR HHHH 15 A_SpawnItemEx("ThunderSpawner", Random(192,192), Random(192,-192), Random(48,96), 0, 0, 0, Random(0,359))
+       ARCR H 47 A_SpawnItemEx("PortalParticleSpawner2", 64, 0, 120)
+	   ARCR HHHH 25 A_SpawnItemEx("ThunderSpawner", Random(144,-144), Random(144,-144), Random(48,96), 0, 0, 0, Random(0,359))
+       ARCR H 52 A_SpawnItemEx("PortalParticleSpawner", 64, 0, 120)
+	   TNT1 A 0 A_SpawnItemEx("ThunderSpawner", Random(128,-128), Random(128,-128), Random(48,96), 0, 0, 0, Random(0,359))
+	   TNT1 A 0 A_UnsetInvulnerable
+	   TNT1 A 0 A_Jump(5,"BFG")
+	   Goto See
+   FireBombs:
+       TNT1 A 0 A_SetInvulnerable
+       ARCR E 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR E 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR E 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR E 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR E 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR E 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR E 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR E 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR E 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR E 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR E 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR E 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR E 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR E 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR E 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR F 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR F 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR F 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR F 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR F 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR F 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR F 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR F 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR F 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR F 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR F 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR F 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR F 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   ARCR F 2 A_SpawnItemEx("ArcradimusFlameSpawner",0,0,0,0)
+	   TNT1 A 0 A_Facetarget
+	   TNT1 A 0 A_UnsetInvulnerable
+	   ARCR F 5 A_FaceTarget
+	   ARCR G 5 A_CustomMissile("ArcradimusFireBall",92,0)
+	   ARCR G 1 A_UnSetShootable
+	   ARCR GGGGGGGGGGGGG 0 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR GGGGGGGGGGG 1 A_FadeOut(0.1,0)
+	   ARCR GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_Wander
+	   ARCR GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_Wander
+       ARCR G 1 A_PlayWeaponSound("boss/teleport")
+	   ARCR GGGGGGGGGGGGG 0 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR GGGGGGGGGGG 1 A_FadeIn(0.1)
+       ARCR G 1 A_SetShootable
+	   ARCR F 5 A_FaceTarget
+	   ARCR G 5 A_CustomMissile("ArcradimusFireBall",92,0)
+	   TNT1 A 0 A_Jump(160,"SuperFallingMeteors","CometCombo")
+	   TNT1 A 0 A_Jump(90,"Normal")
+	   TNT1 A 0 A_Jump(7,"BFG")
+	   Goto See
+   CometCombo:
+       ARCR JI 8 A_FaceTarget
+	   ARCR H 0 A_FaceTarget
+	   ARCR H 0 A_CustomMissile("ArcradimusComet2",179,-96,random(-2,2))
+	   ARCR H 5 A_CustomMissile("ArcradimusComet2",179,96,random(-2,2))
+	   ARCR H 0 A_FaceTarget
+	   ARCR H 0 A_CustomMissile("ArcradimusComet2",179,-96,random(-2,2))
+	   ARCR H 5 A_CustomMissile("ArcradimusComet2",179,96,random(-2,2))
+	   ARCR H 0 A_FaceTarget
+	   ARCR H 0 A_CustomMissile("ArcradimusComet2",179,-96,random(-2,2))
+	   ARCR H 5 A_CustomMissile("ArcradimusComet2",179,96,random(-2,2))
+	   ARCR H 0 A_FaceTarget
+	   ARCR H 0 A_CustomMissile("ArcradimusComet2",179,-96,random(-2,2))
+	   ARCR H 5 A_CustomMissile("ArcradimusComet2",179,96,random(-2,2))
+	   ARCR H 0 A_FaceTarget
+	   ARCR H 0 A_CustomMissile("ArcradimusComet2",179,-96,random(-2,2))
+	   ARCR H 5 A_CustomMissile("ArcradimusComet2",179,96,random(-2,2))
+	   ARCR H 0 A_FaceTarget
+	   ARCR H 0 A_CustomMissile("ArcradimusComet2",179,-96,random(-2,2))
+	   ARCR H 5 A_CustomMissile("ArcradimusComet2",179,96,random(-2,2))	   
+	   ARCR H 0 A_FaceTarget
+	   ARCR H 0 A_CustomMissile("ArcradimusComet2",179,-96,random(-2,2))
+	   ARCR H 5 A_CustomMissile("ArcradimusComet2",179,96,random(-2,2))
+	   ARCR H 0 A_FaceTarget
+	   ARCR H 0 A_CustomMissile("ArcradimusComet2",179,-96,random(-2,2))
+	   ARCR H 5 A_CustomMissile("ArcradimusComet2",179,96,random(-2,2))	 
+	   ARCR I 5 A_FaceTarget
+	   ARCR I 0 A_FaceTarget
+	   ARCR I 0 A_CustomMissile("ArcradimusSeekerComet",152,-86,random(-2,2))
+	   ARCR I 5 A_CustomMissile("ArcradimusSeekerComet",152,86,random(-2,2))
+	   ARCR I 0 A_FaceTarget
+	   ARCR I 0 A_CustomMissile("ArcradimusSeekerComet",152,-86,random(-2,2))
+	   ARCR I 5 A_CustomMissile("ArcradimusSeekerComet",152,86,random(-2,2))
+	   ARCR I 0 A_FaceTarget
+	   ARCR I 0 A_CustomMissile("ArcradimusSeekerComet",152,-86,random(-2,2))
+	   ARCR I 5 A_CustomMissile("ArcradimusSeekerComet",152,86,random(-2,2))
+	   ARCR I 0 A_FaceTarget
+	   ARCR I 0 A_CustomMissile("ArcradimusSeekerComet",152,-86,random(-2,2))
+	   ARCR I 5 A_CustomMissile("ArcradimusSeekerComet",152,86,random(-2,2))
+	   ARCR I 0 A_FaceTarget
+	   ARCR I 0 A_CustomMissile("ArcradimusSeekerComet",152,-86,random(-2,2))
+	   ARCR I 5 A_CustomMissile("ArcradimusSeekerComet",152,86,random(-2,2))
+	   ARCR I 0 A_FaceTarget
+	   ARCR I 0 A_CustomMissile("ArcradimusSeekerComet",152,-86,random(-2,2))
+	   ARCR I 5 A_CustomMissile("ArcradimusSeekerComet",152,86,random(-2,2))	   
+	   ARCR I 0 A_FaceTarget
+	   ARCR I 0 A_CustomMissile("ArcradimusSeekerComet",152,-86,random(-2,2))
+	   ARCR I 5 A_CustomMissile("ArcradimusSeekerComet",152,86,random(-2,2))
+	   ARCR I 0 A_FaceTarget
+	   ARCR I 0 A_CustomMissile("ArcradimusSeekerComet",152,-86,random(-2,2))
+	   ARCR I 5 A_CustomMissile("ArcradimusSeekerComet",152,86,random(-2,2))	   
+       ARCR I 6 A_FaceTarget
+	   TNT1 A 0 A_Jump(10,"FloorSweep")
+	   TNT1 A 0 A_Jump(1,"BFG")
+	   TNT1 A 0 A_Jump(5,"Normal")
+	   Goto See	
+   /*
+   FallingMeteors:
+	   TNT1 A 0 A_SetInvulnerable
+	   TNT1 A 0 A_FaceTarget
+	   TNT1 A 0 A_PlaySoundEx("cyberlord/see","Body",0,2)
+	   ARCR HHHHHHHHHHHHHHHHHHHH 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+       // Phase 1
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(256,384),Random(256,384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(256,384),Random(-256,-384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(-256,-384),Random(-256,-384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(-256,-384),Random(256,384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(256,384),Random(128,192),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(256,384),Random(-128,-192),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(-256,-384),Random(-128,-192),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(-256,-384),Random(128,192),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(128,192),Random(256,384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(128,192),Random(-256,-384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(-128,-192),Random(-256,-384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(-128,-192),Random(256,384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+       // Phase 2
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(512,768),Random(512,768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(512,768),Random(-512,-768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(-512,-768),Random(-512,-768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(-512,-768),Random(512,768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(512,768),Random(256,384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(512,768),Random(-256,-384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(-512,-768),Random(-256,-384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(-512,-768),Random(256,384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(256,384),Random(512,768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(256,384),Random(-512,-768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(-256,-384),Random(-512,-768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(-256,-384),Random(512,768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+       // Phase 3
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(1024,1280),Random(1024,1280),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(1024,1280),Random(-1024,-1280),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(-1024,-1280),Random(-1024,-1280),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(-1024,-1280),Random(1024,1280),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(1024,1280),Random(512,768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(1024,1280),Random(-512,-768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(-1024,-1280),Random(-512,-768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(-1024,-1280),Random(512,768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(512,768),Random(1024,1280),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(512,768),Random(-1024,-1280),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(-512,-768),Random(-1024,-1280),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusMeteorSpawner",Random(-512,-768),Random(1024,1280),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR A 0 A_UnSetInvulnerable
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 105
+	   TNT1 A 0 A_Jump(10,"SuperFallingMeteors")
+	   TNT1 A 0 A_Jump(118,"CometCombo")
+	   Goto See
+   */
+   SuperFallingMeteors:
+	   TNT1 A 0 A_SetInvulnerable
+	   TNT1 A 0 A_FaceTarget
+	   ARCR HHHHHHHHHHHHHHHHHHHH 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+       // Phase 1
+	   ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(256,384),Random(256,384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(256,384),Random(-256,-384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(-256,-384),Random(-256,-384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(-256,-384),Random(256,384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+	   ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(256,384),Random(128,192),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(256,384),Random(-128,-192),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(-256,-384),Random(-128,-192),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(-256,-384),Random(128,192),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(128,192),Random(256,384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(128,192),Random(-256,-384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(-128,-192),Random(-256,-384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(-128,-192),Random(256,384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+       // Phase 2
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(512,768),Random(512,768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(512,768),Random(-512,-768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(-512,-768),Random(-512,-768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(-512,-768),Random(512,768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(512,768),Random(256,384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(512,768),Random(-256,-384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(-512,-768),Random(-256,-384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(-512,-768),Random(256,384),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(256,384),Random(512,768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(256,384),Random(-512,-768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(-256,-384),Random(-512,-768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(-256,-384),Random(512,768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 3 A_SpawnItemEx("ArcradimusFlameSpawner")
+       // Phase 3
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(1024,1280),Random(1024,1280),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(1024,1280),Random(-1024,-1280),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(-1024,-1280),Random(-1024,-1280),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(-1024,-1280),Random(1024,1280),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(1024,1280),Random(512,768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(1024,1280),Random(-512,-768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(-1024,-1280),Random(-512,-768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(-1024,-1280),Random(512,768),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(512,768),Random(1024,1280),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(512,768),Random(-1024,-1280),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(-512,-768),Random(-1024,-1280),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR H 0 A_SpawnItemEx("ArcradimusSuperMeteorSpawner",Random(-512,-768),Random(1024,1280),0,0,0,0,SXF_NOCHECKPOSITION,0) // (1250,-1250)
+       ARCR H 4 A_SpawnItemEx("ArcradimusFlameSpawner")
+       ARCR A 0 A_UnSetInvulnerable
+	   ARCR H 2 A_SpawnItemEx("ArcradimusFlameSpawner")
+	   ARCR H 105
+	   Goto See
+   Melee:
+       ARCR EF 8 A_FaceTarget 
+       ARCR G 6 A_MeleeAttack
+       ARCR G 0 A_Jump (128,1)
+       Goto See
+       ARCR ST 8 A_FaceTarget 
+       ARCR U 6 A_MeleeAttack
+       ARCR G 0 A_Jump (64,1)
+       Goto See
+       ARCR HI 8 A_FaceTarget
+       ARCR J 0 A_MeleeAttack
+       ARCR J 6 A_MeleeAttack
+       Goto See
+   Pain: 
+       ARCR K 2 
+       ARCR K 2 A_Pain 
+       Goto See 
+   Death: 
+       TNT1 A 0 A_StopSound(6)
+	   TNT1 A 0 ACS_ExecuteAlways(5433,0,6)
+	   ARCR L 8 
+       ARCR M 8 A_Scream 
+       ARCR N 8 
+       ARCR O 8 A_NoBlocking 
+       ARCR PQ 8 
+       ARCR R -1 A_Fall 
+       Stop
+   } 
+}
+
+ACTOR PortalParticleSpawner
+{
+	Height 0
+	Radius 0
+	Mass 0
+	Damage 0
+	+THRUACTORS
+	+NOTELEPORT
+	+NOGRAVITY
+	+NOBLOCKMAP
+	+CLIENTSIDEONLY
+	+NOBLOCKMAP
+	+NOINTERACTION
+
+    States
+	{
+	  Spawn:
+	   TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 4 A_SpawnItemEx("PortalParticle",0,0,0,FRandom(9.0,8.5),0,FRandom(-9.0,9.0),Random(0,359),128)
+       Stop
+    }
+}
+
+ACTOR PortalParticleSpawner2 : PortalParticleSpawner
+{
+    States
+    {
+      Spawn:
+       TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 3 A_SpawnItemEx("PortalParticle",0,0,0,FRandom(9.0,8.5),0,FRandom(-9.0,9.0),Random(0,359),128)
+       Stop
+    }
+}
+ACTOR PortalParticleSpawner3 : PortalParticleSpawner
+{
+    States
+    {
+      Spawn:
+       TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("PortalParticle",0,0,0,FRandom(9.0,8.5),0,FRandom(-9.0,9.0),Random(0,359),128)
+       Stop
+    }
+}
+
+ACTOR PortalParticle
+{
+Height 0
+Radius 0
+Mass 0
+Damage 0
++THRUACTORS
++NOTELEPORT
++DONTSPLASH
++NOGRAVITY
++NOBLOCKMAP
++CLIENTSIDEONLY
++MISSILE
++NOBLOCKMAP
++FORCEXYBILLBOARD
++NOINTERACTION
+RENDERSTYLE ADD
+Alpha 0.0
+BounceFactor 0.5
+Scale 0.09
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 5
+TNT1 A 1 A_ScaleVelocity(frandom(-0.1,-0.2))
+SPKR AAAAA 1 Bright A_FadeIn(0.2)
+Fly:
+SPKR A 2 Bright A_FadeOut(0.06)
+Loop
+}
+}
+
+ACTOR ArcradimusComet
+{
+   Radius 16
+   Height 24
+   Speed 32
+   Damage 33
+   DamageType "Hell"
+   Scale 2.0
+   Decal Scorch
+   SpawnID 251
+   PROJECTILE
+   RENDERSTYLE Normal
+   +THRUGHOST
+   SeeSound "weapons/firbfi"
+   DeathSound "weapons/hellex"
+   DONTHURTSHOOTER
+   +FIREDAMAGE
+   States
+   {
+   Spawn: 
+      ACCM AAAABBBBCCCC 1 Bright A_SpawnItem("ArcradimusCometTrail",0,0)
+      loop
+   Death:
+      ACCM J 0 Bright A_SetTranslucent (0.67,1)
+      ACCM J 3 Bright
+      ACCM K 3 Bright A_Explode(128,128,0)
+	  TNT1 A 0 A_SpawnItemEx("ArcradimusCometDeath",0,0,0,0,0,0,0,128,0)
+      ACCM LMN 3 Bright
+      stop
+   }
+}
+
+ACTOR ArcradimusCometTrail
+{   
+   Radius 6
+   Height 6
+   Scale 1.5
+   Speed 0
+   PROJECTILE
+   RENDERSTYLE ADD
+   ALPHA 0.67
+   States
+   {
+   Spawn:
+      NULL A 3 Bright
+      ACCM DEFGHI 3 BRIGHT
+      Stop 
+   }
+}
+
+ACTOR ArcradimusCometDeath : CometDeath
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 AAA 0 A_CustomMissile("KaboomArcrad", 0, 0, random(0,360), 2, random(0,360))	
+TNT1 AAA 0 A_CustomMissile("SmokeFX2", 0, 0, random(0,360), 2, random(0,360))
+ACCM JKLMN 3 Bright A_FadeOut(0.1)
+Stop
+}
+}
+
+ACTOR KaboomArcrad : Kaboom4
+{
+Speed 2
+Scale 0.85
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+FXPR AABBCDEFGHIJKLM 1 Bright A_FadeOut(0.05)
+Stop
+}
+}
+
+ACTOR ArcradimusFireBall : GuardianTracer
+{
+SeeSound "monsters/newfireshoot"
+DeathSound "monsters/newfireexplode"
+RenderStyle Add
+Alpha 1.6
+Decal Scorch
+Speed 28
+FastSpeed 32
+Damage 26
+DamageType "Hell"
+-SEEKERMISSILE
+States
+{
+Spawn:
+	TNT1 A 0 A_SpawnItemEx("ArcradimusSmoke",random(5,-5),random(5,-5),random(5,-5),random(2,-2),random(2,-2),random(2,-2),random(0,360))
+    FRR1 A 1 Bright A_Explode(Random(2,4),68,0)
+	TNT1 A 0 A_SpawnItemEx("ArcradimusSmoke",random(5,-5),random(5,-5),random(5,-5),random(2,-2),random(2,-2),random(2,-2),random(0,360))
+    FRR1 B 1 Bright A_Explode(Random(2,4),68,0)
+	TNT1 A 0 A_SpawnItemEx("ArcradimusSmoke",random(5,-5),random(5,-5),random(5,-5),random(2,-2),random(2,-2),random(2,-2),random(0,360))
+    FRR1 C 1 Bright A_Explode(Random(2,4),68,0)	
+    Loop
+Death:
+	TNT1 A 0
+	TNT1 AAAAAAAAA 0 A_SpawnItemEx("ArcradimusSmoke",random(5,-5),random(5,-5),random(5,-5),random(2,-2),random(2,-2),random(2,-2),random(0,360))
+	FRR1 C 0 Bright A_Mushroom("ArcradimusFlare", 8)
+    FRR1 ABC 2 Bright
+    Stop
+    }
+}
+
+ACTOR ArcradimusSmoke : GhostFire
+{
+Scale 0.88
+RenderStyle Normal
+States
+{
+Spawn:
+FRR1 ABCDEFGHIJKL 2 Bright A_FadeOut
+Stop
+}
+}
+
+Actor DropFire
+{
+  Radius 8
+  Height 40
+  Projectile
+  RenderStyle Add
+  DamageType "Hell"
+  Alpha 0.90
+  -NoGravity
+  +LowGravity
+  +NoExplodeFloor
+  +NoDamageThrust
+  +ThruGhost
+  States
+  {
+  Spawn:
+    FRR1 A 1  A_Playsound("Flamethrower/Flame")
+    FRR1 A 1  A_Explode(5, 16, 0)
+    FRR1 BCDEFGHIJKLMN 2  A_Explode(5, 16, 0)
+    FRR1 A 1  A_Playsound("Flamethrower/Flame")
+    FRR1 A 1  A_Explode(5, 32, 0)
+    FRR1 BCDEFGHIJKLMN 2  A_Explode(5, 16, 0)
+    FRR1 A 1  A_Playsound("Flamethrower/Flame")
+    FRR1 A 1  A_Explode(5, 32, 0)
+    FRR1 BCDEFGHIJKLMN 2  A_Explode(5, 16, 0)
+    FRR1 A 1  A_Playsound("Flamethrower/Flame")
+    FRR1 A 1  A_Explode(5, 32, 0)
+    FRR1 BCDEFGHIJKLMN 2  A_Explode(5, 16, 0)
+    FRR1 A 1  A_Playsound("Flamethrower/Flame")
+    FRR1 A 1  A_Explode(5, 32, 0)
+    FRR1 BCDEFGHIJKLMN 2  A_Explode(5, 16, 0)
+    FRR1 A 0 A_Jump(192, 1)
+    Loop
+	TNT1 A 0
+  Death:
+    TNT1 A 1 Bright
+    Stop
+  }
+}
+
+Actor ArcradimusFlare
+{
+  Radius 8
+  Height 11
+  Speed 35
+  Damage (1)
+  Projectile
+  RenderStyle Add
+  DamageType "Hell"
+  Decal DoomImpScorch
+  Alpha 0.95
+  -NoGravity
+  DeathSound "PyroCannon/Flare"
+  States
+  {
+  Spawn:
+    TNT1 A 1  A_SpawnItemEx("DropFire", 0, 0, 0, 0, 0, 0, 0, 128)
+    Loop
+  Death:
+    FRR1 ABCDEFGHIJKL 2 
+    FRR1 ABCDEFGHIJKL 0 A_Explode(64, 64)
+    FRR1 ABCDEFGHIJKL 2 
+    Stop
+  }
+}
+
+ACTOR HellionSmokeAttackArcradimus : IFire
+{
+  Scale 1.15
+  RenderStyle Translucent
+  Alpha 0.75
+  DamageType "Hell"
+  Obituary "%o was given a one way ticket to hell by the Demon Lord Arcradimus."
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    LESK A 1 Bright A_PlaySoundEx("hellion/smokeloop","Voice",1) 
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+    LESK A 1 Bright A_Explode(Random(1,3),62)
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+    LESK B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+    LESK C 2 Bright A_Fire	
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+    LESK B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+    LESK A 2 Bright A_Explode(Random(1,3),62)
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+    LESK B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+    LESK C 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+    LESK B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+    LESK A 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+    LESK B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+    LESK C 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)	
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+	LESK B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+	LESK A 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+	LESK B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+	LESK C 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+	LESK B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+	LESK A 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+	LESK B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)	
+    LESK C 2 Bright A_Explode(Random(1,3),62)
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+    LESK B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+	LESK A 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+	LESK B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+	LESK C 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+	LESK B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+	LESK A 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+	LESK B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+	LESK C 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+	LESK B 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+	LESK A 2 Bright A_Fire
+	TNT1 A 0 A_SpawnItem("HellionSmokeAttackSpawnerArcradimus",0,0,0,0)
+	TNT1 A 0 Bright A_Explode(Random(1,3),62)
+	LESK B 2 Bright A_Fire	
+	TNT1 A 1 A_StopSoundEx("Voice")
+	TNT1 A 1 A_PlaySound("exile/voidend")
+    Stop
+  }
+}
+
+ACTOR HellionSmokeAttackSpawnerArcradimus : RedParticleSpawner
+{
+  States
+  {
+  Spawn:
+    TNT1 A 0
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    TNT1 A 0 A_SpawnItemEx("HellionSmoke2Arc",random(12,-12),random(12,-12),random(12,20),0,0,random(8,12),0,128,0)
+	TNT1 A 0 A_SpawnItemEx("HellionSmoke2Arc",random(24,-24),random(24,-24),random(2,10),0,0,random(2,6),0,128,0)
+    TNT1 A 1
+    Stop
+  }
+}
+
+ACTOR HellionSmokeArc : GhostFire
+{
+Scale 0.44
+RenderStyle Normal
+States
+{
+Spawn:
+FRR1 ABCDEFGHIJKL 2 Bright A_FadeOut
+Stop
+}
+}
+
+ACTOR HellionSmoke2Arc : HellionSmokeArc
+{
+Scale 0.4
+}
+
+Actor ArcradShot : GuardianTracer
+{
+SeeSound "monsters/newfireshoot"
+DeathSound "monsters/newfireexplode"
+RenderStyle Translucent
+Alpha 0.85
+Decal BaronScorch
+-SEEKERMISSILE
+Damage 18
+DamageType "Hell"
+Speed 28
+FastSpeed 30
+States
+{
+    Spawn:
+	 ABL9 AAABBB 1 Bright A_SpawnItemEx("ArcradShotTrail",0,0,0,0,0,0,0,128)
+	 Loop
+	Death:
+	 TNT1 A 0
+     TNT1 A 0 A_SpawnItemEx("RedParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+	 TNT1 AAA 0 A_CustomMissile("KaboomRed", 0, 0, random(0,360), 2, random(0,360))
+	 TNT1 AAA 0 A_CustomMissile("SmokeFX4", 0, 0, random(0,360), 2, random(0,360))	
+     ABL9 DEFG 3 Bright
+     Stop
+}
+}
+
+Actor ArcradShotTrail : BFG9500Trail
+{
+Scale 0.85
+ States
+  {
+Spawn:
+    TNT1 A 0
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 1
+    ABL9 AB 1 A_FadeOut
+    Goto Spawn+1
+    }
+}
+
+ACTOR KaboomRed : Kaboom8
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+FXPR AABBCDEFGHIJKLM 1 Bright A_FadeOut(0.05)
+Stop
+}
+}
+
+Actor GatewaytoHell
+{
+Speed 0
+Height 0
+Radius 0
+Mass 0
+Damage 0
++THRUACTORS
++NOTELEPORT
++DONTSPLASH
++NOGRAVITY
++NOBLOCKMAP
++MISSILE
++NOBLOCKMAP
+-FORCEXYBILLBOARD
++NOINTERACTION
+RENDERSTYLE ADD
+Scale 1.0
+States
+{
+Spawn:
+  TNT1 A 0
+  TNT1 A 0 A_PlaySound("Gateway/Hell", CHAN_AUTO, 1.0, True)
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+Death:
+  PRT1 ABCDEFGHIJKLMNOPABCD 1 Bright A_FadeOut(0.05)
+  Stop
+}
+}
+
+Actor GatewaytoHellSpawner : GatewaytoHell
+{
+  States {
+  Spawn:
+  // Note, the yell sound is already playing for 182 tics so far.  203 remain.
+  TNT1 A 0
+  TNT1 A 0 A_PlaySound("Gateway/Hell", CHAN_AUTO, 1.0, True)
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("GatewaytoHell2", Random(1,-1), Random(1,-1), Random(1,-1), 0, 0, 0, Random(0,359))
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("GatewaytoHell3", Random(1,-1), Random(1,-1), Random(1,-1), 0, 0, 0, Random(0,359))
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("GatewaytoHell4", Random(1,-1), Random(1,-1), Random(1,-1), 0, 0, 0, Random(0,359))
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("GatewaytoHell5", Random(1,-1), Random(1,-1), Random(1,-1), 0, 0, 0, Random(0,359))
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("GatewaytoHell6", Random(1,-1), Random(1,-1), Random(1,-1), 0, 0, 0, Random(0,359))
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("GatewaytoHell7", Random(1,-1), Random(1,-1), Random(1,-1), 0, 0, 0, Random(0,359))
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("GatewaytoHell8", Random(1,-1), Random(1,-1), Random(1,-1), 0, 0, 0, Random(0,359))
+  PRT1 ABCDEFGHIJKLM 1 Bright
+  PRT1 NOP 2 Bright A_SpawnItemEx("GatewaytoHellSpawnTear")
+  PRT1 ABCDEFGHIJKLMN 1 Bright
+  PRT1 OP 3 Bright A_SpawnItemEx("GatewaytoHellSpawnTear")
+  PRT1 ABCD 1 Bright
+  PRT1 EF 3 Bright A_SpawnItemEx("GatewaytoHellSpawnTear")
+  PRT1 GHIJKLMN 1 Bright
+  PRT1 KLMNOP 4 Bright A_SpawnItemEx("GatewaytoHellSpawnTear")
+  PRT1 OP 1 Bright
+  PRT1 ABCDE 4 Bright A_SpawnItemEx("GatewaytoHellSpawnTear")
+  PRT1 FGHIJKLMOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("ArcradimusMinion1", 0, 0, -60, 0, 0, 0, 0, SXF_TELEFRAG|SXF_NOCHECKPOSITION) // Set Z to negative same as parent actor spawn height.
+  TNT1 A 0 A_SpawnItemEx("GatewaytoHell5", Random(1,-1), Random(1,-1), Random(1,-1), 0, 0, 0, Random(0,359))
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("GatewaytoHell6", Random(1,-1), Random(1,-1), Random(1,-1), 0, 0, 0, Random(0,359))
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("GatewaytoHell7", Random(1,-1), Random(1,-1), Random(1,-1), 0, 0, 0, Random(0,359))
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("GatewaytoHell8", Random(1,-1), Random(1,-1), Random(1,-1), 0, 0, 0, Random(0,359))
+  PRT1 ABCDEFGHIJKLM 1 Bright
+  PRT1 NOP 2 Bright A_SpawnItemEx("GatewaytoHellSpawnTear")
+  PRT1 ABCDEFGHIJKLMN 1 Bright
+  PRT1 OP 3 Bright A_SpawnItemEx("GatewaytoHellSpawnTear")
+  PRT1 ABCD 1 Bright
+  PRT1 EF 3 Bright A_SpawnItemEx("GatewaytoHellSpawnTear")
+  PRT1 GHIJKLMN 1 Bright
+  PRT1 KLMNOP 4 Bright A_SpawnItemEx("GatewaytoHellSpawnTear")
+  PRT1 OP 1 Bright
+  PRT1 ABCDE 4 Bright A_SpawnItemEx("GatewaytoHellSpawnTear")
+  PRT1 FGHIJKLMOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("ArcradimusMinion2", 0, 0, -60, 0, 0, 0, 0, SXF_TELEFRAG|SXF_NOCHECKPOSITION) // Set Z to negative same as parent actor spawn height.
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  Goto Death
+  }
+}
+
+Actor GatewaytoHellSpawner2 : GatewaytoHellSpawner
+{
+  States {
+  Spawn:
+  // Note, the yell sound is already playing for 182 tics so far.  203 remain.
+  TNT1 A 0
+  TNT1 A 0 A_PlaySound("Gateway/Hell", CHAN_AUTO, 1.0, True)
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("GatewaytoHell2", Random(1,-1), Random(1,-1), Random(1,-1), 0, 0, 0, Random(0,359))
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("GatewaytoHell3", Random(1,-1), Random(1,-1), Random(1,-1), 0, 0, 0, Random(0,359))
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("GatewaytoHell4", Random(1,-1), Random(1,-1), Random(1,-1), 0, 0, 0, Random(0,359))
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("GatewaytoHell5", Random(1,-1), Random(1,-1), Random(1,-1), 0, 0, 0, Random(0,359))
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("GatewaytoHell6", Random(1,-1), Random(1,-1), Random(1,-1), 0, 0, 0, Random(0,359))
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("GatewaytoHell7", Random(1,-1), Random(1,-1), Random(1,-1), 0, 0, 0, Random(0,359))
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("GatewaytoHell8", Random(1,-1), Random(1,-1), Random(1,-1), 0, 0, 0, Random(0,359))
+  PRT1 ABCDEFGHIJKLM 1 Bright
+  PRT1 NOP 2 Bright A_SpawnItemEx("GatewaytoHellSpawnTear")
+  PRT1 ABCDEFGHIJKLMN 1 Bright
+  PRT1 OP 3 Bright A_SpawnItemEx("GatewaytoHellSpawnTear")
+  PRT1 ABCD 1 Bright
+  PRT1 EF 3 Bright A_SpawnItemEx("GatewaytoHellSpawnTear")
+  PRT1 GHIJKLMN 1 Bright
+  PRT1 KLMNOP 4 Bright A_SpawnItemEx("GatewaytoHellSpawnTear")
+  PRT1 OP 1 Bright
+  PRT1 ABCDE 4 Bright A_SpawnItemEx("GatewaytoHellSpawnTear")
+  PRT1 FGHIJKLMOP 1 Bright
+  TNT1 A 0 A_SpawnItemEx("ArcradimusMinion3", 0, 0, -60, 0, 0, 0, 0, SXF_TELEFRAG|SXF_NOCHECKPOSITION)
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright
+  Goto Death
+  }
+}
+
+Actor GatewaytoHell2 : GatewaytoHell
+{
+Scale 1.50
+}
+
+Actor GatewaytoHell3 : GatewaytoHell
+{
+Scale 2.0
+}
+
+Actor GatewaytoHell4 : GatewaytoHell
+{
+Scale 2.5
+}
+
+Actor GatewaytoHell5 : GatewaytoHell
+{
+Scale 3.0
+}
+
+Actor GatewaytoHell6 : GatewaytoHell
+{
+Scale 3.5
+}
+
+Actor GatewaytoHell7 : GatewaytoHell
+{
+Scale 4.0
+}
+
+Actor GatewaytoHell8 : GatewaytoHell
+{
+Scale 4.5
+}
+
+Actor GatewaytoHellSpawnTear : GatewaytoHell
+{
+Scale 5.0
+States {
+  Spawn:
+  TNT1 A 0
+  TNT1 A 0 A_PlaySound("brain/spit", CHAN_AUTO, 1.0, True)
+  PRT1 ABCDEFGHIJKLMNOP 1 Bright A_FadeOut(0.10)
+  Stop
+  }
+}
+
+ACTOR ArcradimusMinion1 : RandomSpawner
+{
+DropItem "Cardinal", 256, 100
+}
+
+ACTOR ArcradimusMinion2 : RandomSpawner
+{
+DropItem "CerebralSentient", 256, 100
+}
+
+ACTOR ArcradimusMinion3 : RandomSpawner
+{
+DropItem "CerebralCardinal", 256, 100
+}
+
+ACTOR Thunderspawner
+{
+	Radius 16
+	Height 16
+	States
+	{
+	Spawn:
+		TNT1 A 15 
+		TNT1 A 0 Bright A_SpawnItemEx("ThunderFX", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+		TNT1 A 0 A_Explode(102, 144)		
+		TNT1 A 30 A_Quake(9, 30, 0, 960)
+		Stop
+	}
+}
+
+Actor ThunderFX // 3004
+{
+	+NoInteraction
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		goto Death
+	Death:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("ThunderFX_LightObject", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+		TNT1 A 0 A_SpawnItemEx("ThunderFX_Flare", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+		TNT1 A 0 A_SpawnItemEx("ThunderFX_Flare", 0, 0, 512, 0, 0, 0, 0, 128, 0)
+		TNT1 A 0 A_SpawnItemEx("ThunderFX_Bolt", 0, 0, 0, 0, 0, 0, 0, 128, 0)
+		TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("ThunderFX_Smoke", 0, 0, 0, 0.01 * Random(-125, 125), 0.01 * Random(-125, 125), 0.01 * Random(25, 245), 0, 128, 0)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("ThunderFX_Spark", 0, 0, 8, 0.01 * Random(-300, 300), 0.01 * Random(-300, 300), 0.01 * Random(0, 600), 0, 128, 0)
+		TNT1 A 0 A_PlaySound("Thunder/HitShort", CHAN_AUTO)
+		Stop
+	}
+}
+Actor ThunderFX_LightObject
+{
+	+NoInteraction
+	RenderStyle None
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		TNT1 B 5//1
+		TNT1 A 3
+		TNT1 B 4//2
+		TNT1 CDEFGHIJKL 1//FadeOut
+		Stop
+	}
+}
+//Flare
+Actor ThunderFX_Flare
+{
+	+NoInteraction
+	RenderStyle Add
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(255, "Flash1", "Flash2", "Flash3", "Flash4")
+	Flash1:
+		BFLR A 1
+		BFLR A 1 Bright A_FadeOut(0.05)
+		Wait
+	Flash2:
+		BFLR B 1
+		BFLR B 1 Bright A_FadeOut(0.05)
+		Wait
+	Flash3:
+		BFLR C 1
+		BFLR C 1 Bright A_FadeOut(0.05)
+		Wait
+	Flash4:
+		BFLR D 1
+		BFLR D 1 Bright A_FadeOut(0.05)
+		Wait
+	}
+}
+//ThunderBolt
+Actor ThunderFX_Bolt
+{
+	+NoInteraction
+	RenderStyle Add
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(255, "Flash1", "Flash2", "Flash3")
+	Flash1:
+		THUN A 1
+		THUN A 1 Bright A_FadeOut(0.04)
+		Wait
+	Flash2:
+		THUN B 1
+		THUN B 1 Bright A_FadeOut(0.04)
+		Wait
+	Flash3:
+		THUN C 1
+		THUN C 1 Bright A_FadeOut(0.04)
+		Wait
+	}
+}
+//Sparks
+Actor ThunderFX_Spark
+{
+	+Missile
+	-NoGravity
+	Gravity 0.1
+	Radius 4
+	Height 8
+	RenderStyle Add
+	Scale 0.0125
+	States
+	{ 
+	Spawn:
+		BFLR A 1 Bright
+		Wait
+	}
+}
+//Smoke
+Actor ThunderFX_Smoke
+{
+	+NoInteraction
+	Alpha 0.9
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(255, "Cloud1", "Cloud2", "Cloud3", "Cloud4")
+	Cloud1:
+		SMOG A 1 A_FadeOut(0.0125)
+		Wait
+	Cloud2:
+		SMOG B 1 A_FadeOut(0.0125)
+		Wait
+	Cloud3:
+		SMOG C 1 A_FadeOut(0.0125)
+		Wait
+	Cloud4:
+		SMOG D 1 A_FadeOut(0.0125)
+		Wait
+	}
+}
+
+ACTOR Meteor_m
+{
+	Scale 0.08
+	Decal Scorch
+	PROJECTILE
+	Speed 10
+    +MTHRUSPECIES
+    -NoGravity
+    -Float
+    +FloorClip
+    +DontHurtSpecies 
+    +SpawnCeiling
+    DamageType "Hell"
+	Radius 8 
+	Height 8 
+	RENDERSTYLE Add
+	SeeSound "comet/launch"
+	DeathSound "Meteor/Crash"
+	Damage 10
+	ExplosionDamage 50
+    ExplosionRadius 195
+	MissileHeight 0
+	States
+	{
+		Spawn:
+			EXN1 A 0 bright A_SpawnItemEx("Meteor_m_FX", 0, 0, 0, 0.001 * Random(-125, 125), 0.001 * Random(-125, 125), 0.001 * Random(25, 245), 0, 128, 0)
+			EXN1 A 1 bright A_SpawnItemEx("Meteor_m_TrailFX_Smoke", 0, 0, 0, 0.001 * Random(-125, 125), 0.001 * Random(-125, 125), 0.001 * Random(25, 245), 0, 128, 0)
+			loop
+		Death:
+			TNT1 A 0
+			TNT1 A 0// A_AlertMonsters
+			TNT1 A 0 Radius_Quake(3, 28, 1, 4, 0)
+			TNT1 A 0 A_Explode(160, 168)//Damage, Radius
+			goto EndAnimation
+		EndAnimation:
+			TNT1 A 0 A_SpawnItemEx("Meteor_m_Explosion", 0, 0, 0, 0, 0, 0, -1, SXF_NOCHECKPOSITION)//A_CustomMissile("Meteor_m_Explosion",0+Random(5,80),0+Random(35,-35),0+Random(0,370))
+			TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("Meteor_m_FX_Smoke", 0, 0, 0, 0.01 * Random(-125, 125), 0.01 * Random(-125, 125), 0.01 * Random(25, 245), 0, 128, 0)
+			stop
+	}
+}
+
+ACTOR Meteor_s : Meteor_m
+{
+	Damage 10
+}
+Actor Meteor_m_FX
+{
+	+NoGravity +NoBlockmap +ForceXYBillboard
+	Radius 0 Height 0 Speed 0
+	XScale 0.08 YScale 0.08
+	RenderStyle Add
+	Alpha 0.7
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(255, 1, 2, 3, 4)
+		EXN1 A 1 Bright A_FadeOut(0.06)
+		Wait
+		EXN2 A 1 Bright A_FadeOut(0.06)
+		Wait
+		EXN3 A 1 Bright A_FadeOut(0.06)
+		Wait
+		EXN4 A 1 Bright A_FadeOut(0.06)
+		Wait
+	}
+}
+Actor Meteor_m_TrailFX_Smoke
+{
+	+NoInteraction
+	Alpha 0.9
+	Scale 0.4
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(255, "Cloud1", "Cloud2", "Cloud3", "Cloud4")
+	Cloud1:
+		SMOG A 1 A_FadeOut(0.02)//0.0125
+		Wait
+	Cloud2:
+		SMOG B 1 A_FadeOut(0.02)
+		Wait
+	Cloud3:
+		SMOG C 1 A_FadeOut(0.02)
+		Wait
+	Cloud4:
+		SMOG D 1 A_FadeOut(0.02)
+		Wait
+	}
+}
+
+Actor SFX_Shockwave
+{
+	Projectile
+	+NoBlockmap +RIPPER +BLOODLESSIMPACT +SLIDESONWALLS // +NOCLIP
+	damage 0
+	Radius 2 Height 1 Speed 100
+	States
+	{
+	Spawn:
+		TNT1 A 4
+		stop
+	}
+}
+
+Actor Meteor_m_FX_Smoke
+{
+	+NoInteraction
+	Alpha 0.9
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(255, "Cloud1", "Cloud2", "Cloud3", "Cloud4")
+	Cloud1:
+		SMOG A 1 A_FadeOut(0.0125)
+		Wait
+	Cloud2:
+		SMOG B 1 A_FadeOut(0.0125)
+		Wait
+	Cloud3:
+		SMOG C 1 A_FadeOut(0.0125)
+		Wait
+	Cloud4:
+		SMOG D 1 A_FadeOut(0.0125)
+		Wait
+	}
+}
+
+ACTOR SFX_Explosion_m_Base
+{
+	+NOBLOCKMAP
+	-COUNTITEM
+	PROJECTILE
+	DeathSound "effects/explosion"
+	SpawnID 203
+	Radius 1 Height 1 Speed 0
+	States
+	{
+		Spawn:
+			TNT1 A 1 A_AlertMonsters
+			TNT1 A 0 Radius_Quake(3, 28, 1, 4, 0)
+			TNT1 A 0 BRIGHT A_Explode(412, 232)	
+			goto Death		
+		Death:
+			TNT1 A 0 A_Scream
+			TNT1 A 1 A_SpawnItemEx("SFX_NoLight_ExpFire", 0, 0, 0, 0.1 * Random(-20, 20), 0.1 * Random(-20, 20), 0.1 * Random(-20, 20), 0, 128, 0)
+			//TNT1 AAAA 0 A_SpawnItemEx("SFX_NoLight_ExpFire", 0, 0, 0, 0.1 * Random(-20, 20), 0.1 * Random(-20, 20), 0.1 * Random(-20, 20), 0, 128, 0)					
+			TNT1 AAAA 1 A_SpawnItemEx("SFX_NoLight_ExpFire_long", 0, 0, 0, 0.003 * Random(-200, 200), 0.003 * Random(-200, 200), 0.003 * Random(-200, 200), 0, 128, 0)
+			TNT1 A 1 A_SpawnItemEx("SFX_NoLight_ExpFire_long", 0, 0, 0, 0.01 * Random(-200, 200), 0.01 * Random(-200, 200), 0.01 * Random(-200, 200), 0, 128, 0)
+			TNT1 AAAA 1 A_SpawnItemEx("SFX_NoLight_ExpFire", 0, 0, 0, 0.01 * Random(-200, 200), 0.01 * Random(-200, 200), 0.01 * Random(-200, 200), 0, 128, 0)
+			//TNT1 AAAA 0 A_SpawnItemEx("SFX_NoLight_ExpFire", 0, 0, 0, 0.1 * Random(-20, 20), 0.1 * Random(-20, 20), 0.1 * Random(-20, 20), 0, 128, 0)
+			TNT1 A 5
+			Stop
+	}
+}
+
+ACTOR Meteor_m_Explosion : SFX_Explosion_m_Base
+{
+	States
+	{
+		Spawn:
+			TNT1 A 0
+			goto Death
+	}
+}
+
+Actor SFX_ExpFire
+{
+	+Missile +NoGravity +NoBlockmap +FORCEXYBILLBOARD// +NOINTERACTION
+	-Solid
+	Radius 0 Height 0
+	RenderStyle Add
+	Alpha 1.0
+	Scale 0.8
+//	RenderStyle Add Alpha 1.0
+	States
+	{
+	Spawn:
+		BOOM ABCDEFGHIJKLMNOPPPPPPPPPP 1 BRIGHT A_FadeOut(0.04)
+		Stop
+	}
+}
+
+Actor SFX_ExpFire_long : SFX_ExpFire
+{
+	States
+	{
+	Spawn:
+		BOOM ABCDEFGHIJKLMNOPPPPPPPPPP 2 BRIGHT A_FadeOut(0.04)
+		Stop
+	}
+}
+
+Actor SFX_NoLight_ExpFire_long : SFX_ExpFire_long
+{
+}
+
+Actor SFX_NoLight_ExpFire : SFX_ExpFire
+{
+}
+
+ACTOR ArcradimusGhost
+{
+Scale 3
+RENDERSTYLE Translucent
+Alpha 0.75
++NOGRAVITY
++CLIENTSIDEONLY
++DONTSPLASH
++NOINTERACTION
++NOCLIP
+States
+{
+Spawn:
+    ARCR A 2 A_FadeOut(0.18)
+    Loop
+    }
+}
+
+ACTOR ArcradimusFlameSpawner : RedParticleSpawner
+{
+  States
+  {
+  Spawn:
+    TNT1 AAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("ArcradimusFire",random(64,-64),random(64,-64),random(0,128),0,0,random(4,12),0,128,0)
+    TNT1 A 1
+    Stop
+  }
+}
+
+ACTOR ArcradimusFire
+{
++MISSILE
++DONTSPLASH
++CLIENTSIDEONLY
++NOBLOCKMAP
++NOGRAVITY
++NOTELEPORT
++FORCEXYBILLBOARD
++THRUACTORS
+RenderStyle Add
+Scale 0.4
+States
+{
+Spawn:
+FRR1 ABCDEFGHIJKL 2 Bright A_FadeOut
+Stop
+}
+}
+
+ACTOR ArcradimusMeteorSpawner : RainCometSpawner
+{
+States
+{
+Spawn:
+    TNT1 A 0
+	//TNT1 AAAAAAAAA 1 A_SpawnItemEx("Meteor_m",Random(256,-256),Random(256,-256),0,0,0,-5,-1)
+	TNT1 AAAAAAAAAAAAAAAAAAAA 2 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 0 A_CustomMissile("Meteor_m",-18,random(0,20),random(0,360),2)
+	TNT1 AAAAAAAAAAAAAAAAAAAA 2 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 0 A_CustomMissile("Meteor_m",-18,random(0,20),random(0,360),2)
+	TNT1 AAAAAAAAAAAAAAAAAAAA 2 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 0 A_CustomMissile("Meteor_m",-18,random(0,20),random(0,360),2)
+	Stop
+//FadeOut:
+//	PNIS ABCDEFGHIJ 2 Bright A_FadeOut(0.06)
+//    Goto FadeOut
+	}
+}
+
+
+// Super
+
+Actor SuperMeteor_m_FX
+{
+	+NoGravity +NoBlockmap +ForceXYBillboard
+	Radius 0 Height 0 Speed 0
+	XScale 0.16 YScale 0.16
+	RenderStyle Add
+	Alpha 0.7
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(255, 1, 2, 3, 4)
+		EXN1 A 1 Bright A_FadeOut(0.06)
+		Wait
+		EXN2 A 1 Bright A_FadeOut(0.06)
+		Wait
+		EXN3 A 1 Bright A_FadeOut(0.06)
+		Wait
+		EXN4 A 1 Bright A_FadeOut(0.06)
+		Wait
+	}
+}
+Actor SuperMeteor_m_TrailFX_Smoke
+{
+	+NoInteraction
+	Alpha 0.9
+	Scale 0.8
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(255, "Cloud1", "Cloud2", "Cloud3", "Cloud4")
+	Cloud1:
+		SMOG A 1 A_FadeOut(0.02)//0.0125
+		Wait
+	Cloud2:
+		SMOG B 1 A_FadeOut(0.02)
+		Wait
+	Cloud3:
+		SMOG C 1 A_FadeOut(0.02)
+		Wait
+	Cloud4:
+		SMOG D 1 A_FadeOut(0.02)
+		Wait
+	}
+}
+
+
+Actor SuperMeteor_m_FX_Smoke
+{
+	+NoInteraction
+	Alpha 0.9
+	Scale 2.0
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(255, "Cloud1", "Cloud2", "Cloud3", "Cloud4")
+	Cloud1:
+		SMOG A 1 A_FadeOut(0.0125)
+		Wait
+	Cloud2:
+		SMOG B 1 A_FadeOut(0.0125)
+		Wait
+	Cloud3:
+		SMOG C 1 A_FadeOut(0.0125)
+		Wait
+	Cloud4:
+		SMOG D 1 A_FadeOut(0.0125)
+		Wait
+	}
+}
+
+
+Actor SFX_NoLight_SuperExpFire_long : SFX_ExpFire_long
+{
+Scale 1.6
+}
+
+Actor SFX_NoLight_SuperExpFire : SFX_ExpFire
+{
+Scale 1.6
+}
+
+ACTOR SuperMeteor_m_Explosion : SFX_Explosion_m_Base
+{
+	States
+	{
+		Spawn:
+			TNT1 A 0
+			goto Death
+		Death:
+			TNT1 A 0 A_Scream
+			TNT1 A 1 A_SpawnItemEx("SFX_NoLight_SuperExpFire", 0, 0, 0, 0.1 * Random(-20, 20), 0.1 * Random(-20, 20), 0.1 * Random(-20, 20), 0, 128, 0)
+			//TNT1 AAAA 0 A_SpawnItemEx("SFX_NoLight_ExpFire", 0, 0, 0, 0.1 * Random(-20, 20), 0.1 * Random(-20, 20), 0.1 * Random(-20, 20), 0, 128, 0)					
+			TNT1 AAAA 1 A_SpawnItemEx("SFX_NoLight_SuperExpFire_long", 0, 0, 0, 0.003 * Random(-200, 200), 0.003 * Random(-200, 200), 0.003 * Random(-200, 200), 0, 128, 0)
+			TNT1 A 1 A_SpawnItemEx("SFX_NoLight_SuperExpFire_long", 0, 0, 0, 0.01 * Random(-200, 200), 0.01 * Random(-200, 200), 0.01 * Random(-200, 200), 0, 128, 0)
+			TNT1 AAAA 1 A_SpawnItemEx("SFX_NoLight_SuperExpFire", 0, 0, 0, 0.01 * Random(-200, 200), 0.01 * Random(-200, 200), 0.01 * Random(-200, 200), 0, 128, 0)
+			//TNT1 AAAA 0 A_SpawnItemEx("SFX_NoLight_ExpFire", 0, 0, 0, 0.1 * Random(-20, 20), 0.1 * Random(-20, 20), 0.1 * Random(-20, 20), 0, 128, 0)
+			TNT1 A 5
+			Stop
+	}
+}
+
+ACTOR SuperMeteor_m
+{
+	Scale 0.16
+	Decal Scorch
+	PROJECTILE
+	Speed 6
+    +MTHRUSPECIES
+    -NoGravity
+    -Float
+    +FloorClip
+    +DontHurtSpecies 
+    +SpawnCeiling
+    DamageType "Hell"
+	Radius 32 
+	Height 32 
+	RENDERSTYLE Add
+	SeeSound "Meteor/Fall" // "comet/launch"
+	//DeathSound "Meteor/Crash"
+	Damage 20
+	MissileHeight 0
+	States
+	{
+		Spawn:
+			EXN1 A 0 bright A_SpawnItemEx("SuperMeteor_m_FX", 0, 0, 0, 0.001 * Random(-125, 125), 0.001 * Random(-125, 125), 0.001 * Random(25, 245), 0, 128, 0)
+			EXN1 A 1 bright A_SpawnItemEx("SuperMeteor_m_TrailFX_Smoke", 0, 0, 0, 0.001 * Random(-125, 125), 0.001 * Random(-125, 125), 0.001 * Random(25, 245), 0, 128, 0)
+			loop
+		Death:
+			TNT1 A 0
+			TNT1 A 0// A_AlertMonsters
+			TNT1 A 0 Radius_Quake(3, 28, 1, 4, 0)
+            TNT1 A 0 A_PlaySound("Meteor/Crash")
+			TNT1 A 0 A_Explode(160, 192)//Damage, Radius
+			TNT1 A 0 A_SpawnItemEx("LCABaseScorch", 0, 0, 0, 0, 0, 0, Random(0,359))
+			Goto EndAnimation
+		EndAnimation:
+			TNT1 A 0 A_SpawnItemEx("SuperMeteor_m_Explosion", 0, 0, 0, 0, 0, 0, -1, SXF_NOCHECKPOSITION)//A_CustomMissile("Meteor_m_Explosion",0+Random(5,80),0+Random(35,-35),0+Random(0,370))
+			TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("SuperMeteor_m_FX_Smoke", 0, 0, 0, 0.01 * Random(-125, 125), 0.01 * Random(-125, 125), 0.01 * Random(25, 245), 0, 128, 0)
+			Stop
+	}
+}
+
+
+ACTOR ArcradimusSuperMeteorSpawner : RainCometSpawner
+{
+States
+{
+Spawn:
+    TNT1 A 0
+	//TNT1 AAAAAAAAA 1 A_SpawnItemEx("Meteor_m",Random(256,-256),Random(256,-256),0,0,0,-5,-1)
+	TNT1 AAAAAAAAAAAAAAAAAAAA 2 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 0 A_CustomMissile("SuperMeteor_m",-36,random(0,20),random(0,360),2)
+	TNT1 AAAAAAAAAAAAAAAAAAAA 2 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 0 A_CustomMissile("SuperMeteor_m",-36,random(0,20),random(0,360),2)
+	TNT1 AAAAAAAAAAAAAAAAAAAA 2 A_Wander
+	TNT1 AAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    TNT1 A 0 A_CustomMissile("SuperMeteor_m",-36,random(0,20),random(0,360),2)
+	Stop
+//FadeOut:
+//	PNIS ABCDEFGHIJ 2 Bright A_FadeOut(0.06)
+//    Goto FadeOut
+	}
+}
+
+ACTOR ArcradimusSeekerComet : Comet
+{
+Decal Scorch
+Speed 34
+PROJECTILE
++SEEKERMISSILE
++DOOMBOUNCE
++DONTSPLASH
+BounceCount 8
+BounceFactor 1
+States
+{
+Spawn:
+ARCM AAABBBCCCAAABBBCCCAAABBBCCCAAABBBCCC 1 Bright A_SpawnItemEx("ArcradimusCometTail")
+TNT1 A 0 A_SeekerMissile(90,90)
+ARCM ABC 1 Bright A_SpawnItemEx("ArcradimusCometTail")
+TNT1 A 0 A_SeekerMissile(90,90)
+ARCM ABC 1 Bright A_SpawnItemEx("ArcradimusCometTail")
+TNT1 A 0 A_SeekerMissile(90,90)
+ARCM ABC 1 Bright A_SpawnItemEx("ArcradimusCometTail")
+Fly:
+ARCM ABC 1 Bright A_SpawnItemEx("ArcradimusCometTail")
+Loop
+Death:
+TNT1 A 0
+TNT1 A 0 A_Explode
+TNT1 A 0 A_SetTranslucent(0.75,1)
+TNT1 A 0 A_SpawnItemEx("RedParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+ARCM D 3 Bright A_SpawnItemEx("ArcradimusCometDeathGlow",0,0,0,0,0,0,0,128,0)
+ARCM E 3 Bright A_SpawnItemEx("ArcradimusCometDeath",0,0,0,0,0,0,0,128,0)
+Stop
+}
+}
+
+ACTOR KaboomRed227 : Kaboom3
+{
+Speed 2
+Scale 0.9
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+FXPR AABBCDEFGHIJKLM 1 Bright A_FadeOut(0.05)
+Stop
+}
+}
+
+ACTOR ArcradimusCometDeath2 : CometDeath
+{
+Projectile
+RenderStyle Add
+Alpha 0.7
++NOCLIP
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 AAA 0 A_CustomMissile("KaboomRed227", 0, 0, random(0,360), 2, random(0,360))
+TNT1 AAA 0 A_CustomMissile("SmokeFX2", 0, 0, random(0,360), 2, random(0,360))
+ARCM FGHI 3 Bright A_FadeOut(0.1)
+Stop
+}
+}
+
+ACTOR ArcradimusCometDeathGlow : CometDeathGlow
+{
+Scale 2.0
+Alpha 0.6
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+ARTR ABCDEFGHI 3 Bright
+Stop
+}
+}
+
+ACTOR ArcradimusCometTail : CometTail
+{
+Alpha 0.3
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+ARTR ABCDEFGHI 1 Bright
+Stop
+}
+}
+
+ACTOR ArcradimusComet2 : Comet
+{
+Decal Scorch
+Speed 34
+States
+{
+Spawn:
+ARCM AAABBBCCCAAABBBCCCAAABBBCCCAAABBBCCC 1 Bright A_SpawnItemEx("ArcradimusCometTail")
+TNT1 A 0 A_SeekerMissile(90,90)
+ARCM ABC 1 Bright A_SpawnItemEx("ArcradimusCometTail")
+TNT1 A 0 A_SeekerMissile(90,90)
+ARCM ABC 1 Bright A_SpawnItemEx("ArcradimusCometTail")
+TNT1 A 0 A_SeekerMissile(90,90)
+ARCM ABC 1 Bright A_SpawnItemEx("ArcradimusCometTail")
+Fly:
+ARCM ABC 1 Bright A_SpawnItemEx("ArcradimusCometTail")
+Loop
+Death:
+TNT1 A 0
+TNT1 A 0 A_Explode
+TNT1 A 0 A_SetTranslucent(0.75,1)
+TNT1 A 0 A_SpawnItemEx("RedParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+ARCM D 3 Bright A_SpawnItemEx("ArcradimusCometDeathGlow",0,0,0,0,0,0,0,128,0)
+ARCM E 3 Bright A_SpawnItemEx("ArcradimusCometDeath2",0,0,0,0,0,0,0,128,0)
+Stop
+}
+}

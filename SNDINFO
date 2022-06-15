@@ -1,0 +1,761 @@
+Gateway/Hell   DSGATEHL
+
+// Legendary Rifle Sounds
+BDTRF1 BDTRF1
+BDTRF2 BDTRF2
+BDTRF3 BDTRF3
+DISINCANT DISINCANT
+DSSPIRIT1 DSSPIRIT1
+TBBCSPT2 TBBCSPT2
+TBBSEE1 TBBSEE1
+TBBPAIN1 TBBPAIN1
+TBBPAIN2 TBBPAIN2
+TBBPAIN3 TBBPAIN3
+TBBPAIN4 TBBPAIN4
+TBBPAIN5 TBBPAIN5
+TBBPAIN6 TBBPAIN6
+TBBPAIN7 TBBPAIN7
+TBBDIES TBBDIES
+TBBCSPT1 TBBCSPT1
+GURUCHRG GURUCHRG
+DECHST DECHST
+legimp/chargingsound MAHLAZR
+legimp/fiyabetch DSPRTXPL
+weapons/legrifidle KSAWIDLE
+weapons/legriflereload LRIFLERL
+weapons/legup LRIFUP
+weapons/iceshot2	FROSTY2
+weapons/icehit2		SHARDS1B
+weapons/freezeup FREEZEUP
+freeze/pickup 	NGPKUP
+freeze/up		SR-PKUP
+freeze/altfire 	RIPPSGAF
+freeze/althold 	RIPPSGAL
+freeze/altstop 	ALTRACK
+$random BlueDTRFire { BDTRF1 BDTRF2 BDTRF3 }
+$Volume BDTRF3 5.0
+$Volume BDTRF1 5.0
+$Volume BDTRF2 5.0
+
+$Volume KSWIDLE 5.0
+
+DSD3 DSD3
+
+//True Legendary Sentient
+TrueLegSent/See			TLSNSEEE
+
+TrueLegSent/Attack1		TLSNATK1
+TrueLegSent/Attack2		TLSNATK2
+TrueLegSent/Attack3		TLSNATK3
+TrueLegSent/Attack4		TLSNATK4
+
+TrueLegSent/Act1		TLSNACT1
+TrueLegSent/Act2		TLSNACT2
+TrueLegSent/Act3		TLSNACT3
+TrueLegSent/Act4		TLSNACT4
+
+TrueLegSent/Pain1		TLSNPAI1
+TrueLegSent/Pain2		TLSNPAI2
+TrueLegSent/Pain3		TLSNPAI3
+
+TrueLegSent/Death		TLSNDEAD
+
+TrueLegSent/Taunt		TLSNTAUN //strong attack 1
+TrueLegSent/Taunt2		TLSNTAU2 //strong attack 2
+
+TrueLegSent/MindRape	TLSNMIND //special mind attacks
+
+
+$Random TrueLegSent/Attack 	{ TrueLegSent/Attack1 TrueLegSent/Attack2 TrueLegSent/Attack3 TrueLegSent/Attack4 } //used for weak attacks
+$Random TrueLegSent/Pain	{ TrueLegSent/Pain1 TrueLegSent/Pain2 TrueLegSent/Pain3 }
+$Random TrueLegSent/Act 	{ TrueLegSent/Act1 TrueLegSent/Act2 TrueLegSent/Act3 TrueLegSent/Act4 }
+
+//Cydestroyer
+cydes/sight CDSBSIT
+cydes/death CDSBDTH
+cydes/pain CDSBPAIN
+smissile/fire DSRLAUNC
+cydes/laugh METLLGH
+cydes/mischrg 8FSGCHRG
+
+// Shotgun Commando
+csgun/windup SGCDSTRT
+
+// Desert Hornet
+WASPDIE1	WASPDIE1
+WASPDIE2	WASPDIE2
+WASPDIE3	WASPDIE3
+WASPDIE4	WASPDIE4
+
+$random Hornet/Death	{ WASPDIE1 WASPDIE2 WASPDIE3 WASPDIE4 }
+
+Hornet/Fly		WASPFLY
+$limit Hornet/Fly 0
+
+Hornet/Splat	WASPSPLT
+
+// Legendary Cyber Knight
+lcnoble/see LCSBRSIT
+lcnoble/pain LCSDPAIN
+lcnoble/death LCSBRDTH
+lcnoble/active LCSDACT
+lcnoble/melee DSCLAW
+$rolloff lcnoble/pain 600 2200
+$rolloff lcnoble/active 600 2200
+$rolloff lcnoble/melee 600 2200
+
+star/fire    starfir
+star/explode starexp
+
+//Legendary Redeemer
+legendary/strike LEGSTRK
+$limit legendary/strike 3
+
+redeemer/see     REDEESIT
+redeemer/idle    REDEEACT
+redeemer/pain    REDEEPAI
+redeemer/death   REDEEDTH
+reedemer/trap    REDEETRP
+reedemer/charge  REDEECHG
+reedemer/thunder REDEETHN
+reedemer/zap1	 REDEEZP1
+reedemer/zap2	 REDEEZP2
+$random reedemer/zap {reedemer/zap1 reedemer/zap2}
+
+//Legendary Cardinal
+Rage Lcarage
+Rage2 LCARAG2
+LegCardi/Hi LCARHI
+LegCardi/active LCARACT
+LegCardi/Death LCARDTH
+LegCardi/Death2 LCARDTH2
+Laugh1 lcarlaug
+Laugh2 dstclau2
+Laugh4 LCARLAUGH3
+
+$rolloff LegCardi/active 2100 7200
+$rolloff Laugh1 2100 7200
+$rolloff Laugh2 2100 7200
+$rolloff Laugh4 2100 7200
+$rolloff LegCardi/hi 2100 7200
+$rolloff RAGE 2100 7200
+
+$Volume LCARLAUGH3 5.0
+$Volume dstclau2 5.0
+$Volume dstclau 5.0
+$Volume lcarlaugh 5.0
+$Volume Lcarage 5.0
+$Volume LCARHI 5.0
+$Volume LCARACT 5.0
+
+legcardi/load1    RSLOAD1
+legcardi/load2    RSLOAD2
+legcardi/load3    RSLOAD3
+$rolloff legcardi/load1 600 2200
+$rolloff legcardi/load2 600 2200
+$rolloff legcardi/load3 600 2200
+
+Claw/Move SWINGHEV
+
+$random Claw/hit { Clawhit1 Clawhit2 Clawhit3 }
+Clawhit1                 SORDHIT1
+Clawhit2                 SORDHIT2
+Clawhit3                 SORDHIT3
+
+//Legendary Behemoth
+legendaryflame/crackle LEBHFLME
+lfball1/shot LFB1FLY
+lfball1/exp  LFB1EXP
+$rolloff legendaryflame/crackle 600 2200
+$rolloff lfball1/shot 600 2200
+$rolloff lfball1/exp 600 2200
+
+//Legendary Plasmatic Cannon
+legendarycannon/fire   LEGCFIRE
+legendarycannon/charge LEGCLOAD
+legendarycannon/nbarrel CANNBR
+legendarycannon/up CANNUP
+legendarycannon/steam DSDTBST
+$rolloff legendarycannon/fire 600 2200
+$rolloff legendarycannon/charge 600 2200
+$rolloff legendarycannon/nbarrel 600 2200
+$rolloff legendarycannon/up 600 2200
+$rolloff legendarycannon/steam 600 2200
+
+
+//Legendary Time Sphere
+legtime/pickup LGTPIK
+legtime/use    LGTUSE
+timefreeze/effect1 TIMEFRZ1
+timefreeze/effect2 TIMEFRZ2
+timefreeze/effect3 TIMEFRZ3
+
+//Legendary Assault Captain
+lasgguy/sight ZOMACT4
+lasgguy/pain ZOMPN10
+lasgguy/death ZCDIE2
+lasgguy/active ZOMACT5
+lasgguy/asgout lsasgout
+lasgguy/asgin lsasgin
+LShotgun/Cock LASGCK
+
+//Legendary Commando
+lcmdo/sight ZOMACT3
+lcmdo/pain ZOMPN8
+lcmdo/active ZOMACT1
+lcmdo/death ZCDIE4
+
+//True Legendary Cyberdemon
+star/load1    RSLOAD1
+star/load2    RSLOAD2
+star/load3    RSLOAD3
+true/fire TLCFIRE
+TBFG/charge TIGCHAR1
+tlcyb/sight LBBSEE1
+tlcyb/laugh1 LBBCSPT1
+tlcyb/laugh2 LBBCSPT2
+tlcyb/laugh3 LBBCSPT3
+tlcyb/laugh4 LBBCSPT4
+tlcyb/demand LBBSPT3
+tlcyb/demand2 LBASPT1
+tlcyb/death LBBDIES
+ultimate/laser TLCLASR
+ultimate/chrge TLCDLZF
+ultimate/fire DSBFTAH1
+true/fire2 LPBALFR
+
+//Legendary Fiend
+LegFiend/Sight  LEGFNSIT
+LegFiend/Pain   LEGFNPAI
+LegFiend/Death  LEGFNDTH
+LegFiend/Active LEGFNACT
+LegFiend/Melee  LEGFNATK
+$rolloff LegFiend/Pain 600 2200
+$rolloff LegFiend/Melee 600 2200
+$rolloff LegFiend/Death 600 2200
+
+AttackSound "LegFiend/Melee"
+PainSound "LegFiend/Pain"
+ActiveSound "LegFiend/Active"
+
+
+lfball1/shot LFB1FLY
+lfball1/exp  LFB1EXP
+
+//Leg Zombie 
+legzom/sight ZOMACT2
+legzom/pain ZOMPN10
+legzom/death ZCDIE3
+legzom/active ZOMACT5
+
+//Ion
+weapons/ionchrg IONCHRG
+weapons/ionfir IONFIR
+$rolloff weapons/ionchrg 600 2200
+$rolloff weapons/ionfir 600 2200
+
+//Legendary Imp
+$random legimp/sight		{ legimp/sight1  legimp/sight2 legimp/sight3 legimp/sight4 }
+legimp/sight1			imp_sig1
+legimp/sight2			imp_sig2
+legimp/sight3          imp_sig3
+legimp/sight4          imp_sig4
+
+$random legimp/pain { Imppain1 Imppain2 Imppain3 }
+Imppain1 IMP_P1
+Imppain2 IMP_P2
+Imppain3 IMP_P3
+
+$random legimp/active { BREATH_1  BREATH_2 BREATH_3 }
+BREATH_1 BREATH_1
+BREATH_2 BREATH_2
+BREATH_3 BREATH_3
+
+$random legimp/death { IMP_DEA1 IMP_DEA2 IMP_DEA3 IMP_DEA4 }
+IMP_DEA1 IMP_DEA1
+IMP_DEA2 IMP_DEA2
+IMP_DEA3 IMP_DEA3
+IMP_DEA4 IMP_DEA4
+
+//Hexa-Shotgun
+weapons/pickuphsg		dsgthxs
+weapons/hsgdoublefire			DSQUDBL
+weapons/hsgfire					DSHSFIR
+weapons/hsgopen					DSQSOPN
+weapons/hsgshellslide			DSQSLL
+weapons/hsgclose				DSQSCLS
+
+//Freezer Behemoth
+FreezerBehe/Sight FRZRST
+FreezerBehe/Pain FRZRPN
+FreezerBehe/Death FRZRDTH
+FreezerBehe/Attack FRZRATK
+$random FreezerBehe/Cannon { FRZRCF1 FRZRCF2 FRZRCF3 FRZRCF4 }
+FRZRCF1 FRZRCF1
+FRZRCF2 FRZRCF2
+FRZRCF3 FRZRCF3
+FRZRCF4 FRZRCF4
+
+FRZRBRN FRZRBRN
+
+//Legendary Cyber
+$random Legcyber/pain  { Legcyber/pain1 Legcyber/pain2 }
+Legcyber/amhalt DECHST
+Legcyber/BFG GURUCHRG
+Legcyber/pain1 TBBPAIN1
+Legcyber/pain2 TBBPAIN2
+Legcyber/pain3 TBBPAIN3
+Legcyber/pain4 TBBPAIN4
+Legcyber/pain5 TBBPAIN5
+Legcyber/pain6 TBBPAIN6
+Legcyber/pain7 TBBPAIN7
+Legcyber/laugh2 LAUGH2
+cyber/sight1 TBBSEE1
+monster/laugh TBBCSPT2
+Legcyber/death TBBDIES
+Legcyber/laugh3 TBBCSPT1
+Legcyber/laugh4 LAUGH3
+Legcyber/laugh5 TBCSPT2
+Legcyber/heal HEAL
+LegLaser/explode DSPCBOOM
+LegLaser/Fire LSLFIR
+
+$Volume TBBCSPT2 5.0
+$Volume TBBSEE1 5.0
+$Volume TBBPAIN1 5.0
+$Volume TBBPAIN2 5.0
+$Volume TBBPAIN3 5.0
+$Volume TBBPAIN4 5.0
+$Volume TBBPAIN5 5.0
+$Volume TBBPAIN6 5.0
+$Volume TBBPAIN7 5.0
+$Volume TBBCSPT1 5.0
+
+weapons/firbfi dsfirbfi
+weapons/hellex dshellex
+weapons/incant0 DSINCNT0
+weapons/incant1 DSINCNT1
+weapons/spirit1 dsspirt1
+
+//Gurumaster
+Weapons/GuruUp		GURUUP
+Weapons/GuruIdle	GURUIDLE
+Weapons/GuruTrigger	GURUTRIG
+Weapons/GuruCharge	GURUCHRG
+Weapons/GuruFire	GURUFIRE
+Weapons/GuruAddFire	GURUAFIR
+Weapons/GuruLoad	GURULOAD
+
+Weapons/GuruFly		GURUFLY
+Weapons/GuruBlast	GURUBLST
+Weapons/GuruBlast2	GURUBLS2
+Weapons/GuruBlast3	GURUBLS2
+Weapons/GuruHit		GURUHIT
+Weapons/GuruLoop	GURULOOP
+Weapons/GuruFuuu	GURUFUUU
+Weapons/GuruBoom	GURUBOOM
+Weapons/GuruBolt	GURUBOLT
+
+$random Weapons/GuruStruck { Weapons/GuruStruck0 Weapons/GuruStruck1 Weapons/GuruStruck2 Weapons/GuruStruck3 Weapons/GuruStruck4 Weapons/GuruStruck5 Weapons/GuruStruck6 Weapons/GuruStruck7 Weapons/GuruStruck8 Weapons/GuruStruck9 }
+Weapons/GuruStruck0	GURUSTR0
+Weapons/GuruStruck1	GURUSTR1
+Weapons/GuruStruck2	GURUSTR2
+Weapons/GuruStruck3	GURUSTR3
+Weapons/GuruStruck4	GURUSTR4
+Weapons/GuruStruck5	GURUSTR5
+Weapons/GuruStruck6	GURUSTR6
+Weapons/GuruStruck7	GURUSTR7
+Weapons/GuruStruck8	GURUSTR8
+Weapons/GuruStruck9	GURUSTR9
+
+Ammo/Vearetelium	VEARAMMO
+
+$rolloff Weapons/GuruBlast3 700 2100
+$rolloff Weapons/GuruLoop 3100 10200
+$rolloff Weapons/GuruFuuu 3100 10200
+$rolloff Weapons/GuruBlast 3100 10200
+$rolloff Weapons/GuruBoom 5100 11200
+$rolloff Weapons/GuruBlast2 3100 10200
+$rolloff Weapons/GuruStruck 3100 10200
+
+//Legendary Imp Ball
+legball/fly 				DSBBFLY
+
+//Legendary Sphere And Armor
+legendarysphere/pickup 		DSSPHERE
+legendaryarmor/pickup		DSARMOR6
+$Volume DSARMOR6 1.0
+$Volume DSMASTER 1.0
+$Volume LEGENSPH 1.0
+$random legendarysphere/idle	{ legendarysphere/idle1 legendarysphere/idle2 legendarysphere/idle3 legendarysphere/idle4 legendarysphere/idle5 legendarysphere/idle6 legendarysphere/idle7 legendarysphere/idle8 }
+legendarysphere/idle1 	TAMEIDL1
+legendarysphere/idle2	TAMEIDL2
+legendarysphere/idle3	TAMEIDL3
+legendarysphere/idle4	TAMEIDL4
+legendarysphere/idle5	TAMEIDL5
+legendarysphere/idle6	TAMEIDL6
+legendarysphere/idle7	TAMEIDL7
+legendarysphere/idle8	TAMEIDL8
+legendarymegasphere/idle ULTIDLE
+legmegasphere/pickup LEGMEGA
+
+//Legendary Pistols
+legendarypistols/pickup		DSPRPKUP
+legendatypistols/fire		RW02DEAF
+
+//Freezer Zombie and Freezer Rifle
+weapons/iceshot		DSICESHT
+weapons/icehit		DSICEHIT
+weapons/chill		DSICE01
+
+//Behemoth Cannon
+cannon/up DSINFSIT
+cannon/fire RW09NACA
+cannon/pickup DSINFSIT
+
+//Explosive Minigun
+weapons/explosiveminigunpickup DSEMGUP1
+weapons/expmgunspinstart DSMINSU
+weapons/expmgunspin DSMINSL
+weapons/expmgunspinstop DSMINSD
+
+//Velocirator Archvile
+$random monster/velsit		{ vile/sight1 vile/sight2 vile/sight3 vile/sight4 vile/sight5 vile/sight6 }
+vile/sight1                     vilesee1
+vile/sight2                     vilesee2
+vile/sight3                     vilesee3
+vile/sight4                     vilesee4
+vile/sight5                     vilesee5
+vile/sight6                     vilesee6
+$random monster/velact	{ vile/active1 vile/active2 vile/active3 }
+vile/active1                    breath1
+vile/active2                    breath2
+vile/active3                    breath3
+$random monster/velpai		{ vile/pain1 vile/pain2 vile/pain3 vile/pain4 }
+vile/pain1                      vilpain1
+vile/pain2                      vilpain2
+vile/pain3                      vilpain3
+vile/pain4                      vilpain4
+$random monster/veldie		{ vile/death1 vile/death2 vile/death3 vile/death4 }
+vile/die1                     viledie1
+vile/die2                     viledie2
+vile/die3                     viledie3
+vile/die4                     viledie4
+
+velocirator/spell1 VELOSPL1
+velocirator/spell2 VELOSPL2
+veloghost/death    VELOGHST
+
+//Legendary Rune
+Pickups/Legrune	LEGRUNE
+Pickups/Legruneidle SPIRACT
+Pickups/LegProtection LEGPROT
+Pickups/LegProtectionActive PROTACT
+$Volume LEGRUNE 1.0
+$Volume PROTACT 2.0
+
+//Legendary Music
+D_LEGND D_LEGND
+D_LEGM2 D_LEGM2
+D_LEGM3 D_LEGM3
+D_LEGM4 D_LEGM4
+
+//Legendary Noble
+boss/teleport BTELEP
+legfire/active LNFIRE
+lefrail/active LNRAIL
+hk/summon HKSUMMON
+lnoble/see LSBRSSIT
+lnoble/pain LSDMPAIN
+lnoble/death LSBRSDTH
+lnoble/active LSDMACT
+
+//Legendary Annihilator
+Legannihi/see LASEE
+
+//Legendary Ammo Sphere
+legammo/pickup LGMPIK
+legammo/use    LGMUSE
+
+//Advanced Necronomicon
+necghost/active NECRGHST
+$rolloff necghost/active 500 1900
+$limit necghost/active 0
+
+//DemonLordArcradimus
+GoodGame/Mate NUKEEX
+Flamethrower/Flame	FMTRFLAM
+PyroCannon/Flare	PYRCFLAR
+Thunder/Hit DSTHUNDA
+Thunder/HitShort DSLGHTNG
+Arcradimus/Sight DSARCST1
+Arcradimus/Death DSARCDH1
+Arcradimus/Active1 DSARCAC1
+Arcradimus/Active2 DSARCAC2
+Arcradimus/Pain1 DSARCPN1
+Arcradimus/Pain2 DSARCPN2
+Arcradimus/BFGCharge DSARCCH1
+Arcradimus/BFGFire DSARCBFF
+Arcradimus/BFGBall DSARCBFG
+Arcradimus/BFGElectric1 BFGELEC1
+Arcradimus/BFGElectric2 BFGELEC2
+$random Arcradimus/BFGElectric { Arcradimus/BFGElectric1 Arcradimus/BFGElectric2 }
+$random Arcradimus/Active { Arcradimus/Active1 Arcradimus/Active2 }
+$random Arcradimus/Pain { Arcradimus/Pain1 Arcradimus/Pain2 }
+$limit Thunder/HitShort 0
+$rolloff Thunder/HitShort 1200 4000 // 800 2200
+$rolloff Arcradimus/BFGCharge 1200 4000
+$rolloff Arcradimus/BFGFire 2200 4000
+$rolloff Arcradimus/BFGBall 1200 4000
+$rolloff Arcradimus/Active 1200 4000
+$rolloff Arcradimus/Pain 2200 4000
+$rolloff Arcradimus/Death 2200 4000
+
+//Meteor/Crash METEOR
+Meteor/Fall1 DSCOMTF1
+Meteor/Fall2 DSCOMTF2
+Meteor/Fall3 DSCOMTF3
+Meteor/Fall4 DSCOMTF4
+$random Meteor/Fall { Meteor/Fall1 Meteor/Fall2 Meteor/Fall3 Meteor/Fall4 }
+$rolloff Meteor/Fall 500 4000
+$volume Meteor/Fall 0.5
+$limit Meteor/Fall 5
+$limit Thunder/HitShort 0
+Meteor/Crash1 DSCOMTX1
+Meteor/Crash2 DSCOMTX2
+Meteor/Crash3 DSCOMTX3
+Meteor/Crash4 DSCOMTX4
+$random Meteor/Crash { Meteor/Crash1 Meteor/Crash2 Meteor/Crash3 Meteor/Crash4 }
+$rolloff Meteor/Crash 800 4000
+$limit Meteor/Crash 7
+//$Volume Meteor/Fall 0.8
+
+//Phase Overlord
+PhaseOverlord/Sight DSARCST1
+PhaseOverlord/Death DSARCDH1
+
+//Legendary Revenant
+lrball1/shot   LRB1FLY
+lrball1/exp    LRB1EXP
+lrball2/shot   LRB2FLY
+lrball2/exp    LRB2EXP
+lrball3/charge LRB3CHRG
+lrball3/shot   LRB3FIRE
+lrball3/fly    LRB3FLY
+lrball3/exp    LRB3EXPL
+lrtrap/active  LRTRAP
+$rolloff lrball1/shot	 800 2200
+$rolloff lrball1/exp	 800 2200
+$rolloff lrball2/shot	 800 2200
+$rolloff lrball2/exp	 800 2200
+$rolloff lrball3/shot	 800 2200
+$rolloff lrball3/exp	 800 2200
+$rolloff lrball3/charge	 800 2200
+$rolloff lrball3/fly	 800 2200
+$rolloff lrtrap/active	 800 2200
+
+
+//Legendary Sentient
+legsentient/sight   LSNTST2
+legsentient/pain    LANTPN2
+legsentient/death   LSNTDH2
+legsentient/laugh1   LSNTLA1
+legsentient/laugh2   LSNTLA2
+legsentient/laugh3   LSNTLA3
+legsentient/active  LSNTAC2
+$random legsentient/laugh { legsentient/laugh1 legsentient/laugh2 legsentient/laugh3 }
+$rolloff legsentient/sight	 800 3500
+$rolloff legsentient/pain	 800 3500
+$rolloff legsentient/death	 800 3500
+$rolloff legsentient/laugh	 800 3500
+$rolloff legsentient/active	 800 2200
+$random legstorm/explode {legstorm/explode0 legstorm/explode1 legstorm/explode2 legstorm/explode3 legstorm/explode4 legstorm/explode5 legstorm/explode6 legstorm/explode8 legstorm/explode9}
+legstorm/explode0	GURUSTR0
+legstorm/explode1	GURUSTR1
+legstorm/explode2	GURUSTR2
+legstorm/explode3	GURUSTR3
+legstorm/explode4	GURUSTR4
+legstorm/explode5	GURUSTR5
+legstorm/explode6	GURUSTR6
+//Weapons/GuruStruck7	GURUSTR7 can make zandronum crashes
+legstorm/explode8	GURUSTR8
+legstorm/explode9	GURUSTR9
+pcannon/explode PCANEXP
+$rolloff pcannon/explode 1200 3000
+$rolloff legstorm/explode 1200 3000
+
+$random Petrovec/Fire	{ Petrovec/Fire1 Petrovec/Fire2 Petrovec/Fire3 }
+Petrovec/Fire1		PTRCFIR1
+Petrovec/Fire2		PTRCFIR2
+Petrovec/Fire3		PTRCFIR3
+Petrovec/AddFire	PTRCADD
+Petrovec/Ambient	PTRCAMB
+Petrovec/Fly		PTRCFLY
+Petrovec/AltFire	PTRCALT
+Petrovec/Bounce		PTRCBNC
+$random Petrovec/Hit	{ Petrovec/Hit1 Petrovec/Hit2 Petrovec/Hit3 }
+Petrovec/Hit1		PTRCHIT1
+Petrovec/Hit2		PTRCHIT2
+Petrovec/Hit3		PTRCHIT3
+Petrovec/Explode	PTRCEXP
+
+//CerebralCardinal
+CerebralCardinal/death DSCCDH1
+CerebralCardinal/sight DSCCST1
+CerebralCardinal/laugh DSCCLA1
+CerebralCardinal/pain1 DSCCPA1
+CerebralCardinal/pain2 DSCCPA2
+$random CerebralCardinal/pain { CerebralCardinal/pain1 CerebralCardinal/pain2 }
+
+//Cardihilator
+$rolloff Cardihilator/Laugh	 	800 3500
+Cardihilator/Laugh				DSCCLA1
+Cardihilator/Sight				DSCCST1
+$Random Cardihilator/Active { Cardihilator/active1 Cardihilator/active2 Cardihilator/active3 Cardihilator/active4 }
+Cardihilator/active1			CYBRACT1
+Cardihilator/active2			CYBRACT2
+Cardihilator/active3			CYBRACT3
+Cardihilator/active4			CYBRACT4
+$Random Cardihilator/Pain { Cardihilator/Pain1 Cardihilator/Pain2 }
+Cardihilator/Pain1				DSCCPA1
+Cardihilator/Pain2				DSCCPA2
+Cardihilator/Death				DSCCDH1
+Cardihilator/NukeFire           ATMGFIRE
+
+//Nuke
+weapons/nuclearmissilecharge	dsnukcrg
+weapons/nuclearmissileexplode	dsnukxpl
+weapons/nuclearmissileburn	dsnukbrn
+weapons/nuclearmissileflamehit	dsflwexp
+weapons/nuclearmissileflamewall	dsflwgrn
+
+//DevastatorBall
+devastator/charge  DEVASCHR
+devastator/fire    DEVASFIR
+devastator/fly     DEVASFLY
+devastator/explode DEVASEXP
+devastator/idle    DEVASIDL
+devastator/up                 MSTRUP
+weapons/devfir                dsdevfir
+weapons/devbal                dsdevbal
+weapons/devexp                dsdevexp
+weapons/devex2                dsdevex2
+weapons/devlit                dsdevlit
+weapons/devzap                dsdevzap
+weapons/devchr                dsdevchr
+weapons/devfch                dsdevfch
+
+//FusionNuke
+weapons/nuclearmissilecharge	dsnukcrg
+
+//Legendary ASG
+$random Weapons/LegAutoShotgun { XSG1 XSG2 XSG3 XSG4 }
+XSG1 LASGFIR1
+XSG2 LASGFIR2
+XSG3 LASGFIR3
+XSG4 LASGFIR4
+
+//Ice
+icespike frosty2
+iceexplode	SHARDS1B
+$limit iceexplode 9999
+icefurry SHDETO
+$limit icefurry 0
+
+// Legendary Demon Rune
+legendarypowersphere/pickup LPOWPIK
+legdemonrune/idle HELLDMR
+
+LegCyber/thud dsmothud
+
+//Legendary Revenant
+legendaryrevenant/see     LREVSEE
+legendaryrevenant/death   LREVDIE
+legendaryrevenant/idle    LREVIDL
+$random legendaryrevenant/pain {legendaryrevenant/pain1 legendaryrevenant/pain2 legendaryrevenant/pain3}
+legendaryrevenant/pain1   LREVPA1
+legendaryrevenant/pain2   LREVPA2
+legendaryrevenant/pain3   LREVPA3
+legendaryrevenant/attack1 LREVAT1
+legendaryrevenant/attack2 LREVAT2
+legendaryrevenant/melee  DSSKEPCH
+
+legendary/defense LEGDEFS
+
+$rolloff legendaryrevenant/pain 600 2200
+$rolloff legendaryrevenant/pain1 600 2200
+$rolloff legendaryrevenant/pain2 600 2200
+$rolloff legendaryrevenant/pain3 600 2200
+$rolloff legendaryrevenant/attack1 600 2200
+$rolloff legendaryrevenant/attack2 600 2200
+$rolloff legendaryrevenant/melee 600 2200
+
+$rolloff legendary/defense 600 2200
+
+
+
+thorstrike/load LTHORL
+$rolloff thorstrike/load 1200 3000
+$limit thorstrike/load 3
+
+legbabysentient/see   LBYSSEE
+legbabysentient/idle  LBYSIDL
+legbabysentient/pain  LBYSPAI
+legbabysentient/death LBYSDIE
+legbabysentient/load  LBYSLOD
+legbabysentient/trap  LBYSTRP
+legbabybomb/sound1    LBABSN1
+legbabybomb/sound2    LBABSN2
+legbabybomb/sound3    LBABSN3
+legbaby/bolt          LBSBOLT
+$limit legbabysentient/trap 0
+
+drone/sight	 dssntsee
+drone/death	 dssntdth
+drone/active dssntact
+drone/alarm  dssntala
+
+leggreenade/bounce LRLBNCE
+
+weapons/legAK47Fire1 	LAK47FIR
+weapons/legAK47Fire2 	LAK47FR2
+$random weapons/legAK47Fire { weapons/legAK47Fire1 weapons/legAK47Fire2 }
+weapons/legAK47Reload1 	LAK47RE1
+weapons/legAK47Reload2 	LAK47RE2
+weapons/legAK47Reload3	LAK47RE3
+weapons/legAK47Select	LAK47SEL
+
+$playeralias LegRevenant male *pain100 legendaryrevenant/pain
+$playeralias LegRevenant male *pain75  legendaryrevenant/pain
+$playeralias LegRevenant male *pain50  legendaryrevenant/pain
+$playeralias LegRevenant male *pain25  legendaryrevenant/pain
+$playeralias LegRevenant male *death   legendaryrevenant/death
+$playeralias LegRevenant male *usefail legendaryrevenant/idle
+$playeralias LegRevenant male *grunt   legendaryrevenant/attack1
+$playeralias LegRevenant male *land    legendaryrevenant/attack2
+$playeralias LegRevenant male *jump    legendaryrevenant/idle
+$playeralias LegRevenant male *taunt   legendaryrevenant/see
+
+sandstorm/start SANDSTRT
+sandstorm/loop  SANDLOOP
+
+legbanished/see      LEGPESIT
+legbanished/idle     LEGPEACT
+legbanished/pain     LEGPEPAI
+legbanished/death    LEGPEDTH
+legbanished/attack1  LEGPATK1
+legbanished/attack2  LEGPATK2
+legbanished/explode1 LEGPXP1
+legbanished/explode2 LEGPXP2
+
+legsoul/see      LEGSSEE
+legsoul/idle     LEGSACT
+legsoul/pain     LEGSPAN
+legsoul/attack   LEGSATK
+legsoul/death    LEGSDTH
+legsoul/attack1  LEGSATK1
+legsoul/explode1 LEGSEXP1
+legsoul/attack2  LEGSATK2
+legsoul/explode2 LEGSEXP2
+
+legproton/load LEGPLOA

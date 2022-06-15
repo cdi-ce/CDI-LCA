@@ -1,0 +1,151 @@
+DECAL BFG9500LightningGold
+{
+Pic LRDEA0
+Add 1.0
+X-Scale 0.25
+Y-Scale 0.25
+FullBright
+RandomFlipx
+RandomFlipy
+Animator GoAway2
+LowerDecal BFGScorch
+}
+
+DECAL BFG9500LightningBlue
+{
+Pic BBDEA0
+Add 1.0
+X-Scale 0.25
+Y-Scale 0.25
+FullBright
+RandomFlipx
+RandomFlipy
+Animator GoAway2
+LowerDecal BFGScorch
+}
+
+DECAL LegRocketScorch
+{
+Pic LKDEA0
+Add 1.0
+X-scale 0.12
+Y-scale 0.12
+FullBright
+RandomFlipx
+RandomFlipy
+Animator GoAway
+LowerDecal Scorch
+}
+
+DECAL PoopRocketScorch
+{
+Pic LTDEA0
+Add 1.0
+X-scale 0.12
+Y-scale 0.12
+FullBright
+RandomFlipx
+RandomFlipy
+Animator GoAway
+LowerDecal Scorch
+}
+
+DECAL TrueRocketScorch
+{
+Pic TTDEA0
+Add 1.0
+X-scale 0.12
+Y-scale 0.12
+FullBright
+RandomFlipx
+RandomFlipy
+Animator GoAway
+LowerDecal Scorch
+}
+
+DECAL LegBFG15K
+{
+Pic LLDEA0
+Add 1.0
+X-scale 0.12
+Y-scale 0.12
+FullBright
+RandomFlipx
+RandomFlipy
+Animator GoAway
+LowerDecal Scorch
+}
+
+DECAL TLegBFG15K
+{
+Pic LKDEA0
+Add 1.0
+X-scale 0.12
+Y-scale 0.12
+FullBright
+RandomFlipx
+RandomFlipy
+Animator GoAway
+LowerDecal Scorch
+}
+
+DECAL BlueBFG9500Lightning
+{
+Pic LKDEA0
+Add 1.0
+X-Scale 0.25
+Y-Scale 0.25
+FullBright
+RandomFlipx
+RandomFlipy
+Animator GoAway2
+LowerDecal BFGScorch
+}
+
+DECAL LegBulletChipLower1
+{
+Pic SCORCH1
+Shade "00 00 00"
+X-scale 0.15
+Y-scale 0.15
+RandomFlipx
+RandomFlipy
+}
+
+DECAL LegBulletChip
+{
+Pic LPFFA0
+Add 1.0
+FullBright
+Animator GoAway2
+X-scale 1.0
+Y-scale 1.0
+LowerDecal LegBulletChipLower1
+}
+
+
+GENERATOR PArchonComet Scorch
+GENERATOR LegendaryCyberRail PoopRocketScorch
+GENERATOR LegCyberKnightBlueStar TrueRocketScorch
+GENERATOR LegCyberBlueStar TrueRocketScorch
+GENERATOR TrueLegendaryCyberRail TrueRocketScorch
+GENERATOR ZombieDTBFG10KBall BFG9500LightningRed
+GENERATOR LegendaryCyberFireSpawner Scorch
+GENERATOR LegNobleBall3 Scorch
+GENERATOR LegNobleBall3Small Scorch
+GENERATOR PhazoLaser BaronScorch
+GENERATOR CyLaser BaronScorch
+GENERATOR "Hexa-Shotgun" BulletChip
+GENERATOR ZombieDevastatorBall BFG9500LightningRed
+GENERATOR FusionDevastatorBall BFG9500LightningRed
+GENERATOR PlayerDevastatorBall BFG9500LightningRed
+GENERATOR LegCybDevastatorBall BFG9500LightningGold
+GENERATOR CydestroyerRail RocketScorch
+GENERATOR Cy10K BFG10KLightning
+GENERATOR ShoulderRocket RocketScorch
+GENERATOR ShoulderRocket2 RocketScorch
+GENERATOR SuperBall BFG10KLightning
+GENERATOR SuperSmallBall DoomImpScorch
+GENERATOR LegRevSmallBall3 DoomImpScorch
+GENERATOR LegendaryAssaultCaptain BulletChip
+GENERATOR LegendaryCyberdemon BulletChip

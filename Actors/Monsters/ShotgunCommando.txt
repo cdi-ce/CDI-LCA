@@ -1,0 +1,172 @@
+ACTOR ShotgunCommando 8001
+{
+	Health 220
+	Radius 20
+	Height 56
+	Speed 20
+	Mass 100
+	PainChance 43
+	DropItem "NewShell" 255 4
+	DropItem "HealthFlask" 55
+	DropItem "ArmorCharge" 55
+	DropItem "AmmoPack" 40
+	DropItem "HandGrenadeAmmo" 100 1
+	DropItem "MineAmmo" 50 1
+	DropItem "PortableMedkit" 190
+    DropItem "ArmorPlate" 190
+    DropItem "BackPack" 56
+	DropItem "NewShellBox" 128 
+	DropItem "Assault Shotgun" 25 1
+	MONSTER 
+	+FLOORCLIP
+	+MISSILEMORE
+	+QUICKTORETALIATE
+	AttackSound "weapons/12gaugefire"
+	SeeSound "superzombie/sight"
+	PainSound "superzombie/pain"
+	DeathSound "superzombie/death"
+	ActiveSound "superzombie/active"
+	Obituary "%o was blown to bloody pieces by a Shotgun Commando."
+	states
+	{
+  Spawn:
+    SGCD A 10 A_Look
+	SGCD Z 10 A_Look
+    Loop
+  See:
+    SGCD AABB 3 A_Chase
+    TNT1 A 0 A_SpawnItem("FootStep",0,0,0,0)
+    SGCD CCDD 3 A_Chase
+    TNT1 A 0 A_SpawnItem("FootStep",0,0,0,0)
+    Loop
+  Chase:
+	SGCD AA 1 A_FastChase
+	SGCD A 0 A_JumpIfCloser(130,"Dodge")
+	SGCD AA 1 A_Chase
+	SGCD A 0 A_JumpIfCloser(130,"Dodge")
+	SGCD BB 1 A_Chase
+	SGCD A 0 A_JumpIfCloser(130,"Dodge")
+	SGCD BB 1 A_Chase
+	TNT1 A 0 A_SpawnItemEx("FootStep",0,0,2,0,0,-20)
+	SGCD A 0 A_JumpIfCloser(150,"Dodge")
+	SGCD CC 1 A_Chase
+	SGCD A 0 A_JumpIfCloser(150,"Dodge")
+	SGCD CC 1 A_FastChase
+	SGCD A 0 A_JumpIfCloser(130,"Dodge")
+	SGCD DD 1 A_FastChase
+	SGCD A 0 A_JumpIfCloser(130,"Dodge")
+	SGCD DD 1 A_Chase
+	TNT1 A 0 A_SpawnItemEx("FootStep",0,0,2,0,0,-20)
+	SGCD A 0 A_Jump(64,"Dodge")
+	Loop
+  Strafing:
+	SGCD A 0 A_SpawnItem("FootStep",0,0,0,0)
+	TNT1 A 0 A_Chase("","Missile",CHF_DONTMOVE)
+	SGCD AABB 3 A_GiveInventory("CommandoStrafing",1)
+	SGCD C 0 A_SpawnItem("FootStep",0,0,0,0)
+	TNT1 A 0 A_Chase("","Missile",CHF_DONTMOVE)
+    SGCD CCDD 3 A_GiveInventory("CommandoStrafing",1)
+	Goto See	
+  Pause:
+    TNT1 A 0 A_PlayWeaponSound("csgun/windup")
+	SGCD AAAAA 3
+	Goto See	
+  SeeNoDodge:
+	SGCD AABB 2 A_Chase
+	TNT1 A 0 A_SpawnItemEx("FootStep",0,0,2,0,0,-20)
+	SGCD CCDD 2 A_Chase
+	TNT1 A 0 A_SpawnItemEx("FootStep",0,0,2,0,0,-20)
+	SGCD AABB 2 A_Chase
+	TNT1 A 0 A_SpawnItemEx("FootStep",0,0,2,0,0,-20)
+	SGCD CCDD 2 A_Chase
+	TNT1 A 0 A_SpawnItemEx("FootStep",0,0,2,0,0,-20)
+	SGCD AABB 2 A_Chase
+	TNT1 A 0 A_SpawnItemEx("FootStep",0,0,2,0,0,-20)
+	SGCD CCDD 2 A_Chase
+	TNT1 A 0 A_SpawnItemEx("FootStep",0,0,2,0,0,-20)
+	Goto Chase
+  Dodge:
+	SGCD A 1 A_FaceTarget
+	SGCD E 0 ThrustThingZ(0, 20, 0, 0)
+	SGCD A 0 A_Jump(256, "DodgeRight", "DodgeLeft")
+  DodgeLeft:
+	SGCD E 0 ThrustThing(angle*256/360+192, 15, 0, 0)
+	Goto SeeNoDodge
+  DodgeRight:
+	SGCD E 0 ThrustThing(angle*256/360+64, 15, 0, 0)
+	Goto SeeNoDodge
+  Missile:
+    //TNT1 A 0 A_PlayWeaponSound("csgun/windup")
+    SGCD E 10 A_FaceTarget
+	TNT1 A 0 A_CustomMissile("MonsterTracer2",Random(28,34),0,Random(6,-6),0)
+	TNT1 A 0 A_SpawnItemEx("ShellCasing", 12, -6, 36, Random(2, 6), 0, Random(1, 3), Random(-80, -90), 128)
+	SGCD F 0 Bright A_CustomBulletAttack(22.5,18.3,4,Random(1,5)*3)
+	//SGCD E 1 A_GiveInventory("CommandoStrafing",1)	
+    SGCD E 5 Bright A_CPosAttack
+	TNT1 A 0 A_CustomMissile("MonsterTracer2",Random(28,34),0,Random(6,-6),0)
+	TNT1 A 0 A_SpawnItemEx("ShellCasing", 12, -6, 36, Random(2, 6), 0, Random(1, 3), Random(-80, -90), 128)
+	SGCD F 0 Bright A_CustomBulletAttack(22.5,18.3,4,Random(1,5)*3)
+	//SGCD E 1 A_GiveInventory("CommandoStrafing",1)	
+    SGCD F 4 Bright A_CPosAttack
+    TNT1 A 0 A_CPosRefire
+	TNT1 A 0 A_Jump(20,"Pause")
+    Goto Missile+1
+  Pain:
+    SGCD G 6 A_Pain
+    Goto See
+  Death:
+    SGCD H 5
+    SGCD I 5 A_Scream 
+    SGCD J 5 A_Fall 
+    SGCD K 5 A_SpawnItem("BodyCrash",0,0,0,0)
+    SGCD L 5 
+	SGCD M 5 
+	SGCD N 5 
+	SGCD O 5 
+	SGCD P 5 
+	SGCD P -1
+    Stop
+  Raise:
+  	TNT1 A 0
+	TNT1 A 0 A_SpawnItemEx("VileHealEffect",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+    SGCD PONMLKJIH 5
+    Goto See
+  }
+}
+
+Actor CommandoStrafing : CustomInventory
+{
+  +INVENTORY.QUIET
+  +INVENTORY.UNDROPPABLE
+  +INVENTORY.ALWAYSPICKUP
+  +INVENTORY.AUTOACTIVATE       
+  +COUNTITEM
+  Inventory.Amount 1
+  Inventory.MaxAmount 0
+  States
+  {
+  Pickup:
+    NULL A 1 
+	//NULL A 1 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	NULL A 1 A_Jump(188,2)
+	NULL A 1 A_GiveInventory("LegZombieJumping",1)
+	NULL A 1 A_JumpIf(velx != 0 || vely != 0,2)
+	NULL A 1 A_Jump(256,2)
+	NULL A 1 A_Jump(235,5)
+	NULL A 1 A_JumpIfInventory("LegZombieStrafeSens",1,3)
+	NULL A 1 A_GiveInventory("LegZombieStrafeSens",1)
+	NULL A 1 A_Jump(256,2)	
+	NULL A 1 A_TakeInventory("LegZombieStrafeSens",1)
+	NULL A 1 A_JumpIfInventory("LegZombieStrafeSens",1,3)
+	NULL A 1 ThrustThing(angle*256/360+38.7,3,0,0)
+	NULL A 1 A_Jump(256,2)	
+	NULL A 1 ThrustThing(angle*256/360+38.7,-3,0,0)
+    NULL A 1 A_FaceTarget
+	NULL A 1 A_Jump(24,2)
+	NULL A 1 A_JumpIfCloser(300,2)
+	NULL A 1 A_Recoil(-1)
+    Stop
+	NULL A 1 A_Recoil(1)
+    Stop	
+  }
+}

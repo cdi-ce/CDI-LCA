@@ -1,0 +1,190 @@
+ACTOR FreezerZombie : ChaingunGuy 7064
+{
+Health 215
+Radius 20
+Height 56
+Speed 8
+Mass 100
+PainChance 105
+MONSTER 
++FLOORCLIP
++MISSILEMORE
++MISSILEEVENMORE
++QUICKTORETALIATE
+SeeSound "grunt/sight"
+PainSound "grunt/pain"
+DeathSound "grunt/death"
+ActiveSound "grunt/active"
+Obituary "%o couldn't handle the Freezer Zombie's chilled weaponry."
+DropItem "Freezer Rifle" 128 1
+DropItem "HandGrenadeAmmo" 142 2
+DropItem "MineAmmo" 167 2
+DropItem "Armorplate" 152 1
+DropItem "Portablemedkit" 156 1
+DropItem "Backpack" 122 1
+DropItem "NewCellPack" 250 
+DamageFactor "Ice", 0.0
+DamageFactor "FreezerBurn", 0.0
+States
+{
+Spawn:
+        FRZR AZ 10 A_Look
+        Loop
+See:
+        FRZR AABB 3 A_Chase
+		TNT1 A 0 A_SpawnItem("FootStep",0,0,0,0)
+		FRZR CCDD 3 A_Chase
+		TNT1 A 0 A_SpawnItem("FootStep",0,0,0,0)
+        Loop
+Pause:
+		FRZR E 20
+		Goto See
+Missile:
+        TNT1 A 0 A_JumpIfCloser(325,"Missile3")
+Missile2:
+        FRZR E 10 A_FaceTarget
+		TNT1 A 0 A_PlaySound("weapons/iceshot",6,5)
+        FRZR F 2 Bright A_CustomMissile("NewZombieFreezeBlast", 30, 4, 0)
+		FRZR E 4 A_FaceTarget
+		TNT1 A 0 A_Jump(1,"Pause")
+        TNT1 A 0 A_SentinelRefire
+        Goto Missile2+1
+Missile3:
+           TNT1 A 0 A_PlaySound ("freeze/altfire", 6)
+	       FRZR EE 10 A_FaceTarget
+		   TNT1 A 0 A_PlaySound("freeze/althold", 6)
+		   TNT1 A 0 A_FaceTarget
+		   FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)
+		   TNT1 A 0 A_FaceTarget
+           FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)		 
+		   TNT1 A 0 A_FaceTarget
+           FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)
+		   TNT1 A 0 A_FaceTarget
+		   FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)
+		   TNT1 A 0 A_FaceTarget
+		   FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)
+		   TNT1 A 0 A_FaceTarget
+		   FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)
+		   TNT1 A 0 A_FaceTarget
+		   FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)
+		   TNT1 A 0 A_FaceTarget
+		   FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)
+		   TNT1 A 0 A_FaceTarget
+		   FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)
+		   TNT1 A 0 A_FaceTarget
+		   FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)
+		   TNT1 A 0 A_FaceTarget
+		   FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)
+		   TNT1 A 0 A_FaceTarget
+		   FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)
+		   TNT1 A 0 A_FaceTarget
+		   FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)
+		   TNT1 A 0 A_FaceTarget
+		   FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)
+		   TNT1 A 0 A_FaceTarget
+		   FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)
+		   TNT1 A 0 A_FaceTarget
+		   FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)
+		   TNT1 A 0 A_FaceTarget
+		   FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)
+		   TNT1 A 0 A_FaceTarget
+		   FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)
+		   TNT1 A 0 A_FaceTarget
+		   FRZR F 1 Bright A_CustomMissile("ZombieFlameShot",32,0,random(-4,4),0)
+		   FRZR EE 12 A_StopSound(6)
+	   Goto See
+Pain:
+        FRZR G 3
+        FRZR G 3 A_Pain
+        Goto See
+Death:
+        FRZR H 5
+        FRZR I 5 A_Scream
+        FRZR J 5 A_Fall
+        FRZR K 5
+		FRZR L 0 A_SpawnItem("BodyCrash",0,0,0,0)
+        FRZR L -1
+        Stop
+XDeath:
+        FRZR O 5
+        FRZR O 3 A_SpawnItemEx("GibbedGenerator",0,0,0,0,0,0,0,128,0)
+		FRZR P 5 A_XScream
+        FRZR Q 5 A_Fall
+        FRZR RSTU 5
+        FRZR V -1
+        Stop
+Burn:
+       BURN A 5 BRIGHT
+       BURN B 5 BRIGHT A_Pain
+       BURN C 5 BRIGHT
+       BURN D 5 BRIGHT
+       BURN E 5 BRIGHT A_Pain
+       BURN F 5 BRIGHT
+       BURN G 5 BRIGHT
+       BURN H 5 BRIGHT A_Pain
+       BURN I 5 BRIGHT
+       BURN J 5 BRIGHT
+       BURN K 5 BRIGHT
+       BURN L 5 BRIGHT
+       BURN M 5 BRIGHT
+       BURN N 5 BRIGHT A_Scream
+       BURN O 5 BRIGHT A_NoBlocking
+       BURN P 5 BRIGHT
+       BURN Q 5 BRIGHT
+       BURN R 5 BRIGHT
+       BURN S 5 BRIGHT
+       BURN T 5 BRIGHT
+       BURN U 5 BRIGHT
+       BRNT V -1 
+       Stop        
+Raise:
+       FRZR KJIH 5
+        Goto See
+    }
+}
+
+actor ZombieFreezeBlast
+{
+  Game Doom
+  SpawnID 51
+  Radius 13
+  Height 8
+  Speed 55
+  Damage 12
+  Projectile
+  +RANDOMIZE
+  RenderStyle Add
+  Alpha 0.75
+  scale 0.9
+  SeeSound "weapons/iceshot"
+  DeathSound "weapons/icehit"
+  DamageType "Ice"
+  Decal FreezeBlastMelt
+  States
+  {
+Spawn:
+    FBLS A 6 bright A_SpawnItem("FreezeBlastTrail")
+    loop
+Death:
+    TNT1 AAA 0 A_CustomMissile("Kaboom6", 0, 0, random(0,360), 2, random(0,360))
+    FBLS BCDE 4 bright
+    stop
+  }
+}
+
+ACTOR ProjectileTrailParticleBlue :  EnergyProjectileSparkGreen
+{
++NOGRAVITY
+Scale 0.02
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+SPKB A 2 Bright A_FadeOut(0.08)
+Loop
+Toaster:
+TNT1 A 0
+Stop
+}
+}

@@ -1,0 +1,164 @@
+#library "LEGMUSIC"
+#include "zcommon.acs"
+
+bool Is_Mon_Music_Playing = FALSE;
+bool Is_Mon_Int_Music_Playing = FALSE;
+bool Is_Weap_Music_Playing = FALSE;
+bool Is_Player_Music_Playing = FALSE;
+int Fired_Epic = 0;
+
+Script 5430 (int mNum) CLIENTSIDE
+{//weapon music start
+delay(1);
+if(GetCvar("lca_legweapmusic") && !Is_Player_Music_Playing && !Is_Mon_Music_Playing && !Is_Mon_Int_Music_Playing)
+{
+	Fired_Epic = Fired_Epic + 1;
+	if(Fired_Epic == 5)
+	{
+		SetMusic(StrParam(s:"D_LEGM",i:mNum),0);
+		Is_Weap_Music_Playing = TRUE;
+	}
+}
+}
+
+Script 5431 (void) CLIENTSIDE
+{//weapon music stop
+if(GetCvar("lca_legweapmusic") && Is_Weap_Music_Playing)
+{
+	SetMusic("*",0);
+	Fired_Epic = 0;
+	Is_Weap_Music_Playing = FALSE;
+}
+}
+
+Script 5432 (int mNum) CLIENTSIDE
+{//monster music
+delay(4);
+if(GetActorProperty(0,APROP_Health) > 0)
+{
+	if(GetCvar("lca_legmusic") && !Is_Player_Music_Playing && !Is_Mon_Music_Playing && !Is_Mon_Int_Music_Playing)
+	{
+		SetMusic(StrParam(s:"D_LEGM",i:mNum),0);
+		Is_Mon_Music_Playing = TRUE;
+		Is_Weap_Music_Playing = FALSE;
+		while(GetActorProperty(0,APROP_Health) > 0)
+		{
+			delay(1);
+			if(GetUserArray(0,"user_music",0) == 0)break;
+			else if(GetCvar("lca_legmusic") == FALSE)
+			{
+				SetUserArray(0,"user_music",0,0);
+				break;
+			}
+			else if(Is_Mon_Int_Music_Playing == TRUE)
+			{
+				SetUserArray(0,"user_music",0,0);
+				terminate;
+			}
+			else if(Is_Player_Music_Playing == TRUE)
+			{
+				SetUserArray(0,"user_music",0,0);
+				terminate;
+			}
+		}
+		SetMusic("*",0);
+		Fired_Epic = 0;
+		Is_Mon_Music_Playing = FALSE;
+		Is_Mon_Int_Music_Playing = FALSE;
+		Is_Weap_Music_Playing = FALSE;
+		terminate;
+	}
+}
+else terminate;
+delay(1);
+restart;
+}
+
+/*Script 5432 (int mNum) CLIENTSIDE
+{//monster music start
+delay(1);
+if(GetCvar("lca_legmusic") && !Is_Player_Music_Playing && !Is_Mon_Music_Playing && !Is_Mon_Int_Music_Playing)
+{
+	SetMusic(StrParam(s:"D_LEGM",i:mNum),0);
+	Is_Mon_Music_Playing = TRUE;
+	Is_Weap_Music_Playing = FALSE;
+}
+}*/
+
+Script 5433 (void) CLIENTSIDE
+{//monster music stop
+if(GetCvar("lca_legmusic") && !Is_Player_Music_Playing) 
+{
+	SetMusic("*",0);
+	Fired_Epic = 0;
+	Is_Mon_Music_Playing = FALSE;
+	Is_Mon_Int_Music_Playing = FALSE;
+	Is_Weap_Music_Playing = FALSE;
+}
+}
+
+Script 5434 (void) CLIENTSIDE
+{//monster music intermission
+if(GetCvar("lca_legmusic")) 
+{
+	SetMusic("D_LEGINT",0);
+	Is_Mon_Music_Playing = FALSE;
+	Is_Mon_Int_Music_Playing = TRUE;
+}
+}
+
+Script 5435 (void) CLIENTSIDE
+{//Legendary Player Song
+delay(5);
+if(GetCvar("lca_legplayermusic") && !Is_Player_Music_Playing)
+{
+	Is_Player_Music_Playing = TRUE;
+	Is_Mon_Music_Playing = FALSE;
+	Is_Mon_Int_Music_Playing = FALSE;
+	Is_Weap_Music_Playing = FALSE;
+	SetMusic("D_LEGM7",0);
+	while(CheckActorClass(0,"Demon_LegendaryRevenant") && GetActorProperty(0,APROP_Health) > 0)delay(1);
+	SetMusic("*",0);
+	Fired_Epic = 0;
+	Is_Player_Music_Playing = FALSE;
+	Is_Mon_Music_Playing = FALSE;
+	Is_Mon_Int_Music_Playing = FALSE;
+	Is_Weap_Music_Playing = FALSE;
+}
+}
+
+Script 5440 (int Typ)
+{// Effects
+while(GetActorProperty(0,APROP_Health) > 0)
+{
+    int x = GetActorX(0);
+    int y = GetActorY(0);
+    int z = GetActorZ(0);
+	int angle = (GetActorAngle(ActivatorTID())*255)>>16;
+	if(Typ == 0)SpawnForced("LegendaryBabySentientFireSpawner",x,y,z,0,angle);
+	else if(Typ == 1)SpawnForced("LegSentientFireSpawner",x,y,z,0,angle);
+    delay(2);
+}
+}
+
+Script 5441 (void)
+{// Legendary Zombies Protection
+if(GetUserArray(0,"user_protected",0) == 0)
+{
+	HealThing(75);
+	SetUserArray(0,"user_protected",0,1);
+	SetUserArray(0,"user_protection",0,GetUserArray(0,"user_protection",0)+1);
+	for(int i = 0; i < 105; i++)
+	{
+	    int x = GetActorX(0);
+		int y = GetActorY(0);
+		int z = GetActorZ(0);
+		int angle = (GetActorAngle(ActivatorTID())*255)>>16;
+		SpawnForced("LegImpLineSpawner",x,y,z,0,angle);
+		SetActorProperty(0,APROP_Invulnerable,1);
+		delay(1);
+	}
+	SetActorProperty(0,APROP_Invulnerable,0);
+	SetUserArray(0,"user_protected",0,0);
+}
+}

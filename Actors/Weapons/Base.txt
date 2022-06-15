@@ -1,0 +1,150 @@
+ACTOR LegendaryRifleShot
+{
+   Height 3
+   Radius 3
+   Speed 55
+   DamageType "Legendary"
+   Damage 50
+   Scale 0.5
+   RenderStyle Add
+   Alpha 0.95
+   PROJECTILE
+   +THRUSPECIES
+   +FORCERADIUSDMG
+   +NOTIMEFREEZE
+   Species ""
+   DeathSound "weapons/demontechex"
+   Decal DoomImpScorch
+   States
+   {
+   Spawn:
+	  TNT1 A 0
+	  TNT1 A 0 A_Jump(128,"Spawn2")
+   Normal:
+      BTPR ABCDEF 1 Bright A_SpawnItemEx("LDemonTechTrail",Random(-1,1),Random(-1,1),Random(-1,1),Random(-1,1),Random(-1,1),Random(-1,1),Random(-20,20),128)
+      Loop
+   Spawn2:
+      BTPR ABCDEF 1 Bright A_SpawnItemEx("LDemonTechTrail2",Random(-1,1),Random(-1,1),Random(-1,1),Random(-1,1),Random(-1,1),Random(-1,1),Random(-20,20),128)
+      Loop	  
+   Death:
+      TNT1 A 0
+	  TNT1 A 0 Bright A_SpawnItemEx("LegendaryBlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+	  TNT1 AAA 0 A_CustomMissile("LegendarySmokeFX4", 0, 0, random(0,360), 2, random(0,360))
+	  TNT1 A 0 Bright A_SpawnItemEx("LegendaryADemonTechEx",0,0,0,0,0,0,0,128,0)
+      TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 0, "DeathSFX")
+	  Goto Toaster
+   DeathSFX:
+	  TNT1 A 0 Bright A_SpawnItemEx("LegendaryBlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+	  TNT1 AAA 0 A_CustomMissile("LegendarySmokeFX4", 0, 0, random(0,360), 2, random(0,360))
+	  TNT1 A 0 Bright A_SpawnItemEx("LegendaryADemonTechEx",0,0,0,0,0,0,0,128,0)
+   Toaster:
+	  TNT1 A 1 Bright A_Explode(20,64)
+      Stop
+	  }
+}
+
+
+ACTOR LegendaryProjectile : LegendaryRifleShot
+{
+   Damage 50
+   +THRUSPECIES
+   DamageType "Legendary"
+   States
+   {
+   Death:
+      TNT1 A 0
+      TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 0, "DeathSFX")
+	  Goto Toaster
+   DeathSFX:
+	  TNT1 A 0 Bright A_SpawnItemEx("LegendaryBlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+	  TNT1 AAAA 0 A_CustomMissile("LegendarySmokeFX4", 0, 0, random(0,360), 2, random(0,360))
+   Toaster:
+	  TNT1 A 0 Bright A_SpawnItemEx("LegendaryADemonTechEx",0,0,0,0,0,0,0,128,0)
+	  TNT1 A 1 Bright A_Explode(6,48)
+      Stop
+   }
+}
+
+ACTOR PlayerLegendaryProjectile : LegendaryRifleShot
+{
+   Damage 50
+   Speed 100
+   +THRUSPECIES
+   Species "Player"
+   DamageType "Legendary"
+   States
+   {
+   Death:
+      TNT1 A 0
+      TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 0, "DeathSFX")
+	  Goto Toaster
+   DeathSFX:
+	  TNT1 A 0 Bright A_SpawnItemEx("LegendaryBlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+	  TNT1 AAAA 0 A_CustomMissile("LegendarySmokeFX4", 0, 0, random(0,360), 2, random(0,360))
+   Toaster:
+	  TNT1 A 0 Bright A_SpawnItemEx("LegendaryADemonTechEx",0,0,0,0,0,0,0,128,0)
+	  TNT1 A 1 Bright A_Explode(6,48)
+      Stop
+   }
+}
+
+ACTOR ADemonTechEx
+{
+RenderStyle Add
+Alpha 0.75
+Scale 0.45
+PROJECTILE
++NOCLIP
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    BRPG ABCDEFGH 2 Bright A_FadeOut(0.1)
+    Stop
+Toaster:
+    TNT1 A 0
+    BRPG ABCDEFGH 2 Bright
+    Stop
+}
+}
+
+ACTOR LegendaryADemonTechEx : ADemonTechEx { +NOTIMEFREEZE }
+
+ACTOR LDemonTechTrail : BFG9500Trail
+{
+Scale 0.1
+Alpha 0.75
++NOTIMEFREEZE
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 2
+    BTRI AAAAAABBBBBBBB 1 Bright A_FadeOut(0.05)
+	BTRI BBBBB 1 Bright A_FadeOut(0.025)
+    Stop
+Toaster:
+    TNT1 A 0
+    Stop
+    }
+}
+
+ACTOR LDemonTechTrail2 : DemonTechTrail
+{
++NOTIMEFREEZE
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 2
+    BTRI AAAAAACCCCCCCC 1 Bright A_FadeOut(0.05)
+    BTRI CCCCC 1 Bright A_FadeOut(0.025)
+    Stop
+Toaster:
+    TNT1 A 0
+    Stop
+}
+}

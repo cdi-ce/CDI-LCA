@@ -1,0 +1,61 @@
+#library "legpow"
+#include "zcommon.acs"
+
+Script 15250 DEATH
+{
+TakeInventory("LegMissileType2",1);
+TakeInventory("LegMissileType3",1);
+TakeInventory("LegMissileType4",1);
+TakeInventory("LegMissileType5",1);
+TakeInventory("LegMissileType6",1);
+TakeInventory("LegMissileType7",1);
+TakeInventory("LegendaryRevenant-Weapons",1);
+TakeInventory("LegRevWeapType",7);
+}
+
+Script 15251 ENTER
+{
+while(CheckActorClass(0,"ComplexDoomPlayer"))delay(1);
+int power = 70;
+if(CheckActorClass(0,"Demon_LegendaryRevenant"))
+{
+	while(CheckActorClass(0,"Demon_LegendaryRevenant"))
+	{	
+		SETFONT("BigFont");
+		HudMessage(s:"\cfTimer\ck: \cn",d:power,s:"";HUDMSG_FADEOUT,18400+PlayerNumber(),CR_DARKGREY,0.095,0.63,1.0,1.0);
+		power--;
+		delay(35);
+		if(power == 0)
+		{
+			UnMorphActor(0,0);
+			TakeInventory("LegMissileType2",1);
+			TakeInventory("LegMissileType3",1);
+			TakeInventory("LegMissileType4",1);
+			TakeInventory("LegMissileType5",1);
+			TakeInventory("LegMissileType6",1);
+			TakeInventory("LegMissileType7",1);
+			TakeInventory("LegendaryRevenant-Weapons",1);
+			TakeInventory("LegRevWeapType",7);
+		}
+	}
+}
+delay(1);
+restart;
+}
+
+Script 15252 ENTER
+{
+int x = GetActorX(0);
+int y = GetActorY(0);
+int z = GetActorZ(0);
+int angle = (GetActorAngle(ActivatorTID())*255)>>16;
+if(CheckActorClass(0,"Demon_LegendaryRevenant"))SpawnForced("MorphedPlayerFriendMark0",x-8.0,y,z+84.0,0,angle);
+delay(1);
+restart;
+}
+
+Script 15253 ENTER
+{
+if(CheckActorClass(0,"Demon_LegendaryRevenant"))HealThing(2,400);
+delay(35);restart;
+}

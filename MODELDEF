@@ -1,0 +1,118 @@
+Model Legendary10KProjectile
+{ 
+ Path "BFG10K Tracer"
+ SKIN 0 "tracer4.tga"
+ MODEL 0 "Tracer.md3"
+ Scale 10.0 10.0 5.0
+ PITCHFROMMOMENTUM
+ FrameIndex LRAC A 0 0
+}
+
+Model LegSentientExplosiveTracer
+{ 
+   Path "BFG10K Tracer"
+   SKIN 0 "tracer4.tga"
+   MODEL 0 "Tracer.md3"
+   Scale 2.6 2.6 1.2
+   PITCHFROMMOMENTUM
+   FrameIndex LRAC A 0 0
+}
+
+Model Cy10K
+{ 
+   Path "Models/Tracers"
+   SKIN 0 "tracer3.tga"
+   MODEL 0 "Tracer.md3"
+   Scale 10.0 10.0 5.0
+   PITCHFROMMOMENTUM
+   FrameIndex TRA3 A 0 0
+}
+
+Model PlayerExplosiveTracer
+{ 
+   Path "Models/Tracers"
+   SKIN 0 "tracer1.tga"
+   MODEL 0 "Tracer.md3"
+   Scale 2.6 2.6 1.2
+   PITCHFROMMOMENTUM
+   FrameIndex TRAC A 0 0
+}
+
+Model LegendarySentient10KProjectile
+{ 
+ Path "BFG10K Tracer"
+ SKIN 0 "tracer4.tga"
+ MODEL 0 "Tracer.md3"
+ Scale 10.0 10.0 5.0
+ PITCHFROMMOMENTUM
+ FrameIndex LRAC A 0 0
+}
+
+Model LegendaryBabySentient10KProjectile
+{ 
+ Path "BFG10K Tracer"
+ SKIN 0 "tracer4.tga"
+ MODEL 0 "Tracer.md3"
+ Scale 10.0 10.0 5.0
+ PITCHFROMMOMENTUM
+ FrameIndex LRAC A 0 0
+}
+
+Model General10KProjectile
+{ 
+   Path "Models/Tracers"
+   SKIN 0 "tracer2.tga"
+   MODEL 0 "Tracer.md3"
+   Scale 10.0 10.0 5.0
+   PITCHFROMMOMENTUM
+   FrameIndex TRA2 A 0 0
+}
+
+Model LegendaryBlueTracer
+{ 
+   Path "BFG10K Tracer"
+   SKIN 0 "tracer5.tga"
+   MODEL 0 "Tracer.md3"
+   Scale 4.5 4.5 1.5
+   PITCHFROMMOMENTUM
+   FrameIndex BRAC A 0 0
+}
+
+Model BlueSGTracer
+{ 
+   Path "BFG10K Tracer"
+   SKIN 0 "tracer5.tga"
+   MODEL 0 "Tracer.md3"
+   Scale 4.5 4.5 1.5
+   PITCHFROMMOMENTUM
+   FrameIndex BRAC A 0 0
+}
+
+Model TrueLegendary10KProjectile
+{ 
+   Path "BFG10K Tracer"
+   SKIN 0 "tracer5.tga"
+   MODEL 0 "Tracer.md3"
+   Scale 10.0 10.0 5.0
+   PITCHFROMMOMENTUM
+   FrameIndex BRAC A 0 0
+}
+
+Model LegBabySentientExplosiveTracer
+{ 
+   Path "BFG10K Tracer"
+   SKIN 0 "tracer4.tga"
+   MODEL 0 "Tracer.md3"
+   Scale 2.6 2.6 1.2
+   PITCHFROMMOMENTUM
+   FrameIndex LRAC A 0 0
+}
+
+Model FFPlayer { 
+   Path "Models"
+   SKIN 0 "hexagonFF.png"
+   MODEL 0 "sphere.md2"
+   Scale 5 5 5
+   ROTATING
+   FrameIndex FFLD A 0 0
+}

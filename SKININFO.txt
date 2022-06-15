@@ -1,0 +1,119 @@
+{
+Name = FreezerRifle-Marine
+Class = "Doom Guy"
+Sprite = FZPL
+CrouchSprite = PFZC
+Hidden = True
+}
+
+{
+Name = LCADemonTechRifle-Marine
+Class = "Doom Guy"
+Sprite = PRAI
+CrouchSprite = PRAC
+Hidden = True
+}
+
+{
+Name = LegendaryRifle-Marine
+Class = "Doom Guy"
+Sprite = PLEG
+CrouchSprite = PLCR
+Hidden = True
+}
+
+{
+Name=LegendaryRevRocket-Marine
+Class = "Doom Guy"
+Sprite=PREV
+CrouchSprite=PRVC
+Hidden = True
+}
+
+{
+Name = LegendaryASG-Marine
+Class = "Doom Guy"
+Sprite = LGSA
+CrouchSprite = LASC
+Hidden = True
+}
+
+{
+Name = ExplosiveMinigun-Marine
+Class = "Doom Guy"
+Sprite = XPMS
+CrouchSprite = XPMC
+Hidden = True
+}
+
+{
+Name = LegendaryBFG-Marine
+Class = "Doom Guy"
+Sprite = LBPS
+CrouchSprite = LBPC
+Hidden = True
+}
+
+{
+Name = LegendaryCannon-Marine
+Class = "Doom Guy"
+Sprite = LCNN
+CrouchSprite = LCNC
+Hidden = True
+}
+
+{
+Name = AdvancedNecronomicon-Marine
+Class = "Doom Guy"
+Sprite = ANPS
+CrouchSprite = ANPC
+Hidden = True
+}
+
+{
+Name=BehemothCannon-Marine
+Class = "Doom Guy"
+Sprite=PUNM
+CrouchSprite=PUNC
+Hidden = True
+}
+
+{
+Name=Hexa-Shotgun-Marine
+Class = "Doom Guy"
+Sprite=PHST
+CrouchSprite=PHSC
+Hidden = True
+}
+
+{
+Name=Devastator-Marine
+Class = "Doom Guy"
+Sprite=PDEV
+CrouchSprite=PDVC
+Hidden = True
+}
+
+{
+Name = Fist2-Marine
+Class = "Doom Guy"
+Sprite = PFT2
+CrouchSprite = PFT3
+Hidden = True
+}
+
+{
+Name=Ionspray-Marine
+Class = "Doom Guy"
+Sprite=PION
+CrouchSprite=PINC
+Hidden = True
+}
+
+{
+Name = LegendaryAK47-Marine
+Class = "Doom Guy"
+Sprite = LA47
+CrouchSprite = LAAC
+Hidden = True
+}

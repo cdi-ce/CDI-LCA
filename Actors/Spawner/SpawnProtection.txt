@@ -1,0 +1,11 @@
+ACTOR SpawnProtectionGiver : PowerupGiver {
+	 +INVENTORY.AUTOACTIVATE
+	 +INVENTORY.ALWAYSPICKUP
+	 Inventory.MaxAmount 0
+	 Powerup.Type SpawnProtection
+	 Powerup.Duration -1
+	 Powerup.Color 48 48 52 0.25
+}
+ACTOR PowerSpawnProtection : PowerProtection {
+	DamageFactor "Normal", 0
+}

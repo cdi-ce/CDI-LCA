@@ -1,0 +1,36 @@
+/*
+Flags:
+-----
++NOGRAVITY          = Actor is not subject to gravity.
+                      * Automatically given by the Projectile combo.
++NOBLOCKMAP         = This object is excluded from passive collision detection.
+                      Nothing else can run into a NOBLOCKMAP object but the
+					  object itself can run into others.
+				      * Automatically given by the Projectile combo
++NOINTERACTION      = The actor is purely decorative. It will not interact with
+                      any other actor and will ignore all game physics
+					  (including solid walls and floors!), moving only
+					  according to its own momentum. (i.e. The actor will not
+					  be affected by gravity, but its movement can still be
+					  directly changed using ThrustThing.) All AI routines
+					  will ignore this actor's existence, speeding up
+					  processing time.
++DONTSPLASH         = Actor does not create any terrain splashes.
++NONETID            = Actors with this flag are not assigned a network id when
+                      spawned. Only use it if you know what you are doing!
++CLIENTSIDEONLY     = Spawns the actor on the clientside no matter how it is
+                      spawned.
+*/
+
+// Base flare
+ACTOR LCABaseFlare
+{
+Radius 0
+Height 0
++NOGRAVITY
++NOBLOCKMAP
++NOINTERACTION
++DONTSPLASH
++NONETID
++CLIENTSIDEONLY
+}

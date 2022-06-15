@@ -1,0 +1,116 @@
+actor DesertHornet 20500
+{
+  obituary "%o was pierced by a Desert Hornet's stinger."
+  health 10
+  radius 16
+  height 32
+  mass 50
+  speed 20
+  damage 2
+  damagetype "hornet"
+  damagefactor "hornet", 0
+  DamageFactor "NobleComet", 0.0
+  maxtargetrange 256
+  bloodcolor yellow
+  deathsound "Hornet/Death"
+  DropItem "LifeEssence" 25
+  species "nobles"
+  MONSTER
+  +FLOAT
+  +NOGRAVITY
+  +FLOATBOB
+  +NOBLOODDECALS
+  +SPAWNFLOAT
+  +DONTOVERLAP
+  states
+  {
+  Spawn:
+    WASP A 0
+	WASP A 0 A_PlaySoundEx ("Hornet/Fly", "SoundSlot7", 1)
+    WASP AB 2 A_Look
+    loop
+  See:
+  	WASP A 0 A_PlaySoundEx ("Hornet/Fly", "SoundSlot7", 1)
+  	WASP A 0 A_JumpIfCloser (180, "Dodge")
+    WASP AB 2 A_Chase
+	loop
+  Dodge:
+  	WASP A 0 A_PlaySoundEx ("Hornet/Fly", "SoundSlot7", 1)
+    WASP A 1 A_FastChase
+	WASP A 1 A_FaceTarget
+	WASP B 1 A_FastChase
+	WASP B 1 A_FaceTarget
+    goto See
+  Missile:
+    TNT1 A 0 A_Jump(128,"Stinger")
+  	WASP A 0 A_PlaySoundEx ("Hornet/Fly", "SoundSlot7", 1)
+    WASP A 2 A_FaceTarget
+    WASP B 2 A_SkullAttack
+    goto See
+  Stinger:
+    WASP A 2 A_FaceTarget
+	WASP B 2 A_CustomMissile("HornetStinger", 6, 0, 0)
+	WASP B 2
+	goto See
+  Death:
+    WASP C 1 A_StopSoundEx ("SoundSlot7")
+    WASP C 0 A_ChangeFlag ("FLOATBOB", 0)
+    WASP C 0 A_ScreamAndUnblock
+  Fall:
+    WASP C 1 A_CheckFloor ("Splat")
+	loop
+  Splat:
+    WASP D 1 A_Stop
+    WASP D 0 A_PlaySound ("Hornet/Splat")
+	WASP D -1
+	stop
+  }
+}
+
+Actor HornetStinger
+{
+        Projectile
+        Radius 5
+        Height 8
+        Speed 60
+        Damage 3
+        Scale 0.4
+        +BLOODSPLATTER
+        seeSound ""
+        DeathSound ""
+        Decal Bulletchip
+        States
+        {
+        Spawn:
+            DART A 1 A_CustomMissile("NailBlur", 0, 0, 180)
+            Loop
+        Crash:
+        	DART BCDEFG 2
+        	Stop
+        XDeath:
+        	DART BCDEFG 2
+        	Stop
+        Death:
+        	DART BCDEFG 2
+        	Stop
+        }
+}
+
+Actor NailBlur       
+{
+   Height 8
+   Radius 1
+   Damage 0
+   Scale 0.6
+   Speed 0.2
+   RenderStyle Translucent
+   Alpha 0.5
+   +NOGRAVITY
+   +DROPOFF
+   States
+   {
+   Spawn:
+      DART A 1 A_FadeOut(0.1)
+      Loop
+   }
+}

@@ -1,0 +1,439 @@
+ACTOR LegendaryStealthTrooper 7025 
+{ 
+Health 1400
+Radius 20
+Height 56
+Speed 10
+Mass 100
+PainChance 25
+PainChance "ZombieDemonTech", 0
+BloodColor "Blue"
+DropItem "LegendaryArmor" 85 1
+DropItem "LegAmmoSphere" 88 1
+DropItem "HandGrenadeAmmo" 235 2
+DropItem "MineAmmo" 235 2
+DropItem "Backpack" 198 1
+DropItem "Armorplate" 205 1
+DropItem "Portablemedkit" 210 1
+DropItem "LegendaryBulletBox" 200 
+DropItem "LegendaryBulletMag" 250 20
+DropItem "LegendaryRune" 60 1
+DropItem "Legendary AK-47" 200 1
+DamageFactor "LegendaryZombie", 0.0
+DamageFactor "PDTBFG", 0.25
+DamageFactor "PDTBFGTracer", 0.25
+DamageFactor "PlayerDevBall", 0.125
+DamageFactor "PlayerDevBall2", 0.125
+DamageFactor "PlayerDTBFGRailgunSlug", 0.125
+DamageFactor "PlayerDevTracer", 0.125
+DamageFactor "Legendary", 0.0
+DamageFactor "LegendaryPlayer", 0.3
+DamageFactor "LegendaryGuru", 0.0
+DamageFactor "LegendaryGuruPlayer", 0.3
+DamageFactor "DBFG10K2", 0.65
+DamageFactor "PlayerDBFG10K2", 0.65
+DamageFactor "DBFG2", 0.65
+DamageFactor "PlayerDBFG2", 0.65
+DamageFactor 0.65
+MONSTER 
++NOTIMEFREEZE
++BOSS
++BOSSDEATH
++FLOORCLIP
++MISSILEMORE
++MISSILEEVENMORE
++QUICKTORETALIATE
++NOICEDEATH
++NODROPOFF
++DONTGIB
++NOTARGET
++NORADIUSDMG
++FORCERADIUSDMG
+SeeSound "lcmdo/sight"
+AttackSound "Null"
+PainSound "lcmdo/pain"
+DeathSound "lcmdo/death"
+ActiveSound "lcmdo/active"
+Obituary "%o was immediately gunned down by a Legendary Stealth Trooper."
+var int user_music;
+var int user_protection;
+var int user_protected;
+var int user_minefield;
+var int user_SniperLoopStart;
+var int user_SniperLoop;
+var int user_SniperAttack;
+States 
+{
+Spawn:
+    TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+    LCMD A 10 Bright A_Look
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	LCMD Z 10 Bright A_Look
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+    Loop
+See:
+    TNT1 A 0 A_JumpIf(user_music == 1,3)
+    TNT1 A 0 ACS_ExecuteAlways(5432,0,19)
+	TNT1 A 0 A_SetUserVar("user_music",1)
+    TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+    LCMD A 0 A_JumpIfTargetInLOS("Strafing")
+    LCMD AA 3 Bright A_Chase
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	LCMD BB 3 Bright A_Chase
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_SpawnItem("LegendaryFootStep",0,0,0,0)
+	LCMD A 0 A_JumpIfTargetInLOS("Strafing")
+	LCMD CC 3 Bright A_Chase
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	LCMD DD 3 Bright A_Chase
+	TNT1 A 0 A_Jump(80,"Phase")		
+	LCMD A 0 A_Jump(80,"Rush")
+    TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_SpawnItem("LegendaryFootStep",0,0,0,0)
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)	
+    Loop
+Rush:
+    LCMD A 0 A_JumpIfTargetInLOS("Strafing")
+	TNT1 A 0 A_SpawnItem("LegendaryFootStep",0,0,0,0)
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("LegCommandoGhostA",0,0,0,0,0,0,0,128)
+	LCMD A 1 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegCommandoGhostA",0,0,0,0,0,0,0,128)
+	LCMD A 1 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegCommandoGhostB",0,0,0,0,0,0,0,128)
+	LCMD B 1 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegCommandoGhostB",0,0,0,0,0,0,0,128)
+	LCMD B 1 Bright A_Chase
+	TNT1 A 0 A_Jump(80,"Phase")
+	TNT1 A 0 A_SpawnItem("LegendaryFootStep",0,0,0,0)
+    TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("LegCommandoGhostC",0,0,0,0,0,0,0,128)
+	LCMD C 1 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegCommandoGhostC",0,0,0,0,0,0,0,128)
+	LCMD C 1 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegCommandoGhostD",0,0,0,0,0,0,0,128)
+	LCMD D 1 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegCommandoGhostD",0,0,0,0,0,0,0,128)
+	LCMD D 1 Bright A_Chase
+	TNT1 A 0 A_SpawnItem("LegendaryFootStep",0,0,0,0)
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_Jump(84,"See")
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	Loop
+Strafing:
+	TNT1 A 0 A_SpawnItem("LegendaryFootStep",0,0,0,0)
+	TNT1 A 0 A_Chase("","Missile",CHF_DONTMOVE)
+	LCMD AA 3 Bright A_GiveInventory("LegZombieStrafing",1)
+	TNT1 A 0 A_Chase("","Missile",CHF_DONTMOVE)
+	LCMD BB 3 Bright A_GiveInventory("LegZombieStrafing",1)
+	TNT1 A 0 A_SpawnItem("LegendaryFootStep",0,0,0,0)
+	TNT1 A 0 A_Chase("","Missile",CHF_DONTMOVE)
+    LCMD CC 3 Bright A_GiveInventory("LegZombieStrafing",1)	
+	TNT1 A 0 A_Chase("","Missile",CHF_DONTMOVE)
+	LCMD DD 3 Bright A_GiveInventory("LegZombieStrafing",1)
+	Goto See
+Dodge:
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	LCMD A 1 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	LCMD E 0 ThrustThingZ(0, 20, 0, 0)
+	LCMD A 0 A_Jump(256, "DodgeRight", "DodgeLeft")
+DodgeLeft:
+	LCMD E 0 ThrustThing(angle*256/360+192, 15, 0, 0)
+	Goto See
+DodgeRight:
+	LCMD E 0 ThrustThing(angle*256/360+64, 15, 0, 0)
+	Goto See
+Phase:
+	TNT1 A 0 A_PlaySound("phaseimp/teleport")
+	LCMD E 2 A_FaceTarget
+	LCMD E 1 A_SetTranslucent(0.75)
+	LCMD E 1 A_SetTranslucent(0.55)
+	LCMD E 1 A_SetTranslucent(0.35)
+	LCMD E 1 A_SetTranslucent(0.20)
+	Goto Phased
+UnPhase:
+	TNT1 A 0 A_PlaySound("phaseimp/teleport")
+	LCMD E 1 A_SetTranslucent(0.15)
+	LCMD E 1 A_SetTranslucent(0.35)
+	LCMD E 1 A_SetTranslucent(0.55)
+	LCMD E 1 A_SetTranslucent(0.75)
+	TNT1 A 0 A_SetTranslucent(1)
+	LCMD E 2 A_FaceTarget		
+    Goto See
+Phased:
+	LCMD AABBCCDDAABBCCDDAABBCCDDAABBCCDD 1 A_ExtChase(0,0)
+	LCMD AABBCCDDAABBCCDD 1 A_Chase
+	TNT1 A 0 A_Jump(24,"UnPhase")
+	Goto Phased+32
+Pause:
+	//LCMD E 0 A_PlaySound("weapons/demontechsteam")
+	LCMD EEEEE 3 Bright A_GiveInventory("LegZombieStrafing",1)
+	Goto See	
+Missile:
+    LCMD E 10 A_FaceTarget
+	TNT1 A 0 A_JumpIfInventory ("LegAK47Ammo", 31, "Reload")
+	TNT1 A 0 A_CustomMissile("LegendaryBlueTracer",Random(28,34),0,Random(6,-6),0)
+	TNT1 A 0 A_GiveInventory ("LegAK47Ammo", 1)
+	TNT1 A 0 A_SpawnItemEx("LegRifleCasing", 12, -6, 36, Random(2, 6), 0, Random(1, 3), Random(-80, -90), 128)
+	TNT1 A 0 A_CustomBulletAttack(15.4,7,1,Random(5,15)*3,"LegModdedBulletPuff")
+	LCMD F 0 Bright A_PlaySoundEx("weapons/LegAK47Fire","Weapon")
+	LCMD E 1 A_GiveInventory("LegZombieStrafing",1)	
+    LCMD E 3 Bright A_CPosAttack
+	TNT1 A 0 A_CustomMissile("LegendaryBlueTracer",Random(28,34),0,Random(6,-6),0)
+	TNT1 A 0 A_GiveInventory ("LegAK47Ammo", 1)
+	TNT1 A 0 A_SpawnItemEx("LegRifleCasing", 12, -6, 36, Random(2, 6), 0, Random(1, 3), Random(-80, -90), 128)
+	TNT1 A 0 A_CustomBulletAttack(15.4,7,1,Random(5,15)*3,"LegModdedBulletPuff")
+	LCMD F 0 Bright A_PlaySoundEx("weapons/LegAK47Fire","Weapon")
+	LCMD E 1 A_GiveInventory("LegZombieStrafing",1)	
+    LCMD F 4 Bright A_CPosAttack
+    TNT1 A 0 A_CPosRefire
+	TNT1 A 0 A_Jump(18,"Pause")
+    Goto Missile+1
+Nade:
+    LCMD E 1 A_JumpIfCloser(1000,1)
+	Goto Missile
+	LCMD E 0 A_JumpIfCloser(280,"Missile")
+    LCMD E 6 A_GiveInventory("LegZombieStrafing",1)
+    LCMD EEE 4 A_GiveInventory("LegZombieStrafing",1)
+	TNT1 A 0 A_GiveInventory("LegZombieStrafing",1)
+    LCMD E 6 A_CustomMissile("LGrenade",32,0,0,2,10)
+	LCMD E 1
+	Goto See
+Sniper:
+	TNT1 A 0 A_PlaySound("lcmdo/sight")
+	TNT1 A 0 A_GiveInventory("LegZombieStrafing",1)	
+	LCMD E 5 A_FaceTarget
+	TNT1 A 0 A_GiveInventory("LegZombieStrafing",1)	
+	LCMD E 5 A_FaceTarget
+SniperLoopStart:
+	TNT1 A 0 A_JumpIf(user_SniperLoopStart == 35,"SniperLoop")	
+	LCMD E 1 A_CustomRailgun(-1,7,NONE,NONE,RGF_SILENT|RGF_NOPIERCING,1,0,RailTargetPuff,0,0,0,0,0.45,0,"LaserSight")
+	TNT1 A 0 A_SetUserVar(user_SniperLoopStart,user_SniperLoopStart+1)
+	Loop
+SniperLoop:
+	TNT1 A 0 A_JumpIf(user_SniperLoop == 100, "See")
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_JumpifTargetinLOS("SniperAttack")
+	LCMD E 1 A_CustomRailgun(-1,7,NONE,NONE,RGF_SILENT|RGF_NOPIERCING,1,0,RailTargetPuff,0,0,0,0,0.45,0,"LaserSight")
+	TNT1 A 0 A_SetUserVar(user_SniperLoop,user_SniperLoop+1)
+	Loop
+SniperAttack:
+	TNT1 A 0 A_SetUserVar(user_SniperLoopStart,0)
+	TNT1 A 0 A_JumpIf(user_SniperAttack == 8, "See")
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_CustomMissile("LegendaryBlueTracer",Random(28,34),0,Random(2,-2),0)
+	TNT1 A 0 A_PlaySoundEx("weapons/LMGFire","Weapon")
+	TNT1 A 0 A_CustomRailgun(-1,7,NONE,NONE,RGF_SILENT|RGF_NOPIERCING,1,0,RailTargetPuff,0,0,0,0,0.45,0,"LaserSight")
+	TNT1 A 0 A_SpawnItemEx("LegRifleCasing", 12, -6, 36, Random(2, 6), 0, Random(1, 3), Random(-80, -90), 128)
+	TNT1 A 0 A_CustomBulletAttack(6,10,1,Random(10,20)*5,"LegModdedBulletPuff")
+	LCMD FF 1
+	LCMD EE 1 A_CustomRailgun(-1,7,NONE,NONE,RGF_SILENT|RGF_NOPIERCING,1,0,RailTargetPuff,0,0,0,0,0.45,0,"LaserSight")
+	TNT1 A 0 A_SetUserVar(user_SniperAttack,user_SniperAttack+1)
+	Loop
+Pain:
+   	TNT1 A 0 A_SetTranslucent(1)
+	TNT1 A 0 A_Jump(30,"Protection")
+	TNT1 A 0 A_Jump(80,"Phase")
+    LCMD G 3 Bright A_GiveInventory("LegZombieStrafing",1)
+    LCMD G 0 A_Pain
+	LCMD G 3 Bright A_GiveInventory("LegZombieStrafing",1)
+    Goto See
+Protection:
+	TNT1 A 0 A_JumpIf(user_protection >= 3,"Pain")
+	TNT1 A 0 A_JumpIf(user_protected == 1,"Pain")
+	TNT1 A 0 A_PlaySound("legendary/defense")
+	TNT1 A 0 A_FaceTarget
+	LCMD E 2 Bright ACS_ExecuteAlways(5441,0,0,0,0)
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	Goto See	
+Reload:
+    TNT1 A 0 A_ChangeFlag("NoPain", 1)
+    TNT1 A 0 A_PlaySound("weapons/legAK47Reload1")
+	TNT1 A 0 A_SpawnItemEx("LegAK47EmptyMagSpawner", -8, 7, 30, 4, 0, (0.1)*Random(30, 40), Random(-80, -90), 128)
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+    LCMD E 50 Bright A_TakeInventory ("LegAK47Ammo", 31)
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+    LCMD E 8 Bright A_PlaySound("weapons/legAK47Reload2") 
+	LCMD E 20 Bright A_PlaySound("weapons/legAK47Reload3")
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+    TNT1 A 0 A_ChangeFlag("NoPain", 0)
+    Goto See
+Death:
+    TNT1 A 0 A_Jump(36,"LegendarySoul") 
+	TNT1 A 0 A_SetTranslucent(1)
+    TNT1 A 0 A_StopSound(6)
+	LCMD H 5 A_Scream
+    LCMD I 5 A_Fall
+    LCMD J 5 A_SpawnItem("BodyCrash",0,0,0,0)
+    LCMD K 5 
+    LCMD L -1 
+	Stop
+LegendarySoul:
+	TNT1 A 0 A_SetTranslucent(1)
+    TNT1 A 0 A_StopSound(6)
+	TNT1 A 0 A_SpawnItem("BHellionSmokeSpawner",0,0,0,0)
+	LCMD H 5 A_Scream
+	TNT1 A 0 A_SpawnItem("BHellionSmokeSpawner",0,0,0,0)
+    LCMD I 5 A_Fall
+	TNT1 A 0 A_SpawnItem("BHellionSmokeSpawner",0,0,0,0)
+    LCMD J 5 A_SpawnItem("BodyCrash",0,0,0,0)
+	TNT1 A 0 A_SpawnItem("BHellionSmokeSpawner",0,0,0,0)
+    LCMD K 5 
+	TNT1 A 0 A_SpawnItem("BHellionSmokeSpawner",0,0,0,0)
+	LCMD L 140
+	LCMD L 0 A_PlaySoundEx("brain/spit","Voice",0,2)
+	LCMD LLLLLLLLLLLLLLLLL 2 Bright A_GiveInventory("LegSoulEvent",1)
+	LCMD LLLLLLLLLLLLLLLLL 2 Bright A_GiveInventory("LegSoulEvent",1)
+	LCMD LLLLLLLLLLLLLLLLL 2 Bright A_GiveInventory("LegSoulEvent",1)
+	TNT1 A 0 A_SpawnItemEx("LegendarySoul",0,0,16,0,0,0,0,32)
+	TNT1 A 0 A_SpawnItemEx("TeleportFog",0,0,16,0,0,0,0,32)
+	LCMD L -1
+	Stop
+XDeath:
+    TNT1 A 0 A_StopSound(6)
+	LCMD O 3 A_SpawnItemEx("BlueGibbedGenerator",0,0,0,0,0,0,0,128,0)
+    LCMD P 3 A_XScream
+    LCMD R 3 A_Fall
+    LCMD STUV 3 
+    LCMD W -1 
+    Stop
+    }
+}
+
+ACTOR LegCommandoGhostA 
+{
+	Scale 1.1
+	Radius 20
+	Height 56
+	Speed 0
+	Alpha 0.7
+	PROJECTILE
+	RENDERSTYLE Translucent
+	+NOTIMEFREEZE
+	+CLIENTSIDEONLY
+	States 
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	Fade:
+		TNT1 A 1
+		LCMD A 2 A_FadeOut(0.10)
+		Goto Fade+1
+	Toaster:
+		TNT1 A 0
+		Stop
+    }
+}
+
+ACTOR LegCommandoGhostB : LegCommandoGhostA 
+{   
+	States 
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	Fade:
+		TNT1 A 1
+		LCMD B 2 A_FadeOut(0.10)
+		Goto Fade+1
+	Toaster:
+		TNT1 A 0
+		Stop
+    }
+}
+
+ACTOR LegCommandoGhostC : LegCommandoGhostA 
+{   
+	States 
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	Fade:
+		TNT1 A 1
+		LCMD C 2 A_FadeOut(0.10)
+		Goto Fade+1
+	Toaster:
+		TNT1 A 0
+		Stop
+    }
+}
+
+ACTOR LegCommandoGhostD : LegCommandoGhostA 
+{   
+States 
+{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	Fade:
+		TNT1 A 1
+		LCMD D 2 A_FadeOut(0.10)
+		Goto Fade+1
+	Toaster:
+		TNT1 A 0
+		Stop
+    }
+}
+	
+	ACTOR LegAK47Ammo: Ammo
+{
+     Inventory.MaxAmount 31
+}
+
+Actor LGrenade : ThrownGrenade
+{
+ Damagetype "Legendary"
+ Damage 8
+ Obituary "%o was blown up by a Legendary Commando's grenade."
+ +BOUNCEONACTORS
+ +NOTIMEFREEZE
+ MissileType LGrenadeExplosion
+ States
+   {
+   Spawn:
+	  TNT1 A 0
+      HGN1 A 3 A_StopSound
+      HGN1 BCDEFGHABCDEFGHABCDEFGH 3
+      Goto Death      
+   Death: 
+   	  TNT1 A 0
+	  TNT1 A 0 A_ChangeFlag("MISSILE",0)
+	  TNT1 A 0 A_AlertMonsters
+	  TNT1 A 0 A_PlaySound("weapons/hgrenadeex")
+	  TNT1 A 0 A_SpawnItemEx("LegendaryOrangeParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+      TNT1 AAA 0 A_CustomMissile("LegendaryKaboom3", 0, 0, random(0,360), 2, random(0,360))
+	  TNT1 AAA 0 A_CustomMissile("LegendarySmokeFX2", 0, 0, random(0,360), 2, random(0,360))
+	  TNT1 AAAA 0 A_SpawnItemEx("LegendaryDebris",0,0,0,Random(4,-4),Random(4,-4),Random(4,8),0,128)
+      MISL B 4 Bright A_MissileAttack
+      MISL CD 4 Bright A_SetTranslucent(0.75,1)
+      Stop
+   }
+}
+
+Actor LGrenadeExplosion
+{
+ Radius 1
+ Height 1
+ Speed 0
+ Scale 2.4
+ Projectile
+ Damagetype "Legendary"
+ RenderStyle ADD
+ Alpha 0.95
+ +FLOORHUGGER
+ +NOCLIP
+ +NODAMAGETHRUST
+ +FORCERADIUSDMG
+ +NOTIMEFREEZE
+ Obituary "%o was grenaded down by a Marine Slayer."
+ States
+  {
+   Spawn:
+	TNT1 A 1 
+	TNT1 A 0 A_Explode(64,146)
+	Stop
+  }
+}

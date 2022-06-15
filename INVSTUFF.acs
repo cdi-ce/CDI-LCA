@@ -1,0 +1,229 @@
+#library "invstuff"
+#include "zcommon.acs"
+
+#define PLAYER_TID 600
+#define INVCOUNT 7
+#define INV_HEALTHFLASK 0
+#define INV_STIMKIT 1
+#define INV_PORTABLEMED 2
+#define INV_ARMORCHARGE 3
+#define INV_ARMORBOOST 4
+#define INV_ARMORPLATE 5
+#define INV_AMMOPACK 6
+
+#define HEALTHFLASKMAX 10
+#define STIMKITMAX 5
+#define PORTABLEMEDMAX 2
+#define ARMORCHARGEMAX HEALTHFLASKMAX
+#define ARMORBOOSTMAX STIMKITMAX
+#define ARMORPLATEMAX PORTABLEMEDMAX
+#define AMMOPACKMAX 5
+
+Script 990 OPEN
+{
+	for(int PlayerNum = 0; PlayerNum < 32; PlayerNum++)
+	{
+		if( PlayerInGame(PlayerNum) )
+		{
+			if( FlaskCount(PlayerNum) > 0 )
+				GiveActorInventory(PLAYER_TID+PlayerNum, "HealthFlask", Min(FlaskCount(PlayerNum), HEALTHFLASKMAX));
+			if( StimCount(PlayerNum) > 0 )
+				GiveActorInventory(PLAYER_TID+PlayerNum, "Stimkit", Min(StimCount(PlayerNum), STIMKITMAX));
+			if( PortableMedCount(PlayerNum) > 0 )
+				GiveActorInventory(PLAYER_TID+PlayerNum, "PortableMedkit", Min(PortableMedCount(PlayerNum), PORTABLEMEDMAX));
+			if( ArmorChargeCount(PlayerNum) > 0 )
+				GiveActorInventory(PLAYER_TID+PlayerNum, "ArmorCharge", Min(ArmorChargeCount(PlayerNum), ARMORCHARGEMAX));
+			if( ArmorBoosterCount(PlayerNum) > 0 )
+				GiveActorInventory(PLAYER_TID+PlayerNum, "ArmorBooster", Min(ArmorBoosterCount(PlayerNum), ARMORBOOSTMAX));
+			if( ArmorPlateCount(PlayerNum) > 0 )
+				GiveActorInventory(PLAYER_TID+PlayerNum, "ArmorPlate", Min(ArmorPlateCount(PlayerNum), ARMORPLATEMAX));
+			if( AmmoPackCount(PlayerNum) > 0 )
+				GiveActorInventory(PLAYER_TID+PlayerNum, "AmmoPack", Min(AmmoPackCount(PlayerNum), AMMOPACKMAX));			
+		}
+	}
+}
+
+Script 991 ENTER
+{
+	Thing_ChangeTID(0, PLAYER_TID+PlayerNumber());
+}
+
+Script 992 UNLOADING
+{
+	for(int PlayerNum = 0; PlayerNum < 32; PlayerNum++)
+	{
+		if( CheckActorInventory(PLAYER_TID+PlayerNum, "HealthFlask") )
+			SetFlaskCount(PlayerNum,CheckActorInventory(PLAYER_TID+PlayerNum, "HealthFlask"));
+		if( CheckActorInventory(PLAYER_TID+PlayerNum, "Stimkit") )
+			SetStimCount(PlayerNum,CheckActorInventory(PLAYER_TID+PlayerNum, "Stimkit"));
+		if( CheckActorInventory(PLAYER_TID+PlayerNum, "PortableMedkit") )
+			SetPortableMedCount(PlayerNum,CheckActorInventory(PLAYER_TID+PlayerNum, "PortableMedkit"));
+		if( CheckActorInventory(PLAYER_TID+PlayerNum, "ArmorCharge") )
+			SetArmorChargeCount(PlayerNum,CheckActorInventory(PLAYER_TID+PlayerNum, "ArmorCharge"));
+		if( CheckActorInventory(PLAYER_TID+PlayerNum, "ArmorBooster") )
+			SetArmorBoosterCount(PlayerNum,CheckActorInventory(PLAYER_TID+PlayerNum, "ArmorBooster"));
+		if( CheckActorInventory(PLAYER_TID+PlayerNum, "ArmorPlate") )
+			SetArmorPlateCount(PlayerNum,CheckActorInventory(PLAYER_TID+PlayerNum, "ArmorPlate"));
+		if( CheckActorInventory(PLAYER_TID+PlayerNum, "AmmoPack") )
+			SetAmmoPackCount(PlayerNum,CheckActorInventory(PLAYER_TID+PlayerNum, "AmmoPack"));
+	}
+}
+
+Script 993 (int gone) DISCONNECT
+{
+	SetFlaskCount(gone,0);
+	SetStimCount(gone,0);
+	SetPortableMedCount(gone,0);
+	SetArmorChargeCount(gone,0);
+	SetArmorBoosterCount(gone,0);
+	SetArmorPlateCount(gone,0);
+	SetAmmoPackCount(gone,0);
+}
+
+script 994 DEATH
+{
+	int DeadPlayer = PlayerNumber();
+
+	SetFlaskCount(DeadPlayer,0);
+	SetStimCount(DeadPlayer,0);
+	SetPortableMedCount(DeadPlayer,0);
+	SetArmorChargeCount(DeadPlayer,0);
+	SetArmorBoosterCount(DeadPlayer,0);
+	SetArmorPlateCount(DeadPlayer,0);
+	SetAmmoPackCount(DeadPlayer,0);
+}
+
+global int 0:GlobalInventory[];
+
+function int min(int x, int y)
+{
+    if (x < y) { return x; }
+    return y;
+}
+
+function int max(int x, int y)
+{
+    if (x > y) { return x; }
+    return y;
+}
+
+function void SetFlaskCount(int pln, int count)
+{
+	 int slot = (pln * INVCOUNT) + INV_HEALTHFLASK;
+	 
+	 if(count > 0)
+		GlobalInventory[slot] = count-1;
+	 else
+		GlobalInventory[slot] = count;
+}
+
+function int FlaskCount(int pln)
+{
+	int slot = (pln * INVCOUNT) + INV_HEALTHFLASK;
+	return GlobalInventory[slot];
+}
+
+function void SetStimCount(int pln, int count)
+{
+	 int slot = (pln * INVCOUNT) + INV_STIMKIT;
+	 
+	 if(count > 0)
+		GlobalInventory[slot] = count-1;
+	 else
+		GlobalInventory[slot] = count;
+}
+
+function int StimCount(int pln)
+{
+	int slot = (pln * INVCOUNT) + INV_STIMKIT;
+	return GlobalInventory[slot];
+}
+
+function void SetPortableMedCount(int pln, int count)
+{
+	 int slot = (pln * INVCOUNT) + INV_PORTABLEMED;
+	 
+	 if(count > 0)
+		GlobalInventory[slot] = count-1;
+	 else
+		GlobalInventory[slot] = count;
+}
+
+function int PortableMedCount(int pln)
+{
+	int slot = (pln * INVCOUNT) + INV_PORTABLEMED;
+	return GlobalInventory[slot];
+}
+
+function void SetArmorChargeCount(int pln, int count)
+{
+	 int slot = (pln * INVCOUNT) + INV_ARMORCHARGE;
+	 
+	 if(count > 0)
+		GlobalInventory[slot] = count-1;
+	 else
+		GlobalInventory[slot] = count;
+}
+
+function int ArmorChargeCount(int pln)
+{
+	int slot = (pln * INVCOUNT) + INV_ARMORCHARGE;
+	return GlobalInventory[slot];
+}
+
+function void SetArmorBoosterCount(int pln, int count)
+{
+	 int slot = (pln * INVCOUNT) + INV_ARMORBOOST;
+	 
+	 if(count > 0)
+		GlobalInventory[slot] = count-1;
+	 else
+		GlobalInventory[slot] = count;
+}
+
+function int ArmorBoosterCount(int pln)
+{
+	int slot = (pln * INVCOUNT) + INV_ARMORBOOST;
+	return GlobalInventory[slot];
+}
+
+function void SetArmorPlateCount(int pln, int count)
+{
+	 int slot = (pln * INVCOUNT) + INV_ARMORPLATE;
+	 
+	 if(count > 0)
+		GlobalInventory[slot] = count-1;
+	 else
+		GlobalInventory[slot] = count;
+}
+
+function int ArmorPlateCount(int pln)
+{
+	int slot = (pln * INVCOUNT) + INV_ARMORPLATE;
+	return GlobalInventory[slot];
+}
+
+function void SetAmmoPackCount(int pln, int count)
+{
+	 int slot = (pln * INVCOUNT) + INV_AMMOPACK;
+	 
+	 if(count > 0)
+		GlobalInventory[slot] = count-1;
+	 else
+		GlobalInventory[slot] = count;
+}
+
+function int AmmoPackCount(int pln)
+{
+	int slot = (pln * INVCOUNT) + INV_AMMOPACK;
+	return GlobalInventory[slot];	
+}
+
+script 1 ENTER {if (CheckInventory("DummyRuneGiver") > 0) {GiveInventory("LegDoubleFiringSpeed", 1);}}
+script 2 DEATH {TakeInventory("DummyRuneGiver", 1);}
+
+script 3 ENTER {if (CheckInventory("DummyRuneGiver2") > 0) {GiveInventory("LegRuneDamageGiver", 1);}}
+script 4 DEATH {TakeInventory("DummyRuneGiver2", 1);}
+
+script 5 ENTER {if (CheckInventory("DummyRuneGiver3") > 0) {GiveInventory("LegProtectionGiver", 1);}}
+script 6 DEATH {TakeInventory("DummyRuneGiver3", 1);}

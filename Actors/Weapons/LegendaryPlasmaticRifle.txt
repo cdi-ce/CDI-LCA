@@ -1,0 +1,256 @@
+ACTOR "Legendary Plasmatic Rifle" : Weapon
+{
+   Height 14
+   Weapon.PreferredSkin "LegendaryRifle-Marine"
+   Weapon.SelectionOrder 7980
+   Weapon.KickBack 60
+   Weapon.AmmoUse 2
+   Weapon.AmmoGive 100
+   Scale 0.95
+   Weapon.AmmoType "LDemonMagazine"   
+   Weapon.AmmoType2 "LDemonAmmo"
+   Inventory.PickupMessage "\c[z3]Legendary Plasmatic Rifle"
+   Inventory.PickupSound "weapons/legup"
+   Obituary "%o was obliterated by a soldier trained by Legendary."
+   +WEAPON.AMMO_OPTIONAL
+   +WEAPON.NOALERT
+   +INVENTORY.UNDROPPABLE
+   Tag "Legendary Plasmatic Rifle"
+   States
+   {
+   Ready:
+     TNT1 A 0 A_PlaySound("weapons/legup")
+	 BTRS ABCDE 1
+   ReadyLoop:
+     TNT1 A 0 A_JumpIfInventory("LDemonMagazine",1,2)
+	 TNT1 A 0
+	 Goto NoBuzzing
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	 BTEK AAA 1 A_WeaponReady
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	 BTEK AAA 1 A_WeaponReady
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	 BTEK AAA 1 A_WeaponReady
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	 BTEK AAA 1 A_WeaponReady	 
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	 BTEK AAA 1 A_WeaponReady
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	 BTEK AAA 1 A_WeaponReady
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	 BTEK AAA 1 A_WeaponReady
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	 BTEK AAA 1 A_WeaponReady
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	 BTEK AAA 1 A_WeaponReady
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	 BTEK AAA 1 A_WeaponReady
+	 TNT1 A 0 A_PlaySound("weapons/legrifidle")
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	 BTEK BB 1 A_WeaponReady
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	 BTEK BB 1 A_WeaponReady
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	 BTEK CC 1 A_WeaponReady
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	 BTEK CC 1 A_WeaponReady
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	 BTEK DD 1 A_WeaponReady
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	 BTEK DD 1 A_WeaponReady
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	 BTEK EE 1 A_WeaponReady
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+	 BTEK EE 1 A_WeaponReady
+     Goto ReadyLoop
+   NoBuzzing:
+     TNT1 A 0 A_JumpIfInventory("HandGrenadeAction",1,"GrenadeCheck")
+	 TNT1 A 0 A_JumpIfInventory("MineAction",1,"MineCheck")
+     BTEK A 1 A_WeaponReady
+	 Loop
+   Deselect:
+     TNT1 A 0 A_PlaySound ("D_LEGND",5,5.0,1,ATTN_NONE)
+     TNT1 A 0 ACS_ExecuteAlways(5431,0)
+	 BTEK A 1 A_Lower
+     Goto Deselect+2
+   Select:
+     TNT1 A 0
+	 TNT1 A 0 A_Raise
+	 Wait
+   Fire:
+	 TNT1 A 0 Bright A_JumpIfNoAmmo("Empty")
+     TNT1 A 0 ACS_EXECUTEALWAYS(5430,0,0)
+	 TNT1 A 0 Bright A_AlertMonsters
+     TNT1 A 0 Bright A_GunFlash
+	 TNT1 A 0 Bright Radius_Quake(4,2,0,1,0)
+     TNT1 A 0 Bright A_Light1
+	 TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+     BTKF A 1 Bright A_FireCustomMissile("PlayerLegendaryProjectile",Random(100,-100)/100.00,1,0,0,0,Random(100,-100)/100.00)
+	 BTKF B 1 Bright A_Light2
+     BTKF C 2 A_Light0
+     TNT1 A 0 A_ReFire
+     Goto ReadyLoop
+   Empty:
+     BTEK A 10 A_PlaySound("weapons/click2")	 
+   AltFire:
+  	 TNT1 A 0 A_JumpIfInventory("LDemonMagazine",50,2)
+     TNT1 A 0 A_JumpIfInventory("LDemonAmmo",1,2)
+	 TNT1 A 0
+	 Goto ReadyLoop
+     BTKR AB 2
+	 BTKR C 3
+	 BTKR D 4 A_PlaySound("weapons/demontecheject")
+	 TNT1 A 0 Radius_Quake(2,2,0,1,0)
+	 BTKR E 2 A_PlaySound("weapons/demontechsteam")
+	 BTKR F 2 Radius_Quake(2,2,0,1,0)
+	 BTKR GHI 2 Radius_Quake(2,2,0,1,0)
+	 BTKR J 3 A_FireCustomMissile("LDemonTechEmptyMag", 0, 0, 0, 1)
+	 BTKR K 15 
+	 BTKR LMN 2
+	 TNT1 A 0 A_JumpIfInventory("LDemonAmmo",1,"Reload")	 
+     BTKR O 6 A_PlayWeaponSound("weapons/demontechload")
+     BTKR O 4 A_PlayWeaponSound("weapons/demontechclick")
+     BTKR CB 3
+	 BTKR A 2
+	 Goto ReadyLoop
+   Reload:
+	 TNT1 A 0 A_TakeInventory("LDemonAmmo",1)
+	 TNT1 A 0 A_GiveInventory("LDemonMagazine",1)
+	 TNT1 A 0 A_JumpIfInventory("LDemonMagazine",50,"Full")
+	 TNT1 A 0 A_JumpIfInventory("LDemonAmmo",1,"Reload")
+	 Goto AltFire+19
+   Full:
+     TNT1 A 0
+	 Goto AltFire+19
+   GrenadeCheck:
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAmmo",1,"GrenadeToss")
+	 TNT1 A 0 A_TakeInventory("HandGrenadeAction",1)
+	 Goto Ready+6
+   GrenadeToss:
+  	 TNT1 A 0 A_PlayWeaponSound("weapons/weapondown") 
+	 BTRS EDCBA 1
+	 TNT1 A 6
+	 HGRN ABC 1
+	 HGRN D 3
+	 HGRN EFGHI 2
+	 TNT1 A 14 A_PlayWeaponSound("weapons/hgrenadepin")
+	 TNT1 A 0 A_PlayWeaponSound("weapons/hgrenadethrow")
+	 TNT1 A 0 A_TakeInventory("HandGrenadeAmmo",1)
+	 HGRN J 1 A_FireCustomMissile("ThrownGrenade",0,0,0,0)
+	 HGRN K 1
+	 HGRN LMNO 2
+	 TNT1 A 6
+	 TNT1 A 0 A_JumpIfInventory("HandGrenadeAmmo",1,2)
+     TNT1 A 0 A_TakeInventory("Hand Grenade",1)
+	 TNT1 A 0 A_TakeInventory("HandGrenadeAction",1)
+	 TNT1 A 0
+	 Goto Ready+1
+   MineCheck:
+	 TNT1 A 0 A_JumpIfInventory("MineAmmo",1,"MineToss")
+	 TNT1 A 0 A_TakeInventory("MineAction",1)
+	 Goto Ready+6
+   MineToss:
+  	 TNT1 A 0 A_PlayWeaponSound("weapons/weapondown") 
+	 BTRS EDCBA 1
+	 TNT1 A 10
+	 TNT1 A 0 A_PlayWeaponSound("weapons/hgrenadethrow")
+	 MINE ABCDEF 1		
+	 TNT1 A 0 A_TakeInventory("MineAmmo",1)	  
+	 MINE G 1 A_FireCustomMissile("ThrownMine",0,0,0,0)
+	 MINE HI 1
+	 MINE JK 2
+	 TNT1 A 0 A_JumpIfInventory("MineAmmo",1,2)
+     TNT1 A 0 A_TakeInventory("Land Mine",1)
+	 TNT1 A 0 A_TakeInventory("MineAction",1)
+	 TNT1 A 0
+	 TNT1 A 5
+	 Goto Ready+1 
+  Spawn:
+     BTEP A -1
+     Stop
+     }
+}
+
+ACTOR LDemonMagazine : Ammo 
+{
+Inventory.Amount 0
+Inventory.MaxAmount 50
+Ammo.BackpackAmount 0
+Ammo.BackpackMaxAmount 50
+Inventory.Icon "BTEPA0"
++IGNORESKILL
+}
+
+ACTOR LDemonAmmo : Ammo
+{
+Scale 0.65
+Inventory.PickupMessage "Legendary Plasmatic Energy Cells Obtained"
+Inventory.PickupSound "items/LDemonAmmo"
+Inventory.Amount 50
+Inventory.MaxAmount 250
+Ammo.BackpackAmount 50
+Ammo.BackpackMaxAmount 500
+Inventory.Icon "BAMGA0"
++NOTIMEFREEZE
+States
+{
+Spawn:
+	BAMG A -1
+    Stop
+    }
+}
+
+ACTOR LDemonAmmoBox : LDemonAmmo
+{
+Scale 0.65
+Inventory.Amount 100
+Inventory.PickupMessage "Charged Legendary Plasmatic Energy Cells Obtained"
+Inventory.PickupSound "items/LDemonAmmopack"
++NOTIMEFREEZE
+States
+{
+Spawn:
+	BAMO A -1
+	Stop
+	}
+}
+
+ACTOR LDemonTechEmptyMag : BulletCasing
+{
+Scale 0.4
+SeeSound "weapons/emptydrum"
++NOTIMEFREEZE
+States
+{
+	Spawn:
+	  LDTM ABCD 3  
+	  Loop
+    Death:
+	  TNT1 A 0
+      TNT1 A 0 A_Jump(128,3)
+      LDTM A 100
+      LDTM A 5 A_FadeOut(0.10)
+      Goto Death+3
+      LDTM C 100
+	  LDTM C 5 A_FadeOut(0.10)
+	  Goto Death+5		  
+      }
+}

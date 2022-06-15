@@ -1,0 +1,3630 @@
+ACTOR LegendaryCyberdemon : Cyberdemon 7011
+{
+  Health 6999
+  Radius 40
+  Height 110
+  Scale 1.1
+  Mass 0x7FFFFFFF
+  DamageFactor "PDTBFG", 0.05
+  DamageFactor "PDTBFGTracer", 0.05
+  DamageFactor "Cyber10K", 0.0
+  DamageFactor "Legendary", 0.0
+  DamageFactor "LegendaryPlayer", 0.3
+  DamageFactor "LegendaryGuru", 0.0
+  DamageFactor "LegendaryGuruPlayer", 0.3
+  DamageFactor "CadaverRocket", 0.0
+  DamageFactor "BFGSplash", 0.25
+  DamageFactor "BFGSpray", 0.25
+  DamageFactor "PlayerDevBall", 0.025
+  DamageFactor "PlayerDevBall2", 0.025
+  DamageFactor "PlayerDTBFGRailgunSlug", 0.025
+  DamageFactor "PlayerDevTracer", 0.025
+  DamageFactor "DemolisherEx", 0.0
+  DamageFactor "DarkDemoEx", 0.0
+  DamageFactor "CerChainguns", 0.0
+  DamageFactor "CerEnergyBall", 0.0
+  DamageFactor "DBFG10K2", 0.65
+  DamageFactor "PlayerDBFG10K2", 0.65
+  DamageFactor "DBFG2", 0.65
+  DamageFactor "PlayerDBFG2", 0.65
+  DamageFactor "PyroShot", 0.0
+  DamageFactor "PlayerPyro", 0.0
+  DamageFactor "PDTPuff", 0.0
+  DamageFactor 0.5
+  PainChance "PlayerDBFG2", 256
+  PainChance "DBFG2", 256
+  PainChance "PlayerDBFG10K2", 256
+  Speed 19
+  PainChance 7
+  BloodColor "Blue"
+  Monster
+  MinMissileChance 160
+  DropItem "LegendaryUltraSphere" 215
+  DropItem "LegendaryRune" 256 1
+  DropItem "LDemonAmmoBox" 256 
+  DropItem "Legendary BFG" 256 1
+  DropItem "BossLifeEssence" 250 
+  DropItem "BossArmorBonusMax" 250 
+  DropItem "DemonicChalice" 200
+  DropItem "Legendary Plasmatic Rifle" 140 1
+  DropItem "LegAmmoSphere" 128 1
+  DropItem "LegDemonRune" 80 1
+  DropItem "Legendary Assault Shotgun" 100 1
+  +QUICKTORETALIATE
+  +NOTIMEFREEZE
+  +NORADIUSDMG
+  +PIERCEARMOR
+  +MISSILEEVENMORE
+  +NOTARGET
+  +BOSS
+  +MISSILEMORE
+  +FLOORCLIP
+  +DONTMORPH
+  +BOSSDEATH
+  +NOICEDEATH
+  +DONTGIB
+  +DONTRIP
+  +DONTHARMSPECIES
+  +NOICEDEATH
+  +CANTSEEK
+  Species "Cybers"
+  SeeSound "cyber/sight1"
+  PainSound "Legcyber/pain"
+  DeathSound "Legcyber/death"
+  ActiveSound "Legcyber/laugh3"
+  Obituary "%o wasn't ready for the wrath of the Legendary Cyberdemon!"
+  var int user_music;
+  States
+  {
+  Spawn:
+    TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR A 10 Bright A_Look
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR A 10 Bright A_Look
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR Z 10 Bright A_Look
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR Z 10 Bright A_Look
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	Loop
+  See:
+    TNT1 A 0 A_JumpIf(user_music == 1,3)
+    TNT1 A 0 ACS_ExecuteAlways(5432,0,2)
+	TNT1 A 0 A_SetUserVar("user_music",1)
+	TNT1 A 0 A_Jump(100,"Rush")
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR A 3 Bright A_Hoof
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+    CYBR A 3 Bright A_Chase
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR BB 3 Bright A_Chase
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR CC 3 Bright A_Chase
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+    CYBR D 3 Bright A_Metal
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+    CYBR D 3 Bright A_Chase
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+    TNT1 A 0 A_Jump(35,"Teleport")
+	Loop
+  Rush:
+    TNT1 A 0 A_Hoof
+	CYBR A 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegendaryCyberGhostA",0,0,0,0,0,0,0,128)
+	CYBR A 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegendaryCyberGhostA",0,0,0,0,0,0,0,128)
+	CYBR A 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegendaryCyberGhostA",0,0,0,0,0,0,0,128)
+	CYBR B 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegendaryCyberGhostA",0,0,0,0,0,0,0,128)
+	CYBR C 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegendaryCyberGhostA",0,0,0,0,0,0,0,128)
+	CYBR C 2 Bright A_Chase
+	TNT1 A 0 A_Metal
+	TNT1 A 0 A_SpawnItemEx("LegendaryCyberGhostA",0,0,0,0,0,0,0,128)
+	CYBR D 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegendaryCyberGhostA",0,0,0,0,0,0,0,128)
+	CYBR D 2 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegendaryCyberGhostA",0,0,0,0,0,0,0,128)
+	TNT1 A 0 A_Jump(25,"Teleport")
+	TNT1 A 0 A_Jump(75,"See")		
+	Loop	
+  Teleport:
+    CYBR A 1 Bright A_UnSetShootable
+	CYBR AAAAAAAAAAAAA 0 A_SpawnItemEx("LegendaryCyberFlameSpawner2")
+	CYBR AAAAAAAAAA 1 A_FadeOut(0.1,0)
+	CYBR A 2
+	CYBR AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	CYBR AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA  0 A_Wander
+    CYBR A 1 A_PlayWeaponSound("boss/teleport")
+	CYBR AAAAAAAAAAAAA 0 A_SpawnItemEx("LegendaryCyberFlameSpawner2")
+	CYBR AAAAAAAAAA 1 A_FadeIn(0.1)
+    CYBR A 1 Bright A_SetShootable
+    Goto See		
+  Missile:
+    TNT1 A 0 A_SetShootable
+    TNT1 A 0 A_UnsetInvulnerable
+    TNT1 A 0 A_SetTranslucent(1)
+    TNT1 A 0 A_JumpIfCloser(300,"LegendaryASG")
+    TNT1 A 0 A_Jump(130,"Finder","LegBFG95K","LegendaryRailgun","LegendaryBFG10K","LegendaryStomp","LegendaryBFG15K","LegendaryDTBFG")
+	TNT1 A 0 A_Jump(55,"LegendaryTech","LegendaryBFG","LegendaryDevastator")
+	TNT1 A 0 A_Jump(45,"LegendaryCyberLaser")
+	TNT1 A 0 A_Jump(50,"LegRevBall")
+	TNT1 A 0 A_Jump(60,"RocketCombo")
+	TNT1 A 0 A_Jump(40,"LegendaryPlasmaticBomb")
+  Normal:
+    CYBR E 5  Bright A_FaceTarget
+    CYBR F 5 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-6, 6))
+    CYBR E 5  Bright A_FaceTarget
+    CYBR F 5 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-6, 6))
+    CYBR E 5  Bright A_FaceTarget
+    CYBR F 5 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-6, 6))
+	CYBR E 5  Bright A_FaceTarget
+    CYBR F 5 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-6, 6))
+    CYBR E 5  Bright A_FaceTarget
+    CYBR F 5 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-6, 6))
+    CYBR E 5  Bright A_FaceTarget
+    CYBR F 5 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-6, 6))
+	CYBR E 5  Bright A_FaceTarget
+    CYBR F 5 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-6, 6))
+    CYBR E 5  Bright A_FaceTarget
+    CYBR F 5 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-6, 6))
+    CYBR E 5  Bright A_FaceTarget
+    CYBR F 5 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-6, 6))
+	CYBR E 5  Bright A_FaceTarget
+    CYBR F 5 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-6, 6))
+    TNT1 A 0 A_Jump(130,"Finder","LegBFG95K","LegendaryRailgun","LegendaryBFG10K","LegendaryStomp","LegendaryBFG15K","LegendaryDTBFG")
+	TNT1 A 0 A_Jump(55,"LegendaryTech","LegendaryBFG","LegendaryDevastator")
+	TNT1 A 0 A_Jump(45,"LegendaryCyberLaser")
+	TNT1 A 0 A_Jump(50,"LegRevBall")
+	TNT1 A 0 A_Jump(60,"RocketCombo")
+	TNT1 A 0 A_Jump(1,"LegendaryPlasmaticBomb")
+	Goto See
+  Pain:
+    TNT1 A 0 A_Jump(45,"SoulsAndShield")
+	TNT1 A 0 A_Jump(55,"Shield")
+	TNT1 A 0 A_Jump(75,"Healing")
+	TNT1 A 0 A_Jump(130,"PainMissile")
+	TNT1 A 0 A_Jump(25,"Teleport")
+    CYBR G 10 Bright A_Pain
+    Goto See
+  Pain.DBFG10K2:
+  Pain.PlayerDBFG10K2:
+  Pain.DBFG2:
+  Pain.PlayerDBFG2:
+    TNT1 A 0 A_Jump(250, "Teleport")
+	Goto PainMissile
+  PainMissile:
+    CYBR G 10 Bright A_Pain
+    Goto Missile
+  Shield:
+     CYBR G 10 Bright A_Pain
+	 TNT1 A 0 A_SetInvulnerable
+     TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,0)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,0,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,0,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,0,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,0,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,25,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,25,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,25,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,25,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,50)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,50,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,50,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,50,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,50,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,75)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,75,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,75,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,75,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,75,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,100)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,100,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,100,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,100,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,100,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,125)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,125,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,125,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,125,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,125,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,150)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,150,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,150,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,150,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,150,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,175)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,175,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,175,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,175,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,175,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,200)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,200,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,200,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,200,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,200,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,225)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,225,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,225,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,225,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,225,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,250)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,250,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,250,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,250,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,250,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,275)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,275,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,275,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,275,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,275,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,300)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,300,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,300,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,300,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,300,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,325)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,325,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,325,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,325,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,325,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,350)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,350,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,350,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,350,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,350,10,55)
+	 CYBR G 145 Bright
+	 TNT1 A 0 A_UnSetInvulnerable
+	 Goto Missile
+  SoulsAndShield:
+     TNT1 A 0 A_SetInvulnerable
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,0)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,0,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,0,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,0,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,0,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,25,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,25,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,25,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,25,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,50)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,50,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,50,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,50,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,50,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,75)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,75,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,75,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,75,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,75,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,100)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,100,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,100,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,100,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,100,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,125)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,125,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,125,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,125,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,125,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,150)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,150,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,150,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,150,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,150,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,175)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,175,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,175,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,175,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,175,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,200)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,200,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,200,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,200,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,200,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,225)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,225,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,225,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,225,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,225,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,250)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,250,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,250,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,250,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,250,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,275)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,275,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,275,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,275,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,275,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,300)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,300,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,300,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,300,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,300,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,325)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,325,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,325,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,325,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,325,10,55)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner",30,0,350)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner2",30,0,350,10,25)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner3",30,0,350,10,35)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner4",30,0,350,10,45)
+	 TNT1 A 0 A_CustomMissile("LegCyberShieldSpawner5",30,0,350,10,55)
+	 TNT1 A 0 A_Blast(0,225,500,30)
+	 TNT1 A 0 A_Explode(120,650,0)
+     CYBR GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 2 Bright A_CustomMissile("LegHomingSoulY",random(0,80),0,random(0,360),0)
+	 TNT1 A 0 A_UnSetInvulnerable
+	 Goto see
+  Healing:
+  	TNT1 A 0 A_PlaySoundEx("Legcyber/heal","HEAL")
+	TNT1 A 0 A_SetInvulnerable
+	CYBR G 2 Bright HealThing(350)
+    CYBR GGGGGGGGGGGGGGGGGGGGGGGG 2 Bright A_SpawnItem("DarkAnniFlameSpawner",0,0,0,0)
+	TNT1 A 0 A_UnSetInvulnerable
+	CYBR G 2 Bright
+    Goto See
+ LegendaryASG:
+	TNT1 A 0 A_JumpIfInventory ("ASGZAmmo", 16, "Reload")
+	CYBR E 4 Bright A_FaceTarget
+	TNT1 A 0 A_GiveInventory ("ASGZAmmo", 1)
+	TNT1 A 0 A_SpawnItemEx("BlueShellCasing",26,26,58, Random(2, 6), 0, Random(1, 3), Random(80, 90), 128)
+	TNT1 AAAA 0 Bright A_CustomMissile("LegendaryBlueTracer",58,-26,Random(6,-6),0)
+	CYBR F 2 Bright A_CustomBulletAttack(22.5,18.3,4,Random(5,15)*6,"LegModdedBulletPuff")
+	TNT1 A 0 Bright A_PlaySoundEx("Weapons/LegAutoShotgun","Weapon")
+	CYBR E 2 Bright A_FaceTarget
+	TNT1 A 0 Bright A_CPosRefire
+	TNT1 A 0 A_JumpIfCloser(300,"LegendaryASG")
+	TNT1 A 0 A_Jump(130,"Finder","LegendaryRailgun","LegendaryBFG10K","LegBFG95K","LegendaryBFG15K","LegendaryStomp","LegendaryDTBFG")
+	TNT1 A 0 A_Jump(55,"LegendaryTech","LegendaryBFG","LegendaryDevastator")
+	TNT1 A 0 A_Jump(52,"LegendaryCyberLaser")
+	TNT1 A 0 A_Jump(50,"LegRevBall")
+	TNT1 A 0 A_Jump(1,"LegendaryPlasmaticBomb")
+	Goto See
+ Reload:
+    TNT1 A 0 A_ChangeFlag("NoPain", 1)
+    TNT1 A 0 A_PlaySound("lasgguy/asgout")
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+    CYBR E 48 Bright A_TakeInventory ("ASGZAmmo", 16)
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+    CYBR E 8 Bright A_PlaySound("lasgguy/asgin") 
+	CYBR E 20 Bright A_PlaySound("LShotgun/Cock")
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+    TNT1 A 0 A_ChangeFlag("NoPain", 0)
+    Goto See
+  LegendaryStomp:
+    CYBR G 10 Bright A_FaceTarget
+	TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner2",0,0,0,0)
+	LBE3 G 3 Bright A_PlaySoundEx("Legcyber/laugh4","LAUGH3")
+	LBE3 GGGGGGGGGGGGGGGGGGGGGGGGGGGGG 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_UnsetInvulnerable
+	CYBR G 7 Bright A_FaceTarget
+	LBE3 A 5 Bright A_FaceTarget
+	TNT1 A 0 Radius_Quake(40,80,0,40,0)	
+	LBE3 B 6 Bright A_PlaySound("monsters/darkcyberstomp")
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 0)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 10)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 20)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 30)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 40)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 50)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 60)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 70)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 80)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 90)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 100)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 110)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 120)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 130)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 140)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 150)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 160)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 180)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 190)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 200)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 210)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 220)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 230)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 240)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 250)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 260)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 270)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 280)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 290)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 300)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 310)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 320)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 330)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 340)
+    LBE3 B 0 A_CustomMissile("LegCyberQuake", 0, -48, 350)
+    LBE3 B 2 Bright A_CustomMissile("LegendaryCyberFireSpawner",0,0,0,0)
+    TNT1 A 0 A_CustomMissile("LegendaryCyberFireSpawner",0,0,25,0)
+    LBE3 B 2 Bright A_CustomMissile("LegendaryCyberFireSpawner",0,0,-25,0)
+    TNT1 A 0 A_CustomMissile("LegendaryCyberFireSpawner",0,0,70,0)
+    LBE3 B 2 Bright A_CustomMissile("LegendaryCyberFireSpawner",0,0,-70,0)
+    TNT1 A 0 A_CustomMissile("LegendaryCyberFireSpawner",0,0,45,0)
+    LBE3 B 2 Bright A_CustomMissile("LegendaryCyberFireSpawner",0,0,-45,0)
+    TNT1 A 0 A_CustomMissile("LegendaryCyberFireSpawner",0,0,315,0)
+    LBE3 B 2 Bright A_CustomMissile("LegendaryCyberFireSpawner",0,0,-315,0)
+    TNT1 A 0 A_CustomMissile("LegendaryCyberFireSpawner",0,0,270,0)
+    LBE3 B 2 Bright A_CustomMissile("LegendaryCyberFireSpawner",0,0,-270,0)       
+    TNT1 A 0 A_CustomMissile("LegendaryCyberFireSpawner",0,0,225,0)
+    LBE3 B 2 Bright A_CustomMissile("LegendaryCyberFireSpawner",0,0,-225,0)
+    TNT1 A 0 A_CustomMissile("LegendaryCyberFireSpawner",0,0,180,0)
+    LBE3 B 2 Bright A_CustomMissile("LegendaryCyberFireSpawner",0,0,-180,0)
+    TNT1 A 0 A_CustomMissile("LegendaryCyberFireSpawner",0,0,135,0)
+    LBE3 B 2 Bright A_CustomMissile("LegendaryCyberFireSpawner",0,0,-135,0)
+    TNT1 A 0 A_CustomMissile("LegendaryCyberFireSpawner",0,0,115,0)
+    LBE3 B 2 Bright A_CustomMissile("LegendaryCyberFireSpawner",0,0,-115,0)
+    TNT1 A 0 A_CustomMissile("LegendaryCyberFireSpawner",0,0,155,0)
+    LBE3 B 2 Bright A_CustomMissile("LegendaryCyberFireSpawner",0,0,-155,0)
+    LBE3 B 2 Bright A_CustomMissile("LegendaryCyberFireSpawner",0,0,-200,0)
+    TNT1 A 0 A_CustomMissile("LegendaryCyberFireSpawner",0,0,200,0)
+    LBE3 B 2 Bright A_CustomMissile("LegendaryCyberFireSpawner",0,0,-245,0)
+    TNT1 A 0 A_CustomMissile("LegendaryCyberFireSpawner",0,0,245,0)
+    LBE3 B 2 Bright A_CustomMissile("LegendaryCyberFireSpawner",0,0,-295,0)
+    TNT1 A 0 A_CustomMissile("LegendaryCyberFireSpawner",0,0,295,0)
+    LBE3 B 2 Bright A_CustomMissile("LegendaryCyberFireSpawner",0,0,-335,0)
+    TNT1 A 0 A_CustomMissile("LegendaryCyberFireSpawner",0,0,355,0)
+    TNT1 A 0 A_CustomMissile("LegendaryCyberFireSpawner",0,0,90,0)
+    LBE3 B 2 Bright A_CustomMissile("LegendaryCyberFireSpawner",0,0,-90,0)
+	LBE3 B 20 Bright
+	TNT1 A 0 A_Jump(130,"Finder","LegendaryTech","LegendaryBFG","LegendaryRailgun","LegendaryBFG10K","LegBFG95K","LegendaryBFG15K","LegendaryDTBFG")
+	TNT1 A 0 A_Jump(52,"LegendaryCyberLaser")
+	TNT1 A 0 A_Jump(50,"LegRevBall")
+    Goto See
+  LegendaryCyberlaser:
+    CYBR G 10 Bright A_FaceTarget
+	TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner2",0,0,0,0)
+	CYBR G 3 Bright A_PlaySoundEx("Legcyber/laugh4","LAUGH3")
+	CYBR GGGGGGGGGGGGGGGGGGGGGGGGGGGGG 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	LBBE A 10 Bright A_FaceTarget
+	LBBE A 5 A_FaceTarget
+	LBBE A 10 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("RAGE", CHAN_VOICE|CHAN_NOPAUSE)
+	LBBE B 10 Bright A_CustomMissile("LegCyberLaserBeam", 80, 0, 0)
+	LBBE A 10 Bright A_FaceTarget
+	CYBR G 5 A_FaceTarget
+	LBBE A 10 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("RAGE", CHAN_VOICE|CHAN_NOPAUSE)
+	LBBE B 10 Bright A_CustomMissile("LegCyberLaserBeam", 80, 0, 0)
+	LBBE A 10 Bright A_FaceTarget
+	CYBR G 5 A_FaceTarget
+	LBBE A 10 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("RAGE", CHAN_VOICE|CHAN_NOPAUSE)
+	LBBE B 10 Bright A_CustomMissile("LegCyberLaserBeam", 80, 0, 0)
+	TNT1 A 0 A_UnSetInvulnerable
+	LBBE A 5 Bright
+	CYBR G 5 Bright
+	LBBE A 5 Bright
+	CYBR G 5 Bright
+	Goto see
+  LegBFG95K:
+	TNT1 A 0 A_PlaySound("weapons/bfgf")
+    CYBR E 10 Bright A_FaceTarget
+    CYBR E 10 Bright A_FaceTarget
+	CYBR F 10 Bright A_FaceTarget
+	CYBR F 10 Bright A_CustomMissile("LegCyberBFG9500Ball", 58, -26, 0)
+	CYBR E 4 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfgf")
+    CYBR E 10 Bright A_FaceTarget
+	CYBR E 10 Bright A_FaceTarget
+	CYBR F 10 Bright A_FaceTarget
+	CYBR F 10 Bright A_CustomMissile("LegCyberBFG9500Ball", 58, -26, 0)		
+	CYBR E 4 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfgf")
+    CYBR E 10 Bright A_FaceTarget
+	CYBR E 10 Bright A_FaceTarget
+	CYBR F 10 Bright A_FaceTarget
+	CYBR F 10 Bright A_CustomMissile("LegCyberBFG9500Ball", 58, -26, 0)		
+	CYBR E 10 Bright
+	TNT1 A 0 A_Jump(130,"Finder","LegendaryTech","LegendaryBFG","LegendaryRailgun","LegendaryBFG10K","LegendaryBFG15K","LegendaryDTBFG","LegendaryDevastator")
+	TNT1 A 0 A_Jump(52,"LegendaryCyberLaser")
+	TNT1 A 0 A_Jump(50,"LegRevBall")
+	TNT1 A 0 A_Jump(1,"LegendaryPlasmaticBomb")
+	Goto See
+  LegendaryRailgun:
+    TNT1 A 0 A_PlaySound("weapons/rgcharge")
+    CYBR EE 4 Bright A_FaceTarget
+	CYBR E 8 Bright A_FaceTarget
+    CYBR F 5 Bright A_CustomMissile("LegendaryCyberRail",58, -26)
+	CYBR EE 4 A_FaceTarget
+	CYBR E 5 Bright A_FaceTarget
+    CYBR F 5 Bright A_CustomMissile("LegendaryCyberRail",58, -26)
+	CYBR EEEEEEEEEEEEE 0 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner2")
+	CYBR EEEEEEEEEEE 1 A_FadeOut(0.1,0)
+	CYBR EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0 A_Wander
+    CYBR E 20
+    CYBR E 1 A_PlayWeaponSound("boss/teleport")
+	TNT1 A 0 A_FaceTarget
+	CYBR EEEEEEEEEEEEE 0 A_SpawnItemEx("LegendaryCyberFlameSpawner2")
+	CYBR EEEEEEEEEEE 1 A_FadeIn(0.1)	
+	TNT1 A 0 Bright A_SetShootable
+    CYBR F 10 Bright A_CustomMissile("LegendaryCyberRail",58, -26,Random(-2,3))
+	CYBR EE 5 A_FaceTarget
+	CYBR E 9 Bright A_FaceTarget
+	CYBR F 9 Bright A_CustomMissile("LegendaryCyberRail",58, -26,Random(-2,3))
+	CYBR EE 5 A_FaceTarget
+	CYBR E 8 Bright A_FaceTarget
+	CYBR F 8 Bright A_CustomMissile("LegendaryCyberRail",58, -26,Random(-2,3))
+	CYBR EE 4 A_FaceTarget
+	CYBR E 7 Bright A_FaceTarget
+	CYBR F 7 Bright A_CustomMissile("LegendaryCyberRail",58, -26,Random(-2,3))
+	CYBR EE 4 A_FaceTarget
+	CYBR E 5 Bright A_FaceTarget
+	CYBR F 5 Bright A_CustomMissile("LegendaryCyberRail",58, -26,Random(-2,3))
+	CYBR EE 3 A_FaceTarget
+	CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("LegendaryCyberRail",58, -26,Random(-2,3))
+	CYBR EE 3 A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_CustomMissile("LegendaryCyberRail",58, -26,Random(-2,3))
+	CYBR EE 2 A_FaceTarget
+	CYBR E 1 Bright A_FaceTarget
+	CYBR F 1 Bright A_CustomMissile("LegendaryCyberRail",58, -26,Random(-2,3))
+	CYBR EE 1 A_FaceTarget
+	CYBR E 6 Bright A_FaceTarget
+	CYBR F 6 Bright A_CustomMissile("LegendaryCyberRail",58, -26,Random(-2,3))
+	CYBR E 1 A_FaceTarget
+	CYBR E 5 Bright A_FaceTarget
+	CYBR F 5 Bright A_CustomMissile("LegendaryCyberRail",58, -26,Random(-2,3))
+	CYBR E 1 A_FaceTarget
+	CYBR E 4 Bright A_FaceTarget
+	CYBR F 4 Bright A_CustomMissile("LegendaryCyberRail",58, -26,Random(-2,3))
+	CYBR E 1 A_FaceTarget
+	CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("LegendaryCyberRail",58, -26,Random(-2,3))
+	CYBR E 1 A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_CustomMissile("LegendaryCyberRail",58, -26,Random(-2,3))
+	CYBR E 1 A_FaceTarget
+	CYBR E 1 Bright A_FaceTarget
+	CYBR F 1 Bright A_CustomMissile("LegendaryCyberRail",58, -26,Random(-2,3))
+	CYBR E 1 A_FaceTarget
+	CYBR EEEEEEEEEEEEE 0 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner2")
+	CYBR EEEEEEEEEEE 1 A_FadeOut(0.1,0)
+	CYBR EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0 A_Wander
+    CYBR E 20
+    CYBR E 1 A_PlayWeaponSound("boss/teleport")
+	TNT1 A 0 A_FaceTarget
+	CYBR EEEEEEEEEEEEE 0 A_SpawnItemEx("LegendaryCyberFlameSpawner2")
+	CYBR EEEEEEEEEEE 1 A_FadeIn(0.1)
+	TNT1 A 0 Bright A_SetShootable
+	CYBR E 5 Bright A_FaceTarget
+	CYBR F 0 Bright A_CustomMissile("LegendaryCyberRail",58, 0, -2)
+	CYBR F 2 Bright A_CustomMissile("LegendaryCyberRail",58, 0, 0)
+	CYBR F 0 Bright A_CustomMissile("LegendaryCyberRail",58, 0, 2)
+	CYBR E 10 Bright A_FaceTarget
+	CYBR E 15 Bright
+	TNT1 A 0 A_Jump(130,"Finder","LegendaryTech","LegendaryBFG10K","LegendaryBFG15K")
+	TNT1 A 0 A_Jump(52,"LegendaryCyberLaser")
+	TNT1 A 0 A_Jump(50,"LegRevBall")
+	TNT1 A 0 A_Jump(1,"LegendaryPlasmaticBomb")
+	Goto See
+  LegendaryBFG10K:
+	TNT1 A 0 A_PlaySound("weapons/charge15k")
+	CYBR E 18 Bright A_FaceTarget
+	CYBR E 6 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("Legendary10KProjectile",58,-26,Random(-4, 4))	
+	CYBR E 4 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("Legendary10KProjectile",58,-26,Random(-4, 4))	
+	CYBR E 4 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("Legendary10KProjectile",58,-26,Random(-4, 4))
+	CYBR E 4 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("Legendary10KProjectile",58,-26,Random(-4, 4))
+	CYBR E 4 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("Legendary10KProjectile",58,-26,Random(-4, 4))
+	CYBR E 3 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("Legendary10KProjectile",58,-26,Random(-4, 4))
+	CYBR E 3 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("Legendary10KProjectile",58,-26,Random(-4, 4))
+	CYBR E 3 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("Legendary10KProjectile",58,-26,Random(-4, 4))
+	CYBR E 3 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("Legendary10KProjectile",58,-26,Random(-4, 4))
+	CYBR E 3 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("Legendary10KProjectile",58,-26,Random(-4, 4))
+	CYBR E 2 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("Legendary10KProjectile",58,-26,Random(-4, 4))
+	CYBR E 2 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("Legendary10KProjectile",58,-26,Random(-4, 4))
+	CYBR E 2 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("Legendary10KProjectile",58,-26,Random(-4, 4))
+	CYBR E 1 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("Legendary10KProjectile",58,-26,Random(-4, 4))
+	CYBR E 1 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("Legendary10KProjectile",58,-26,Random(-4, 4))
+	CYBR E 1 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("Legendary10KProjectile",58,-26,Random(-4, 4))
+	CYBR E 1 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("Legendary10KProjectile",58,-26,Random(-4, 4))
+	CYBR E 1 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("Legendary10KProjectile",58,-26,Random(-4, 4))
+	CYBR E 20 Bright A_PlaySound("weapons/bfg15kcooldown",CHAN_AUTO)	
+	TNT1 A 0 A_Jump(130,"Finder","LegendaryBFG15K","LegendaryDTBFG","LegendaryDevastator")
+	TNT1 A 0 A_Jump(52,"LegendaryCyberLaser")
+	TNT1 A 0 A_Jump(1,"LegendaryPlasmaticBomb")
+	Goto See
+  LegendaryBFG15K:
+	TNT1 A 0 A_PlaySound("weapons/charge15k")
+	CYBR E 18 Bright A_FaceTarget
+	CYBR E 6 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 4 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))	
+	CYBR E 4 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 4 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))	
+	CYBR E 4 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 4 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 4 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 4 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 4 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 3 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 3 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 3 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 3 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 3 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 2 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 2 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 2 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 2 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 2 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 2 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 2 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 2 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 1 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 1 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 1 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 1 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 1 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 1 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 1 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 1 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 1 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 1 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 1 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 1 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 1 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 1 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 1 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 1 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 1 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 1 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("weapons/bfg15kfire")
+	CYBR F 1 Bright A_CustomMissile("LegendaryCyberBFG15KBall",58,-26,Random(-4, 4))
+	CYBR E 20 Bright A_PlaySound("weapons/bfg15kcooldown",CHAN_AUTO)	
+	TNT1 A 0 A_Jump(130,"Finder","LegendaryTech","LegendaryRailgun","LegendaryDTBFG","LegendaryDevastator")
+	TNT1 A 0 A_Jump(52,"LegendaryCyberLaser")
+	TNT1 A 0 A_Jump(50,"LegRevBall")
+	TNT1 A 0 A_Jump(1,"LegendaryPlasmaticBomb")
+	Goto See
+  Finder:
+    CYBR E 5  Bright A_FaceTarget
+	CYBR F 5 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+	CYBR E 5  Bright A_FaceTarget
+	CYBR F 5 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+	CYBR E 5  Bright A_FaceTarget
+	CYBR F 5 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+	CYBR E 5  Bright A_FaceTarget
+	CYBR F 5 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+	CYBR E 5  Bright A_FaceTarget
+	CYBR F 5 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+	CYBR E 5  Bright A_FaceTarget
+	CYBR F 5 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+    CYBR E 5  Bright A_FaceTarget
+	CYBR F 5 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+    CYBR E 5  Bright A_FaceTarget
+	CYBR F 5 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+    TNT1 A 0 A_Jump(130,"LegendaryTech","LegendaryBFG","LegendaryDTBFG","LegendaryDevastator")
+	TNT1 A 0 A_Jump(52,"LegendaryCyberLaser")
+	TNT1 A 0 A_Jump(50,"LegRevBall")
+	TNT1 A 0 A_Jump(60,"RocketCombo")
+	TNT1 A 0 A_Jump(1,"LegendaryPlasmaticBomb")
+	Goto See
+  RocketCombo:
+    CYBR E 5  Bright A_FaceTarget
+	CYBR F 5 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-8, 8))
+	CYBR E 5  Bright A_FaceTarget
+	CYBR F 5 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+	CYBR E 5  Bright A_FaceTarget
+	CYBR F 5 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-8, 8))
+	CYBR E 5  Bright A_FaceTarget
+	CYBR F 5 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+	CYBR E 5  Bright A_FaceTarget
+	CYBR F 5 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-8, 8))
+	CYBR E 5  Bright A_FaceTarget
+	CYBR F 5 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+	CYBR E 5 Bright A_FaceTarget
+	CYBR F 5 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+	CYBR E 4  Bright A_FaceTarget
+	CYBR F 4 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-8, 8))
+    CYBR E 4  Bright A_FaceTarget
+	CYBR F 4 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+    CYBR E 4  Bright A_FaceTarget
+	CYBR F 4 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+	CYBR E 4  Bright A_FaceTarget
+	CYBR F 4 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-8, 8))
+	CYBR E 4  Bright A_FaceTarget
+	CYBR F 4 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+	CYBR E 4  Bright A_FaceTarget
+	CYBR F 4 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+	CYBR E 4  Bright A_FaceTarget
+	CYBR F 4 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-8, 8))
+	CYBR E 4  Bright A_FaceTarget
+	CYBR F 4 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+	CYBR E 3  Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-8, 8))
+	CYBR E 3  Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+	CYBR E 3  Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-8, 8))
+	CYBR E 3  Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+	CYBR E 3  Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-8, 8))
+	CYBR E 3  Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("LegendaryRocket", 58, -26, Random(-8, 8))
+	CYBR E 3  Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+	CYBR E 3  Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("LegendaryHomingRocket", 58, -26, Random(-8, 8))
+    TNT1 A 0 A_Jump(130,"LegendaryTech","LegendaryBFG","LegendaryDTBFG","LegendaryDevastator")
+	TNT1 A 0 A_Jump(52,"LegendaryCyberLaser")
+	TNT1 A 0 A_Jump(50,"LegRevBall")
+	TNT1 A 0 A_Jump(1,"LegendaryPlasmaticBomb")
+	Goto See
+  LegendaryTech:
+    CYBR G 30 Bright A_FaceTarget
+	TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+    CYBR G 3 Bright A_PlaySoundEx("Legcyber/laugh2","LAUGH2")
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 A_UnsetInvulnerable
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+    CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+	CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+	CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+	CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+	CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+    CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+	CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+	CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+	CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+    CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+    CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+	CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+	CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+	CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+	CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+    CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+	CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+	CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+	CYBR E 3 Bright A_FaceTarget
+	CYBR F 3 Bright A_CustomMissile("CyberLegendaryProjectile",58,-26,Random(100,-100)/100.00,0)
+    TNT1 A 0 Bright A_PlayWeaponSound("BlueDTRFire")
+    CYBR E 30 Bright A_PlaySoundEx("Legcyber/amhalt","DECHST")
+	TNT1 A 0 A_Jump(130,"LegendaryBFG","LegendaryStomp","Finder","LegendaryRailgun","LegendaryBFG10K","LegendaryDTBFG","LegendaryDevastator")
+	TNT1 A 0 A_Jump(52,"LegendaryCyberLaser")
+	TNT1 A 0 A_Jump(1,"LegendaryPlasmaticBomb")
+	Goto See
+ LegendaryDTBFG:
+    CYBR F 0 Bright A_PlaySound ("Cardinal/9k")
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 0 Bright A_CustomMissile("LegCybDTBFGBall", 58, -26, 0)
+	CYBR F 0 Bright A_PlaySound ("Cardinal/9k")
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 0 Bright A_CustomMissile("LegCybDTBFGBall", 58, -26, 0)
+	CYBR E 30 Bright
+	TNT1 A 0 A_Jump(95,"LegendaryBFG","LegendaryDevastator")
+	TNT1 A 0 A_Jump(52,"LegendaryCyberLaser")
+	TNT1 A 0 A_Jump(1,"LegendaryPlasmaticBomb")
+	Goto See
+ LegendaryDevastator:
+    TNT1 A 0 A_PlaySound("devastator/charge")
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR E 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 2 Bright A_FaceTarget
+	CYBR F 0 A_PlaySound ("devastator/fire")
+	CYBR F 0 Bright A_CustomMissile("LegCybDevastatorBall", 58, -26, 0)
+	CYBR E 50 Bright
+	TNT1 A 0 A_Jump(95,"LegendaryBFG")
+	TNT1 A 0 A_Jump(52,"LegendaryCyberLaser")
+	TNT1 A 0 A_Jump(1,"LegendaryPlasmaticBomb")
+	Goto See
+  LegendaryBFG:
+    CYBR E 30 Bright A_FaceTarget
+	TNT1 A 0 A_SetInvulnerable
+	CYBR E 3 Bright A_PlaySoundEx("monster/laugh","TBBCSPT1")
+	CYBR E 3 Bright A_PlaySoundEx("Legcyber/BFG","GURUCHRG")	
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+    CYBR E 3 Bright A_PlaySoundEx("Legcyber/BFG","GURUCHRG")	
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner",0,0,0,0)
+	TNT1 A 0 A_JumpIfTargetInLos(2)
+    TNT1 A 0 A_Jump(256,2)
+	TNT1 A 0
+	Goto LegBFGGo
+	CYBR EEEEEEEEEEEEE 0 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner2")
+	TNT1 A 0 A_UnSetShootable
+    CYBR EEEEEEEEEEE 1 A_FadeOut(0.1,0)
+	CYBR EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0 A_Wander
+    CYBR E 20
+    CYBR E 1 A_PlayWeaponSound("boss/teleport")
+	TNT1 A 0 A_FaceTarget
+	CYBR EEEEEEEEEEEEE 0 A_SpawnItemEx("LegendaryCyberFlameSpawner2")
+	CYBR EEEEEEEEEEE 1 A_FadeIn(0.1)	
+	TNT1 A 0 A_SetShootable
+  LegBFGGo:	
+    TNT1 A 0 A_UnsetInvulnerable
+	TNT1 A 0 A_PlayWeaponSound("Weapons/GuruFire")
+  	TNT1 A 0 A_PlayWeaponSound("Weapons/GuruAddFire")
+	CYBR F 5 A_CustomMissile("CyberGuruball", 58, -26, 0, 0)
+    CYBR E 60 Bright A_FaceTarget
+	Goto See
+  LegRevBall:
+    CYBR G 30 Bright A_FaceTarget
+	TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+    CYBR G 3 Bright A_PlaySoundEx("Legcyber/laugh5","TBCSPT2")
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 A_UnsetInvulnerable
+	CYBR E 10 Bright A_FaceTarget
+	CYBR F 0 A_PlayWeaponSound("lrball3/shot")
+    CYBR F 5 Bright A_CustomMissile("LegRevBall3", 58, -26)
+	CYBR E 10 Bright A_FaceTarget
+	CYBR F 0 A_PlayWeaponSound("lrball3/shot")
+    CYBR F 5 Bright A_CustomMissile("LegRevBall3", 58, -26)
+	CYBR E 10 Bright A_FaceTarget
+	CYBR F 0 A_PlayWeaponSound("lrball3/shot")
+    CYBR F 5 Bright A_CustomMissile("LegRevBall3", 58, -26)
+	CYBR E 20 Bright A_FaceTarget
+	Goto See
+  /*LegendaryThunder:
+    CYBR G 30 Bright A_FaceTarget
+	TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+    CYBR G 3 Bright A_PlaySoundEx("monster/laugh","TBBCSPT1")
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	CYBR G 5 Bright A_CustomMissile("LegCybThunderSpawner2",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 A_UnsetInvulnerable
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	Goto See*/
+  LegendaryPlasmaticBomb:
+    TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 A_PlaySoundEx("monster/laugh","TBBCSPT1")
+    TNT1 A 0 A_PlaySound("Arcradimus/BFGCharge")
+    CYBR E 0 Bright A_SpawnItemEx("LegendaryBombCharging1", 70, 0, 58)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 0 Bright A_SpawnItemEx("LegendaryBombCharging2", 70, 0, 58)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 0 Bright A_SpawnItemEx("LegendaryBombCharging3", 70, 0, 58)
+	TNTT A 0 A_PlaySoundEx("Legcyber/laugh2","LAUGH2")
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 0 Bright A_SpawnItemEx("LegendaryBombCharging4", 70, 0, 58)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 0 Bright A_SpawnItemEx("LegendaryBombCharging5", 70, 0, 58)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+	CYBR E 2 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner",0,0,0,0)
+    CYBR EF 4 Bright A_FaceTarget 
+	TNT1 A 0 A_CustomMissile("LegendaryBomb",58,-26,0,0)
+	TNT1 A 0 A_UnsetInvulnerable
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	CYBR E 2 Bright 
+	Goto See
+  /*LegThor:
+    CYBR G 30 Bright A_FaceTarget
+	TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+    CYBR G 3 Bright A_PlaySoundEx("cyber/sight1","TBCSPT2")
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("LegCybThorStrikeSpawner",Random(1650,-1650),Random(1650,-1650),0,0,0,0,SXF_NOCHECKPOSITION,64)
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("LegCybThorStrikeSpawner",Random(1650,-1650),Random(1650,-1650),0,0,0,0,SXF_NOCHECKPOSITION,64)
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("LegCybThorStrikeSpawner",Random(1650,-1650),Random(1650,-1650),0,0,0,0,SXF_NOCHECKPOSITION,64)
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("LegCybThorStrikeSpawner",Random(1650,-1650),Random(1650,-1650),0,0,0,0,SXF_NOCHECKPOSITION,64)
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("LegCybThorStrikeSpawner",Random(1650,-1650),Random(1650,-1650),0,0,0,0,SXF_NOCHECKPOSITION,64)
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 AA 0 A_SpawnItemEx("LegCybThorStrikeSpawner",Random(1650,-1650),Random(1650,-1650),0,0,0,0,SXF_NOCHECKPOSITION,64)
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("LegCybThorStrikeSpawner",Random(1650,-1650),Random(1650,-1650),0,0,0,0,SXF_NOCHECKPOSITION,64)
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 AA 0 A_SpawnItemEx("LegCybThorStrikeSpawner",Random(1650,-1650),Random(1650,-1650),0,0,0,0,SXF_NOCHECKPOSITION,64)
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 AA 0 A_SpawnItemEx("LegCybThorStrikeSpawner",Random(1650,-1650),Random(1650,-1650),0,0,0,0,SXF_NOCHECKPOSITION,64)
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 AA 0 A_SpawnItemEx("LegCybThorStrikeSpawner",Random(1650,-1650),Random(1650,-1650),0,0,0,0,SXF_NOCHECKPOSITION,64)
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("LegCybThorStrikeSpawner",Random(1650,-1650),Random(1650,-1650),0,0,0,0,SXF_NOCHECKPOSITION,64)
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("LegCybThorStrikeSpawner",Random(1650,-1650),Random(1650,-1650),0,0,0,0,SXF_NOCHECKPOSITION,64)
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 AA 0 A_SpawnItemEx("LegCybThorStrikeSpawner",Random(1650,-1650),Random(1650,-1650),0,0,0,0,SXF_NOCHECKPOSITION,64)
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("LegCybThorStrikeSpawner",Random(1650,-1650),Random(1650,-1650),0,0,0,0,SXF_NOCHECKPOSITION,64)
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItemEx("LegCybThorStrikeSpawner",Random(1650,-1650),Random(1650,-1650),0,0,0,0,SXF_NOCHECKPOSITION,64)
+	CYBR G 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 A_UnsetInvulnerable
+	CYBR G 3 Bright
+	Goto See/*	
+  /*LegendarySlow:
+    CYBR E 30 Bright A_FaceTarget
+	TNT1 A 0 A_SetInvulnerable
+	CYBR E 3 Bright A_PlaySoundEx("monster/laugh","TBBCSPT1")
+	CYBR E 3 Bright
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+    CYBR E 3 Bright
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 Bright A_FaceTarget
+	CYBR E 3 Bright A_SpawnItem("LegendaryCyberFlameSpawner3",0,0,0,0)
+	TNT1 A 0 A_JumpIfTargetInLos(2)
+    TNT1 A 0 A_Jump(256,2)
+	TNT1 A 0
+	Goto LegendarySlowGo
+	CYBR EEEEEEEEEEEEE 0 Bright A_SpawnItemEx("LegendaryCyberFlameSpawner2")
+	TNT1 A 0 A_UnSetShootable
+    CYBR EEEEEEEEEEE 1 A_FadeOut(0.1,0)
+	CYBR EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0 A_Wander
+    CYBR E 20
+    CYBR E 1 A_PlayWeaponSound("boss/teleport")
+	TNT1 A 0 A_FaceTarget
+	CYBR EEEEEEEEEEEEE 0 A_SpawnItemEx("LegendaryCyberFlameSpawner2")
+	CYBR EEEEEEEEEEE 1 A_FadeIn(0.1)	
+	TNT1 A 0 A_SetShootable
+  LegendarySlowGo:	
+    TNT1 A 0 A_UnsetInvulnerable
+	TNT1 A 0 A_PlayWeaponSound("Weapons/GuruFire")
+  	TNT1 A 0 A_PlayWeaponSound("Weapons/GuruAddFire")
+	CYBR F 5 A_CustomMissile("LegCybSlowBall", 58, -26, 0, 0)
+    CYBR E 60 Bright A_FaceTarget
+	Goto See*/	
+  Death:
+    TNT1 A 0 A_Jump(52,"LegDeath")
+    TNT1 A 0 A_StopSound(6)
+	CYBR H 10 Bright
+    CYBR H 10 Bright A_Scream
+	CYBR HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHIIIIIIIIIIIIIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJJJJJJ 2 A_SpawnItemEx("PainfulDeathKaboom",random(-32,32),random(-40,40),random(16,48),random(-4,4),random(-4,4),random(0,4),0,SXF_TRANSFERPOINTERS)
+	TNT1 AAAA 0 A_SpawnItemEx("LegBlueGibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)
+	TNT1 AAAA 0 A_SpawnItemEx("LegBlueGibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)
+	TNT1 AAAA 0 A_SpawnItemEx("LegBlueGibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)
+	CYBR KL 10 Bright
+	TNT1 A 0 A_SpawnItem("DeathBall2")
+	CYBR M 10 A_NoBlocking
+    CYBR NO 10 Bright
+	CYBR P 30
+	CYBR P -1 A_BossDeath
+	Stop
+  LegDeath:
+    TNT1 A 0 A_StopSound(6)
+	CYBR H 10 Bright
+    CYBR H 10 Bright A_Scream
+	CYBR HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHIIIIIIIIIIIIIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJJJJJJ 2 A_SpawnItemEx("PainfulDeathKaboom",random(-32,32),random(-40,40),random(16,48),random(-4,4),random(-4,4),random(0,4),0,SXF_TRANSFERPOINTERS)
+	TNT1 AAAA 0 A_SpawnItemEx("LegBlueGibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)
+	TNT1 AAAA 0 A_SpawnItemEx("LegBlueGibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)
+	TNT1 AAAA 0 A_SpawnItemEx("LegBlueGibbedGenerator",Random(10,-10),Random(10,-10),Random(20,60),0,0,0,0,128,0)
+	CYBR KL 10 Bright
+	TNT1 A 0 A_SpawnItem("TrueDeathBall")
+	CYBR M 10 Bright A_NoBlocking
+    CYBR NO 10 Bright
+	CYBR PPPP 50 
+    TNT1 A 0 ACS_ExecuteAlways(647)
+	CYBR P 30 A_CustomMissile("TrueLegPentagram")
+	TNT1 A 0 A_SpawnItemEx("DingySummoner")
+	TNT1 A 0 A_SpawnItemEx("LegendaryRevivalSummoner")
+	TNT1 A 0 A_SpawnItemEx("ResurrectorSummoner",0,0,0,30,0,0,72,0)
+	TNT1 A 0 A_SpawnItemEx("ResurrectorSummoner",0,0,0,30,0,0,-72,0)
+	TNT1 A 0 A_SpawnItemEx("ResurrectorSummoner",0,0,0,30,0,0,-222,0)
+	TNT1 A 0 A_SpawnItemEx("ResurrectorSummoner",0,0,0,30,0,0,222,0)
+	TNT1 A 0 A_SpawnItemEx("ResurrectorSummoner",0,0,0,30,0,0,365,0)
+	Stop
+  }
+}
+
+ACTOR CyberGuruSphereSmoke : GuruSphereSmoke
+{
+	Scale 1.8
+	Alpha 0.45
+	PROJECTILE
+	DamageType "Cyber10K"
+	States
+	{
+	Spawn:
+	TNT1 A 0
+	TNT1 A 1 A_Jump(255,"Spawn1","Spawn2","Spawn3","Spawn4","Spawn5","Spawn6")
+	Stop
+	Spawn1:
+	 TNT1 A 0 //A_SetScale(ScaleX -0.002, ScaleY -0.002)
+	 TNT1 A 0 A_JumpIf(Alpha<0.3,2)
+	 THD1 A 0 A_Explode(10,164)
+	 THD1 A 4 Bright A_FadeOut(0.0065)
+	 Loop
+	Spawn2:
+	 TNT1 A 0 //A_SetScale(ScaleX -0.002, ScaleY -0.002)
+	 TNT1 A 0 A_JumpIf(Alpha<0.3,2)
+	 THD1 A 0 A_Explode(10,164)
+	 THD2 A 4 Bright A_FadeOut(0.0065)
+	 Loop
+	Spawn3:
+	 TNT1 A 0 //A_SetScale(ScaleX -0.002, ScaleY -0.002)
+	 TNT1 A 0 A_JumpIf(Alpha<0.3,2)
+	 THD1 A 0 A_Explode(10,164)
+	 THD3 A 4 Bright A_FadeOut(0.0065)
+	 Loop
+	Spawn1:
+	 TNT1 A 0 //A_SetScale(ScaleX -0.002, ScaleY -0.002)
+	 TNT1 A 0 A_JumpIf(Alpha<0.3,2)
+	 THD1 A 0 A_Explode(10,164)
+	 THD1 A 4 Bright A_FadeOut(0.0065)
+	 Loop
+	Spawn2:
+	 TNT1 A 0 //A_SetScale(ScaleX -0.002, ScaleY -0.002)
+	 TNT1 A 0 A_JumpIf(Alpha<0.3,2)
+	 THD1 A 0 A_Explode(10,164)
+	 THD2 A 4 Bright A_FadeOut(0.0065)
+	 Loop
+	Spawn3:
+	 TNT1 A 0 //A_SetScale(ScaleX -0.002, ScaleY -0.002)
+	 TNT1 A 0 A_JumpIf(Alpha<0.3,2)
+	 THD1 A 0 A_Explode(10,164)
+	 THD3 A 4 Bright A_FadeOut(0.0065)
+	 Loop
+	}
+}
+
+Actor LegCybThunderSpawner2
+{
+Height 0
+Radius 0
+Mass 0
+Damage 0
++THRUACTORS
++NOTELEPORT
++NOGRAVITY
++NOBLOCKMAP
++NOBLOCKMAP
++NOINTERACTION
++NOTIMEFREEZE
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 AAAAAAAAA 8 A_SpawnItemEx("TrueLegCardinalThunder",random(812,-812),random(812,-812))
+Stop
+}
+}
+
+ACTOR LegendaryBomb
+{
+  Radius 11
+  Height 6
+  Speed 15 // 10
+  DamageType "Legendary"
+  Damage 150
+  Projectile
+  RenderStyle Add
+  +FORCERADIUSDMG
+  +FOILINVUL
+  +RIPPER
+  +BLOODLESSIMPACT
+  //+DONTBLAST
+  -RANDOMIZE
+  +NOTIMEFREEZE
+  Scale 1.0
+  Alpha 1.0
+  MissileType "ArcLesserProjectileTrail"
+  SeeSound "Arcradimus/BFGFire"
+  States
+  {
+  Spawn:
+    // Gold
+	TNT1 A 0
+	TNT1 A 0 A_Explode(600,192,0,1)
+	TNT1 A 0 A_SpawnItemEx("LegBombTrail",5,0,0,0,0,0,0,0,0)
+    TNT1 A 0 A_Jump(224, 2)
+	TNT1 A 0 A_SpawnItemEx("LegendaryBombFluxShockwave",0,0,0,10,0,0,0,0,0)
+    TNT1 A 0 A_Jump(16, 2)
+    TNT1 A 0 A_SpawnItemEx("ArcBallLightningBolt4",Random(6,-6),Random(6,-6),Random(16,8),0,0,0,0,128)
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticleGold",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticleGold",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright
+    // Blue
+	//TNT1 A 0 A_PlaySound("Weapons/GuruFly",5,1.0,1)
+	TNT1 A 0 A_Explode(600,192,0,1)
+	TNT1 A 0 A_SpawnItemEx("LegBombTrail",5,0,0,0,0,0,0,0,0)
+    TNT1 A 0 A_Jump(224, 2)
+	TNT1 A 0 A_SpawnItemEx("LegendaryBombFluxShockwave",0,0,0,10,0,0,0,0,0)
+    TNT1 A 0 A_Jump(16, 2)
+    TNT1 A 0 A_SpawnItemEx("ArcBallLightningBolt4",Random(6,-6),Random(6,-6),Random(16,8),0,0,0,0,128)
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticleBlue",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticleBlue",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright
+    // Gold
+	//TNT1 A 0 A_PlaySound("Weapons/GuruFly",5,1.0,1)
+	TNT1 A 0 A_Explode(600,192,0,1)
+	TNT1 A 0 A_SpawnItemEx("LegBombTrail",5,0,0,0,0,0,0,0,0)
+    TNT1 A 0 A_Jump(224, 2)
+	TNT1 A 0 A_SpawnItemEx("LegendaryBombFluxShockwave",0,0,0,10,0,0,0,0,0)
+    TNT1 A 0 A_Jump(16, 2)
+    TNT1 A 0 A_SpawnItemEx("ArcBallLightningBolt4",Random(6,-6),Random(6,-6),Random(16,8),0,0,0,0,128)
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticleGold",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticleGold",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright
+     // Blue
+	//TNT1 A 0 A_PlaySound("Weapons/GuruFly",5,1.0,1)
+	TNT1 A 0 A_Explode(600,192,0,1)
+	TNT1 A 0 A_SpawnItemEx("LegBombTrail",5,0,0,0,0,0,0,0,0)
+    TNT1 A 0 A_Jump(224, 2)
+	TNT1 A 0 A_SpawnItemEx("LegendaryBombFluxShockwave",0,0,0,10,0,0,0,0,0)
+    TNT1 A 0 A_Jump(16, 2)
+    TNT1 A 0 A_SpawnItemEx("ArcBallLightningBolt4",Random(6,-6),Random(6,-6),Random(16,8),0,0,0,0,128)
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticleBlue",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticleBlue",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright
+    // Gold
+	//TNT1 A 0 A_PlaySound("Weapons/GuruFly",5,1.0,1)
+	TNT1 A 0 A_Explode(600,192,0,1)
+	TNT1 A 0 A_SpawnItemEx("LegBombTrail",5,0,0,0,0,0,0,0,0)
+    TNT1 A 0 A_Jump(224, 2)
+	TNT1 A 0 A_SpawnItemEx("LegendaryBombFluxShockwave",0,0,0,10,0,0,0,0,0)
+    TNT1 A 0 A_Jump(16, 2)
+    TNT1 A 0 A_SpawnItemEx("ArcBallLightningBolt4",Random(6,-6),Random(6,-6),Random(16,8),0,0,0,0,128)
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticleGold",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright
+    TNT1 A 0 A_SpawnItemEx("LCABFGTrailParticleGold",Random(-12,12),Random(-12,12),Random(12,22),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright
+	Loop
+  Death:
+	//COLLATERAL DAMAGE EFFECTS
+	TNT1 A 0
+	TNT1 A 0 A_StopSound(5)
+	TNT1 A 0 A_SpawnItem("LegendaryNuke2")
+	TNT1 A 0 A_Explode(6000,512,0,1)
+	TNT1 A 0 A_BFGSpray("ArcSpray",15,20)
+	//IMPACT STUFF
+	TNT1 A 0 A_SpawnItemEx("ArcStruckGlowX",0,0,10,0,0,0,0,128,0)
+	TNT1 A 0 A_SpawnItemEx("ArcStruckGlowY",0,0,10,0,0,0,0,128,0)
+	//TNT1 AAAAAAAAAAA 0 A_SpawnItemEx("ArcSphereSmoke",random(126,-126),random(126,-126),random(66,-66),0.00001*random(100000,-100000),0.00001*random(100000,-100000),0.00001*random(100000,-100000),random(0,359),0,0)
+	//TNT1 AAAAAAAAAAA 0 A_SpawnItemEx("ArcChunkSpark",random(126,-126),random(126,-126),random(66,-66),0,0,0,0,0,0)
+	//TNT1 AAAAAAAAAAAAAAAAAAA 2 A_SpawnItemEx("ArcChunkSpark",random(126,-126),random(126,-126),random(66,-66),0,0,0,0,0,0)
+	Stop
+  }
+}
+
+ACTOR LegBombTrail : LCABaseEffect
+{
+	Alpha 0.50
+	Renderstyle Add
+	+CLIENTSIDEONLY
+    +NOTIMEFREEZE
+	Scale 0.90
+	States
+	{
+	Spawn:
+	 TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 0 //A_SetScale(ScaleX -0.01, ScaleY -0.01)
+	UBAL BDBDB 1 Bright A_FadeOut(0.05)
+	Loop
+  Toaster:
+    TNT1 A 0
+	Stop		
+	}
+}
+
+ACTOR LegendaryBombShockwave : LCAShockwave
+{
+  +NOTIMEFREEZE
+  +CLIENTSIDEONLY
+  States
+  {
+    Spawn:
+		 TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+      HBRY A 1 Bright A_FadeOut(0.04)
+      HBRB B 1 Bright A_FadeOut(0.04)
+      HBRY C 1 Bright A_FadeOut(0.04)
+      HBRB D 1 Bright A_FadeOut(0.04)
+      HBRY E 1 Bright A_FadeOut(0.04)
+      HBRB F 1 Bright A_FadeOut(0.04)
+      HBRY G 1 Bright A_FadeOut(0.04)
+      HBRB H 1 Bright A_FadeOut(0.04)
+      HBRY I 1 Bright A_FadeOut(0.04)
+      HBRB J 1 Bright A_FadeOut(0.04)
+      HBRY K 1 Bright A_FadeOut(0.04)
+      HBRB L 1 Bright A_FadeOut(0.04)
+      HBRY M 1 Bright A_FadeOut(0.04)
+      HBRB N 1 Bright A_FadeOut(0.04)
+      HBRY O 1 Bright A_FadeOut(0.04)
+      HBRB P 1 Bright A_FadeOut(0.04)
+      HBRY Q 1 Bright A_FadeOut(0.04)
+      HBRB R 1 Bright A_FadeOut(0.04)
+      Stop
+  Toaster:
+    TNT1 A 0
+	Stop	  
+  }
+}
+
+ACTOR LegendaryBombFluxShockwave : LegendaryBombShockwave
+{
+  Scale 0.75
+  Alpha 1.0
+  Projectile
+}
+
+ACTOR LegendaryBombCharging : LegendaryBomb
+{
+  Speed 0
+  -MISSILE
+  -SOLID
+  +THRUACTORS
+  +NOINTERACTION
+  +NOGRAVITY
+  +NOBLOCKMAP
+  +NOTELEPORT
+  +NOCLIP
+  +NONETID
+  States
+  {
+  Spawn:
+    // Gold
+	TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",CHAN_BODY,1.0,False)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright A_FadeOut(0.01)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright
+    // Blue
+	TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",CHAN_BODY,1.0,False)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright A_FadeOut(0.01)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright
+    // Gold
+	TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",CHAN_BODY,1.0,False)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright A_FadeOut(0.01)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright
+    // Blue
+	TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",CHAN_BODY,1.0,False)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright A_FadeOut(0.01)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright
+    // Gold
+	TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",CHAN_BODY,1.0,False)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright A_FadeOut(0.01)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleGOld",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright
+	Loop
+  Death:
+    TNT1 A 1
+	Stop
+  }
+}
+
+ACTOR LegendaryBombCharging1 : LegendaryBombCharging
+{
+  Scale 0.6
+}
+
+ACTOR LegendaryBombCharging2 : LegendaryBombCharging
+{
+  Scale 0.7
+}
+
+ACTOR LegendaryBombCharging3 : LegendaryBombCharging
+{
+  Scale 0.8
+}
+
+ACTOR LegendaryBombCharging4 : LegendaryBombCharging
+{
+  Scale 0.9
+}
+
+ACTOR LegendaryBombCharging5 : LegendaryBombCharging
+{
+  Scale 1.0
+  States
+  {
+  Spawn:
+    // Blue
+	TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",CHAN_BODY,1.0,False)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright A_FadeOut(0.02)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright
+    // Gold
+	TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",5,1.0,1)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright A_FadeOut(0.01)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright
+     // Blue
+	TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",CHAN_BODY,1.0,False)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright A_FadeOut(0.02)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright
+    // Gold
+	TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",5,1.0,1)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright A_FadeOut(0.01)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL D 1 Bright
+     // Blue
+	TNT1 A 0 A_PlaySound("Arcradimus/BFGBall",CHAN_BODY,1.0,False)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright A_FadeOut(0.02)
+    TNT1 A 0 A_SpawnItemEx("LCABFGChargeParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	UBAL B 1 Bright
+	Loop
+
+  }
+}
+
+ACTOR LegendaryRocket : CardinalRocket
+{
+	Speed 38
+	FastSpeed 58
+	Scale 0.9
+	DECAL LegRocketScorch
+	DamageType "Legendary"
+	SeeSound "true/fire"
+	-THRUSPECIES
+    +NOTIMEFREEZE
+	States
+	{
+	Spawn:
+        TNT1 A 0 Bright A_CustomMissile("MissileTrail",Random(4,6),Random(-2,2))
+		LROC A 2 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(4,6),Random(-2,2))
+		TNT1 A 0 Bright A_CustomMissile("MissileTrail",Random(4,6),Random(-2,2))	
+		LROC B 2 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(4,6),Random(-2,2))
+		Loop
+	Death:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("OrangeParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+		TNT1 AAA 0 A_CustomMissile("BlueKaboom3", 0, 0, random(0,360), 2, random(0,360))
+		TNT1 AAA 0 A_CustomMissile("LegendarySmokeFX2", 0, 0, random(0,360), 2, random(0,360))
+		TNT1 AAAA 0 A_SpawnItemEx("LegendaryDebris",0,0,0,Random(4,-4),Random(4,-4),Random(4,8),0,128)
+		LROC B 6 Bright A_Explode
+		LROC CD 5 Bright A_SetTranslucent(0.75,1)
+		Stop
+	}
+}
+
+ACTOR LegendaryHomingRocket : CardinalHomingRocket
+{
+Radius 12
+Height 10
+Scale 1.1
+DECAL LegRocketScorch
+Damage 15
+Speed 24
+FastSpeed 28
+ExplosionDamage 70
+DamageType "Cyber10K"
+SeeSound "monster/homingrockfire"
++NOTIMEFREEZE
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_Jump(128,"Homing")
+Normal:
+    TNT1 A 0 Bright A_CustomMissile("MissileTrail",Random(0,2),Random(-2,2))
+    LCKM A 2 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(0,2),Random(-2,2))
+    Loop	
+Homing:
+    TNT1 A 0 Bright A_CustomMissile("MissileTrail",Random(0,2),Random(-2,2))
+    LCKM A 2 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(0,2),Random(-2,2))
+    TNT1 A 0 Bright A_CustomMissile("MissileTrail",Random(0,2),Random(-2,2))
+    LCKM A 2 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(0,2),Random(-2,2))
+    TNT1 A 0 Bright A_CustomMissile("MissileTrail",Random(0,2),Random(-2,2))
+    LCKM A 2 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(0,2),Random(-2,2))
+    TNT1 A 0 Bright A_CustomMissile("MissileTrail",Random(0,2),Random(-2,2))
+    LCKM A 2 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(0,2),Random(-2,2))
+    TNT1 A 0 Bright A_CustomMissile("MissileTrail",Random(0,2),Random(-2,2))
+    LCKM A 2 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(0,2),Random(-2,2))
+	Goto StartSeek
+StartSeek:
+	TNT1 A 0 Bright A_BishopMissileWeave
+	TNT1 A 0 Bright A_Tracer2
+    TNT1 A 0 Bright A_CustomMissile("MissileTrail",Random(0,2),Random(-2,2))
+    LCKM A 1 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(0,2),Random(-2,2))
+	TNT1 A 0 Bright A_BishopMissileWeave
+    TNT1 A 0 Bright A_CustomMissile("MissileTrail",Random(0,2),Random(-2,2))
+    LCKM A 1 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(0,2),Random(-2,2))
+	TNT1 A 0 Bright A_BishopMissileWeave
+    TNT1 A 0 Bright A_CustomMissile("MissileTrail",Random(0,2),Random(-2,2))
+    LCKM A 1 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(0,2),Random(-2,2))
+	TNT1 A 0 Bright A_BishopMissileWeave
+    TNT1 A 0 Bright A_CustomMissile("MissileTrail",Random(0,2),Random(-2,2))
+    LCKM A 1 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(0,2),Random(-2,2))
+	TNT1 A 0 Bright A_BishopMissileWeave
+	TNT1 A 0 Bright A_Tracer2
+    TNT1 A 0 Bright A_CustomMissile("MissileTrail",Random(0,2),Random(-2,2))
+    LCKM A 1 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(0,2),Random(-2,2))
+	TNT1 A 0 Bright A_BishopMissileWeave
+    TNT1 A 0 Bright A_CustomMissile("MissileTrail",Random(0,2),Random(-2,2))
+    LCKM A 1 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(0,2),Random(-2,2))
+	TNT1 A 0 Bright A_BishopMissileWeave
+    TNT1 A 0 Bright A_CustomMissile("MissileTrail",Random(0,2),Random(-2,2))
+    LCKM A 1 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(0,2),Random(-2,2))
+	TNT1 A 0 Bright A_BishopMissileWeave
+    TNT1 A 0 Bright A_CustomMissile("MissileTrail",Random(0,2),Random(-2,2))
+    LCKM A 1 Bright A_CustomMissile("ProjectileTrailParticleOrange",Random(0,2),Random(-2,2))		
+	TNT1 A 0 Bright A_PlaySound("monster/homingrockbeep")
+    Loop
+Death:
+	TNT1 A 0
+	TNT1 A 0 A_SpawnItemEx("OrangeParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+    TNT1 AAA 0 A_CustomMissile("BlueKaboom3", 0, 0, random(0,360), 2, random(0,360))
+	TNT1 AAA 0 A_CustomMissile("LegendarySmokeFX2", 0, 0, random(0,360), 2, random(0,360))
+    TNT1 AAAA 0 A_SpawnItemEx("LegendaryDebris",0,0,0,Random(4,-4),Random(4,-4),Random(4,8),0,128)
+    TNT1 A 0 A_Explode
+    TNT1 A 1 A_SpawnItem("LegendaryBlueRocketEx")
+    Stop
+    }
+}
+
+ACTOR LegendaryCyberFlame
+{
++MISSILE
++DONTSPLASH
++NOBLOCKMAP
++NOGRAVITY
++NOTELEPORT
++FORCEXYBILLBOARD
++NOTIMEFREEZE
+RenderStyle Add
+Scale 0.5
+States
+{
+Spawn:
+LMKE ABCDEFGHIJKL 2 Bright A_FadeOut
+Stop
+}
+}
+
+ACTOR LegendaryCyberFlameSpawner : LegendaryRedParticleSpawner
+{
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    TNT1 AAAAAA 0 A_SpawnItemEx("LegendaryCyberFlame",random(48,-48),random(48,-48),random(0,96),0,0,random(2,6),0,128,0)
+    TNT1 A 1
+    Stop
+  }
+}
+
+ACTOR CyberGuruBall : GuruBall
+{
+  Radius 11
+  Height 6
+  Speed 15
+  DamageType "Cyber10K"
+  Damage 125
+  Projectile
+  Renderstyle Add
+  +FORCERADIUSDMG
+  +FOILINVUL
+  +RIPPER
+  +BLOODLESSIMPACT
+  +DONTBLAST
+  +THRUSPECIES
+  +SKYEXPLODE
+  Scale 0.25
+  MissileType "GuruLesserProjectileTrail"
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_Jump(128,"LEGBFGSFX")
+	TNT1 A 0 A_PlaySound("Weapons/GuruFly",5,1.0,1)
+	TNT1 A 0 A_Explode(600,64,0,1)
+	YBAL AAA 0 Bright A_CustomMissile("LegCybLiteShot",0,0,Random(0,360))
+	TNT1 A 0 A_SpawnItemEx("GuruTrailSpark",random(28,-28),random(28,-28),random(28,-28),0,0,0,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("GuruTrail",-3,0,0,0,0,0,0,0,0)
+	YBAL A 1 bright
+	loop
+  LEGBFGSFX:
+    TNT1 A 0 A_SpawnItemEx("GuruTrailSpark",random(28,-28),random(28,-28),random(28,-28),0,0,0,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("GuruTrail",-3,0,0,0,0,0,0,0,0)
+	TNT1 A 0 A_CustomMissile("LegCybDevastatorBolt",6,0,random(0,359),CMF_AIMDIRECTION|CMF_TRACKOWNER,random(-40,40))
+	YBAL A 1 Bright A_SpawnItemEx("CyberPlayerDTBFGProjectileAttack",0,0,0,0,0,0,0,SXF_SETMASTER)
+    TNT1 A 0 A_SpawnItemEx("GuruTrailSpark",random(28,-28),random(28,-28),random(28,-28),0,0,0,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("GuruTrail",-3,0,0,0,0,0,0,0,0)
+	TNT1 A 0 A_CustomMissile("LegCybDevastatorBolt",6,0,random(0,359),CMF_AIMDIRECTION|CMF_TRACKOWNER,random(-40,40))
+	YBAL A 1 Bright A_SpawnItemEx("CyberPlayerDTBFGProjectileAttack",0,0,0,0,0,0,0,SXF_SETMASTER)
+    TNT1 A 0 A_SpawnItemEx("GuruTrailSpark",random(28,-28),random(28,-28),random(28,-28),0,0,0,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("GuruTrail",-3,0,0,0,0,0,0,0,0)
+	TNT1 A 0 A_CustomMissile("LegCybDevastatorBolt",6,0,random(0,359),CMF_AIMDIRECTION|CMF_TRACKOWNER,random(-40,40))
+	YBAL A 1 Bright A_SpawnItemEx("CyberPlayerDTBFGProjectileAttack",0,0,0,0,0,0,0,SXF_SETMASTER)
+    TNT1 A 0 A_SpawnItemEx("GuruTrailSpark",random(28,-28),random(28,-28),random(28,-28),0,0,0,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("GuruTrail",-3,0,0,0,0,0,0,0,0)
+	TNT1 A 0 A_CustomMissile("LegCybDevastatorBolt",6,0,random(0,359),CMF_AIMDIRECTION|CMF_TRACKOWNER,random(-40,40))
+	YBAL A 1 Bright A_SpawnItemEx("CyberPlayerDTBFGProjectileAttack",0,0,0,0,0,0,0,SXF_SETMASTER)
+    Goto Spawn
+  Death:
+	TNT1 A 0 A_PlaySound("Weapons/GuruBlast3",5)
+	//COLLATERAL DAMAGE EFFECTS
+	TNT1 A 0 A_Explode(6000,486,0,1)
+	TNT1 A 0 A_BFGSpray("GuruSpray",15,20)
+
+	//IMPACT STUFF
+	TNT1 A 0 A_SpawnItemEx("GuruStruckGlowX",0,0,10,0,0,0,0,128,0)
+	TNT1 A 0 A_SpawnItemEx("GuruStruckGlowY",0,0,10,0,0,0,0,128,0)
+	TNT1 AAAAAAAAAAA 0 A_SpawnItemEx("CyberGuruSphereSmoke",random(126,-126),random(126,-126),random(66,-66),0.00001*random(100000,-100000),0.00001*random(100000,-100000),0.00001*random(100000,-100000),random(0,359),0,0)
+	TNT1 AAAAAAAAAAA 0 A_SpawnItemEx("GuruChunkSpark",random(126,-126),random(126,-126),random(66,-66),0,0,0,0,0,0)
+	TNT1 AAAAAAAAAAAAAAAAAAA 2 A_SpawnItemEx("GuruChunkSpark",random(126,-126),random(126,-126),random(66,-66),0,0,0,0,0,0)
+	Stop
+  }
+}
+
+ACTOR CyberPlayerDTBFGProjectileAttack : PlayerDTBFGProjectileAttack
+{
+PROJECTILE
++LOOKALLAROUND
++ISMONSTER
++QUICKTORETALIATE
++NOTARGET
++NOCLIP
++NOTIMEFREEZE
+Obituary "%o couldn't handle the wrath of the Legendary Cyberdemon!"
+MissileType "SentientDTBFGRailgunSlug"
+States
+{
+Spawn:
+    TNT1 A 0
+	TNT1 AAAAA 1 A_Look
+	Stop
+See:
+    TNT1 A 0
+	TNT1 A 1 A_JumpIfCloser(1250,"Attack")
+	Stop
+Attack:
+    TNT1 A 0
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_MissileAttack
+	TNT1 A 1 A_CustomRailgun(-1,0,NONE,"Yellow",1,1,1)
+	Goto Death	
+Death:
+	TNT1 A 1
+	Stop
+	}
+}
+
+ACTOR CyberLegendaryProjectile : LegendaryProjectile { }
+
+ACTOR LegCyberBFG9500Ball : BFG9500Ball
+{
+Speed 30
+Damage 125
+-THRUSPECIES
++NOTIMEFREEZE
+Species "Cybers"
+Obituary "%o wasn't ready for the wrath of the Legendary Cyberdemon!"
+Decal BFG9500LightningGold
+DamageType "Cyber10K"
+States
+{
+Spawn:
+    LFS3 AAABBB 1 Bright A_SpawnItemEx("BFGTrailParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+    Loop
+Death:
+	TNT1 A 0
+	TNT1 A 0 A_SpawnItemEx("BFGShockwaveGold", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 AAAAAA 0 A_CustomMissile("KaboomGold", 0, 0, random(0,360), 2, random(0,360))
+    LFE3 AB 8 Bright A_SpawnItemEx("LegendaryGoldParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+    LFE3 C 8 Bright A_BFGSpray("GoldenSpray")
+    LFE3 DEF 8 Bright
+    Stop    
+    }
+}
+
+ACTOR BFGTrailParticleGold : BFGTrailParticleGreen
+{
+Scale 0.06
++NOTIMEFREEZE
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+LPKG A 2 Bright A_FadeOut(0.015)
+Loop
+}
+}
+
+ACTOR BFGShockwaveGold : BFGShockwave2 
+{
+Scale 1.1
++NOTIMEFREEZE
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+LHOG ABCDEFGHIJKLMNOPQR 2 Bright A_FadeOut(0.04)
+Stop
+}
+}
+
+ACTOR KaboomGold : Kaboom11
+{
+Speed 2
+Scale 1
++NOTIMEFREEZE
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+LXPG AABBCDEFGHIJKLM 2 Bright A_FadeOut(0.05)
+Stop
+}
+}
+
+ACTOR GoldenSpray : CustomSpray
+{
++NOBLOCKMAP
++NOGRAVITY
++ACTIVATEPCROSS
++ACTIVATEIMPACT
++NOTELEPORT
++DROPOFF
++EXTREMEDEATH
++NOTIMEFREEZE
+RENDERSTYLE ADD
+Radius 1
+Height 1
+Damage 0
+Speed 0
+States
+{
+Spawn:
+   TNT1 A 0
+   LFE2 A 6 Bright A_SpawnItemEx("GoldParticleSpawnerDT", 0, 0, 0, 0, 0, 0, 0, 128)
+   LFE2 BCD 6 Bright 
+   Stop
+   }
+}
+
+ACTOR LegendaryCyberRail : DarkCyberRail
+{
+Radius 6
+Height 6
+Speed 300
+DamageType "Cyber10K"
+Damage (Random(65,85))
+Scale 1.26
+SeeSound "monsters/darkcyberrail"
+MissileType "LegendaryCyberRailTrail"
+Species "Cybers"
+DeathSound "cyberrail/impact"
++RIPPER
++THRUSPECIES
++EXTREMEDEATH
++BLOODLESSIMPACT
++NOTIMEFREEZE
+States
+{
+Spawn:
+    DCRP A 1 Bright
+    Loop
+Death:
+	TNT1 A 0
+	TNT1 A 0 A_SpawnItemEx("BFGShockwaveGold", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 AAAA 0 A_CustomMissile("KaboomGold2", 0, 0, random(0,360), 2, random(0,360))	
+	TNT1 A 1 A_SpawnItem("RailGunImpactEffectGold")
+	Stop
+	}
+}
+
+ACTOR LegendaryCyberRailTrail : BFG9500Trail
+{
+Scale 1
++NOTIMEFREEZE
+States
+{
+Spawn:
+	TNT1 A 0
+	LGPR ABCDEFGHIJKLMNOP 2 A_FadeOut(0.04)
+	Stop
+	}
+}
+
+ACTOR KaboomGold2 : KaboomGold
+{
+Speed 1
+Scale 0.9
++NOTIMEFREEZE
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+LXPG AABBCDEFGHIJKLM 1 Bright A_FadeOut(0.05)
+Stop
+}
+}
+
+ACTOR RailgunImpactEffectGold : RailgunImpactEffectGreen
+{
++NOTIMEFREEZE
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 AAA 0 A_SpawnItemEx("LegendaryGoldParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+	TNT1 AAAAAA 1 A_SpawnItem("RailImpactFlareGold",0)
+	Stop
+	}
+}
+
+ACTOR RailImpactFlareGold : GreenSphereFlare
+{
+Scale 0.5
++NOTIMEFREEZE
+States
+{
+Spawn:
+	TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	LEGG A 1 Bright
+	Stop
+	}
+}
+
+ACTOR Legendary10KProjectile : 10KProjectile
+{
+   Height 1
+   Radius 1
+   Speed 200
+   Scale 0.15
+   RenderStyle Add
+   Alpha 0.85
+   DECAL BFG9500LightningGold
+   PROJECTILE
+   -THRUSPECIES
+   +NOEXTREMEDEATH
+   -MTHRUSPECIES
+   +NOTIMEFREEZE
+   DeathSound "weapons/bfg95explode"
+   States
+   {
+   Spawn:
+      LRAC A 1 Bright
+      Loop
+   Death:
+   XDeath:  
+      TNT1 A 0
+      TNT1 A 1 A_SpawnItem("LegCyber10KEx")
+      Stop
+	  }
+}
+
+ACTOR LegCyber10KEx : Player10KEx
+{
+  Radius 11
+  Height 8
+  DamageType "Cyber10K"
+  Damage 150
+  +NOBLOCKMAP
+  +NOGRAVITY
+  +NOTELEPORT 
+  +FORCERADIUSDMG
+  -MTHRUSPECIES
+  -THRUSPECIES
+  +NOTIMEFREEZE
+  Renderstyle Add
+  Alpha 0.75
+  Scale 0.85
+  States
+  {
+  Spawn:
+    TNT1 A 0
+	TNT1 A 0 A_SpawnItemEx("BFGShockwaveGold", 0, 0, 0, 0, 0, 0, 0, 128)
+	TNT1 AA 0 A_SpawnItemEx("LegendaryGoldParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 AAAA 0 A_CustomMissile("KaboomGold2", 0, 0, random(0,360), 2, random(0,360))
+    LFE1 A 4 Bright A_Detonate
+    LFE1 BCDEF 4 Bright
+    Stop
+  }
+}
+
+ACTOR LegendaryCyberGhostA
+{
+Scale 1.1
+RENDERSTYLE Translucent
+Alpha 0.75
++NOGRAVITY
++CLIENTSIDEONLY
++DONTSPLASH
++NOINTERACTION
++NOCLIP
++NOTIMEFREEZE
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    CYBR A 2 A_FadeOut(0.18)
+    Loop
+  Toaster:
+    TNT1 A 0
+	Stop		
+    }
+}
+
+ACTOR LegendaryCyberFireSpawner : DarkCyberFireSpawner
+{
+  Speed 30
+  FastSpeed 35
+  Damage 15
+  DamageType "Cyber10K"
+  Species "Cybers"
+  Obituary "%o wasn't ready for the wrath of the Legendary Cyberdemon!"
+  MissileType "LegFireTrail"
+  MissileHeight 0
+  +NOTIMEFREEZE
+  States
+  {
+  Spawn: 
+    TNT1 A 0 A_PlaySoundEx("monster/ambientfire2","Voice",1)
+	TNT1 A 0 A_CStaffMissileSlither
+	TNT1 A 2 Bright A_MissileAttack
+    Loop  
+  Death:
+    TNT1 A 0
+    TNT1 A 0 A_StopSoundEx("Voice")
+    TNT1 A 0 A_SpawnItemEx("LegendaryGoldParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+	TNT1 AAAA 0 A_CustomMissile("KaboomGold", 0, 0, random(0,360), 2, random(0,360))
+	TNT1 AAAA 0 A_CustomMissile("LegendarySmokeFX2", 0, 0, random(0,360), 2, random(0,360))
+    LTRD K 4 Bright
+    LTRD L 4 Bright A_Explode(32,86)
+    LTRD MNO 3 Bright
+    Stop
+    }
+}
+
+ACTOR LegFireTrail
+{
+  Radius 1
+  Height 1
+  Speed 0
+  Scale 2
+  Projectile
+  DamageType "Legendary"
+  RenderStyle Add
+  Alpha 0.95
+  +FLOORHUGGER
+  +NODAMAGETHRUST
+  +FORCERADIUSDMG
+  +NOTIMEFREEZE
+  Obituary "%o wasn't ready for the wrath of the Legendary Cyberdemon!"
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    LTRD A 1 Bright A_Explode(16,68)
+	LTRD ABBCDEFGHIJ 1 Bright A_FadeOut(0.05)
+    Stop
+	}
+}
+
+ACTOR LegendaryCyberFireTrail : LegFireTrail
+{
+  DamageType "Cyber10K"
+  Species "Cybers"
+  Obituary "%o wasn't ready for the wrath of the Legendary Cyberdemon!" 
+}
+
+ACTOR LegendaryCyberFlame2 : DarkCyberFlame
+{
++MISSILE
++DONTSPLASH
++NOBLOCKMAP
++NOGRAVITY
++NOTELEPORT
++FORCEXYBILLBOARD
++NOTIMEFREEZE
+RenderStyle Add
+Scale 0.5
+States
+{
+Spawn:
+LMKE ABCDEFGHIJKL 2 Bright A_FadeOut
+Stop
+}
+}
+
+ACTOR LegendaryCyberFlameSpawner2 : LegendaryRedParticleSpawner
+{
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    TNT1 AAAAAA 0 A_SpawnItemEx("LegendaryCyberFlame2",random(48,-48),random(48,-48),random(0,96),0,0,random(2,6),0,128,0)
+    TNT1 A 1
+    Stop
+  }
+}
+
+ACTOR LegendaryCyberBFG15KBall : BFG15KBall
+{
+Height 15
+Radius 15
+Decal LegBFG15K
+Speed 45
+Damage 25
+DamageType "Cyber10K"
+Scale 0.5
+-MTHRUSPECIES
+-THRUSPECIES
++FORCERADIUSDMG
++NOTIMEFREEZE
+ExplosionDamage 110
+ExplosionRadius 165
+SeeSound "weapons/bfg15kfire"
+DeathSound "weapons/bfg95explode"
+States
+{
+Spawn:
+    LFS1 AB 2 Bright A_SpawnItemEx("BFGTrailParticleGold",Random(-8,8),Random(-8,8),Random(-8,8),Random(-1,1),Random(-1,1),Random(-1,1),Random(-20,20),128)
+    Loop
+Death:
+	TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx("BFGShockwaveGold", 0, 0, 0, 0, 0, 0, 0, 128)
+	TNT1 A 0 A_SpawnItemEx("LegendaryGoldParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	TNT1 AAA 0 A_CustomMissile("KaboomGold2", 0, 0, random(0,360), 2, random(0,360))      
+    LFE1 A 4 Bright A_Explode	
+    LFE1 BCDEF 4 Bright
+    Stop
+    }
+}
+
+Actor DeathBall2 : CyberGuruBall
+{
+Obituary "%o payed the ultimate price for his greed."
+States
+{
+Spawn:
+TNT1 A 0 A_PlaySound("Weapons/GuruBlast3",5) 
+Goto Death
+  Death:
+	TNT1 A 0 A_PlaySound("Weapons/GuruBlast3",5)
+	//COLLATERAL DAMAGE EFFECTS
+	TNT1 A 0 A_Explode(2048,192,0,1)
+	TNT1 A 0 A_BFGSpray("GuruSpray",15,20)
+
+	//IMPACT STUFF
+	TNT1 A 0 A_SpawnItemEx("GuruStruckGlowX",0,0,10,0,0,0,0,128,0)
+	TNT1 A 0 A_SpawnItemEx("GuruStruckGlowY",0,0,10,0,0,0,0,128,0)
+	TNT1 AAAAAAAAAAA 0 A_SpawnItemEx("CyberGuruSphereSmoke",random(126,-126),random(126,-126),random(66,-66),0.00001*random(100000,-100000),0.00001*random(100000,-100000),0.00001*random(100000,-100000),random(0,359),0,0)
+	TNT1 AAAAAAAAAAA 0 A_SpawnItemEx("GuruChunkSpark",random(126,-126),random(126,-126),random(66,-66),0,0,0,0,0,0)
+	TNT1 AAAAAAAAAAAAAAAAAAA 2 A_SpawnItemEx("GuruChunkSpark",random(126,-126),random(126,-126),random(66,-66),0,0,0,0,0,0)
+	Stop
+  }
+}
+
+ACTOR DarkAnniFlameSpawner : LegendaryRedParticleSpawner
+{
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    TNT1 AAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("DarkCyberFlame",random(48,-48),random(48,-48),random(0,96),0,0,random(2,6),0,128,0)
+    TNT1 A 1
+    Stop
+  }
+}
+
+ACTOR LegendaryCyberFlame3 : DarkCyberFlame
+{
++MISSILE
++DONTSPLASH
++NOBLOCKMAP
++NOGRAVITY
++NOTELEPORT
++FORCEXYBILLBOARD
++NOTIMEFREEZE
+RenderStyle Add
+Scale 0.5
+States
+{
+Spawn:
+BMKE ABCDEFGHIJKL 2 Bright A_FadeOut
+Stop
+}
+}
+
+ACTOR LegendaryCyberFlameSpawner3 : RedParticleSpawner
+{
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    TNT1 AAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("LegendaryCyberFlame3",random(48,-48),random(48,-48),random(0,96),0,0,random(2,6),0,128,0)
+    TNT1 A 1
+    Stop
+  }
+}
+
+ACTOR LegCybDevastatorBall
+{
+Radius 16
+Height 16
+Damage 1050
+Speed 19
+Alpha 0.95
+Scale 0.7
+RENDERSTYLE Translucent
+Species "Cybers"
+DamageType "Cyber10K"
+Alpha 0.85
+PROJECTILE
++FORCERADIUSDMG
++FORCEXYBILLBOARD
++EXTREMEDEATH
++SKYEXPLODE
++MTHRUSPECIES
++NOTIMEFREEZE
+States
+{
+Spawn:
+    TNT1 A 0
+	TNT1 A 0 A_Jump(128,"DTBFGSFX")
+    TNT1 A 0 A_AlertMonsters
+    TNT1 A 0 A_PlaySoundEx("devastator/fly","Voice",1)
+	TNT1 A 0 A_CustomMissile("LegCybDevastatorBolt",6,0,random(0,359),CMF_AIMDIRECTION|CMF_TRACKOWNER,random(-40,40))
+    LGS2 A 1 Bright A_SpawnItemEx("ProjectileTrailParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	LGS2 AAA 0 Bright A_CustomMissile("LegCybLiteShot",0,0,Random(0,360))
+	TNT1 A 0 A_CustomMissile("LegCybDevastatorBolt",6,0,random(0,359),CMF_AIMDIRECTION|CMF_TRACKOWNER,random(-40,40))
+	LGS2 B 1 Bright A_SpawnItemEx("ProjectileTrailParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	TNT1 A 0 A_CustomMissile("LegCybDevastatorBolt",6,0,random(0,359),CMF_AIMDIRECTION|CMF_TRACKOWNER,random(-40,40))
+	LGS2 C 1 Bright A_SpawnItemEx("ProjectileTrailParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	LGS2 CCC 0 Bright A_CustomMissile("LegCybLiteShot",0,0,Random(0,360))
+	TNT1 A 0 A_CustomMissile("LegCybDevastatorBolt",6,0,random(0,359),CMF_AIMDIRECTION|CMF_TRACKOWNER,random(-40,40))
+	TNT1 A 0 A_CustomMissile("LegDevastatorTrail",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+	LGS2 D 1 Bright A_SpawnItemEx("ProjectileTrailParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+    Loop
+DTBFGSFX:
+    TNT1 A 0 A_AlertMonsters
+    TNT1 A 0 A_PlaySoundEx("devastator/fly","Voice",1)
+	TNT1 A 0 A_Explode(32,450,0)
+	TNT1 A 0 A_CustomMissile("LegCybDevastatorBolt",6,0,random(0,359),CMF_AIMDIRECTION|CMF_TRACKOWNER,random(-40,40))
+	TNT1 A 0 A_SpawnItemEx("DTBFGLightningGold",Random(6,-6),Random(6,-6),Random(6,-6),0,0,0,0,128)
+    LGS2 A 1 Bright A_SpawnItemEx("ProjectileTrailParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	LGS2 A 1 Bright A_CustomMissile("LegCybDTBFGProjectileAttack",Random(-10,10),0,0,CMF_TRACKOWNER)
+	TNT1 A 0 A_Explode(32,450,0)
+	TNT1 A 0 A_CustomMissile("LegCybDevastatorBolt",6,0,random(0,359),CMF_AIMDIRECTION|CMF_TRACKOWNER,random(-40,40))
+	TNT1 A 0 A_SpawnItemEx("DTBFGLightningGold2",Random(6,-6),Random(6,-6),Random(6,-6),0,0,0,0,128)
+    LGS2 B 1 Bright A_SpawnItemEx("ProjectileTrailParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	LGS2 A 1 Bright A_CustomMissile("LegCybDTBFGProjectileAttack",Random(-10,10),0,0,CMF_TRACKOWNER)
+	TNT1 A 0 A_Explode(32,450,0)
+	TNT1 A 0 A_CustomMissile("LegCybDevastatorBolt",6,0,random(0,359),CMF_AIMDIRECTION|CMF_TRACKOWNER,random(-40,40))
+	TNT1 A 0 A_SpawnItemEx("DTBFGLightningGold",Random(6,-6),Random(6,-6),Random(6,-6),0,0,0,0,128)
+    LGS2 C 1 Bright A_SpawnItemEx("ProjectileTrailParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	LGS2 A 1 Bright A_CustomMissile("LegCybDTBFGProjectileAttack",Random(-10,10),0,0,CMF_TRACKOWNER)
+	TNT1 A 0 A_Explode(32,450,0)
+	TNT1 A 0 A_CustomMissile("LegCybDevastatorBolt",6,0,random(0,359),CMF_AIMDIRECTION|CMF_TRACKOWNER,random(-40,40))
+	TNT1 A 0 A_SpawnItemEx("DTBFGLightningGold2",Random(6,-6),Random(6,-6),Random(6,-6),0,0,0,0,128)
+	TNT1 A 0 A_CustomMissile("LegDevastatorTrail",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    LGS2 D 1 Bright A_SpawnItemEx("ProjectileTrailParticleGold",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	LGS2 A 1 Bright A_CustomMissile("LegCybDTBFGProjectileAttack",Random(-10,10),0,0,CMF_TRACKOWNER)
+    Goto Spawn
+Death:
+    TNT1 A 0
+	TNT1 A 0 A_SetTranslucent(0.75,1)
+	TNT1 A 0 Radius_Quake(3,35,0,10,0)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,0,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,10,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,20,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,30,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,40,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,50,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,60,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,70,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,80,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,90,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,100,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,110,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,120,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,130,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,140,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,150,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,160,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,170,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,180,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,190,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,200,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,210,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,220,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,230,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,240,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,250,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,260,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,270,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,280,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,290,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,300,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,310,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,320,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,330,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,340,CMF_TRACKOWNER)
+	TNT1 A 0 A_CustomMissile("LegAnniDTBFGTracer",0,0,350,CMF_TRACKOWNER)	
+	TNT1 A 0 A_SpawnItemEx("DTBFGLightningGoldSpawner",0,0,0,0,0,0,0,128)	
+	TNT1 A 0 A_Explode(80,256)
+	LGS2 A 6 Bright A_SpawnItemEx("LegDevastatorShockWave",0,0,0,0,0,0,0,128)
+	TNT1 A 0 A_Explode(80,256)
+	LGS2 B 6 Bright A_SpawnItemEx("LegDevastatorShockWave",0,0,0,0,0,0,0,128)
+	TNT1 A 0 A_Explode(80,256)
+	LGS2 C 6 Bright A_SpawnItemEx("LegDevastatorShockWave",0,0,0,0,0,0,0,128)
+	TNT1 A 0 A_Explode(80,256)
+	LGS2 D 6 Bright A_SpawnItemEx("LegDevastatorShockWave",0,0,0,0,0,0,0,128)
+	TNT1 A 0 A_Explode(80,256)
+	LGS2 A 6 Bright A_SpawnItemEx("LegDevastatorShockWave",0,0,0,0,0,0,0,128)
+	TNT1 A 0 A_Explode(80,256)
+	LGS2 B 6 Bright A_SpawnItemEx("LegDevastatorShockWave",0,0,0,0,0,0,0,128)
+	TNT1 A 0 A_Explode(80,256)
+	LGS2 C 6 Bright A_SpawnItemEx("LegDevastatorShockWave",0,0,0,0,0,0,0,128)
+	TNT1 A 0 A_Explode(80,256)
+	LGS2 D 6 Bright A_SpawnItemEx("LegDevastatorShockWave",0,0,0,0,0,0,0,128)
+	TNT1 A 0 A_Explode(80,256)
+	LGS2 A 6 Bright A_SpawnItemEx("LegDevastatorShockWave",0,0,0,0,0,0,0,128)
+	TNT1 A 0 A_Explode(80,256)
+	LGS2 B 6 Bright A_SpawnItemEx("LegDevastatorShockWave",0,0,0,0,0,0,0,128)
+	TNT1 A 0 A_Explode(80,256)
+	LGS2 C 6 Bright A_SpawnItemEx("LegDevastatorShockWave",0,0,0,0,0,0,0,128)
+	TNT1 A 0 A_Explode(80,256)
+	LGS2 D 6 Bright A_SpawnItemEx("LegDevastatorShockWave",0,0,0,0,0,0,0,128)
+	TNT1 A 0 A_Explode(128,1024,0)
+	TNT1 A 0 A_Explode(460,640,0)
+	TNT1 A 0 A_Explode(618,256)
+	TNT1 A 0 A_StopSoundEx("Voice")
+	TNT1 A 0 Radius_Quake(20,12,0,12,0)
+	TNT1 A 0 A_PlaySound("weapons/dtech10kexplode")
+	TNT1 A 0 A_SpawnItemEx("LegDevastatorShockWave2",0,0,0,0,0,0,0,128)
+	TNT1 A 0 A_SpawnItem("LegAnniDTBFGEx",0,-10)
+	LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,18,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,36,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,54,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,72,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,90,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,108,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,126,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,144,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,144,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,162,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,180,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,196,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,216,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,234,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,252,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,270,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,288,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,306,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,324,2)
+    LGE1 D 0 Bright A_CustomMissile("LegCybDevastatorBall2",0,0,342,2)
+	LGE1 AAAAAABBBBBBCCCCCCDDDDDD 1 A_CustomMissile("LegKaboomDevastator22",0,0,random(0,360),2,random(0,360))
+    LGE1 EF 6 Bright
+    Stop    
+    }
+}
+
+ACTOR LegCybDevastatorProjectileAttack
+{
+
+Obituary "%o was pulverised by %k's Devastator."
+MissileType "PlayerDTBFGRailgunSlug"
+Monster
+Species "Cybers"
++THRUSPECIES
++LOOKALLAROUND
++ISMONSTER
++QUICKTORETALIATE
++NOTARGET
++NOCLIP
++NOTIMEFREEZE
+States
+{
+Spawn:
+    TNT1 A 0
+	TNT1 A 0 A_Look
+	TNT1 AAAAA 1 A_Chase
+	Stop
+See:
+    TNT1 A 0
+	TNT1 A 1 A_JumpIfCloser(1250,"Attack")
+	Stop
+Attack:
+    TNT1 A 0
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 0 A_MissileAttack
+	TNT1 A 1 A_CustomRailgun(-1,0,NONE,"Yellow",1,1,2)
+	Goto Death	
+Death:
+	TNT1 A 1
+	Stop
+	}
+}
+
+actor LegCyberLaserBeam : fastprojectile{
+	radius 16
+	height 16
+	scale 2.0
+	mass 20
+	PROJECTILE
+	+NODAMAGETHRUST
+	+FORCERADIUSDMG
+	+EXTREMEDEATH
+	+SEEKERMISSILE
+	+DOOMBOUNCE
+    +NOTIMEFREEZE
+    BounceCount 2
+	ReactionTime 80
+	speed 95
+	damage 65
+	renderstyle add
+	damagetype "Cyber10k"
+	SeeSound "LegLaser/fire"
+	DeathSound "LegLaser/explode"
+	MissileType "powbolt_trail1"
+	MissileHeight 8
+	Decal BFG9500LightningGold
+	var int user_boomc;
+	states {
+		spawn:
+			CPBL ABCDEFGHIJKL 1 bright A_SpawnItemEx("powbolt_trail2",0,0,0, 0,0,0)
+			loop
+		death:
+			TNT1 A 0 A_SetUserVar("user_boomc", 0)
+			TNT1 A 0 A_SpawnItemEx("powbolt_boomflash",0,0,0, 0,0,0)
+			TNT1 A 0 A_SpawnItemEx("powbolt_boomflashB",0,0,0, 0,0,0)
+			TNT1 A 0 A_SpawnItemEx("powbolt_boom",0,0,0, 0,0,0)
+			TNT1 A 0 A_SpawnItemEx("powbolt_boom2",0,random(60,70),50, 0,0,0)
+			TNT1 A 0 A_SpawnItemEx("powbolt_boom3",0,random(-70,-60),-50, 0,0,0)
+			TNT1 A 0 A_SpawnItemEx("pbolt_boomwave",0,0,0, 0,0,0)
+			TNT1 A 0 A_Quake(5, 20, 0, 864, " ")
+			TNT1 A 0 A_Explode (120, 15, 0, 0, 64)
+		boom:
+			TNT1 A 0 A_JumpIf(user_boomc>=5,"boom2")
+			TNT1 A 0 A_Explode (120, 15, 0, 0, 64)
+			TNT1 A 1 A_SetUserVar("user_boomc", user_boomc+1)
+			loop
+		boom2:
+			TNT1 A 0 A_ChangeFlag("FORCERADIUSDMG",0)
+			TNT1 A 0 A_SetUserVar("user_boomc", 0)
+			TNT1 A 0 A_SpawnItemEx("pbolt_boomwave",0,0,0, 0,0,0)
+
+		boom2s:
+			TNT1 A 0 A_JumpIf(user_boomc>=20,"boomend")
+			TNT1 A 0 A_Explode (120, 15, 0, 0, 64)
+			TNT1 A 2 A_SetUserVar("user_boomc", user_boomc+1)
+			loop
+		boomend:
+			TNT1 A 0
+			stop				 
+	}
+}
+
+actor powbolt_boom 
+{
+	height 5
+	radius 5
+	scale 1.5
+	alpha 1.0
+	renderstyle add
+	+NOINTERACTION
+	+FORCEXYBILLBOARD
+    +NOTIMEFREEZE
+	states 
+	{
+		spawn:
+		CBE1 ABCDEFGHIJKLMNOPQRSTUVWX 1 bright
+		stop
+	
+	}
+
+}
+
+actor powbolt_boom2 : powbolt_boom 
+{
+	scale 1.3
+	states 
+	{
+		spawn:
+		CBE2 ABCDEFGHIJKLMNOP 1 bright
+		stop
+	}
+}
+
+actor powbolt_boom3 : powbolt_boom {
+	scale 1.45
+	states {
+		spawn:
+		CBE4 ABCDEFGHIJKLMNOP 1 bright
+		stop
+	}
+}
+
+actor powbolt_boomflash {
+	scale 0.95
+	alpha 1.0
+	renderstyle add
+	+NOINTERACTION
+	+FORCEXYBILLBOARD
+    +NOTIMEFREEZE
+	states {
+		spawn:
+			CBFL A 3 bright
+		spend:
+			CBFL A 1 bright A_FadeOut(0.05) 
+			stop
+	}
+}
+
+actor powbolt_boomflashB {
+	scale 0.6
+	alpha 1.0
+	renderstyle add
+	+NOINTERACTION
+	+FORCEXYBILLBOARD
+    +NOTIMEFREEZE
+	states {
+		spawn:
+			TNT1 A 0
+			TNTE A 0 A_Jump(256, "f1", "f2", "f3", "f4")
+		f1:	
+			CBF2 A 1 bright A_FadeOut(0.02) 
+			wait 
+		f2:	
+			CBF2 B 1 bright A_FadeOut(0.02) 
+			wait 
+		f3:	
+			CBF2 C 1 bright A_FadeOut(0.02) 
+			wait 
+		f4:	
+			CBF2 C 1 bright A_FadeOut(0.02) 
+			wait
+	}
+}
+
+actor pbolt_boomwave 
+{
+	var int user_scale;
+	alpha 1.0
+	renderstyle add
+	+NOINTERACTION
+	+FORCEXYBILLBOARD
+    +NOTIMEFREEZE
+	states{
+		spawn:
+			TNT1 A 0
+			TNT1 A 0 A_SetUserVar("user_scale",4)
+		scaledown:
+			TNT1 A 0 A_JumpIf(user_scale>=110,"LoopEnd") 
+			CPEW B 1 bright A_FadeOut(0.06)
+			TNT1 A 0 A_SetUserVar("user_scale",user_scale+10)
+			loop
+		loopend:
+			CPEW B 1 Bright A_FadeOut(0.1)
+			wait	
+	}
+}
+
+
+
+actor powbolt_trail1 
+{
+	scale 0.1
+	alpha 1.0
+	renderstyle add
+	+NOINTERACTION
+	+NOGRAVITY
+	+FORCEXYBILLBOARD
+	+NOTELEPORT
+    +NOTIMEFREEZE
+	states {
+		spawn:
+			CPST ABCDE 2 bright
+		tofade:
+			CPST FGHIJKLLMMNNOOOO 2 bright A_Fadeout(0.1)
+			stop
+	}
+}
+
+
+actor powbolt_trail2 
+{
+	var int user_scale;
+	alpha 1.0
+	renderstyle add
+	+NOINTERACTION
+	+FORCEXYBILLBOARD
+    +NOTIMEFREEZE
+	+CLIENTSIDEONLY
+	states{
+		spawn:
+			    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+			TNT1 A 0 A_SetUserVar("user_scale",4)
+		scaledown:
+			TNT1 A 0 A_JumpIf(user_scale>=30,"LoopEnd") 
+			CPEW A 1 bright A_FadeOut(0.04)
+			TNT1 A 0 A_SetUserVar("user_scale",user_scale+1)
+			loop
+		loopend:
+			CPEW A 1 Bright A_FadeOut(0.1)
+			wait
+			  Toaster:
+    TNT1 A 0
+	Stop	
+			
+	}
+}
+
+ACTOR LegCyberQuake
+{
+	Speed 8
+	Damage 15
+	Radius 12
+	Height 16
+	RenderStyle Translucent
+	Alpha 0.1
+	DamageType "Cyber10K"
+	PROJECTILE
+	+DROPOFF
+	-NOGRAVITY
+	+FORCERADIUSDMG
+	+BLOODLESSIMPACT
+	+FloorHugger
+	+RIPPER
+    +NOTIMEFREEZE
+	SeeSound "LegCyber/thud"
+	States
+	{
+	Spawn:
+	    	IDGA CCAABBBBBCCC 10 A_Explode
+	Death:
+		IDGA C 1 A_Explode
+	    	Stop
+	}
+}
+
+Actor LegCyberShieldSpawner
+{
+ Speed 75
+ Height 1
+ Radius 1
+ Damage 0
+ +Ripper
+ +Noclip
+ +BloodlessImpact
+ +NOTIMEFREEZE
+  States
+   {
+    Spawn:
+	 TNT1 AAAAAAAAAA 0
+	 Death:
+	 TNT1 A 1 A_SpawnItemEx("LegCyberShield",0,0,0)
+	 Stop
+  }
+}
+
+Actor LegCyberShieldSpawner2 : LegCyberShieldSpawner
+{
+ States
+   {
+    Spawn:
+	 TNT1 AAAAAA 0
+	 GoTo Death
+  }
+}
+
+Actor LegCyberShieldSpawner3 : LegCyberShieldSpawner
+{
+ States
+   {
+    Spawn:
+	 TNT1 AAAA 0
+	 GoTo Death
+  }
+}
+
+Actor LegCyberShieldSpawner4 : LegCyberShieldSpawner
+{
+ States
+   {
+    Spawn:
+	 TNT1 AA 0
+	 GoTo Death
+  }
+}
+
+Actor LegCyberShieldSpawner5 : LegCyberShieldSpawner
+{
+ States
+   {
+    Spawn:
+	 TNT1 A 0
+	 GoTo Death
+  }
+}
+
+
+Actor LegCyberShield
+{
+ Renderstyle Add
+ Mass 0x7FFFFFFF
+ Alpha 1.0
+ +NoGravity
+ -Float
+ Height 55
+ Radius 55
+ Species "Cybers"
+ +Solid
+ +Shootable
+ +Invulnerable
+ +Reflective
+ +NoBlood
+ +NOTIMEFREEZE
+ Reactiontime 37
+ Scale 3.5
+ DamageType "Legendary"
+ DeathSound "Monster/hadsit"
+  States
+   {
+    Spawn:
+	 CPBL A 2 Bright
+	 //TNT1 AA 0 A_CustomMissile("KaboomGold2", 17, 0, random(0,360), 2, random(0,360))
+	 CPBL B 2 Bright
+	 //TNT1 AA 0 A_CustomMissile("KaboomGold2", 17, 0, random(0,360), 2, random(0,360))
+	 TNT1 A 0 A_CountDown
+	 Loop
+	Death:
+	 ENRS A 2 Bright
+	 ENRS A 1 A_Explode(25,130)
+	 TNT1 A 0 A_Scream
+	 TNT1 AAAAAAAA 0 A_CustomMissile("KaboomGold2", 17, 0, random(0,360), 2, random(0,360))
+	 TNT1 AAAAAA 0 A_CustomMissile("KaboomGold", 0, 0, random(0,360), 2, random(0,360))	
+	 TNT1 AAAAAA 0 A_CustomMissile("LegendarySmokeFX4", 0, 0, random(0,360), 2, random(0,360))
+	 TNT1 AAAA 0 A_SpawnItemEx("LegendaryGoldParticleSpawner", 0, 0, 17, 0, 0, 0, 0, 128)
+	 TNT1 A 0 A_SpawnItemEx("LNCometDeath",0,0,0,0,0,0,0,128,0)
+	 Stop
+  }
+}
+
+ACTOR LegHomingSoulY
+{
+   Radius 6
+   Height 8
+   Speed 40
+   Damage 30
+   PROJECTILE
+   +SEEKERMISSILE
+   +THRUSPECIES
+   +ScreenSeeker
+   +NOTIMEFREEZE
+   RENDERSTYLE ADD
+   DamageType "Legendary"
+   Species "Cybers"
+   ALPHA 0.67
+   MissileType LegHomingSYTrail
+   SeeSound "forgotten/attack"
+   DeathSound "forgotten/death"
+   Decal Scorch
+   States
+   {
+   Spawn:
+	YVSP A 0 Bright A_SeekerMissile(15,15)
+      YVSP ABABAB 1 Bright A_CustomMissile("LegHomingSYTrail",0,0,0,0)
+      BVSP B 1 Bright A_CustomMissile("LegHomingSYTrail",0,0,0,0)
+      YVSP A 1 Bright A_CustomMissile("LegHomingSYTrail",0,0,0,0)
+      BVSP B 1 Bright A_CustomMissile("LegHomingSYTrail",0,0,0,0)
+      YVSP A 1 Bright A_CustomMissile("LegHomingSYTrail",0,0,0,0)
+      BVSP B 1 Bright A_CustomMissile("LegHomingSYTrail",0,0,0,0)
+      Loop
+   Death:
+      TNT1 AA 0 A_SpawnItemEx("LegendaryGoldParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	  TNT1 AAA 0 A_CustomMissile("KaboomGold2", 0, 0, random(0,360), 2, random(0,360))
+	  TNT1 AAAA 0 A_CustomMissile("LegendarySmokeFX2", 0, 0, random(0,360), 2, random(0,360))
+	  TNT1 AA 0 A_SpawnItemEx("LegendaryBlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	  TNT1 AAA 0 A_CustomMissile("KaboomBlue3", 0, 0, random(0,360), 2, random(0,360))
+      YVSP K 3 Bright A_RadiusThrust(4800, 512, 0)
+      BVSP L 3 Bright
+      YVSP M 3 Bright
+      BVSP N 3 Bright
+      YVSP O 3 Bright
+      Stop
+   }
+}
+
+ACTOR LegHomingSYTrail
+{
+   Radius 3
+   Height 3
+   Speed 15
+   PROJECTILE
+   RENDERSTYLE ADD
+   +NOTIMEFREEZE
+   +CLIENTSIDEONLY
+   Alpha 0.67
+   states
+   {
+   Spawn:
+       TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+      YVSP QRS 4
+      Goto Death
+   Death:
+      YVSP C 3 BRIGHT
+      BVSP D 3 BRIGHT
+      Stop
+  Toaster:
+    TNT1 A 0
+	Stop		  
+   }
+}
+
+ACTOR LegCybSeekingComet
+{
+Radius 10
+Height 10
+Speed 35
+FastSpeed 38
+Damage 15
+Scale 0.60
+DamageType "Cyber10K"
+ExplosionDamage 70
+ExplosionRadius 110
+PROJECTILE
+SeeSound "comet/launch"
+DeathSound "comet/explosion"
+MissileType LegendarySeekingTail
+MissileHeight 0
+Decal Scorch
++NOTIMEFREEZE
+States
+{
+Spawn:
+TNT1 A 0 A_Tracer2
+LCPB AAAAA 1 Bright A_SpawnItemEx("LegCybSeekingTail", 0, 0, 0, 0, 0, 0, 0, 128)
+TNT1 A 0 A_Tracer2
+LCPB BBBBB 1 Bright A_SpawnItemEx("LegCybSeekingTail", 0, 0, 0, 0, 0, 0, 0, 128)
+Loop
+Death:
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("LegendaryBlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+LNCM DE 3 Bright
+TNT1 A 0 A_SpawnItemEx("LNCometDeath",0,0,0,0,0,0,0,128,0)
+Stop
+}
+}
+
+ACTOR LegCybSeekingTail : CometTail
+{
+Alpha 0.85
+Scale 0.75
++NOTIMEFREEZE
++CLIENTSIDEONLY
+States
+{
+Spawn:
+ TNT1 A 0
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+TNT1 A 1
+LCPT ABCDE 2 Bright A_FadeOut(0.12)
+Stop
+  Toaster:
+    TNT1 A 0
+	Stop	
+}
+}
+
+ACTOR LegCybThorStrikeSpawner
+{
+Height 2
+Radius 2
+Speed 6
+PROJECTILE
++FLOORHUGGER
++NOCLIP
++DONTSPLASH
++FORCERADIUSDMG
++NOTIMEFREEZE
+DamageType "Cyber10K"
+States
+{
+  Spawn:
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_Wander
+	TNT1 A 0 A_Stop
+	TNT1 A 0 A_PlayWeaponSound("thorstrike/load")
+	TNT1 A 0 A_SpawnItemEx("LegCybThorStrikeBeam")
+    TNT1 A 0 A_SpawnItemEx("LegCybThorStrikeBeam2")
+	TNT1 AAAAAAAAAA 17
+	TNT1 A 0 A_PlayWeaponSound("legendary/strike")
+	TNT1 A 0 A_PlaySoundEx("legendary/strike","Voice",0,2)
+	TNT1 A 0 A_SpawnItemEx("LegendaryStrike")
+	TNT1 A 0 A_SpawnItemEx("LegendaryBlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	TNT1 AAA 0 A_CustomMissile("BlueKaboom3", 0, 0, random(0,360), 2, random(0,360))
+	TNT1 AAA 0 A_CustomMissile("LegendarySmokeFX2", 0, 0, random(0,360), 2, random(0,360))
+	LROC B 0 A_Explode(84,512,0)
+	LROC B 4 Bright A_Explode(286,286,0)
+	LROC CD 3 Bright A_SetTranslucent(0.75,1)
+	TNT1 A 0 A_SpawnItemEx("TrueSmartFire")
+	Stop
+}
+}
+
+Actor LegCybThorStrikeBeam
+{
++NOCLIP
++NOBLOCKMAP
++FORCEYBILLBOARD
++NOINTERACTION
++NOTIMEFREEZE
++CLIENTSIDEONLY
+RenderStyle Add
+XScale 0.5
+YScale 5.0
+Alpha 0.5
+States
+{
+  Spawn:
+	THOR A 0
+	THOR AAAAAAAAAA 17 BRIGHT A_FadeIn(0.1)
+	THOR A 1 Bright A_FadeOut(0.05)
+	Wait
+ }
+}
+
+Actor LegCybThorStrikeBeam2 : LegCybThorStrikeBeam
+{
+XScale 2.0
+YScale 5.0
+Alpha 0.0
+}
+
+Actor LegCybThorStrike
+{
+Alpha 0.9
++NOCLIP
++NOBLOCKMAP
++FORCEYBILLBOARD
++NOINTERACTION
++NOTIMEFREEZE
++CLIENTSIDEONLY
+Scale 7.0
+States
+{
+  Spawn:
+	LFR9 A 0
+	LFR9 A 1 Bright A_FadeOut(0.05)
+	Wait
+}
+}
+
+ACTOR LegCybSlowBall
+{
+Radius 6
+Height 8
+Speed 3
+PROJECTILE
+ActiveSound "lefrail/active"
+DeathSound "weapons/bfg95explode"
+RenderStyle Add
+Damage 100
+DamageType "Cyber10K"
+Scale 2.5
+Alpha 1.00
+Decal Scorch
+BounceCount 3
++DOOMBOUNCE
++CANBOUNCEWATER
++FORCERADIUSDMG
++DONTHURTSPECIES
++SEEKERMISSILE
++NOTIMEFREEZE
+States
+{
+   Spawn:
+	LRB3 A 0
+	LRB3 A 0 A_LoopActiveSound
+	LRB3 A 0 A_SeekerMissile(15,15,SMF_LOOK)
+	LRB3 AABBCCDD 1 Bright A_Explode(4,384,0)
+	Loop
+   Death:
+	TNT1 A 0
+	TNT1 A 0 A_Explode(128,128,0)
+    TNT1 A 0 A_SpawnItemEx("LegendaryBlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("LNCometDeath",0,0,0,0,0,0,0,128,0)
+	TNT1 A 0 A_PlaySound("lrball3/exp")
+	MMSD A 8 bright
+	Stop
+   }
+}
+
+Actor ResurrectorSummoner
+{
+ Height 8
+ Radius 25
+ Speed 30
+ Damage (0)
+ +RippeR
+ +BloodlessImpact
+ +NOTIMEFREEZE
+  States
+   {
+    Spawn:
+	 TNT1 A 5
+	Death:
+	 TNT1 A 0
+	 TNT1 A 2
+	 TNT1 A 0 A_Playsound ("hk/summon")
+	 TNT1 A 0 A_SpawnItemEx("Resurrector")
+	 Stop
+   }
+}

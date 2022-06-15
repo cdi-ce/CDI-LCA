@@ -1,0 +1,36 @@
+#include "zcommon.acs"
+#library "LCARD"
+
+#define x_index 1
+bool BlueScreen = FALSE;
+
+script 620 (int Typ)
+{
+if( Typ == 1){BlueScreen = TRUE;}
+}
+
+script 621 ENTER
+{
+if( BlueScreen == TRUE )
+{
+fadeto(0,0,255, 1.0, 0);
+fadeto(0,0,0, 1.0, 0.25);
+delay(35*3);   
+fadeto(0,0,0, 0, 0.25); 
+BlueScreen = FALSE;
+}
+delay(1);
+restart;
+}
+
+script 622( void )
+{
+        delay(35*3);
+		 PrintBold(s:"\cfYou thought you could beat me that easily?!\n\n Lets see how long you last against my final form!");
+}
+
+script 623( void )
+{
+         delay(35*3);
+		 PrintBold(s:"\cnTHIS IS ONLY THE BEGINNING HAHAHAHAHA!");
+}

@@ -1,0 +1,1516 @@
+Actor LegendaryRedeemer 7037
+{
+Monster
+Health 2000
+Radius 31
+Height 56
+Mass 400
+Speed 12
+PainChance 28
++FLOAT
++NOGRAVITY
++NOTARGET
++BOSS
++AVOIDMELEE
++NOTIMEFREEZE
++MISSILEMORE
++MISSILEEVENMORE
++NOICEDEATH
++DONTGIB
++NOTELEFRAG
++QUICKTORETALIATE
++DONTHARMSPECIES
++NORADIUSDMG
+BloodColor "Blue"
+//Species "Caco" Complex Doom Cacodemons don't have species :/
+Species "Redeemer"
+DamageFactor 0.6
+DamageFactor "CacoComet", 0.0
+DamageFactor "Legendary1", 0.0
+DamageFactor "LegendaryPlayer", 0.3
+DamageFactor "Legendary", 0.0
+DamageFactor "LegendaryGuru", 0.0
+DamageFactor "LegendaryGuruPlayer", 0.3
+DamageFactor "PDTBFG", 0.10
+DamageFactor "PDTBFGTracer", 0.10
+DamageFactor "PlayerDevBall", 0.110
+DamageFactor "PlayerDevBall2", 0.110
+DamageFactor "PlayerDTBFGRailgunSlug", 0.110
+DamageFactor "PlayerDevTracer", 0.110
+DamageFactor "DBFG10K2", 0.65
+DamageFactor "PlayerDBFG10K2", 0.65
+DamageFactor "DBFG2", 0.65
+DamageFactor "PlayerDBFG2", 0.65
+DropItem "BossLifeEssence" 256
+DropItem "BossArmorBonusMax" 256
+DropItem "LDemonAmmo" 256
+DropItem "LDemonAmmoBox" 256
+DropItem "LegTimeFreezeSphere" 80 1
+DropItem "LegendarySphere" 150 1
+DropItem "Legendary Plasmatic Rifle" 190 1
+DropItem "LegendaryRune" 56 1
+SeeSound "redeemer/see"
+PainSound "redeemer/pain"
+DeathSound "redeemer/death"
+ActiveSound "redeemer/idle"
+Obituary "not one cell was left of %o after being defeated by a Legendary Redeemer."
+var int user_delay;
+var int user_portal;
+var int user_suicide;
+var int user_trap;
+var int user_timer;
+var int user_music;
+States
+{
+  Spawn:
+    LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+    LRED A 10 Bright A_Look
+    Loop
+  See:
+    TNT1 A 0 A_JumpIf(user_music == 1,3)
+    TNT1 A 0 ACS_ExecuteAlways(5432,0,15)
+	TNT1 A 0 A_SetUserVar("user_music",1)
+	TNT1 A 0 A_JumpIf(user_suicide == 1,"SeeSuicide")
+	TNT1 AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+    LRED AAA 2 Bright A_Chase
+	TNT1 A 0 A_Jump(68,"Avoid","Rush","Trap","Teleport")
+    Loop
+  SeeSuicide:
+	LRED A 0 A_JumpIf(user_timer >= 390,"Explode")
+	LRED A 0 A_SetUserVar("user_timer",user_timer+1)
+	TNT1 A 0 A_SpawnItem("LRedFlameSpawner",0,0,0,0)
+    LRED A 3 Bright A_Chase("","Kamikaze")
+    Loop	
+  Rush:
+	TNT1 AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)	
+	TNT1 A 0 A_JumpIf(user_suicide == 1,"SeeSuicide")
+	LRED AA 0 A_Chase
+    LRED A 1 Bright A_SpawnItemEx("LegendaryRedeemerGhost")
+	TNT1 A 0 A_Jump(12,"See")
+    Loop
+  Avoid:
+	LRED G 0
+	TNT1 A 0 A_JumpIf(user_suicide == 1,"SeeSuicide")
+	LRED G 0 A_SetAngle(angle+random(0,359))
+	LRED G 0 A_Recoil(-50)
+	LRED G 0 A_FaceTarget
+	LRED GGGGGGGGGGGGG 1 A_SpawnItemEx("LegendaryRedeemerGhost2")
+	TNT1 A 0 A_Jump(145,"See")
+	LRED G 1 A_Stop
+    Goto Avoid
+  Teleport:
+    LRED A 1 A_UnSetShootable
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+	LRED AAAAAAAAAAA 1 A_FadeOut(0.1,0)
+	LRED AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+	LRED A 8
+	LRED A 0 A_JumpIfCloser(2500,2)
+	LRED A 0 A_Jump(256,6)
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+	LRED A 0 A_SpawnItemEx("FakeLegendaryRedeemer",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS,192)
+	LRED A 8
+	LRED AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    LRED A 1 A_PlayWeaponSound("boss/teleport")
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+	LRED AAAAAAAAAAA 1 A_FadeIn(0.1)
+    LRED A 1 A_SetShootable
+    Goto See		
+  Trap:
+	TNT1 A 0 
+	TNT1 A 0 A_SetUserVar("user_trap",0)
+	TNT1 A 0 A_JumpIf(user_suicide == 1,"SeeSuicide")
+    TNT1 A 0 A_JumpIf(user_trap >= 4,"See")
+	LRED B 0 A_JumpIfTargetInLos("Missile")
+    LRED B 0 A_SetAngle(random(0,359))
+    LRED BC 5 Bright
+	LRED D 0 A_PlaySound("reedemer/trap")
+    LRED D 0 A_SetUserVar("user_trap",user_trap+1)
+	LRED D 0 A_SpawnItemEx("LegRedTrap",45,0,16,15,-4)
+	LRED D 0 A_SpawnItemEx("LegRedTrap",45,0,16,15,4)
+    LRED D 5 Bright A_SpawnItemEx("LegRedTrap",45,0,16,15)
+	TNT1 A 0 A_Jump(110,"See")
+	Goto Trap+3
+  Missile:
+    TNT1 A 0 A_SetShootable
+    TNT1 A 0 A_UnsetInvulnerable
+    TNT1 A 0 A_SetTranslucent(1)
+    TNT1 A 0 A_JumpIf(user_suicide == 1,"SeeSuicide")
+	TNT1 A 0 A_Jump(127,2)
+	TNT1 A 0 A_JumpIfHealthLower(400,"Suicide")
+	TNT1 A 0 A_JumpIfHealthLower(200,"Suicide")
+    TNT1 A 0 A_Jump(127,"FastBall","Laser","Void","TrapAttack")
+	TNT1 A 0 A_Jump(64,"Thunder","Storm")
+	TNT1 A 0 A_Jump(48,"Portal")
+  Normal:
+    LRED BC 2 Bright A_FaceTarget
+	LRED D 0 A_CustomMissile("LegRedBall",30,10,0,0,0)
+    LRED D 0 A_CustomMissile("LegRedBall",30,-10,0,0,0)
+	LRED D 0 A_CustomMissile("LegRedBall",20,10,0,0,0)
+    LRED D 2 Bright A_CustomMissile("LegRedBall",20,-10,0,0,0)
+	LRED D 0 A_Jump(64,"See","Avoid","Laser")
+	LRED D 0 A_CposRefire
+	LRED D 0 A_Jump(256,"Normal","FastBall")
+    Goto Normal
+  FastBall:
+    LRED BC 2 Bright A_FaceTarget
+    LRED D 2 Bright A_CustomMissile("LegRedFastBall",25,0,0,0,0)
+	LRED D 0 A_Jump(64,"See","Avoid","Laser")
+	LRED D 0 A_CposRefire
+	LRED D 0 A_Jump(256,"Normal","FastBall")
+    Goto FastBall
+  Laser:
+    LRED BC 5 Bright A_FaceTarget
+    LRED D 3 Bright A_CustomMissile("LegRedLaser",25,0,0,0,0)
+	LRED D 0 A_FaceTarget
+	LRED D 3 Bright A_CustomMissile("LegRedLaser",25,0,0,0,0)
+	LRED D 0 A_FaceTarget
+	LRED D 3 Bright A_CustomMissile("LegRedLaser",25,0,0,0,0)
+	LRED D 0 A_FaceTarget
+	LRED D 3 Bright A_CustomMissile("LegRedLaser",25,0,0,0,0)
+	LRED D 0 A_FaceTarget
+	LRED D 3 Bright A_CustomMissile("LegRedLaser",25,0,0,0,0)
+	LRED D 0 A_FaceTarget
+	LRED D 3 Bright A_CustomMissile("LegRedLaser",25,0,0,0,0)
+	LRED D 0 A_FaceTarget
+	LRED D 3 Bright A_CustomMissile("LegRedLaser",25,0,0,0,0)
+	LRED D 0 A_FaceTarget
+	LRED D 3 Bright A_CustomMissile("LegRedLaser",25,0,0,0,0)
+	LRED D 0 A_FaceTarget
+	LRED D 3 Bright A_CustomMissile("LegRedLaser",25,0,0,0,0)
+	LRED D 0 A_FaceTarget
+	LRED D 3 Bright A_CustomMissile("LegRedLaser",25,0,0,0,0)
+	LRED D 0 A_FaceTarget
+	LRED D 3 Bright A_CustomMissile("LegRedLaser",25,0,0,0,0)
+	LRED D 0 A_FaceTarget
+	LRED D 3 Bright A_CustomMissile("LegRedLaser",25,0,0,0,0)
+	LRED D 0 A_FaceTarget
+	LRED D 3 Bright A_CustomMissile("LegRedLaser",25,0,0,0,0)
+	LRED D 0 A_FaceTarget
+	LRED D 3 Bright A_CustomMissile("LegRedLaser",25,0,0,0,0)
+	LRED D 0 A_FaceTarget
+	LRED D 3 Bright A_CustomMissile("LegRedLaser",25,0,0,0,0)
+	LRED D 0 A_Jump(127,"Void","Teleport")
+    Goto See
+   Void:
+    TNT1 A 0 Bright A_FaceTarget
+    LRED B 10 Bright A_PlaySound("exile/voidstart")
+    LRED C 8 Bright A_VileTarget("LegRedVoid")
+    LRED DDDDDD 8 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("exile/voidend")
+    LRED G 8 Bright
+    LRED DCB 5 Bright
+	LRED D 0 A_Jump(127,"TrapAttack","Avoid")
+    Goto See
+  TrapAttack:
+    LRED BC 5 Bright A_FaceTarget
+	LRED D 0 A_SpawnItemEx("LegRedTrap",45,0,16,15,-4)
+	LRED D 0 A_SpawnItemEx("LegRedTrap",45,0,16,15,4)
+    LRED D 5 Bright A_SpawnItemEx("LegRedTrap",45,0,16,15)
+    LRED BC 5 Bright A_FaceTarget
+	LRED D 0 A_SpawnItemEx("LegRedTrap",45,0,16,15,-4)
+	LRED D 0 A_SpawnItemEx("LegRedTrap",45,0,16,15,4)
+    LRED D 5 Bright A_SpawnItemEx("LegRedTrap",45,0,16,15)
+    LRED BC 5 Bright A_FaceTarget
+	LRED D 0 A_SpawnItemEx("LegRedTrap",45,0,16,15,-4)
+	LRED D 0 A_SpawnItemEx("LegRedTrap",45,0,16,15,4)
+    LRED D 5 Bright A_SpawnItemEx("LegRedTrap",45,0,16,15)
+	LRED D 0 A_Jump(127,"Teleport")
+	LRED D 0 A_Jump(64,"Storm","Thunder")
+    Goto See
+  Storm:
+    LRED E 0 A_SetInvulnerable
+	LRED E 0 A_FaceTarget
+	TNT1 A 0 A_PlaySound("redeemer/see")
+	TNT1 A 0 Radius_Quake(8,60,0,20,0)
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+    LRED E 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+    LRED E 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+	LRED F 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+	LRED F 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+	LRED F 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+	LRED F 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+	LRED F 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+    LRED G 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_GiveToTarget("LegRedStormBoltAttack",1)
+	TNT1 AA 0 A_SpawnItemEx("LegRedStormBoltSpawner",Random(512,-512),Random(512,-512),0,0,0,0,SXF_NOCHECKPOSITION,64)
+    LRED G 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_GiveToTarget("LegRedStormBoltAttack",1)
+	TNT1 AA 0 A_SpawnItemEx("LegRedStormBoltSpawner",Random(512,-512),Random(512,-512),0,0,0,0,SXF_NOCHECKPOSITION,64)
+    LRED G 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_GiveToTarget("LegRedStormBoltAttack",1)
+	TNT1 AA 0 A_SpawnItemEx("LegRedStormBoltSpawner",Random(512,-512),Random(512,-512),0,0,0,0,SXF_NOCHECKPOSITION,64)
+    LRED G 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_GiveToTarget("LegRedStormBoltAttack",1)
+	TNT1 AA 0 A_SpawnItemEx("LegRedStormBoltSpawner",Random(512,-512),Random(512,-512),0,0,0,0,SXF_NOCHECKPOSITION,64)
+    LRED G 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_GiveToTarget("LegRedStormBoltAttack",1)
+	TNT1 AA 0 A_SpawnItemEx("LegRedStormBoltSpawner",Random(512,-512),Random(512,-512),0,0,0,0,SXF_NOCHECKPOSITION,64)
+    LRED G 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_GiveToTarget("LegRedStormBoltAttack",1)
+	TNT1 AA 0 A_SpawnItemEx("LegRedStormBoltSpawner",Random(512,-512),Random(512,-512),0,0,0,0,SXF_NOCHECKPOSITION,64)
+    LRED G 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_GiveToTarget("LegRedStormBoltAttack",1)
+	TNT1 AA 0 A_SpawnItemEx("LegRedStormBoltSpawner",Random(512,-512),Random(512,-512),0,0,0,0,SXF_NOCHECKPOSITION,64)
+    LRED G 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_GiveToTarget("LegRedStormBoltAttack",1)
+	TNT1 AA 0 A_SpawnItemEx("LegRedStormBoltSpawner",Random(512,-512),Random(512,-512),0,0,0,0,SXF_NOCHECKPOSITION,64)
+    LRED G 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_GiveToTarget("LegRedStormBoltAttack",1)
+	TNT1 AA 0 A_SpawnItemEx("LegRedStormBoltSpawner",Random(512,-512),Random(512,-512),0,0,0,0,SXF_NOCHECKPOSITION,64)
+    LRED G 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_GiveToTarget("LegRedStormBoltAttack",1)
+	TNT1 AA 0 A_SpawnItemEx("LegRedStormBoltSpawner",Random(512,-512),Random(512,-512),0,0,0,0,SXF_NOCHECKPOSITION,64)
+    LRED G 3 Bright A_FaceTarget
+	LRED G 1 A_UnSetInvulnerable
+	LRED G 0 A_Jump(127,"Avoid")
+	Goto See
+  Thunder:
+    LRED E 0 A_SetInvulnerable
+	LRED E 0 A_FaceTarget
+	TNT1 A 0 A_PlaySound("redeemer/see")
+	TNT1 A 0 Radius_Quake(8,60,0,20,0)
+	LRED AAA 0 A_SpawnItem("LRedeBSmokeSpawner",0,0,0,0)
+    LRED E 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeBSmokeSpawner",0,0,0,0)
+    LRED E 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeBSmokeSpawner",0,0,0,0)
+    LRED F 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeBSmokeSpawner",0,0,0,0)
+    LRED F 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeBSmokeSpawner",0,0,0,0)
+	LRED G 0 A_SetUserVar("user_delay",0)
+	LRED G 0 A_Stop
+	LRED G 3 Bright A_SpawnItemEx("LegRedThunderCharge",64,0,0)
+  ThunderCharge:
+  	LRED GGG 0 A_SpawnItem("LRedeBSmokeSpawner",0,0,0,0)
+	LRED G 0 A_JumpIf(user_delay >= 57,"ThunderDone")
+	LRED G 0 A_SetUserVar("user_delay",user_delay+1)
+	LRED G 3 Bright A_Stop
+	Loop
+  ThunderDone:
+	LRED G 3 Bright A_FaceTarget
+	LRED G 3 Bright A_CustomMissile("LegRedThunderBall",5,0,0)
+	LRED G 1 Bright A_UnSetInvulnerable
+	LRED G 0 A_Jump(127,"Avoid")
+	Goto See
+  Portal:
+    LRED E 1 Bright A_JumpIf(user_portal > 0,"Thunder")
+	LRED E 0 A_FaceTarget
+	TNT1 A 0 A_PlaySound("brain/spit")
+	TNT1 A 0 Radius_Quake(8,60,0,20,0)
+	LRED AAA 0 A_SpawnItem("LRedeGSmokeSpawner",0,0,0,0)
+    LRED E 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeGSmokeSpawner",0,0,0,0)
+    LRED E 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeGSmokeSpawner",0,0,0,0)
+    LRED F 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeGSmokeSpawner",0,0,0,0)
+    LRED F 3 Bright A_FaceTarget
+	LRED AAA 0 A_SpawnItem("LRedeGSmokeSpawner",0,0,0,0)
+	LRED G 0 A_SetUserVar("user_delay",0)
+	LRED G 0 A_Stop
+	LRED G 3 Bright A_SpawnItemEx("LegRedPortal",64,0,0,0,0,0,0,SXF_SETMASTER|32)
+  PortalCharge:
+  	LRED GGG 0 A_SpawnItem("LRedeGSmokeSpawner",0,0,0,0)
+	LRED G 0 A_JumpIf(user_delay >= 315,"PortalDone")
+	LRED G 0 A_SetUserVar("user_delay",user_delay+1)
+	LRED G 0 HealThing(10)
+	LRED G 3 Bright A_Stop
+	Loop
+  PortalDone:
+	LRED G 3 Bright A_FaceTarget
+	LRED G 0 A_SetUserVar("user_portal",1)
+	LRED G 0 A_Jump(127,"Teleport")
+	Goto See
+  Suicide:
+  	LRED A 0 A_JumpIf(user_suicide == 1,"SeeSuicide")
+	LRED G 0 A_SetUserVar("user_suicide",1)
+	LRED E 0 A_SetInvulnerable
+	LRED E 0 A_FaceTarget
+	TNT1 A 0 A_ChangeFlag("NOBLOCKMONST",TRUE)
+	TNT1 A 0 A_SpawnItem("LRedFlameSpawner",0,0,0,0)
+	TNT1 A 0 A_PlaySound("redeemer/see")
+	TNT1 A 0 Radius_Quake(8,120,0,20,0)
+    LRED EEEEEEEEEEEEEFFFFFFFFFFFFFFFGGGGGGGGGGGGGGGGG 3 Bright A_SpawnItem("LRedFlameSpawner",0,0,0,0)
+	Goto SeeSuicide
+  Kamikaze:
+	LRED GGGG 5 Bright A_FaceTarget
+	LRED G 0 A_JumpIfTargetInLos(1)
+	Goto SeeSuicide
+	LRED G 0 A_JumpIfCloser(350,"Explode")
+	TNT1 A 0 A_SpawnItem("LRedFlameSpawner",0,0,0,0)
+    LRED G 3 Bright A_SkullAttack(35)
+    Goto Kamikaze+4  
+  Explode:
+    TNT1 A 0
+	TNT1 A 0 A_CustomMissile("LegSuicideBomb",0,0,0,0)
+    TNT1 A 0 A_SpawnItemEx("LegendaryStrike")
+    LRD4 G 3 Bright A_Die
+    Goto SeeSuicide	
+  Pain:
+    TNT1 A 0
+	TNT1 A 0 A_KillChildren
+    TNT1 A 0 A_Jump(8,"Thunder")	
+  	TNT1 A 0 A_Jump(21,"Teleport")	
+	TNT1 A 0 A_Jump(128,"PainMissile")
+    LRED H 2 Bright
+    LRED H 2 Bright A_Pain
+    Goto See
+  PainMissile: 
+    LRED H 2 Bright
+    LRED H 2 Bright A_Pain
+    Goto Missile	
+  Death:
+    LRED I 5 Bright A_Scream
+	TNT1 A 0 A_SpawnItemEx("BlueGibbedGenerator",0,0,0,0,0,0,0,128,0)
+    LRED JJKKLL 2 Bright A_SpawnItemEx("BlueKaboom",random(-32,32),random(-40,40),random(16,48),random(-4,4),random(-4,4),random(0,4),0,SXF_TRANSFERPOINTERS)
+	TNT1 A 0 A_SpawnItemEx("BlueGibbedGenerator",0,0,0,0,0,0,0,128,0)
+    LRED M 0 A_NoBlocking
+	LRED M 0 A_KillChildren
+    LRED M 0 A_SpawnItemEx("LegRedTrap",0,-40,8)
+    LRED M 0 A_SpawnItemEx("LegRedTrap",40,0,8)
+    LRED M 0 A_SpawnItemEx("LegRedTrap",-40,0,8)
+    LRED M 0 A_SpawnItemEx("LegRedTrap",0,40,8)
+    LRED MMNNOOPP 2 Bright A_SpawnItemEx("BlueKaboom",random(-32,32),random(-40,40),random(16,48),random(-4,4),random(-4,4),random(0,4),0,SXF_TRANSFERPOINTERS)
+	TNT1 A 0 A_SpawnItemEx("BlueGibbedGenerator",0,0,0,0,0,0,0,128,0)
+    LRED QQRRSSTTUU 2 A_SpawnItemEx("BlueKaboom",random(-32,32),random(-40,40),random(16,48),random(-4,4),random(-4,4),random(0,4),0,SXF_TRANSFERPOINTERS) 
+    LRED V -1 A_BossDeath
+    Stop
+  }
+}
+
+ACTOR LegRedBall
+{
+Radius 8
+Height 6
+Speed 16
+Damage 12
+Scale 0.85
+PROJECTILE
+RENDERSTYLE ADD
+Speed 28
+FastSpeed 36
+SeeSound "monsters/newfireshoot"
+DeathSound "monsters/newfireexplode"
+Decal DoomImpScorch
++NOTIMEFREEZE
+States
+{
+Spawn:
+	TNT1 A 0 A_CStaffMissileSlither
+	LRD1 AB 1 Bright A_SpawnItemEx("LegRedBallTrail",0,0,2,0,0,0,0,128,0)
+	TNT1 A 0 A_CStaffMissileSlither
+	Loop
+Death:
+	TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx("BlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	TNT1 AAA 0 A_CustomMissile("Kaboom6", 0, 0, random(0,360), 2, random(0,360))
+	TNT1 AAA 0 A_CustomMissile("SmokeFX4", 0, 0, random(0,360), 2, random(0,360))	
+	LRD1 CDEFG 3 Bright
+	Stop
+	}
+}
+
+ACTOR FakeLegRedBall : LegRedBall{Damage 4}
+
+ACTOR LegRedBallTrail : BFG9500Trail
+{
+Scale 0.85
++NOTIMEFREEZE
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 1
+    LRD1 HIJKLM 2 A_FadeOut(0.15)
+	Stop
+    }
+}
+
+ACTOR LegRedFastBall
+{
+Speed 16
+Speed 58
+Scale 1.2
+Radius 8
+Height 8
+Damage 22
+Renderstyle Add
+Seesound "skeleton/attack"
+Deathsound "skeleton/tracex"
+PROJECTILE
+Scale 1.5
++NOTIMEFREEZE
+Decal RevenantScorch
+States
+{
+Spawn:
+    LDR7 AB 1 Bright A_CustomMissile("LegRedFastBallTrail",Random(-2,2),Random(-2,2))
+    Loop
+Death:
+	TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx("BlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	TNT1 AAA 0 A_CustomMissile("Kaboom6", 0, 0, random(0,360), 2, random(0,360))
+	TNT1 AAA 0 A_CustomMissile("SmokeFX4", 0, 0, random(0,360), 2, random(0,360))		
+    LDR7 CD 5 Bright
+    LDR7 EF 4 Bright
+    LDR7 GH 3 Bright
+    Stop
+    }
+}
+
+ACTOR FakeLegRedFastBall : LegRedFastBall{Damage 10}
+
+ACTOR LegRedFastBallTrail : BFG9500Trail
+{
+Scale 1.28
++NOTIMEFREEZE
+States
+{
+Spawn:
+    TNT1 A 1
+    LDR8 DEFGHIJKLMNO 1 A_FadeOut(0.025)
+    Stop
+    }
+}
+
+Actor LegRedLaser : FastProjectile
+{
+Height 6
+Radius 6
+Damage 7
+SeeSound "baron/attack"
+DeathSound "baron/shotx"
+-RIPPER
++EXTREMEDEATH
++NOTIMEFREEZE
+Speed 120
+Scale 0.75
+MissileType "LegRedLaserTrail"
+Renderstyle Add
+Decal DoomImpScorch
+States
+{
+  Spawn:
+	LRD2 ABCB 1 Bright
+	Loop
+  Death:
+	TNT1 A 0
+	TNT1 A 0 A_SpawnItemEx("BlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	TNT1 AAA 0 A_CustomMissile("Kaboom6", 0, 0, random(0,360), 2, random(0,360))
+	TNT1 AAA 0 A_CustomMissile("SmokeFX4", 0, 0, random(0,360), 2, random(0,360))	
+	LRD2 DDFFGGGGG 2 Bright A_FadeOut
+	Stop
+   }
+}
+
+Actor LegRedLaserTrail
+{
+Scale 0.1
+Renderstyle Add
++NOBLOCKMAP
++NOGRAVITY
++NOTELEPORT
++CANNOTPUSH
++NODAMAGETHRUST
++NOTIMEFREEZE
++CLIENTSIDEONLY
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+  TNT1 A 1 Bright A_SpawnItemEx("LegRedLaserTrail2",0,0,8)
+  Stop
+  Toaster:
+    TNT1 A 0
+	Stop  
+}
+}
+
+Actor LegRedLaserTrail2
+{
+Scale 0.75
++Nogravity
++NOTIMEFREEZE
++CLIENTSIDEONLY
+Alpha 0.85
+Renderstyle Add
+States
+{
+ Spawn:
+     TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+  LRD2 AAA 3 Bright 
+  LRD2 DDFFGGGGG 1 Bright A_FadeOut
+  Wait
+   Toaster:
+    TNT1 A 0
+	Stop 
+}
+}
+
+ACTOR LegRedVoid : ArchVileFire
+{
+RenderStyle Add
+Scale 2.1
+Alpha 0.5
++DONTSPLASH
++EXTREMEDEATH
++FORCERADIUSDMG
++NOTIMEFREEZE
+DamageType "CacoComet"
+States
+{
+  Spawn:
+    TNT1 A 0
+    LRD3 H 1 Bright A_PlaySoundEx("exile/voidsuck","Voice")
+	TNT1 A 0 A_Explode(6,128,0)
+	TNT1 AAAAA 0 A_SpawnItemEx("BHellionSmoke",random(32,-32),random(32,-32),random(12,64),0,0,random(1,3),0,128,0)
+    LRD3 HGGHH 1 Bright A_Fire
+	TNT1 A 0 A_Explode(6,128,0)
+	TNT1 AAAAA 0 A_SpawnItemEx("BHellionSmoke",random(32,-32),random(32,-32),random(12,64),0,0,random(1,3),0,128,0)
+	LRD3 GGHHG 1 Bright A_Fire
+	TNT1 A 0 A_Explode(6,128,0)
+	TNT1 AAAAA 0 A_SpawnItemEx("BHellionSmoke",random(32,-32),random(32,-32),random(12,64),0,0,random(1,3),0,128,0)
+	LRD3 GFFEE 1 Bright A_Fire
+	TNT1 A 0 A_Explode(6,128,0)
+	TNT1 AAAAA 0 A_SpawnItemEx("BHellionSmoke",random(32,-32),random(32,-32),random(12,64),0,0,random(1,3),0,128,0)
+	LRD3 FFEEF 1 Bright A_Fire
+	TNT1 A 0 A_Explode(6,128,0)
+	TNT1 AAAAA 0 A_SpawnItemEx("BHellionSmoke",random(32,-32),random(32,-32),random(12,64),0,0,random(1,3),0,128,0)
+	LRD3 FEEDD 1 Bright A_Fire
+	TNT1 A 0 A_Explode(6,128,0)
+	TNT1 AAAAA 0 A_SpawnItemEx("BHellionSmoke",random(32,-32),random(32,-32),random(12,64),0,0,random(1,3),0,128,0)
+	LRD3 EEDDE 1 Bright A_Fire
+	TNT1 A 0 A_Explode(6,128,0)
+	TNT1 AAAAA 0 A_SpawnItemEx("BHellionSmoke",random(32,-32),random(32,-32),random(12,64),0,0,random(1,3),0,128,0)
+	LRD3 EDDCC 1 Bright A_Fire
+    TNT1 A 0 A_Explode(6,128,0)
+	TNT1 AAAAA 0 A_SpawnItemEx("BHellionSmoke",random(32,-32),random(32,-32),random(12,64),0,0,random(1,3),0,128,0)
+	LRD3 DDCCD 1 Bright A_Fire
+	TNT1 A 0 A_Explode(6,128,0)
+	TNT1 AAAAA 0 A_SpawnItemEx("BHellionSmoke",random(32,-32),random(32,-32),random(12,64),0,0,random(1,3),0,128,0)
+	LRD3 DCCBB 1 Bright A_Fire
+	TNT1 A 0 A_Explode(6,128,0)
+	TNT1 AAAAA 0 A_SpawnItemEx("BHellionSmoke",random(32,-32),random(32,-32),random(12,64),0,0,random(1,3),0,128,0)
+	LRD3 CCBBC 1 Bright A_Fire
+	TNT1 A 0 A_Explode(6,128,0)
+	TNT1 AAAAA 0 A_SpawnItemEx("BHellionSmoke",random(32,-32),random(32,-32),random(12,64),0,0,random(1,3),0,128,0)
+	LRD3 CBBBB 1 Bright A_Fire
+	TNT1 A 0 A_Explode(6,128,0)
+	TNT1 AAAAA 0 A_SpawnItemEx("BHellionSmoke",random(32,-32),random(32,-32),random(12,64),0,0,random(1,3),0,128,0)
+	LRD3 AAAA 1 Bright A_Fire
+	TNT1 A 0 A_Explode(6,128,0)
+    TNT1 AAAAA 0 A_SpawnItemEx("BHellionSmoke",random(32,-32),random(32,-32),random(12,64),0,0,random(1,3),0,128,0)
+	LRD3 B 1 Bright A_StopSoundEx("Voice")
+	LRD3 C 0 A_Explode(128,140,0)
+	TNT1 A 0 A_SpawnItemEx("LegendaryBlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	TNT1 AAAAAAAA 0 A_SpawnItemEx("BlueKaboom3",random(-32,32),random(-40,40),random(16,48),random(-4,4),random(-4,4),random(0,4),0,SXF_TRANSFERPOINTERS)
+	TNT1 AAA 0 A_CustomMissile("LegendarySmokeFX2", 0, 0, random(0,360), 2, random(0,360))
+	LRD3 C 1 Bright A_PlaySoundEx("exile/voidend","Voice")
+	LRD3 DEFGH 1 Bright
+	TNT1 A 20
+	TNT1 A 0 A_StopSoundEx("Voice")
+    Stop
+	}
+}
+
+Actor LegRedTrap
+{ 
+Health 25
+Radius 16 
+Height 32 
+Mass 3000 
+Speed 0
+MONSTER
++LOOKALLAROUND
++AMBUSH
++DONTGIB
++NOTARGET
++NOINFIGHTING
++NOGRAVITY 
++FLOAT
++DONTFALL
++NOPAIN
++DONTHARMSPECIES
++NOBLOCKMONST
++NOTIMEFREEZE
+-COUNTKILL
+-SOLID
+SeeSound "reedemer/trap"
+DeathSound "BFlan/LightningExp"
+BloodColor "Blue"
+Species "Redeemer"
+DamageType "CacoComet"
+DamageFactor "CacoComet", 0.0
+DamageFactor "Hell", 0.0
+Scale 1.15
+Obituary "%o was blown to pieces by a Legendary Redeemer's sentient bomb."
+var int user_delay;
+Tag "\c[z3]Legendary Redeemer Sentient Bomb\c-"
+States 
+{ 
+  Spawn:
+	LRD4 A 20 Bright
+	LRD4 A 1 Bright A_Stop
+	LRD4 A 0 A_JumpIf(user_delay >= 130,"Suicide")
+	LRD4 A 0 A_SetUserVar("user_delay",user_delay+1)
+	LRD4 A 0 A_JumpIfInventory("LegRedTrapDetonate",1,"Suicide")
+	LRD4 ABCD 1 Bright A_Look
+	Goto Spawn+2
+  See:
+	LRD4 A 0 A_JumpIfInventory("LegRedTrapDetonate",1,"Suicide")
+	LRD4 ABCD 2 Bright A_Chase
+	Goto Missile
+  Missile:
+	LRD4 A 0
+	LRD4 A 0 A_JumpIfTargetInLos(1)
+	Goto Clear
+	LRD4 A 0 A_JumpIfCloser(100,"Suicide")
+	LRD4 A 0 A_JumpIfInventory("LegRedTrapDetonate",1,"Suicide")
+	LRD4 ABCD 4 Bright A_SkullAttack(18)
+	Loop  
+  Clear:
+	LRD4 A 4 Bright A_ClearTarget
+	Goto Spawn+2 
+  Suicide:
+	LRD4 A 2 Bright A_Die
+	Goto Spawn+2
+  Death:
+	TNT1 A 0 A_SetScale(1.0)
+	TNT1 A 0 A_RadiusGive("LegRedTrapDetonate",128,RGF_MONSTERS)
+	TNT1 A 0 A_PlayWeaponSound("BFlan/LightningExp")
+	TNT1 A 0 A_SpawnItemEx("BFGShockwaveBlue", 0, 0, 0, 0, 0, 0, 0, 128)
+	TNT1 AA 0 A_SpawnItemEx("LegendaryBlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+	TNT1 A 0 A_SpawnItemEx("LNCometDeath",0,0,0,0,0,0,0,128,0)
+	TNT1 A 0 A_CustomMissile("LegRedTrapBomb",0,0,0,0)
+	QRE3 ABCDEF 5 Bright
+	Stop
+} 
+}
+
+Actor LegRedTrapDetonate : Inventory{Inventory.MaxAmount 1}
+
+Actor LegRedTrapBomb
+{
+Projectile
+Speed 0
+Damage 0
++NOCLIP
++EXTREMEDEATH
++FORCERADIUSDMG
++NOTIMEFREEZE
+DamageType "Hell"
+States
+{
+  Spawn:
+	TNT1 A 0 
+	TNT1 A 0 A_Explode(128,156)
+    Stop
+  }
+}
+
+Actor FakeLegendaryRedeemer
+{
+Monster
+Health 300
+Radius 31
+Height 56
+Speed 12
+Alpha 0.65
+RenderStyle Translucent
++FLOAT
++NOGRAVITY
++NOTARGET
++NOINFIGHTING
++AVOIDMELEE
++NOTIMEFREEZE
++MISSILEMORE
++MISSILEEVENMORE
++NOICEDEATH
++DONTGIB
++QUICKTORETALIATE
++DONTHARMSPECIES
++NOPAIN
+-COUNTKILL
+-SOLID
+BloodColor "Blue"
+DamageFactor "CacoComet", 0.0
+Species "Redeemer"
+Scale 1.15
+SeeSound "redeemer/see"
+PainSound "redeemer/pain"
+DeathSound "redeemer/death"
+ActiveSound "redeemer/idle"
+Obituary "%o was out played by a Legendary Redeemer's clone."
+var int user_delay;
+States
+{
+  Spawn:
+    LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+    LRED A 10 Bright A_Look
+    Loop
+  See:
+    TNT1 A 0 A_JumpIf(user_delay > 480,"Over")
+	TNT1 A 0 A_SetUserVar("user_delay",user_delay+1)
+	TNT1 AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+    LRED AAA 2 Bright A_Chase
+	TNT1 A 0 A_Jump(48,"Rush")
+    Loop
+  Rush:
+	TNT1 AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)	
+	LRED AA 0 A_Chase
+    LRED A 1 Bright A_SpawnItemEx("LegendaryRedeemerGhost")
+	TNT1 A 0 A_Jump(12,"See")
+    Loop
+  Missile:
+    LRED B 0 A_Jump(127,"FastBall")
+    LRED BC 5 Bright A_FaceTarget
+	LRED D 0 A_CustomMissile("FakeLegRedBall",30,10,0,0,0)
+    LRED D 0 A_CustomMissile("FakeLegRedBall",30,-10,0,0,0)
+	LRED D 0 A_CustomMissile("FakeLegRedBall",20,10,0,0,0)
+    LRED D 5 Bright A_CustomMissile("FakeLegRedBall",20,-10,0,0,0)
+    Goto See
+  FastBall:
+    LRED BC 5 Bright A_FaceTarget
+    LRED D 5 Bright A_CustomMissile("FakeLegRedFastBall",25,0,0,0,0)
+    Goto See	
+  Over:	
+	TNT1 A 0 A_Stop
+	LRED A 1 A_Die	 
+	Goto See		
+  Death:
+	LRED EF 5 A_FaceTarget
+    LRED G 4 A_ScreamAndUnblock
+	LRED GGGGGGGGGG 4 A_FadeOut(0.1)
+	LRED G 1
+	Stop
+  }
+}
+
+Actor LegRedThunderBall
+{
+Projectile
+Decal "PlasmaDecal"
+DamageType "CacoComet"
+Radius 12
+Height 6
+RenderStyle Add
+Alpha 0.8
+Speed 25
+Scale 0.25
+SeeSound "LightningHandsFire"
+DeathSound "MageElectricalStorm"
+Damage 60
++EXTREMEDEATH
++SKYEXPLODE
++FORCERADIUSDMG
++SEEKERMISSILE
++HEXENBOUNCE
++CANBOUNCEWATER
++NOTIMEFREEZE
+BounceCount 6
+DECAL BlueBFG9500Lightning
+States
+{
+  Spawn:
+	LRD5 ABCD 1 bright A_SpawnItemEx("BlueParticleSpawner",0,0,32,0,0,0,0,128)
+	LRD5 D 0 A_SeekerMissile(5,5)
+	LRD5 D 0 A_SpawnItemEx("LegRedThunderLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	Loop
+  Death:
+    TNT1 A 0
+    TNT1 A 0 A_Explode(32,612)
+	TNT1 A 0 A_Explode(64,350)
+	TNT1 A 0 A_Explode(192,256)
+	TNT1 A 0 A_SpawnItemEx("LegRedThunder",0,0,0)
+	Stop
+	}
+}
+
+Actor LegRedThunder
+{
++NOGRAVITY
++NOCLIP
++NOTIMEFREEZE
+Renderstyle Add
+Height 32
+Radius 16
+Alpha 0.2
+Scale 4.0
+States
+{
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_PlaySoundEx("thunder/hit","Voice",0,2)
+	TNT1 A 0 Radius_Quake(175,8,512,1024,0)
+	TNT1 AAA 0 A_CustomMissile("SmokeFX3",0,0,random(0,360),2,random(0,360))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("LegCardiThunderSpark",0,0,0,random(1,10),0,random(1,10),random(0,359),129)
+	LTHN AAAA 2 Bright A_FadeIn(0.2)
+	LTHN AAAA 8 Bright A_FadeOut(0.2)
+	Stop
+    }     
+}
+
+Actor LegRedThunderCharge
+{
++NOINTERACTION
++NOBLOCKMAP
++NOGRAVITY
++FORCEXYBILLBOARD
++NOTIMEFREEZE
+RenderStyle Add
+Alpha 0.8
+Scale 0.25
+var int user_delay;
+States
+{
+  Spawn:
+	TNT1 AAAAA 7 A_SpawnItemEx("LegRedThunderLightningWaveSpawner",0,0,32,0,0,0,0,0,172)
+	TNT1 A 0 A_SetTranslucent(0.1,1)
+	TNT1 A 0 A_PlaySound("reedemer/charge")
+	LRD5 ABCDCB 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD5 A 0 A_SpawnItemEx("LegRedThunderLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	TNT1 A 0 A_SetTranslucent(0.2,1)
+	LRD5 ABCDCB 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD5 A 0 A_SpawnItemEx("LegRedThunderLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	TNT1 A 0 A_SetTranslucent(0.3,1)
+	LRD5 ABCDCB 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD5 A 0 A_SpawnItemEx("LegRedThunderLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	TNT1 A 0 A_SetTranslucent(0.4,1)
+	LRD5 ABCDCB 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD5 A 0 A_SpawnItemEx("LegRedThunderLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	TNT1 A 0 A_SetTranslucent(0.5,1)
+	LRD5 ABCDCB 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD5 A 0 A_SpawnItemEx("LegRedThunderLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	TNT1 A 0 A_SetTranslucent(0.6,1)
+	LRD5 ABCDCB 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD5 A 0 A_SpawnItemEx("LegRedThunderLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	TNT1 A 0 A_SetTranslucent(0.7,1)
+	LRD5 ABCDCB 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD5 A 0 A_SpawnItemEx("LegRedThunderLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	TNT1 A 0 A_SetTranslucent(0.8,1)
+	TNT1 A 0 A_PlaySound("reedemer/thunder",5,1,1)
+  Doing:
+    TNT1 A 0 A_JumpIf(user_delay > 15,"Over")
+	TNT1 A 0 A_SetUserVar("user_delay",user_delay+1)
+	LRD5 ABCDCB 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD5 A 0 A_SpawnItemEx("LegRedThunderLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	Loop
+  Death:
+  Over:
+	TNT1 A 0
+	TNT1 A 1 A_StopSound(5)
+	TNT1 A 1
+	Stop	
+	}
+}
+
+Actor LegRedThunderEffect
+{
++CLIENTSIDEONLY
++NOINTERACTION
++NOBLOCKMAP
++NOGRAVITY
++NOTELEPORT
++FORCEXYBILLBOARD
++NOTIMEFREEZE
+States
+{
+  Toaster:
+    TNT1 A 0
+	Stop
+	}
+}
+
+Actor LegRedThunderMist : LegRedThunderEffect
+{
+RenderStyle Add
+Alpha 0.25
+Scale 0.225
+States
+{
+  Spawn:
+	   TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 0 A_Jump(256,1,2,3,4,5,6,7,8,9,10)
+  Loopy:
+	MIST ABCDEFGHIJKLMOOPQR 1 bright A_FadeOut(0.01)
+	loop
+	}
+}
+
+Actor LegRedThunderMistSpawner : LegRedThunderEffect
+{
+States
+{
+  Spawn:
+	    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 AA 0 A_SpawnItemEx("LegRedThunderMist",Random(-14,14),Random(-14,14),Random(-14,14),0.012*Random(-50,50),0.012*Random(-50,50),0.012*Random(-50,50),0,0,24)
+	Stop
+	}
+}
+
+Actor LegRedThunderLightning : LegRedThunderEffect
+{
+RenderStyle Add
+Alpha 0.7
+States
+{
+  Spawn:
+	    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 0 A_Jump(256,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72)
+  Select:
+	BLL1 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade")
+	BLL2 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade")
+	BLL3 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade")
+	BLL4 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade")
+  Fade:
+	"----" A 1 bright A_FadeOut(0.15)
+	loop
+	}
+}
+
+Actor LegRedThunderLightningSmall : LegRedThunderLightning{Scale 0.2}
+Actor LegRedThunderLightningMedium : LegRedThunderLightning{Scale 0.3}
+Actor LegRedThunderLightningLarge : LegRedThunderLightning{Scale 0.4}
+Actor LegRedThunderLightningHuge : LegRedThunderLightning{Scale 0.5}
+
+Actor LegRedThunderLightningWave : LegRedThunderEffect
+{
+States
+{
+   Spawn:
+	    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 0 A_SpawnItemEx("LegRedThunderLightningSmall",Random(-2,2),Random(-2,2),Random(-2,2),0,0,0,0,0,32)
+	TNT1 A 0 A_SpawnItemEx("LegRedThunderLightningMedium",Random(-3,3),Random(-3,3),Random(-3,3),0,0,0,0,0,56)
+	TNT1 A 0 A_SpawnItemEx("LegRedThunderLightningLarge",Random(-4,4),Random(-4,4),Random(-3,3),0,0,0,0,0,96)
+	TNT1 A 0 A_SpawnItemEx("LegRedThunderLightningHuge",Random(-5,5),Random(-5,5),Random(-5,5),0,0,0,0,0,144)
+	Stop
+	}
+}
+
+Actor LegRedThunderLightningWaveSpawner : LegRedThunderEffect
+{
+States
+{
+  Spawn:
+	    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 0 A_PlaySound("reedemer/zap")
+	TNT1 A 2 A_SpawnItem("LegRedThunderLightningWave")
+	TNT1 A 1 A_SpawnItem("LegRedThunderLightningWave")
+	TNT1 A 3 A_SpawnItem("LegRedThunderLightningWave")
+	TNT1 A 5 A_SpawnItem("LegRedThunderLightningWave")
+	TNT1 A 1 A_SpawnItem("LegRedThunderLightningWave")
+	TNT1 A 2 A_SpawnItem("LegRedThunderLightningWave")
+	TNT1 A 4 A_SpawnItem("LegRedThunderLightningWave")
+	Stop
+	}
+}
+
+Actor LegRedPortal
+{
+Monster
++NOINTERACTION
++NOBLOCKMAP
++NOGRAVITY
++FORCEXYBILLBOARD
++NOTIMEFREEZE
+-SOLID
+-COUNTKILL
+Health 99999999
+RenderStyle Add
+Alpha 0.8
+Scale 1.5
+var int user_delay;
+States
+{
+  Spawn:
+	TNT1 AAAAA 7 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,172)
+	TNT1 A 0 A_SetTranslucent(0.1,1)
+	TNT1 A 0 A_PlaySound("reedemer/charge")
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	TNT1 A 0 A_SetTranslucent(0.2,1)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	TNT1 A 0 A_SetTranslucent(0.3,1)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	TNT1 A 0 A_SetTranslucent(0.4,1)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	TNT1 A 0 A_SetTranslucent(0.5,1)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	TNT1 A 0 A_SetTranslucent(0.6,1)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	TNT1 A 0 A_SetTranslucent(0.7,1)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD5 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	TNT1 A 0 A_SetTranslucent(0.8,1)
+	TNT1 A 0 A_PlaySound("reedemer/thunder",5,1,1)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+  Doing:
+    TNT1 A 0 A_JumpIf(user_delay > 14,"Over")
+	TNT1 A 0 A_SetUserVar("user_delay",user_delay+1)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	LRD6 AAAAA 1 bright A_SpawnItem("LegRedThunderMistSpawner",0,32)
+	LRD6 A 0 A_SpawnItemEx("LegRedPortalLightningWaveSpawner",0,0,32,0,0,0,0,0,160)
+	TNT1 A 0 A_SpawnItemEx("TeleportFog",0,0,16)
+	TNT1 A 0 A_SpawnItemEx("LegRedMinion",0,0,16,5,0,0,0,32)
+	Loop
+  Over:
+	TNT1 A 0
+	TNT1 A 1 A_StopSound(5)
+	TNT1 A 1
+	Stop	
+	}
+}
+
+ACTOR LegRedMinion : RandomSpawner
+{
+DropItem "Cacodemon~", 256, 3
+DropItem "Watcher", 256, 1
+}
+
+Actor LegRedPortalLightning : LegRedThunderEffect
+{
+RenderStyle Add
+Alpha 0.7
+States
+{
+  Spawn:
+	    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 0 A_Jump(256,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72)
+  Select:
+	GRL1 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade")
+	GRL2 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade")
+	GRL3 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade")
+	GRL4 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade")
+  Fade:
+	"----" A 1 bright A_FadeOut(0.15)
+	loop
+	}
+}
+
+Actor LegRedPortalLightningSmall : LegRedPortalLightning{Scale 0.2}
+Actor LegRedPortalLightningMedium : LegRedPortalLightning{Scale 0.3}
+Actor LegRedPortalLightningLarge : LegRedPortalLightning{Scale 0.4}
+Actor LegRedPortalLightningHuge : LegRedPortalLightning{Scale 0.5}
+
+Actor LegRedPortalLightningWave : LegRedThunderEffect
+{
+States
+{
+   Spawn:
+	    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 0 A_SpawnItemEx("LegRedPortalLightningSmall",Random(-2,2),Random(-2,2),Random(-2,2),0,0,0,0,0,32)
+	TNT1 A 0 A_SpawnItemEx("LegRedPortalLightningMedium",Random(-3,3),Random(-3,3),Random(-3,3),0,0,0,0,0,56)
+	TNT1 A 0 A_SpawnItemEx("LegRedPortalLightningLarge",Random(-4,4),Random(-4,4),Random(-3,3),0,0,0,0,0,96)
+	TNT1 A 0 A_SpawnItemEx("LegRedPortalLightningHuge",Random(-5,5),Random(-5,5),Random(-5,5),0,0,0,0,0,144)
+	Stop
+	}
+}
+
+Actor LegRedPortalLightningWaveSpawner : LegRedThunderEffect
+{
+States
+{
+  Spawn:
+	    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 0 A_PlaySound("reedemer/zap")
+	TNT1 A 2 A_SpawnItem("LegRedPortalLightningWave")
+	TNT1 A 1 A_SpawnItem("LegRedPortalLightningWave")
+	TNT1 A 3 A_SpawnItem("LegRedPortalLightningWave")
+	TNT1 A 5 A_SpawnItem("LegRedPortalLightningWave")
+	TNT1 A 1 A_SpawnItem("LegRedPortalLightningWave")
+	TNT1 A 2 A_SpawnItem("LegRedPortalLightningWave")
+	TNT1 A 4 A_SpawnItem("LegRedPortalLightningWave")
+	Stop
+	}
+}
+
+Actor LegRedStormBoltAttack : CustomInventory
+{
+  +INVENTORY.QUIET
+  +INVENTORY.UNDROPPABLE
+  +INVENTORY.ALWAYSPICKUP
+  +INVENTORY.AUTOACTIVATE       
+  +COUNTITEM
+  +NOTIMEFREEZE
+  Inventory.Amount 1
+  Inventory.MaxAmount 0
+  States
+  {
+  Pickup:
+    NULL A 1 
+	NULL AA 1 A_SpawnItemEx("LegRedStormBoltSpawner",Random(512,-512),Random(512,-512),0,0,0,0,SXF_NOCHECKPOSITION,64)
+    Stop	
+  }
+}
+
+ACTOR LegRedStormBoltSpawner
+{
+Height 2
+Radius 2
+Speed 6
+PROJECTILE
++SPAWNCEILING
++CEILINGHUGGER
++NOCLIP
++DONTSPLASH
++NOTIMEFREEZE
++CLIENTSIDEONLY
+States
+{
+Spawn:
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAA 1 A_Wander
+    TNT1 A 0 A_CustomMissile("LegRedStormBolt",-18,random(0,20),random(0,360),2)
+	Stop
+	}
+}
+
+ACTOR LegRedStormBolt
+{
+Speed 1
+Radius 8
+Height 12
+Renderstyle Add
+Damage 5
+SeeSound ""
+PROJECTILE
+-NOGRAVITY
++BLOODLESSIMPACT
++RIPPER
++FORCERADIUSDMG
++EXTREMEDEATH
++NOTIMEFREEZE
+Gravity 2.0
+DamageType "CacoComet"
+States
+{
+   Spawn:
+      TNT1 A 0
+	  TNT1 A 0 A_SetAngle(7 + angle)
+      TNT1 A 2 A_SpawnItemEx("LegSentientStormBoltFade",0,0,0,frandom(0.25,-0.25),frandom(0.25,-0.25),frandom(0.25,-0.25),128,0)
+      Loop
+   Death:
+      TNT1 A 0 A_PlayWeaponSound("legstorm/explode")
+      TNT1 A 0 A_Explode(48,278,0)
+      TNT1 A 0 A_SpawnItemEx("LegRedGuruStormBoltStruckGlowX",0,0,0,0,0,0,0,128,0)
+      TNT1 A 0 A_SpawnItemEx("LegRedGuruStormBoltStruckGlowY",0,0,0,0,0,0,0,128,0)
+      TNT1 AAAAAAA 2 A_SpawnItemEx("GuruSpray",random(20,-20),random(20,-20),random(30,-5),0,0,0,0,128,0)
+      Stop
+   }
+}
+
+ACTOR LegRedGuruStormBoltStruckGlowY : GuruBoltStruckGlowY
+{
+	-CLIENTSIDEONLY
+	+FORCERADIUSDMG
+	+NOTIMEFREEZE
+	Alpha 0.5
+	XScale 0.35
+	YScale 1.5
+	DamageType "CacoComet"
+	States
+	{
+	Spawn:
+	TNT1 A 0
+	YBUM A 0 A_Explode(3,192)
+	YBUM A 1 Bright A_FadeOut(0.005)
+	Loop
+	}	
+}
+
+ACTOR LegRedGuruStormBoltStruckGlowX : GuruBoltStruckGlowY
+{
+    -CLIENTSIDEONLY
+	+FORCERADIUSDMG	
+	+NOTIMEFREEZE
+	Alpha 0.5
+	XScale 1.5
+	YScale 0.35
+	DamageType "CacoComet"
+	States
+	{
+	Spawn:
+	TNT1 A 0
+	YBUM A 0 A_Explode(3,192)
+	YBUM A 1 Bright A_FadeOut(0.005)
+	Loop
+	}		
+}
+
+ACTOR LRedeYSmokeSpawner : LegendaryRedParticleSpawner
+{
+  +CLIENTSIDEONLY
+  States
+  {
+  Spawn:
+        TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    TNT1 AAAAA 0 A_SpawnItemEx("AHellionSmoke",random(32,-32),random(32,-32),random(12,64),0,0,random(1,3),0,128,0)
+    TNT1 A 1
+    Stop
+  Toaster:
+    TNT1 A 0
+	Stop		
+  }
+}
+
+ACTOR LRedeBSmokeSpawner : LegendaryRedParticleSpawner
+{
+  +CLIENTSIDEONLY
+  States
+  {
+  Spawn:
+        TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 AAAAA 0 A_SpawnItemEx("BHellionSmoke",random(32,-32),random(32,-32),random(12,64),0,0,random(1,3),0,128,0)
+    TNT1 A 1
+    Stop
+  Toaster:
+    TNT1 A 0
+	Stop		
+  }
+}
+
+ACTOR LRedeGSmokeSpawner : LegendaryRedParticleSpawner
+{
+  +CLIENTSIDEONLY
+  States
+  {
+  Spawn:
+       TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 AAAAA 0 A_SpawnItemEx("GHellionSmoke",random(32,-32),random(32,-32),random(12,64),0,0,random(1,3),0,128,0)
+    TNT1 A 1
+    Stop
+  Toaster:
+    TNT1 A 0
+	Stop		
+  }
+}
+
+ACTOR LRedFlameSpawner : LegendaryRedParticleSpawner
+{
+  +CLIENTSIDEONLY
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    TNT1 AAAAAA 0 A_SpawnItemEx("LRedFlameFlame",random(20,-20),random(20,-20),random(40,80),0,0,random(2,6),0,128,0)
+    TNT1 A 1
+    Stop
+  Toaster:
+    TNT1 A 0
+	Stop		
+  }
+}
+
+ACTOR LRedFlameFlame
+{
++MISSILE
++DONTSPLASH
++CLIENTSIDEONLY
++NOBLOCKMAP
++NOGRAVITY
++NOTELEPORT
++FORCEXYBILLBOARD
++NOTIMEFREEZE
+RenderStyle Add
+Scale 1.1
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+BMKE ABCDEFGHIJKL 2 Bright A_FadeOut
+Stop
+Toaster:
+    TNT1 A 0
+    Stop
+}
+}
+
+
+ACTOR LegendaryRedeemerGhost
+{
+Scale 1.15
+Radius 31
+Height 56
+Speed 0
+Alpha 0.7
+PROJECTILE
+RENDERSTYLE Translucent
++CLIENTSIDEONLY
++NOTIMEFREEZE
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 0
+	TNT1 A 0
+Fade:
+    TNT1 A 1
+    LRED A 2 A_FadeOut(0.10)
+    Goto Fade+1
+Toaster:
+    TNT1 A 0
+    Stop
+    }
+}
+
+ACTOR LegendaryRedeemerGhost2 : LegendaryRedeemerGhost
+{
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 0
+	TNT1 A 0
+Fade:
+    TNT1 A 0
+    TNT1 A 1 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+    LRED G 2 A_FadeOut(0.10)
+    Goto Fade+2
+    }
+}
+
+Actor LegSuicideBomb
+{
+Projectile
+Speed 0
+Damage 0
++NOCLIP
++EXTREMEDEATH
++FORCERADIUSDMG
++NOTIMEFREEZE
+States
+{
+  Spawn:
+	TNT1 A 0 
+	TNT1 A 0 A_PlaySoundEx("legendary/strike","Voice",0,2)
+	TNT1 A 0 A_Explode(384,1024)
+    Stop
+  }
+}
+
+Actor LegendaryStrike
+{
+ Alpha 0.9
+ RenderStyle Add
+ +NoGravity
+ +NOTIMEFREEZE
+ Scale 10.0
+ States
+ {
+  Spawn:
+   TSKB A 0
+   TSKB A 1 Bright A_FadeOut(0.05)
+   Wait
+ }
+}
+
+Actor FakeLegendaryRedeemerbycardi : LegendaryRedeemer 
+{
+Species "UltimateLegendary"
+DamageFactor "UltimateLegendary", 0.0
+DamageFactor "Cyber10K", 0.0
+DamageFactor "CacoComet", 0.0
+DamageFactor "CadaverRocket", 0.0
+DamageFactor "BeheComet", 0.0
+DamageFactor "NobleCOmet", 0.0
+DamageFactor "Legendary", 0.0
+DamageFactor "LegendaryPlayer", 0.3
+DamageFactor "Legendary1", 0.0
+DamageFactor "LegendaryGuru", 0.0
+DamageFactor "LegendaryGuruPlayer", 0.3
++DONTHARMSPECIES
+DropItem ""
++NOTELEFRAG
+States
+{
+  Spawn:
+    LRED AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+    LRED A 10 Bright A_Look
+    Loop
+  See:
+    //TNT1 A 0 ACS_ExecuteAlways(5432,0,15)
+	TNT1 A 0 A_JumpIf(user_suicide == 1,"SeeSuicide")
+	TNT1 AAA 0 A_SpawnItem("LRedeYSmokeSpawner",0,0,0,0)
+    LRED AAA 2 Bright A_Chase
+	TNT1 A 0 A_Jump(68,"Avoid","Rush","Trap","Teleport")
+    Loop
+  Death:
+    LRED I 5 Bright A_Scream
+	TNT1 A 0 A_SpawnItemEx("BlueGibbedGenerator",0,0,0,0,0,0,0,128,0)
+    LRED JJKKLL 2 Bright A_SpawnItemEx("BlueKaboom",random(-32,32),random(-40,40),random(16,48),random(-4,4),random(-4,4),random(0,4),0,SXF_TRANSFERPOINTERS)
+	TNT1 A 0 A_SpawnItemEx("BlueGibbedGenerator",0,0,0,0,0,0,0,128,0)
+    LRED M 0 A_NoBlocking
+	LRED M 0 A_KillChildren
+    LRED M 0 A_SpawnItemEx("LegRedTrap",0,-40,8)
+    LRED M 0 A_SpawnItemEx("LegRedTrap",40,0,8)
+    LRED M 0 A_SpawnItemEx("LegRedTrap",-40,0,8)
+    LRED M 0 A_SpawnItemEx("LegRedTrap",0,40,8)
+    LRED MMNNOOPP 2 Bright A_SpawnItemEx("BlueKaboom",random(-32,32),random(-40,40),random(16,48),random(-4,4),random(-4,4),random(0,4),0,SXF_TRANSFERPOINTERS)
+	TNT1 A 0 A_SpawnItemEx("BlueGibbedGenerator",0,0,0,0,0,0,0,128,0)
+    LRED QQRRSSTTUU 2 A_SpawnItemEx("BlueKaboom",random(-32,32),random(-40,40),random(16,48),random(-4,4),random(-4,4),random(0,4),0,SXF_TRANSFERPOINTERS) 
+    LRED V -1 A_BossDeath
+    Stop
+  }
+}

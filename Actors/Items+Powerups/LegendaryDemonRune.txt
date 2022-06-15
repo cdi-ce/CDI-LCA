@@ -1,0 +1,752 @@
+Actor LegDemonRune : CustomInventory
+{
+  Inventory.PickupMessage "\c[l5]Legendary Demon Rune"
+  Inventory.PickupSound "legendarypowersphere/pickup"
+  Inventory.Icon "LDRNM0"
+  Inventory.MaxAmount 1
+  +INVBAR
+  +COUNTITEM
+  +INVENTORY.BIGPOWERUP
+  +NOTIMEFREEZE
+  +FLOAT
+  +FLOATBOB
+  States
+  {
+  Use:
+    TNT1 A 0
+    TNT1 A 0 A_GiveInventory("LegDemonRuneeGiver")
+	TNT1 A 0 A_PlaySound("legendaryrevenant/see", CHAN_AUTO, 1.0, False, ATTN_NONE)
+    Stop  	
+  Spawn:
+    TNT1 A 0 A_PlaySound("legdemonrune/idle",6,5.0)
+    TNT1 A 0 Bright A_SpawnItemEx("LegDemonRuneParticleSpawner",0,0,32,0,0,0,0,128) 
+    TNT1 AAAAAAAAAAAAA 0 Bright A_SpawnItemEx("ArmorParticleBlue",Random(-12,12),Random(-12,12),Random(16,40),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	LDRN ABCDEFGJHIJKL 5 Bright A_CustomMissile("LegendaryDRuneFlameSpawner",-20,0,random(0,-360),2,random(0,360)) 
+	Loop	
+  Pickup:
+    TNT1 A 1 A_StopSound
+	Stop
+  }
+}
+
+ACTOR LegDemonRuneParticleSpawner : LegendaryRedParticleSpawner
+{
+States
+{
+  Spawn:
+    TNT1 AAAAAAAAAAAAA 1 Bright A_SpawnItemEx("ArmorParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128) 
+    Stop
+}
+}
+
+ACTOR LegDemonRuneeGiver : PowerupGiver
+{
+  Powerup.Duration -80
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  +NOTIMEFREEZE
+  Inventory.MaxAmount 1
+  Powerup.Type "LegendaryPlayer"
+}
+
+ACTOR PowerLegendaryPlayer : PowerMorph
+{
+  +NOTIMEFREEZE
+  PowerMorph.PlayerClass "Demon_LegendaryRevenant"
+  PowerMorph.MorphFlash "Nothing"
+  PowerMorph.UnMorphFlash "Nothing"
+  PowerMorph.MorphStyle (MRF_FULLHEALTH|MRF_ADDSTAMINA|MRF_NEWTIDBEHAVIOUR|MRF_WHENINVULNERABLE|MRF_LOSEACTUALWEAPON)
+}
+
+ACTOR LegMissileType2 : Inventory{inventory.MaxAmount 1}
+ACTOR LegMissileType3 : Inventory{inventory.MaxAmount 1}
+ACTOR LegMissileType4 : Inventory{inventory.MaxAmount 1}
+ACTOR LegMissileType5 : Inventory{inventory.MaxAmount 1}
+ACTOR LegMissileType6 : Inventory{inventory.MaxAmount 1}
+ACTOR LegMissileType7 : Inventory{inventory.MaxAmount 1}
+
+ACTOR Demon_LegendaryRevenant : PlayerPawn
+{
+  Speed 1
+  Mass 300
+  Radius 20
+  Height 56
+  Health 1350
+  Scale 1.1
+  Player.MaxHealth 1350
+  Player.ForwardMove 1.3
+  Player.SideMove 1.3
+  Player.JumpZ 10
+  BloodColor "Blue"
+  Player.SoundClass "LegRevenant"
+  Player.DisplayName "Legendary Revenant"
+  Player.AttackZOffset 0
+  Player.DamageScreenColor Blue, 0.1
+  Player.MorphWeapon "LegendaryRevenant-Weapons"
+  DamageFactor "LegendaryPlayer", 0.0
+  DamageFactor "LegendaryGuruPlayer", 0.0
+  DamageFactor 0.65
+  DamageFactor "Legendary1", 0.0
+  DamageFactor "Legendary", 0.0
+  DamageFactor "LegendaryGuru", 0.0
+  DamageFactor "CadaverRocket", 0.0
+  SeeSound "legendaryrevenant/see"
+  PainSound "legendaryrevenant/pain"
+  DeathSound "legendaryrevenant/death"
+  ActiveSound "legendaryrevenant/idle"
+  MeleeSound "skeleton/melee"
+  Species "Player"
+  +THRUSPECIES
+  +DONTHARMSPECIES
+  +NORADIUSDMG
+  +NOSKIN
+  +DONTRIP
+  +NOPAIN
+  +BOSS
+  +BOSSDEATH
+  +NOTIMEFREEZE
+  States
+  {
+   Spawn:
+    //LREV AAA 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	TNT1 A 0
+	TNT1 A 0 ACS_ExecuteAlways(5435,0,0,0,0)
+    LREV A 10 Bright
+    Loop
+   See:
+    TNT1 A 0
+	TNT1 A 0 ACS_ExecuteAlways(5435,0,0,0,0)
+	TNT1 A 0 A_SpawnItem("BonyStep",0,0,0,0)
+	//TNT1 AAA 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+    LREV AAA 2 Bright
+	//TNT1 AAA 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	LREV BBB 2 Bright
+	//TNT1 AAA 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	LREV CCC 2 Bright
+	//TNT1 AAA 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	LREV DDD 2 Bright
+	//TNT1 AAA 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	LREV EEE 2 Bright
+	//TNT1 AAA 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	LREV FFF 2 Bright
+	//TNT1 AAA 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+    TNT1 A 0 A_SpawnItem("BonyStep",0,0,0,0)
+    Goto Spawn
+  //Melee:
+  Missile:
+    LREV J 1 Bright
+    /*LREV J 0 A_JumpIfInventory("LegRevWeapType",7,"Missile7")
+  	LREV J 0 A_JumpIfInventory("LegRevWeapType",6,"Missile6")
+	LREV J 0 A_JumpIfInventory("LegRevWeapType",5,"Missile5")
+	LREV J 0 A_JumpIfInventory("LegRevWeapType",4,"Missile4")
+	LREV J 0 A_JumpIfInventory("LegRevWeapType",3,"Missile3")
+	LREV J 0 A_JumpIfInventory("LegRevWeapType",2,2)
+	LREV J 0 A_JumpIfInventory("LegRevWeapType",1,"Missile2")*/
+	
+	LREV J 0 A_JumpIfInventory("LegRevWeapType",7,2)
+	LREV J 0 A_Jump(256,2)
+	LREV J 0
+	Goto Missile7
+  	LREV J 0 A_JumpIfInventory("LegRevWeapType",6,2)
+	LREV J 0 A_Jump(256,2)
+	LREV J 0
+	Goto Missile6
+	LREV J 0 A_JumpIfInventory("LegRevWeapType",5,2)
+	LREV J 0 A_Jump(256,2)
+	LREV J 0
+	Goto Missile5
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",4,2)
+	LRDY A 0 A_Jump(256,2)
+	LRDY A 0
+	Goto Missile4
+	LREV J 0 A_JumpIfInventory("LegRevWeapType",3,2)
+	LREV J 0 A_Jump(256,2)
+	LREV J 0
+	Goto Missile3
+	LREV J 0 A_JumpIfInventory("LegRevWeapType",2,2)
+	LREV J 0 A_Jump(256,2)
+	LREV J 0
+	Goto Missile1
+	LREV J 0 A_JumpIfInventory("LegRevWeapType",1,2)
+	LREV J 0 A_Jump(256,2)
+	LREV J 0
+	Goto Missile2
+	LREV J 1 Bright A_Jump(256,"Missile1")
+    Goto Spawn
+  Missile1:
+    LREV J 1 Bright
+    LREV JKK 10 Bright
+    Goto Spawn	
+  Missile2:
+    LREV J 35 Bright
+    LREV K 84 Bright
+    Goto Spawn
+  Missile3:	
+    LREV GHI 4 Bright
+    Goto See	
+  Missile4:
+    LREV J 35 Bright
+    LREV K 10 Bright
+    Goto Spawn	
+  Missile5:
+    LREV J 80 Bright
+    LREV K 10 Bright
+    Goto Spawn	
+  Missile6:
+    LREV GH 5 Bright
+    LREV I 3 Bright
+    Goto Spawn	
+  Missile7:
+    LREV G 0
+    LREV G 0 A_Jump(127,4)
+    LREV GHI 2 Bright
+    Goto See
+    LREV RST 2 Bright
+    Goto See
+  Death: 
+	LREV LM 7
+    LREV N 7 A_Scream
+	//TNT1 A 0 A_PlaySound("legendaryrevenant/death", CHAN_AUTO, 1.0, False, ATTN_NONE)
+    LREV O 7 A_NoBlocking
+    LREV P 7
+	LREV Q -1
+    Stop
+  }
+}
+
+ACTOR MorphedPlayerFriendMark0
+{
++FRIENDLY
++FLOAT
++NOGRAVITY
++NOTARGET
++NOCLIP
++DORMANT
++NOTRIGGER
++NOTIMEFREEZE
++CLIENTSIDEONLY
+RenderStyle "Translucent"
+Alpha 0.6
+Radius 0
+Height 0
+Speed 0
+States
+{
+   Spawn:
+	LDRN I 2 Bright
+	Stop
+   Death:
+	Stop
+	}
+}
+
+ACTOR MorphedWeapon : Weapon
+{
+  +INVENTORY.UNDROPPABLE
+  +WEAPON.AMMO_OPTIONAL
+  +WEAPON.ALT_AMMO_OPTIONAL
+  +WEAPON.CHEATNOTWEAPON
+  +WEAPON.DONTBOB
+  Decal "BulletChip"
+  Weapon.SelectionOrder 1
+  States
+  {	
+  Spawn:
+    TNT1 A 0 
+    Stop
+  Ready:
+    TNT1 A 1 A_WeaponReady
+    Goto Ready
+  Select:
+    TNT1 AAA 0 A_Raise
+    TNT1 A 1 A_Raise
+    Loop
+  Deselect:
+    TNT1 AAA 0 A_Lower
+    TNT1 A 1 A_Lower
+    Loop  
+  Fire:	
+    TNT1 A 2
+    Goto Ready	
+  Flash:
+    TNT1 A 1 Bright A_Light2
+    TNT1 A 2 Bright A_Light1
+    Goto LightDone
+  }
+}
+
+Actor LegRevWeapType : Inventory{Inventory.MaxAmount 7}
+
+Actor LegendaryRevenant-Weapons : MorphedWeapon
+{
+States
+{
+  Ready:
+    LRDY ABCDEFGHIJKL 4 Bright A_WeaponReady
+    Loop	
+  Fire:
+	LRDY A 1 Bright
+    /*LRDY A 0 A_JumpIfInventory("LegRevWeapType",7,"Fire7")
+  	LRDY A 0 A_JumpIfInventory("LegRevWeapType",6,"Fire6")
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",5,"Fire5")
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",4,"Fire4")
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",3,"Fire3")
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",2,"Fire2")
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",1,"Fire1")*/
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",7,2)
+	LRDY A 0 A_Jump(256,2)
+	LRDY A 0
+	Goto Fire7
+  	LRDY A 0 A_JumpIfInventory("LegRevWeapType",6,2)
+	LRDY A 0 A_Jump(256,2)
+	LRDY A 0
+	Goto Fire6
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",5,2)
+	LRDY A 0 A_Jump(256,2)
+	LRDY A 0
+	Goto Fire5
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",4,2)
+	LRDY A 0 A_Jump(256,2)
+	LRDY A 0
+	Goto Fire4
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",3,2)
+	LRDY A 0 A_Jump(256,2)
+	LRDY A 0
+	Goto Fire3
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",2,2)
+	LRDY A 0 A_Jump(256,2)
+	LRDY A 0
+	Goto Fire2
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",1,2)
+	LRDY A 0 A_Jump(256,2)
+	LRDY A 0
+	Goto Fire1
+	LRDY A 1 Bright A_Jump(256,"Fire0")
+	Goto Ready
+  Fire0:
+	LVRD B 0 A_GunFlash	
+    LVRD B 2 Bright
+	LVRD C 0 A_FireCustomMissile("PlayerLegRevBall",0,0,-18,25)	
+	LVRD C 3 Bright A_FireCustomMissile("PlayerLegRevBall",0,0,18,25)	
+	LVRD D 3 Bright
+	LVRD E 22 Bright
+    Goto Ready		
+  Fire1:
+    LVRD D 0 A_GiveInventory("LegMissileType2")
+	LVRD D 0 A_GunFlash	
+    LVRD D 35 Bright A_PlaySound("legendaryrevenant/attack1")
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright	
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright	
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright	
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright	
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright	
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright	
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright	
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright	
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright	
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright	
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright	
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright	
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright	
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright	
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright	
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright	
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright	
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright	
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD B 0 A_FireCustomMissile("PlayerLegRevBall2",0,0,-18,25)	
+	LVRD B 1 Bright A_FireCustomMissile("PlayerLegRevBall2",0,0,18,25)	
+	LVRD C 1 Bright
+	LVRD E 22 Bright
+    Goto Ready
+  Fire2:
+	LVRD B 0 A_GunFlash	
+    LVRD B 2 Bright
+	LVRD C 0 A_FireCustomMissile("PlayerLegRevRocket",0,0,-18,25)	
+	LVRD C 3 Bright A_FireCustomMissile("PlayerLegRevRocket",0,0,18,25)	
+	LVRD D 3 Bright
+	LVRD E 22 Bright
+    Goto Ready
+  Fire3:
+    LPNC A 0 A_GiveInventory("LegMissileType3")
+	LPNC A 0 A_GunFlash
+    LPNC A 2 Bright
+	LPNC B 3 Bright A_FireCustomMissile("PlayerLegRevFloorDeadHands",0,0,0,0)	
+	LPNC CDB 3 Bright
+	LPNC A 15 Bright
+    Goto Ready
+  Fire4:
+    LVRD D 0 A_GiveInventory("LegMissileType4")
+	LVRD D 0 A_GunFlash	
+    LVRD D 35 Bright A_PlaySound("legendaryrevenant/see")
+    LVRD B 2 Bright
+	LVRD C 0 A_PlayWeaponSound("monsters/darkcyberrail")
+	LVRD C 0 A_FireCustomMissile("PlayerLegRevRailgunProj",0,0,-18,25)	
+	LVRD C 3 Bright A_FireCustomMissile("PlayerLegRevRailgunProj",0,0,18,25)	
+	LVRD D 3 Bright
+	LVRD E 22 Bright
+    Goto Ready	
+  Fire5:
+    LVRD D 0 A_GiveInventory("LegMissileType5")
+	LVRD D 0 A_GunFlash	
+    LVRD D 20 Bright A_PlaySound("legendaryrevenant/attack2")
+	LVRD B 60 Bright A_PlayWeaponSound("lrball3/charge")
+	LVRD C 0 A_PlayWeaponSound("lrball3/shot")
+	LVRD C 0 A_FireCustomMissile("PlayerLegRevBall3",0,0,-18,25)	
+	LVRD C 3 Bright A_FireCustomMissile("PlayerLegRevBall3",0,0,18,25)	
+	LVRD D 3 Bright
+	LVRD E 22 Bright
+    Goto Ready	
+  Fire6:
+    LVRD D 0 A_GiveInventory("LegMissileType6")
+	LVRD D 0 A_GunFlash	
+    LPNC A 0 A_PlaySound("skeleton/swing")	
+    LPNC A 1 Bright A_Recoil(-65)
+	LPNC AAAAAAAAAA 1 Bright A_SpawnItemEx("LRGhost",0,0,0,0,0,0,0,128)
+	LPNC B 0 A_Stop
+	LPNC B 3 Bright A_FireCustomMissile("PlayerLRDashPunch",0,0,0,0)	
+	LPNC CDB 3 Bright
+    Goto Ready
+  Fire7:
+    LVRD D 0 A_GiveInventory("LegMissileType7")
+	LVRD D 0 A_GunFlash	
+    LPNC A 0 A_PlaySound("skeleton/swing")
+    LPNC A 1 Bright
+	LPNC B 2 Bright A_FireCustomMissile("PlayerLRPunch",0,0,0,0)
+	LPNC CDB 2 Bright
+    Goto Ready	
+  AltFire:
+    LRDY A 0
+  	LRDY A 0 A_JumpIfInventory("LegRevWeapType",7,3)
+	LRDY A 0 A_GiveInventory("LegRevWeapType",1)
+	LRDY A 0 A_Jump(256,2)
+	LRDY A 0 A_TakeInventory("LegRevWeapType",7)
+	LRDY A 0
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",7,"Select7")
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",6,"Select6")
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",5,"Select5")
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",4,"Select4")
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",3,"Select3")
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",2,"Select2")
+	LRDY A 0 A_JumpIfInventory("LegRevWeapType",1,"Select1")
+	LRDY A 1 Bright
+	LRDY A 1 Bright A_Jump(256,"Select0")
+	Goto Ready
+  Select0:
+    LRDY A 1 Bright A_Print("Normal")
+    Goto AltDone	
+  Select1:
+    LRDY A 1 Bright A_Print("Rage Attack")
+    Goto AltDone
+  Select2:
+    LRDY A 1 Bright A_Print("Rockets")
+    Goto AltDone
+  Select3:
+    LRDY A 1 Bright A_Print("Dead Hands")
+    Goto AltDone
+  Select4:
+    LRDY A 1 Bright A_Print("Railgun")
+    Goto AltDone
+  Select5:
+    LRDY A 1 Bright A_Print("Best Attack")
+    Goto AltDone
+  Select6:
+    LRDY A 1 Bright A_Print("Dash Punch")
+    Goto AltDone
+  Select7:
+    LRDY A 1 Bright A_Print("Normal Punch")
+    Goto AltDone	
+  AltDone:
+	LRDY A 12 Bright
+    Goto Ready
+  }
+}
+
+Actor PlayerLegRevBall : LegRevBall
+{
+    Damage 11
+	DamageType "LegendaryPlayer"
+	Species "Player"
+	+THRUSPECIES
+    +NOTIMEFREEZE
+    States
+    {
+	Spawn:
+	    TNT1 A 0 A_SeekerMissile(15,15,SMF_LOOK)
+        LRB1 A 2 A_CustomMissile("LegRevBallFX",0,0,0,0)
+	    TNT1 A 0 A_SeekerMissile(15,15,SMF_LOOK)
+        LRB1 B 2 A_CustomMissile("LegRevBallFX",0,0,0,0)
+	    TNT1 A 0 A_SeekerMissile(15,15,SMF_LOOK)
+        LRB1 C 2 A_CustomMissile("LegRevBallFX",0,0,0,0)
+	    TNT1 A 0 A_SeekerMissile(15,15,SMF_LOOK)
+        LRB1 D 2 A_CustomMissile("LegRevBallFX",0,0,0,0)		
+        Loop	
+    Death:
+	    LRB1 ABCD 4 A_SpawnItemEx("BlueParticleSpawner",0,0,0,0,0,0,0,128)
+		TNT1 A 0 A_Explode(64,64,0) 
+		TNT1 A 0 A_PlaySound("weapons/clrocketexplode")
+	    TNT1 A 0 A_SpawnItemEx("BlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	    TNT1 AAA 0 A_CustomMissile("Kaboom6", 0, 0, random(0,360), 2, random(0,360))
+	    TNT1 AAA 0 A_CustomMissile("SmokeFX4", 0, 0, random(0,360), 2, random(0,360))	
+        LRB1 EFGHIJKLMNO 3
+        Stop
+    }
+}
+
+Actor PlayerLegRevBall2 : LegRevBall2
+{
+Damage 8
+DamageType "LegendaryPlayer"
+Species "Player"
++THRUSPECIES
++NOTIMEFREEZE
+}
+
+ACTOR PlayerLegRevRocket : LegRevRocket
+{
+Damage 35
+DamageType "LegendaryPlayer"
+Species "Player"
++THRUSPECIES
++NOTIMEFREEZE
+}
+
+ACTOR PlayerLegRevFloorDeadHands : LegRevFloorDeadHands
+{
+Damage 12
+DamageType "LegendaryPlayer"
+Species "Player"
++THRUSPECIES
++NOTIMEFREEZE
+States
+{
+   Spawn:
+    LRHD MNO 2 A_SpawnItemEx("PlayerLRUndeadHand",random(-16,16),random(-16,16))
+    Loop
+   Death: 
+    TNT1 A 0
+    TNT1 AAAAAAA 0 A_SpawnItemEx("PlayerLRUndeadHand",random(-48,48),random(-48,48))
+    TNT1 A 1
+    Stop
+	}
+}
+
+Actor PlayerLRUndeadHand : LRUndeadHand
+{
+DamageType "LegendaryPlayer"
+Species "Player"
++THRUSPECIES
++NOTIMEFREEZE
+}
+
+ACTOR PlayerLegRevRailgunProj : LegRevRailgunProj
+{
+Damage (Random(14,20))
+DamageType "LegendaryPlayer"
+Species "Player"
++THRUSPECIES
++NOTIMEFREEZE
+}
+
+Actor PlayerLegRevBall3 : LegRevBall3
+{
+  Damage 125
+  DamageType "LegendaryPlayer"
+  Species "Player"
+  +THRUSPECIES
+  +NOTIMEFREEZE
+  States
+  {
+  Death:
+    TNT1 A 0 A_Explode(128,128,0)
+    TNT1 A 0 A_SpawnItemEx("BlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 A 0 A_SpawnItemEx("LNCometDeath",0,0,0,0,0,0,0,128,0)
+	TNT1 A 0 A_PlaySound("lrball3/exp")
+    TNT1 AAAAAAAA 0 A_SpawnItemEx("PlayerLegRevSmallBall3",Random(-8,8),Random(-8,8),Random(-8,8),Random(45,70),0,Random(-3,3),Random(170,190),SXF_NOCHECKPOSITION)	
+    TNT1 AAAAAAAAAAAAAAAA 0 A_SpawnItemEx("PlayerLegRevSmallBall3",Random(-8,8),Random(-8,8),Random(-8,8),Random(45,70),0,Random(-3,3),Random(-14,14),SXF_NOCHECKPOSITION)
+	MMSD A 8 bright A_Explode(38, 140, 0)
+    Stop
+  }
+}
+
+Actor PlayerLegRevSmallBall3 : LegRevSmallBall3
+{
+  Damage 10
+  DamageType "LegendaryPlayer"
+  Species "Player"
+  +THRUSPECIES
+  +NOTIMEFREEZE
+}
+
+Actor PlayerLRDashPunch : LRDashPunch
+{
+  Damage (10*Random(6,10))
+  DamageType "LegendaryPlayer"
+  Species "Player"
+  +THRUSPECIES
+  +NOTIMEFREEZE
+  States
+  {
+   Death:
+    TNT1 A 1 A_Explode(128,158,0)
+    Stop
+    }
+}
+
+Actor PlayerLRPunch : PlayerLRDashPunch
+{
+  Damage (20*Random(6,10))
+  DamageType "LegendaryPlayer"
+  Species "Player"
+  +THRUSPECIES
+  +EXTREMEDEATH
+  +NOTIMEFREEZE
+  States
+  {
+   Death:
+    TNT1 A 1
+    Stop
+    }
+}
+
+ACTOR LegendaryDRuneFlame
+{
++NOCLIP
++MISSILE
++DONTSPLASH
++CLIENTSIDEONLY
++NOBLOCKMAP
++NOGRAVITY
++NOTELEPORT
++FORCEXYBILLBOARD
++NOTIMEFREEZE
+RenderStyle Add
+Scale 0.3
+States
+{
+Spawn:
+BMKE ABCDEFGHIJKL 2 Bright A_FadeOut
+Stop
+}
+}
+
+ACTOR LegendaryDRuneFlameSpawner 
+{
+  +NOTIMEFREEZE
+  +CLIENTSIDEONLY
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    TNT1 AAAAAA 0 A_SpawnItemEx("LegendaryDRuneFlame",random(20,-20),random(20,-20),random(20,40),0,0,random(2,6),0,128,0)
+    TNT1 A 0
+    Stop
+  Toaster:
+    TNT1 A 0
+	Stop	
+  }
+}

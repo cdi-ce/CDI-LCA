@@ -1,0 +1,295 @@
+Actor RictusIncarnate : BaronOfHell 3127
+{
+  Health 1300
+  Speed 12
+  PainChance 46
+  Species "Nobles"
+  +FLOORCLIP
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +FASTMELEE
+  +DONTHURTSPECIES
+  +QUICKTORETALIATE
+  SeeSound "rictus/sight"
+  ActiveSound "rictus/active"
+  PainSound "rictus/pain"
+  DeathSound "rictus/die"
+  Obituary "%o was turned into a lost soul by a Rictus Incarnate."
+  HitObituary "%o got ripped apart by Rictus Incarnate."
+  MeleeDamage 16
+  DamageFactor "NobleComet", 0.0
+  DamageFactor "SoulToxic", 0.0
+  DropItem "LifeEssence" 256
+  DropItem "ArmorBonusMax" 256
+  DropItem "BossLifeEssence" 192 25
+  DropItem "BossArmorBonusMax" 192 1
+  DropItem "DemonAmmoBox" 192 200
+  DropItem "RedArmor" 64
+  States
+  {
+  Spawn:
+    RCIN A 7 A_Look
+	RCIN A 7 A_Look
+	RCIN Z 7 A_Look
+	RCIN Z 7 A_Look
+    Loop
+  See:
+    RCIN AABB 3 A_Chase
+	TNT1 A 0 A_SpawnItem("HoofStep",0,0,0,0)
+	RCIN CCDD 3 A_Chase
+	TNT1 A 0 A_SpawnItem("HoofStep",0,0,0,0)
+    Loop
+  Missile:
+    TNT1 A 0 A_Jump(128,"Imp","Famine","Comet","RictusProjectile","SmallComet","SmallSeekingComet")
+	TNT1 A 0 A_Jump(64,"Rictus")
+  Normal:
+    RCIN EF 8 A_FaceTarget	
+	RCIN G 0 A_CustomMissile("RIBall", 32, 0, 3)
+	RCIN G 0 A_CustomMissile("RIBall", 32, 0, 0)
+	RCIN G 6 Bright A_CustomMissile("RIBall", 32, 0, -3)
+	RCIN EF 8 A_FaceTarget	
+	RCIN G 0 A_CustomMissile("RIBall", 32, 0, 3)
+	RCIN G 0 A_CustomMissile("RIBall", 32, 0, 0)
+	RCIN G 0 A_CustomMissile("RIBall", 32, 0, 6)
+	RCIN G 6 Bright A_CustomMissile("RIBall", 32, 0, -3)
+	RCIN EF 8 A_FaceTarget	
+	RCIN G 0 A_CustomMissile("RIBall", 32, 0, 3)
+	RCIN G 0 A_CustomMissile("RIBall", 32, 0, 0)
+	RCIN G 0 A_CustomMissile("RIBall", 32, 0, -3)
+	RCIN G 0 A_CustomMissile("RIBall", 32, 0, 6)
+	RCIN G 0 A_CustomMissile("RIBall", 32, 0, -6)
+	RCIN G 6 Bright A_CustomMissile("RIBall", 32, 0, -3)
+	TNT1 A 0 A_Jump(64,"Imp","Famine","Comet","RictusProjectile","SmallComet","SmallSeekingComet")
+	Goto See
+  Imp:
+    RCIN P 4 Bright A_FaceTarget
+    RCIN Q 6 Bright A_CustomMissile("DevilBall", 60, 0, 0)
+	RCIN P 4 Bright A_FaceTarget
+    RCIN Q 6 Bright A_CustomMissile("DevilBall", 60, 0, 0)
+	RCIN P 4 Bright A_FaceTarget
+    RCIN Q 6 Bright A_CustomMissile("DevilBall", 60, 0, 0)
+	RCIN P 4 Bright A_FaceTarget
+    RCIN Q 6 Bright A_CustomMissile("DevilBall", 60, 0, 0)
+	RCIN P 4 Bright A_FaceTarget
+    RCIN Q 6 Bright A_CustomMissile("DevilBall", 60, 0, 0)
+	RCIN P 4 Bright A_FaceTarget
+    RCIN Q 6 Bright A_CustomMissile("DevilBall", 60, 0, 0)
+	RCIN P 10 Bright A_FaceTarget
+	TNT1 A 0 A_Jump(64,"Famine","Comet","RictusProjectile","SmallComet","SmallSeekingComet")
+    Goto See
+  Famine:
+    RCIN R 4 Bright A_FaceTarget
+    RCIN S 5 Bright A_CustomMissile("FamineTracer", 60, 0, 0)
+	RCIN R 4 Bright A_FaceTarget
+    RCIN S 5 Bright A_CustomMissile("FamineTracer", 60, 0, 0)
+	RCIN R 4 Bright A_FaceTarget
+    RCIN S 5 Bright A_CustomMissile("FamineTracer", 60, 0, 0)
+	RCIN R 4 Bright A_FaceTarget
+    RCIN S 5 Bright A_CustomMissile("FamineTracer", 60, 0, 0)
+	RCIN R 4 Bright A_FaceTarget
+    RCIN S 5 Bright A_CustomMissile("FamineTracer", 60, 0, 0)
+	RCIN R 4 Bright A_FaceTarget
+    RCIN S 5 Bright A_CustomMissile("FamineTracer", 60, 0, 0)
+	RCIN R 4 Bright A_FaceTarget
+    RCIN S 5 Bright A_CustomMissile("FamineTracer", 60, 0, 0)
+	RCIN R 4 Bright A_FaceTarget
+    RCIN S 5 Bright A_CustomMissile("FamineTracer", 60, 0, 0)
+	RCIN R 15 Bright A_FaceTarget
+	TNT1 A 0 A_Jump(64,"Comet","RictusProjectile","SmallComet","SmallSeekingComet")
+	Goto See
+  SmallComet:
+    RCIN EF 8 A_FaceTarget	
+	RCIN G 7 Bright A_CustomMissile("ArcradimusComet2", 32, 0, 0)
+	RCIN EF 8 A_FaceTarget	
+	RCIN G 0 A_CustomMissile("ArcradimusComet2", 32, 0, 10)
+	RCIN G 0 A_CustomMissile("ArcradimusComet2", 32, 0, 0)
+	RCIN G 7 Bright A_CustomMissile("ArcradimusComet2", 32, 0, -10)
+	TNT1 A 0 A_Jump(64,"RictusProjectile","Comet","SmallSeekingComet")
+    Goto See
+  SmallSeekingComet:
+    RCIN EF 8 A_FaceTarget	
+	RCIN G 7 Bright A_CustomMissile("RISeekerComet", 32, 0, 0)
+	RCIN EF 8 A_FaceTarget	
+	RCIN G 0 A_CustomMissile("RISeekerComet", 32, 0, 10)
+	RCIN G 0 A_CustomMissile("RISeekerComet", 32, 0, 0)
+	RCIN G 7 Bright A_CustomMissile("RISeekerComet", 32, 0, -10)
+	RCIN EF 8 A_FaceTarget	
+	RCIN G 0 A_CustomMissile("RISeekerComet", 32, 0, 10)
+	RCIN G 0 A_CustomMissile("RISeekerComet", 32, 0, 0)
+	RCIN G 0 A_CustomMissile("RISeekerComet", 32, 0, 5)
+	RCIN G 0 A_CustomMissile("RISeekerComet", 32, 0, 0)
+	RCIN G 0 A_CustomMissile("RISeekerComet", 32, 0, -5)
+	RCIN G 7 Bright A_CustomMissile("RISeekerComet", 32, 0, -10)
+	TNT1 A 0 A_Jump(64,"RictusProjectile","Comet")
+    Goto See
+  Comet:
+    RCIN EF 8 A_FaceTarget	
+	RCIN G 7 Bright A_CustomMissile("RIComet", 32, 0, 0)
+	RCIN EF 8 A_FaceTarget	
+	RCIN G 0 A_CustomMissile("RIComet", 32, 0, -8)
+	RCIN G 7 Bright A_CustomMissile("RIComet", 32, 0, 8)
+	RCIN EF 8 A_FaceTarget	
+	RCIN G 0 A_CustomMissile("RIComet", 32, 0, 8)
+	RCIN G 0 A_CustomMissile("RIComet", 32, 0, 0)
+	RCIN G 7 Bright A_CustomMissile("RIComet", 32, 0, -8)
+	TNT1 A 0 A_Jump(64,"RictusProjectile")
+    Goto See
+  Rictus:
+    RCIN P 6 Bright A_FaceTarget
+    RCIN Q 6 Bright A_SpawnItemEx("Rictus",62,0,60,0,0,0,0,SXF_SETMASTER)
+    Goto See
+  RictusProjectile:
+    RCIN P 20 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("rictus/attack")
+	RCIN Q 8 Bright A_CustomMissile("RictusBomb", 60, 0, 0)
+	RCIN P 20 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("rictus/attack")
+	RCIN Q 8 Bright A_CustomMissile("RictusBomb", 60, 0, 0)
+	RCIN P 20 Bright A_FaceTarget
+	TNT1 A 0 A_PlaySound("rictus/attack")
+	RCIN Q 8 Bright A_CustomMissile("RictusBomb", 60, 0, 0)
+	RCIN P 20 Bright A_FaceTarget
+	Goto See
+    Melee:
+    RCIN EF 8 A_FaceTarget
+    RCIN G 8 A_ComboAttack
+    Goto See
+  Pain:
+    RCIN H 2
+    RCIN H 2 A_Pain
+    Goto See
+  Death:
+    RCIN I 8 A_Scream
+	TNT1 A 0 A_SpawnItemEx("Rictus",62,0,60,0,0,0,0,SXF_SETMASTER)
+    RCIN J 0 A_FaceTarget
+    RCIN J 8 
+    RCIN K 8
+    RCIN L 8 A_Fall
+    RCIN M 8 A_SpawnItem("BodyCrash",0,0,0,0)
+	RCIN N 8 
+    RCIN O -1
+    Stop
+  Raise:
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx("VileHealEffect",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+    RCIN NMLKJI 8
+    Goto See
+   }
+}
+
+ACTOR RIComet : ArcradimusComet
+{
+   Radius 10
+   Height 10
+   Speed 30
+   Damage 22
+   DamageType "NobleComet"
+   Scale 0.85
+   States
+   {
+   Spawn: 
+      ACCM AAAABBBBCCCC 1 Bright A_SpawnItem("RICometTrail",0,0)
+      loop
+   Death:
+      ACCM J 0 Bright A_SetTranslucent (0.67,1)
+      ACCM J 3 Bright
+      ACCM K 3 Bright A_Explode(128,128,0)
+	  TNT1 A 0 A_SpawnItemEx("ArcradimusCometDeath",0,0,0,0,0,0,0,128,0)
+      ACCM LMN 3 Bright
+      stop
+   }
+}
+
+ACTOR RICometTrail : ArcradimusCometTrail
+{   
+   Radius 6
+   Height 6
+   Scale 0.9
+   Speed 0
+   PROJECTILE
+   RENDERSTYLE ADD
+   ALPHA 0.67
+   States
+   {
+   Spawn:
+      NULL A 3 Bright
+      ACCM DEFGHI 3 BRIGHT
+      Stop 
+   }
+}
+
+Actor RIBall : ArcradShot
+{
+Damage 9
+DamageType "NobleComet"
+States
+{
+    Spawn:
+	 ABL9 AAABBB 1 Bright A_SpawnItemEx("ArcradShotTrail",0,0,0,0,0,0,0,128)
+	 Loop
+	Death:
+	 TNT1 A 0
+     TNT1 A 0 A_SpawnItemEx("RedParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+	 TNT1 AAA 0 A_CustomMissile("KaboomRed", 0, 0, random(0,360), 2, random(0,360))
+	 TNT1 AAA 0 A_CustomMissile("SmokeFX4", 0, 0, random(0,360), 2, random(0,360))	
+     ABL9 DEFG 3 Bright
+     Stop
+}
+}
+
+ACTOR RictusBomb : DefilerBall
+{
+    Speed 40
+	FastSpeed 44
+    Damage 10
+	Obituary "%o was turned into a lost soul by a Rictus Incarnate."
+    States
+    {
+    Spawn:
+	    //TNT1 A 0 A_PlaySound("rictus/attack")
+		TNT1 A 0 A_SpawnItem("RictFireSpawner",0,0,0,0)
+		RICT A 2 Bright A_Tracer2	
+		RICT B 2 Bright A_SpawnItem("RictFireSpawner",0,0,0,0)
+		Loop
+    Death:	
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound("rictus/die")
+		TNT1 A 0 A_SetTranslucent(0.75,1)
+		TNT1 AA 0 A_SpawnItemEx("SoulPart1",0,0,Random(10,20),Random(8,-8),Random(8,-8),Random(6,8))
+		TNT1 A 0 A_SpawnItemEx("SoulPart2",0,0,Random(10,20),Random(8,-8),Random(8,-8),Random(6,8))
+		TNT1 AA 0 A_SpawnItemEx("SoulPart3",0,0,Random(10,20),Random(8,-8),Random(8,-8),Random(6,8))
+		TNT1 AA 0 A_SpawnItemEx("OrangeParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+		TNT1 AAA 0 A_CustomMissile("Kaboom3", 0, 0, random(0,360), 2, random(0,360))
+		TNT1 AAAA 0 A_CustomMissile("SmokeFX2", 0, 0, random(0,360), 2, random(0,360))
+		MISL B 5 Bright A_NoBlocking
+		MISL CD 4 Bright
+		Stop
+    }
+}
+
+ACTOR RISeekerComet : ArcradimusSeekerComet
+{
+BounceCount 3
+States
+{
+Spawn:
+ARCM AAABBBCCCAAABBBCCCAAABBBCCCAAABBBCCC 1 Bright A_SpawnItemEx("ArcradimusCometTail")
+TNT1 A 0 A_SeekerMissile(90,90)
+ARCM ABC 1 Bright A_SpawnItemEx("ArcradimusCometTail")
+TNT1 A 0 A_SeekerMissile(90,90)
+ARCM ABC 1 Bright A_SpawnItemEx("ArcradimusCometTail")
+TNT1 A 0 A_SeekerMissile(90,90)
+ARCM ABC 1 Bright A_SpawnItemEx("ArcradimusCometTail")
+Fly:
+ARCM ABC 1 Bright A_SpawnItemEx("ArcradimusCometTail")
+Loop
+Death:
+TNT1 A 0
+TNT1 A 0 A_Explode
+TNT1 A 0 A_SetTranslucent(0.75,1)
+TNT1 A 0 A_SpawnItemEx("RedParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+ARCM D 3 Bright A_SpawnItemEx("ArcradimusCometDeathGlow",0,0,0,0,0,0,0,128,0)
+ARCM E 3 Bright A_SpawnItemEx("ArcradimusCometDeath",0,0,0,0,0,0,0,128,0)
+Stop
+}
+}

@@ -1,0 +1,484 @@
+ACTOR LegendaryCommando
+{
+Monster
+Health 2000
+Radius 20
+Height 56
+Speed 13
+Mass 100
+PainChance 20
++NOTIMEFREEZE
++BOSS
++BOSSDEATH
++FLOORCLIP
++MISSILEMORE
++MISSILEEVENMORE
++QUICKTORETALIATE
++NOICEDEATH
++NODROPOFF
++DONTGIB
++NOTARGET
++NORADIUSDMG
++FORCERADIUSDMG
+BloodColor "Blue"
+DropItem "HandGrenadeAmmo" 235 2
+DropItem "MineAmmo" 235 2
+DropItem "Backpack" 198 1
+DropItem "LDemonAmmo" 250
+DropItem "LDemonAmmoBox" 200
+DropItem "LegAmmoSphere" 108 1
+DropItem "LegendaryArmor" 105 1
+DropItem "Legendary Plasmatic Cannon" 180 1
+DropItem "LegendaryRune" 45 1
+DamageFactor 0.65
+DamageFactor "PDTBFG", 0.20
+DamageFactor "PDTBFGTracer", 0.20
+DamageFactor "PlayerDevBall", 0.120
+DamageFactor "PlayerDevBall2", 0.120
+DamageFactor "PlayerDTBFGRailgunSlug", 0.120
+DamageFactor "PlayerDevTracer", 0.120
+DamageFactor "Legendary", 0.0
+DamageFactor "LegendaryPlayer", 0.3
+DamageFactor "LegendaryGuru", 0.0
+DamageFactor "LegendaryGuruPlayer", 0.3
+DamageFactor "LACGrenade", 0.0
+DamageFactor "LegendaryZombie", 0.0
+DamageFactor "GeneralTracer", 0.0
+DamageFactor "DBFG10K2", 0.65
+DamageFactor "PlayerDBFG10K2", 0.65
+DamageFactor "DBFG2", 0.65
+DamageFactor "PlayerDBFG2", 0.65
+SeeSound "superzombie/sight"
+AttackSound "Null"
+PainSound "legzom/pain"
+DeathSound "legzom/death"
+ActiveSound "legzom/active"
+AttackSound "Null"
+Obituary "%o was turned into a pile of juicy slop by Legendary Commando."
+var int user_music;
+var int user_protection;
+var int user_protected;
+States
+{
+Spawn:
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+    LCOS A 10 Bright A_Look
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	LCOI A 10 Bright A_Look
+    Loop
+See:
+    TNT1 A 0 A_JumpIf(user_music == 1,3)
+    TNT1 A 0 ACS_ExecuteAlways(5432,0,18)
+	TNT1 A 0 A_SetUserVar("user_music",1)
+    LCOS A 0 A_JumpIfTargetInLOS("Strafing")
+    LCOS AABB 3 Bright A_Chase
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_SpawnItem("LegendaryFootStep",0,0,0,0)
+    TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	LCOS A 0 A_JumpIfTargetInLOS("Strafing")
+	LCOS CCDD 3 Bright A_Chase
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	LCOS A 0 A_Jump(80,"Rush")
+    TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_SpawnItem("LegendaryFootStep",0,0,0,0)
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+    Loop
+Rush:
+    LCOS A 0 A_JumpIfTargetInLOS("Strafing")
+	TNT1 A 0 A_SpawnItem("LegendaryFootStep",0,0,0,0)
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("LegCommandoGhost",0,0,0,0,0,0,0,128)
+	LCOS A 1 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegCommandoGhost",0,0,0,0,0,0,0,128)
+	LCOS A 1 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegCommandoGhost",0,0,0,0,0,0,0,128)
+	LCOS B 1 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegCommandoGhost",0,0,0,0,0,0,0,128)
+	LCOS B 1 Bright A_Chase
+	TNT1 A 0 A_SpawnItem("LegendaryFootStep",0,0,0,0)
+    TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("LegCommandoGhost",0,0,0,0,0,0,0,128)
+	LCOS C 1 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegCommandoGhost",0,0,0,0,0,0,0,128)
+	LCOS C 1 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegCommandoGhost",0,0,0,0,0,0,0,128)
+	LCOS D 1 Bright A_Chase
+	TNT1 A 0 A_SpawnItemEx("LegCommandoGhost",0,0,0,0,0,0,0,128)
+	LCOS D 1 Bright A_Chase
+	TNT1 A 0 A_SpawnItem("LegendaryFootStep",0,0,0,0)
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_Jump(84,"See")
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	Loop
+  Strafing:
+	TNT1 A 0 A_SpawnItem("LegendaryFootStep",0,0,0,0)
+	TNT1 A 0 A_Chase("","Missile",CHF_DONTMOVE)
+	LCOS AA 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_Chase("","Missile",CHF_DONTMOVE)
+	LCOS BB 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_SpawnItem("LegendaryFootStep",0,0,0,0)
+	TNT1 A 0 A_Chase("","Missile",CHF_DONTMOVE)
+    LCOS CC 3 Bright A_GiveInventory("LegZombieStrafing2",1)	
+	TNT1 A 0 A_Chase("","Missile",CHF_DONTMOVE)
+	LCOS DD 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	Goto See
+  Pause:
+	LCOS EEEEE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	Goto See	
+  Missile:
+    TNT1 A 0 A_SetShootable
+    TNT1 A 0 A_UnsetInvulnerable
+    TNT1 A 0 A_SetTranslucent(1)
+    TNT1 A 0 A_Jump(88,"Combo","Grenades")
+  Normal:
+	LCOS EEEE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	LCOS E 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_CustomMissile("LegCommanderProj",32,0,0)
+	LCOS F 3 Bright A_PlaySoundEx("legendarycannon/fire","Weapon")
+	TNT1 A 0 A_Jump(24,"Pause")
+	TNT1 A 0 A_SpidRefire
+	Goto Normal+3
+  Combo:
+	LCOS E 0 A_SetInvulnerable
+	LCOS E 0 A_PlaySound("superzombie/sight")
+	LCOS E 1 Bright A_FaceTarget
+	LCOS EEEE 3 Bright A_GiveInventory("LegZombieStrafing3",1)
+	LEGW A 0 A_PlayWeaponSound("legendarycannon/charge")
+	LCOS EEEEE 3 Bright A_GiveInventory("LegZombieStrafing3",1)
+	LCOS E 0 A_UnSetInvulnerable
+	TNT1 A 0 A_CustomMissile("LegCommanderBall",32,0,random(-2,2))
+	LCOS FE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_CustomMissile("LegCommanderBall",32,0,random(-2,2))
+	LCOS FE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_CustomMissile("LegCommanderBall",32,0,random(-2,2))
+	LCOS FE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_CustomMissile("LegCommanderBall",32,0,random(-2,2))
+	LCOS FE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_CustomMissile("LegCommanderBall",32,0,random(-2,2))
+	LCOS FE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_CustomMissile("LegCommanderBall",32,0,random(-2,2))
+	LCOS FE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_CustomMissile("LegCommanderBall",32,0,random(-2,2))
+	LCOS FE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_CustomMissile("LegCommanderBall",32,0,random(-2,2))
+	LCOS FE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_CustomMissile("LegCommanderBall",32,0,random(-2,2))
+	LCOS FE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_CustomMissile("LegCommanderBall",32,0,random(-2,2))
+	LCOS FE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	LCOS EEEEEE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_Jump(80,"Grenades")
+	Goto See
+  Grenades:
+	LCOS EEEEEEEE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	LCOS EEE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_GiveInventory("LegZombieStrafing2",1)
+	LCOS F 3 Bright A_CustomMissile("LegFlyingGrenade",32,0,0)
+	LCOS EEE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_GiveInventory("LegZombieStrafing2",1)
+	LCOS F 3 Bright A_CustomMissile("LegFlyingGrenade",32,0,0)
+	LCOS EEE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_GiveInventory("LegZombieStrafing2",1)
+	LCOS F 3 Bright A_CustomMissile("LegFlyingGrenade",32,0,0)
+	LCOS EEE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_GiveInventory("LegZombieStrafing2",1)
+	LCOS F 3 Bright A_CustomMissile("LegFlyingGrenade",32,0,0)
+	LCOS EEE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_GiveInventory("LegZombieStrafing2",1)
+	LCOS F 3 Bright A_CustomMissile("LegFlyingGrenade",32,0,0)
+	LCOS EEE 3 Bright A_GiveInventory("LegZombieStrafing2",1)
+	TNT1 A 0 A_GiveInventory("LegZombieStrafing2",1)
+	LCOS F 3 Bright A_CustomMissile("LegFlyingGrenade",32,0,0)	
+	Goto See
+  Pain:
+	TNT1 A 0 A_Jump(40,"Protection")
+	TNT1 A 0 A_Jump(192,"PainMissile")
+	LCOS G 3 Bright
+	LCOS G 3 Bright A_Pain
+	Goto See
+  PainMissile:
+	LCOS G 3 Bright
+	LCOS G 3 Bright A_Pain
+	Goto Missile	
+  Protection:
+	TNT1 A 0 A_JumpIf(user_protection >= 3,"Pain")
+	TNT1 A 0 A_JumpIf(user_protected == 1,"Pain")
+	TNT1 A 0 A_PlaySound("legendary/defense")
+	TNT1 A 0 A_FaceTarget
+	LCOS E 2 Bright ACS_ExecuteAlways(5441,0,0,0,0)
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	Goto See	
+Death:
+    TNT1 A 0 A_Jump(36,"LegendarySoul")
+    TNT1 A 0 A_StopSound(6)
+	LCOS H 5 A_Scream
+    LCOS I 5 A_Fall
+    LCOS J 5 A_SpawnItem("BodyCrash",0,0,0,0)
+    LCOS KLM 5 
+    LCOS N -1 
+	Stop
+LegendarySoul:
+    TNT1 A 0 A_StopSound(6)
+	TNT1 A 0 A_SpawnItem("BHellionSmokeSpawner",0,0,0,0)
+	LCOS H 5 A_Scream
+	TNT1 A 0 A_SpawnItem("BHellionSmokeSpawner",0,0,0,0)
+    LCOS I 5 A_Fall
+	TNT1 A 0 A_SpawnItem("BHellionSmokeSpawner",0,0,0,0)
+    LCOS J 5 A_SpawnItem("BodyCrash",0,0,0,0)
+	TNT1 A 0 A_SpawnItem("BHellionSmokeSpawner",0,0,0,0)
+    LCOS K 5 
+	TNT1 A 0 A_SpawnItem("BHellionSmokeSpawner",0,0,0,0)
+    LCOS L 5
+	TNT1 A 0 A_SpawnItem("BHellionSmokeSpawner",0,0,0,0)
+    LCOS M 5
+	TNT1 A 0 A_SpawnItem("BHellionSmokeSpawner",0,0,0,0)
+	LCOS N 140
+	LCOS N 0 A_PlaySoundEx("brain/spit","Voice",0,2)
+	LCOS NNNNNNNNNNNNNNNNN 2 Bright A_GiveInventory("LegSoulEvent",1)
+	LCOS NNNNNNNNNNNNNNNNN 2 Bright A_GiveInventory("LegSoulEvent",1)
+	LCOS NNNNNNNNNNNNNNNNN 2 Bright A_GiveInventory("LegSoulEvent",1)
+	TNT1 A 0 A_SpawnItemEx("LegendarySoul",0,0,16,0,0,0,0,32)
+	TNT1 A 0 A_SpawnItemEx("TeleportFog",0,0,16,0,0,0,0,32)
+	LCOS N -1
+	Stop	
+XDeath:
+    TNT1 A 0 A_StopSound(6)
+	LCOS O 3 A_SpawnItemEx("BlueGibbedGenerator",0,0,0,0,0,0,0,128,0)
+    LCOS P 3 A_XScream
+    LCOS R 3 A_Fall
+    LCOS S 3 
+    LCOS T -1 
+    Stop
+    }
+}
+
+Actor LegCommanderProj
+{
+Radius 8
+Height 10
+Speed 70
+Damage 25
+Scale 0.17
+Projectile 
++SEEKERMISSILE 
++RANDOMIZE
++EXTREMEDEATH
++DOOMBOUNCE
++FORCERADIUSDMG
++NOTIMEFREEZE
+BounceCount 2
+DeathSound "lrball3/exp"
+DamageType "Legendary"
+RenderStyle Add
+States
+{
+  Spawn:
+    LRB3 A 0
+    LRB3 A 0 A_SeekerMissile(15,8,SMF_LOOK)
+	LRB3 AA 1 Bright A_SpawnItemEx("LegRevBall3Trail2",0,0,0,0,0,0,0,SXF_CLIENTSIDE)
+	LRB3 A 0 A_SeekerMissile(1,8,SMF_LOOK)
+	LRB3 BB 1 Bright A_SpawnItemEx("LegRevBall3Trail2",0,0,0,0,0,0,0,SXF_CLIENTSIDE)
+	LRB3 A 0 A_SeekerMissile(15,8,SMF_LOOK)
+	LRB3 CC 1 Bright A_SpawnItemEx("LegRevBall3Trail2",0,0,0,0,0,0,0,SXF_CLIENTSIDE)
+	LRB3 A 0 A_SeekerMissile(15,8,SMF_LOOK)
+	LRB3 DD 1 Bright A_SpawnItemEx("LegRevBall3Trail2",0,0,0,0,0,0,0,SXF_CLIENTSIDE)
+    loop
+  Death:
+    TNT1 A 0
+	TNT1 A 0 A_SpawnItemEx("LegendaryBlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	TNT1 AAA 0 A_CustomMissile("LegendaryKaboom6", 0, 0, random(0,360), 2, random(0,360))
+	TNT1 AAA 0 A_CustomMissile("LegendarySmokeFX4", 0, 0, random(0,360), 2, random(0,360))
+    TNT1 I 8 Bright A_Explode(32,80,0)
+    TNT1 J 6 Bright
+    TNT1 K 4 Bright
+    Stop
+  }
+}
+
+Actor LegCommanderBall
+{
+Radius 8
+Height 8
+Speed 42
+Damage 16
+Scale 1.5
+PROJECTILE
+RENDERSTYLE ADD
++SPAWNSOUNDSOURCE
++SEEKERMISSILE
++FORCERADIUSDMG
++NOTIMEFREEZE
+ALPHA 0.8
+DamageType "Legendary"
+SeeSound "lrball1/shot"
+DeathSound "lrball1/exp"
+Decal CacoScorch
+States
+{
+  Spawn:
+    LRB1 ABCD 2 Bright A_CustomMissile("LegRevBallFX",0,0,0,0)
+    Loop	
+  Death:
+	LRB1 ABCD 4 Bright A_SpawnItemEx("LegendaryBlueParticleSpawner",0,0,0,0,0,0,0,128)
+	TNT1 A 0 A_Explode(24,32,0) 
+	TNT1 A 0 A_PlaySound("weapons/clrocketexplode")
+	TNT1 A 0 A_SpawnItemEx("LegendaryBlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	TNT1 AAA 0 A_CustomMissile("LegendaryKaboom6", 0, 0, random(0,360), 2, random(0,360))
+	TNT1 AAA 0 A_CustomMissile("LegendarySmokeFX4", 0, 0, random(0,360), 2, random(0,360))	
+    LRB1 EFGHIJKLMNO 3 Bright
+    Stop
+    }
+}
+
+ACTOR LegFlyingGrenade
+{
+Radius 8
+Height 8
+Damage 20
+Speed 60
+Scale 0.7
+Projectile
++DOOMBOUNCE
++RANDOMIZE
++CANBOUNCEWATER
++SKYEXPLODE
++FORCERADIUSDMG
++NOTIMEFREEZE
+SeeSound "leggreenade/bounce"
+DeathSound "weapons/rocklx"
+ReactionTime 175
+BounceFactor 100
+BounceCount 3
+DamageType "GeneralTracer"
+States
+{
+  Spawn:
+    FLYG AAA 0 A_CustomMissile("LegFlyingGrenadeParticle",Random(4,6),Random(-2,2))
+	FLYG A 0 A_CountDown
+    FLYG A 1 Bright
+    FLYG AAA 0 A_CustomMissile("LegFlyingGrenadeParticle",Random(4,6),Random(-2,2))
+	FLYG A 0 A_CountDown
+    FLYG B 1 Bright	
+    Loop
+  Death:
+	TNT1 A 0
+	TNT1 A 0 A_Explode(156,350)
+	TNT1 A 0 A_AlertMonsters
+	TNT1 A 0 A_CustomMissile("BlueDiggerExplosion",0,0,random(80,100),2,random(80,100))
+    TNT1 AAAA 0 A_SpawnItemEx("Debris",0,0,0,random(4,-4),random(4,-4),random(4,8),0,128)
+	TNT1 A 1 A_SpawnItem("BlueDiggerEx")
+	Stop
+  }
+}
+
+Actor LegFlyingGrenadeParticle
+{
+  Height 0
+  Radius 0
+  Mass 0
+  +Missile
+  +NoBlockMap
+  +NoGravity
+  +DontSplash
+  +FORCEXYBILLBOARD
+  +NOTIMEFREEZE
+  +CLIENTSIDEONLY
+  RenderStyle Add
+  Scale 0.05
+  States
+  {
+  Spawn:
+    SPKB AAAAAAAAAA 1 Bright A_FadeOut(0.1)
+    Stop
+  }
+}
+
+ACTOR LegCommandoGhost
+{
+Scale 1.1
+Radius 20
+Height 56
+Speed 0
+Alpha 0.7
+PROJECTILE
+RENDERSTYLE Translucent
++CLIENTSIDEONLY
++NOTIMEFREEZE
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+Fade:
+    TNT1 A 1
+    LCOS A 2 A_FadeOut(0.10)
+    Goto Fade+1
+Toaster:
+    TNT1 A 0
+    Stop
+    }
+}
+
+Actor LegZombieStrafing2 : LegZombieStrafing
+{
+  States
+  {
+  Pickup:
+    NULL A 1 
+	NULL A 1 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+	NULL A 1 A_Jump(188,2)
+	NULL A 1 A_GiveInventory("LegZombieJumping",1)
+	NULL A 1 A_JumpIf(velx != 0 || vely != 0,2)
+	NULL A 1 A_Jump(256,2)
+	NULL A 1 A_Jump(235,5)
+	NULL A 1 A_JumpIfInventory("LegCommandoStrafeSens",1,3)
+	NULL A 1 A_GiveInventory("LegCommandoStrafeSens",1)
+	NULL A 1 A_Jump(256,2)	
+	NULL A 1 A_TakeInventory("LegCommandoStrafeSens",1)
+	NULL A 1 A_JumpIfInventory("LegCommandoStrafeSens",1,3)
+	NULL A 1 ThrustThing(angle*256/360+38.7,3,0,0)
+	NULL A 1 A_Jump(256,2)	
+	NULL A 1 ThrustThing(angle*256/360+38.7,-3,0,0)
+    NULL A 1 A_FaceTarget
+	NULL A 1 A_Jump(24,2)
+	NULL A 1 A_JumpIfCloser(300,2)
+	NULL A 1 A_Recoil(-1)
+    Stop
+	NULL A 1 A_Recoil(1)
+    Stop	
+  }
+}
+
+Actor LegZombieStrafing3 : LegZombieStrafing
+{
+  States
+  {
+  Pickup:
+    NULL A 1 
+	NULL A 1 A_SpawnItem("BHellionSmokeSpawner",0,0,0,0)
+	NULL A 1 A_Jump(188,2)
+	NULL A 1 A_GiveInventory("LegZombieJumping",1)
+	NULL A 1 A_JumpIf(velx != 0 || vely != 0,2)
+	NULL A 1 A_Jump(256,2)
+	NULL A 1 A_Jump(235,5)
+	NULL A 1 A_JumpIfInventory("LegCommandoStrafeSens",1,3)
+	NULL A 1 A_GiveInventory("LegCommandoStrafeSens",1)
+	NULL A 1 A_Jump(256,2)	
+	NULL A 1 A_TakeInventory("LegCommandoStrafeSens",1)
+	NULL A 1 A_JumpIfInventory("LegCommandoStrafeSens",1,3)
+	NULL A 1 ThrustThing(angle*256/360+38.7,3,0,0)
+	NULL A 1 A_Jump(256,2)	
+	NULL A 1 ThrustThing(angle*256/360+38.7,-3,0,0)
+    NULL A 1 A_FaceTarget
+	NULL A 1 A_Jump(24,2)
+	NULL A 1 A_JumpIfCloser(300,2)
+	NULL A 1 A_Recoil(-1)
+    Stop
+	NULL A 1 A_Recoil(1)
+    Stop	
+  }
+}
+
+
+ACTOR LegCommandoStrafeSens : Inventory{Inventory.MaxAmount 1}

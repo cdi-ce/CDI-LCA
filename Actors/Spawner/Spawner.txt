@@ -1,0 +1,359 @@
+ACTOR LegendarySpawner : RandomSpawner Replaces ZombiemanSpawner
+{
+DropItem "PlasmaGunner", 256, 58
+DropItem "RailGunner", 256, 32
+DropItem "DemonTechZombie", 256, 8
+DropItem "RocketZombie", 256, 2
+DropItem "LegZombie", 256, 1
+}
+
+ACTOR LegendaryDemonSpawner : RandomSpawner Replaces DemonSpawner
+{
+DropItem "BullFiend", 256, 65
+DropItem "CyberFiend", 256, 24
+DropItem "MagmaFiend", 256, 8
+DropItem "DTechFiend", 256, 3
+DropItem "LegendaryFiend", 256, 1
+}
+
+ACTOR OverlordNobleReplacer Replaces NobleReplacer
+{
++NOSECTOR
++NOGRAVITY
++BOSSDEATH
++SHOOTABLE
++ISMONSTER
++NORADIUSDMG
++NOINTERACTION
++NOBLOCKMAP
+HEALTH 0x7FFFFFFF
+Radius 0
+Height 0
+Mass 0x7FFFFFFF
+States
+{
+Spawn:
+    TNT1 A 1
+    TNT1 A 0 A_Jump(22,"BruiserSpawn")
+	TNT1 A 0 A_Jump(10,"CybruiserSpawn")
+	TNT1 A 0 A_Jump(6,"RictusISpawn")
+	TNT1 A 0 A_Jump(5,"OverlordSpawn")
+	TNT1 A 0 A_Jump(4,"CydestroyerSpawn")
+	TNT1 A 0 A_Jump(1,"LegCyberNobleSpawn")
+NormalSpawn:
+    TNT1 A 0 A_SpawnItemEx("BaronOfHell~",0,0,0,0,0,0,0,272)
+    Goto Nothing
+BruiserSpawn:
+    TNT1 A 0 A_SpawnItemEx("BruiserDemon",0,0,0,0,0,0,0,272)
+    Goto Nothing
+CybruiserSpawn:
+    TNT1 A 0 A_SpawnItemEx("Cybruiser",0,0,0,0,0,0,0,272)
+    Goto Nothing
+RictusISpawn:
+    TNT1 A 0 A_SpawnItemEx("RictusIncarnate",0,0,0,0,0,0,0,272)
+    Goto Nothing
+OverlordSpawn:
+    TNT1 A 0 A_SpawnItemEx("PhaseOverlord",0,0,0,0,0,0,0,272)
+    Goto Nothing
+CydestroyerSpawn:
+    TNT1 A 0 A_SpawnItemEx("Cydestroyer",0,0,0,0,0,0,0,272)
+    Goto Nothing
+LegCyberNobleSpawn:
+    TNT1 A 0 A_SpawnItemEx("LegendaryCyberNoble",0,0,0,0,0,0,0,272)
+    Goto Nothing
+Nothing:
+    TNT1 A 1
+    Loop
+Death:
+    TNT1 A 0 A_BossDeath
+    Stop
+    }
+}
+
+Actor BFGCacoSpawner : RandomSpawner Replaces Cacodemon
+{
+DropItem "Cacodemon~", 256, 82
+DropItem "Watcher", 256, 12
+DropItem "Cacomental", 256, 6
+DropItem "BFGCacodemon", 256, 2
+DropItem "LegendaryRedeemer", 256, 1
+}
+
+Actor VelVileSpawner : RandomSpawner Replaces VileSpawner
+{
+DropItem "Exile", 256, 88
+DropItem "Diabolist", 256, 8
+DropItem "DarkHellion", 256, 4
+DropItem "Velocirator", 256, 3
+}
+
+Actor DemonTechBFG10kZombieSpawner : RandomSpawner Replaces ShotgunZombieSpawner
+{
+DropItem "ShotgunZombie", 256, 46
+DropItem "AssaultShotgunZombie", 256, 32
+DropItem "SuperShotgunZombie", 256, 16
+DropItem "QuadShotgunZombie", 256, 6
+DropItem "Hexa-ShotgunZombie",256, 3
+DropItem "EraserZombie", 256, 2
+DropItem "DTDevastatorZombie", 256, 1
+DropItem "ShotgunCommando", 256, 1
+DropItem "LegendaryAssaultCaptain", 256, 1
+}
+
+ACTOR LegCyberReplacer Replaces CyberReplacer
+{
++NOSECTOR
++NOGRAVITY
++BOSSDEATH
++SHOOTABLE
++ISMONSTER
++NORADIUSDMG
++NOINTERACTION
++NOBLOCKMAP
+HEALTH 0x7FFFFFFF
+Radius 0
+Height 0
+Mass 0x7FFFFFFF
+States
+{
+Spawn:
+    TNT1 A 1
+	TNT1 A 0 A_Jump(26,"DarkCybSpawn")
+    TNT1 A 0 A_Jump(16,"CardySpawn")
+	TNT1 A 0 A_Jump(8,"CardihilatorSpawn")
+	TNT1 A 0 A_Jump(4,"LegCybSpawn")
+	TNT1 A 0 A_Jump(2,"LegAnniSpawn")
+	TNT1 A 0 A_Jump(1,"LegCardSpawn")	
+NormalSpawn:
+    TNT1 A 0 A_SpawnItemEx("CyberLord",0,0,0,0,0,0,0,272)
+    Goto Nothing
+DarkCybSpawn:
+    TNT1 A 0 A_SpawnItemEx("DarkCyberdemon",0,0,0,0,0,0,0,272)
+    Goto Nothing	
+CardySpawn:
+    TNT1 A 0 A_SpawnItemEx("Cardinal",0,0,0,0,0,0,0,272)
+    Goto Nothing
+CardihilatorSpawn:
+    TNT1 A 0 A_SpawnItemEx("Cardihilator",0,0,0,0,0,0,0,272)
+    Goto Nothing
+LegCybSpawn:
+    TNT1 A 0 A_SpawnItemEx("LegendaryCyberdemon",0,0,0,0,0,0,0,272)
+    Goto Nothing
+LegAnniSpawn:
+    TNT1 A 0 A_SpawnItemEx("LegendaryAnnihilator",0,0,0,0,0,0,0,272)
+    Goto Nothing
+LegCardSpawn:
+    TNT1 A 0 A_SpawnItemEx("LegendaryCardinal",0,0,0,0,0,0,0,272)
+    Goto Nothing
+Nothing:
+    TNT1 A 1
+    Loop
+Death:
+    TNT1 A 0 A_BossDeath
+    Stop
+    }
+}
+
+ACTOR LegendaryImpSpawner : RandomSpawner Replaces ImpSpawner
+{
+DropItem "Imp", 256, 67
+DropItem "VoidImp", 256, 30
+DropItem "Devil", 256, 18
+DropItem "PhaseImp", 256, 9
+DropItem "LegendaryImp", 256, 1
+}
+
+ACTOR LegendaryGreenArmorSpawner : RandomSpawner Replaces GreenArmorSpawner
+{
+DropItem "ModdedGreenArmor", 256, 95
+DropItem "RedArmor", 256, 5
+DropItem "LegendaryArmor", 256, 1
+}
+
+ACTOR LegendaryBlueArmorSpawner : RandomSpawner Replaces BlueArmorSpawner
+{
+DropItem "ModdedBlueArmor", 256, 90
+DropItem "RedArmor", 256, 10
+DropItem "LegendaryArmor", 256, 2
+}
+
+ACTOR LegendarySoulSphereSpawner : RandomSpawner Replaces SoulSphereSpawner
+{
+DropItem "ModdedSoulSphere", 256, 90
+DropItem "LifeSphere", 256, 10
+DropItem "LegendarySphere", 256, 1
+}
+
+ACTOR "ChainZombieSpawner " : ChainZombieSpawner Replaces ChainZombieSpawner
+{
+DropItem "AssaultRifleZombie", 256, 102
+DropItem "Chaingunner", 256, 64
+DropItem "Minigunner", 256, 28
+DropItem "BFGZombieman", 256, 4
+DropItem "FreezerZombie", 256, 4
+DropItem "BFG10KGeneral", 256, 2
+DropItem "LegendaryStealthTrooper", 256, 1
+DropItem "LegendaryCommando", 256, 1
+}
+
+ACTOR LegendaryUltraSphereSpawner : RandomSpawner Replaces MegaSphereSpawner
+{
+DropItem "ModdedMegaSphere", 256, 90
+DropItem "UltraSphere", 256, 10
+DropItem "LegendaryUltraSphere", 256, 3
+}
+
+ACTOR LegKnightSpawner : RandomSpawner Replaces MinorSpawner
+{
+DropItem "HellKnight~", 256, 83
+DropItem "PyroDemon", 256, 9
+DropItem "CyberNoble", 256, 5
+DropItem "HellDuke" 256, 3
+DropItem "SandSpirit" 256, 2
+DropItem "LegendaryHellKnight" 256, 1
+}
+
+ACTOR LegRevSpawner : RandomSpawner Replaces SkeletonSpawner
+{
+DropItem "Guardian", 256, 90
+DropItem "Cadaver", 256, 16
+DropItem "HellfireRevenant", 256, 12
+DropItem "Famine", 256, 10
+DropItem "LegendaryRevenant", 256, 1
+}
+
+ACTOR LegSentientReplacer Replaces MastermindReplacer
+{
++NOSECTOR
++NOGRAVITY
++BOSSDEATH
++SHOOTABLE
++ISMONSTER
++NORADIUSDMG
++NOINTERACTION
++NOBLOCKMAP
+HEALTH 0x7FFFFFFF
+Radius 0
+Height 0
+Mass 0x7FFFFFFF
+States
+{
+Spawn:
+    TNT1 A 1
+	TNT1 A 0 A_Jump(28,"DarkDemoSpawn")
+    TNT1 A 0 A_Jump(18,"CerebralSpawn")
+	TNT1 A 0 A_Jump(9,"FusionSpawn")
+	TNT1 A 0 A_Jump(5,"LegSentientSpawn")	
+NormalSpawn:
+    TNT1 A 0 A_SpawnItemEx("Demolisher",0,0,0,0,0,0,0,272)
+    Goto Nothing
+DarkDemoSpawn:
+    TNT1 A 0 A_SpawnItemEx("DarkDemolisher",0,0,0,0,0,0,0,272)
+    Goto Nothing		
+CerebralSpawn:
+    TNT1 A 0 A_SpawnItemEx("CerebralSentient",0,0,0,0,0,0,0,272)
+	Goto Nothing
+FusionSpawn:
+    TNT1 A 0 A_SpawnItemEx("CerebralCardinal",0,0,0,0,0,0,0,272)
+	Goto Nothing
+LegSentientSpawn:
+    TNT1 A 0 A_SpawnItemEx("LegendarySentient",0,0,0,0,0,0,0,272)
+    Goto Nothing	
+Nothing:
+    TNT1 A 1
+    Loop
+Death:
+    TNT1 A 0 A_BossDeath
+    Stop
+    }
+}
+
+ACTOR LegendaryBehemothSpawner : FattyReplacer Replaces FattyReplacer
+{
+States
+{
+Spawn:
+    TNT1 A 1	
+    TNT1 A 0 A_Jump(26,"DaedaSpawn")
+	TNT1 A 0 A_Jump(12,"BeheSpawn")
+	TNT1 A 0 A_Jump(6,"BarbaSpawn")
+	TNT1 A 0 A_Jump(4,"FreezSpawn")
+	TNT1 A 0 A_Jump(3,"LegSpawn")
+NormalSpawn:
+    TNT1 A 0 A_SpawnItemEx("Hectebus",0,0,0,0,0,0,0,272)
+    Goto Nothing
+DaedaSpawn:
+    TNT1 A 0 A_SpawnItemEx("Daedabus",0,0,0,0,0,0,0,272)
+    Goto Nothing
+BeheSpawn:
+    TNT1 A 0 A_SpawnItemEx("Behemoth",0,0,0,0,0,0,0,272)
+    Goto Nothing
+BarbaSpawn:
+    TNT1 A 0 A_SpawnItemEx("Barbatos",0,0,0,0,0,0,0,272)
+    Goto Nothing	
+FreezSpawn:
+    TNT1 A 0 A_SpawnItemEx("FreezerBehemoth",0,0,0,0,0,0,0,272)
+    Goto Nothing		
+LegSpawn:
+    TNT1 A 0 A_SpawnItemEx("LegendaryBehemoth",0,0,0,0,0,0,0,272)
+    Goto Nothing
+Nothing:
+    TNT1 A 1
+    Loop
+Death:
+    TNT1 A 0 A_BossDeath
+    Stop
+    }
+}
+
+ACTOR LegendaryBabySentientSpawner : ArachReplacer Replaces ArachReplacer
+{
+States
+{
+Spawn:
+    TNT1 A 1
+    TNT1 A 0 A_Jump(26,"FusioniteSpawn")
+	TNT1 A 0 A_Jump(12,"BabyDemoSpawn")	
+	TNT1 A 0 A_Jump(6,"BabySentSpawn")
+	TNT1 A 0 A_Jump(3,"LegSpawn")
+NormalSpawn:
+    TNT1 A 0 A_SpawnItemEx("Dualachnotron",0,0,0,0,0,0,0,272)
+    Goto Nothing
+FusioniteSpawn:
+    TNT1 A 0 A_SpawnItemEx("Fusionite",0,0,0,0,0,0,0,272)
+    Goto Nothing
+BabyDemoSpawn:
+    TNT1 A 0 A_SpawnItemEx("BabyDemolisher",0,0,0,0,0,0,0,272)
+    Goto Nothing
+BabySentSpawn:
+    TNT1 A 0 A_SpawnItemEx("BabySentient",0,0,0,0,0,0,0,272)
+    Goto Nothing
+LegSpawn:
+    TNT1 A 0 A_SpawnItemEx("LegendaryBabySentient",0,0,0,0,0,0,0,272)
+    Goto Nothing
+Nothing:
+    TNT1 A 1
+    Loop
+Death:
+    TNT1 A 0 A_BossDeath
+    Stop
+    }
+}
+
+ACTOR LegendarySoulSpawner : RandomSpawner Replaces SoulSpawner
+{
+DropItem "TerrorSoul", 256, 62
+DropItem "ForgottenOne", 256, 24
+DropItem "PoisonSoul", 256, 10
+DropItem "Rictus", 256, 5
+//DropItem "LegendarySoul", 256, 1 It sometimes spawn from Legendary Zombies bodies instead.
+}
+
+ACTOR LegendaryTormentorSpawner : RandomSpawner Replaces PainSpawner
+{
+DropItem "SoulKeeper", 256, 81
+DropItem "Defiler", 256, 10
+DropItem "PoisonElemental", 256, 6
+DropItem "BombElemental", 256, 3
+DropItem "LegendaryTormentor", 256, 1
+}

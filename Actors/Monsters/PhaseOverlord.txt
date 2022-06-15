@@ -1,0 +1,585 @@
+ACTOR PhaseOverlord 7063
+{ 
+Health 1650 
+Radius 24 
+Height 64 
+Mass 1000 
+Speed 8 
+Species "Nobles"
+PainChance 20 
+DropItem "UltraSphere" 40 
+DropItem "ExtraArmor" 65 
+DropItem "BossLifeEssence" 210 
+DropItem "BossArmorBonusMax" 210 
+MONSTER
+MeleeDamage 12
+Obituary "%o's aorta was punctured by a Phase Overlord."
+HitObituary "%o's penis was split in two by a Phase Overlord."
+BloodColor "cf 00 b0"
++NOTARGET
++QUICKTORETALIATE
++FLOORCLIP 
++MISSILEMORE
++MISSILEEVENMORE
++NORADIUSDMG
++DONTHURTSPECIES
+SeeSound "PhaseOverlord/Sight" 
+PainSound "baron/pain" 
+DeathSound "PhaseOverlord/Death"
+MeleeSound "baron/melee"
+SpawnID 174
+States 
+   { 
+   Spawn: 
+       //TNT1 A 0 A_SpawnItem("PHellionSmokeSpawner",0,0,0,0)
+       BOS3 A 14 A_Look 
+	   //TNT1 A 0 A_SpawnItem("PHellionSmokeSpawner",0,0,0,0)
+	   BOS3 X 14 A_Look 
+	   //TNT1 A 0 A_SpawnItem("PHellionSmokeSpawner",0,0,0,0)
+	   Loop 
+   See:
+       BOS3 AA 3 A_Chase
+	   TNT1 A 0 A_SpawnItem("HoofStep",0,0,0,0)
+	   TNT1 A 0 A_SpawnItemEx("PurpleWalkFire",0,0,0,0,0,0,0,128)
+	   BOS3 BB 3 A_Chase
+	   TNT1 A 0 A_SpawnItem("HoofStep",0,0,0,0)
+	   TNT1 A 0 A_SpawnItemEx("PurpleWalkFire",0,0,0,0,0,0,0,128)
+	   BOS3 CC 3 A_Chase
+	   TNT1 A 0 A_SpawnItem("HoofStep",0,0,0,0)
+	   TNT1 A 0 A_SpawnItemEx("PurpleWalkFire",0,0,0,0,0,0,0,128)
+	   BOS3 DD 3 A_Chase
+	   TNT1 A 0 A_SpawnItem("HoofStep",0,0,0,0)
+	   TNT1 A 0 A_SpawnItemEx("PurpleWalkFire",0,0,0,0,0,0,0,128)
+	   //TNT1 A 0 A_SpawnItem("PHellionSmokeSpawner",0,0,0,0)
+	   TNT1 A 0 A_Jump(62,"Rush")
+	   //TNT1 A 0 A_SpawnItem("PHellionSmokeSpawner",0,0,0,0)
+	   Loop
+   Rush:
+		TNT1 A 0 A_UnHideThing
+        TNT1 A 0 A_SetTranslucent(1)
+		TNT1 A 0 A_SpawnItemEx("OverlordGhostA",0,0,0,0,0,0,0,128)		
+		BOS3 A 1 A_Chase
+		TNT1 A 0 A_SpawnItem("HoofStep",0,0,0,0)
+		TNT1 A 0 A_SpawnItemEx("OverlordGhostA",0,0,0,0,0,0,0,128)		
+		BOS3 A 1 A_Chase
+		TNT1 A 0 A_SpawnItem("HoofStep",0,0,0,0)
+		TNT1 A 0 A_SpawnItemEx("OverlorddGhostB",0,0,0,0,0,0,0,128)
+		BOS3 B 1 A_Chase
+		TNT1 A 0 A_SpawnItem("HoofStep",0,0,0,0)
+		TNT1 A 0 A_SpawnItemEx("OverlorddGhostB",0,0,0,0,0,0,0,128)
+		BOS3 B 1 A_Chase
+		TNT1 A 0 A_SpawnItem("HoofStep",0,0,0,0)
+		TNT1 A 0 A_SpawnItemEx("OverlordGhostC",0,0,0,0,0,0,0,128)
+		BOS3 C 1 A_Chase
+		TNT1 A 0 A_SpawnItem("HoofStep",0,0,0,0)
+		TNT1 A 0 A_SpawnItemEx("OverlordGhostC",0,0,0,0,0,0,0,128)
+		BOS3 C 1 A_Chase
+		TNT1 A 0 A_SpawnItem("HoofStep",0,0,0,0)
+		TNT1 A 0 A_SpawnItemEx("OverlorddGhostD",0,0,0,0,0,0,0,128)
+		BOS3 D 1 A_Chase
+		TNT1 A 0 A_SpawnItem("HoofStep",0,0,0,0)
+		TNT1 A 0 A_SpawnItemEx("OverlorddGhostD",0,0,0,0,0,0,0,128)
+		BOS3 D 1 A_Chase
+		BOS3 D 1 A_Chase	
+		TNT1 A 0 A_SpawnItem("HoofStep",0,0,0,0)
+		TNT1 A 0 A_Jump(84,"See")		
+		Loop
+    Phase:
+        TNT1 A 0 A_PlaySound("phaseimp/teleport")
+        BOS3 A 4 A_FaceTarget
+        BOS3 A 1 A_SetTranslucent(0.8)
+        BOS3 A 1 A_SetTranslucent(0.6)
+        BOS3 A 1 A_SetTranslucent(0.4)
+        BOS3 A 1 A_SetTranslucent(0.2)
+        TNT1 A 0 A_HideThing
+        Goto See+10
+	Missile:
+       TNT1 A 0 A_SetShootable
+       TNT1 A 0 A_UnsetInvulnerable
+       TNT1 A 0 A_SetTranslucent(1)
+       TNT1 A 0 A_Jump(30,"Phase")
+	   TNT1 A 0 A_UnHideThing
+       TNT1 A 0 A_SetTranslucent(1)
+	   BOS3 B 0 A_Jump(156,"PhazoLaser","Spread","Comet")   
+	Normal:
+	   BOS3 EF 8 A_FaceTarget 
+	   TNT1 A 0 A_PlaySound("imp/attack")
+	   BOS3 G 0 A_CustomMissile("PhaseImpBall",28,0,-13)
+       BOS3 G 0 A_CustomMissile("PhaseImpBall",28,0,0)
+       BOS3 G 6 A_CustomMissile("PhaseImpBall",28,0,13)
+	   BOS3 ST 8 A_FaceTarget
+	   TNT1 A 0 A_PlaySound("imp/attack")
+	   BOS3 U 0 A_CustomMissile("PhaseImpBall",28,0,-13)
+       BOS3 U 0 A_CustomMissile("PhaseImpBall",28,0,0)
+       BOS3 U 6 A_CustomMissile("PhaseImpBall",28,0,13)
+	   TNT1 A 0 A_Jump(88,"PhazoLaser")  
+	   Goto See
+    Melee:
+       BOS3 EF 8 A_FaceTarget 
+       BOS3 G 8 A_MeleeAttack	
+       Goto See 
+	PhazoLaser:
+	   BOS3 EF 2 A_FaceTarget
+       BOS3 G 2 A_CustomMissile("PhazoLaser",28,0,0)	
+	   BOS3 ST 2 A_FaceTarget
+       BOS3 U 2 A_CustomMissile("PhazoLaser",28,0,0)
+	   BOS3 EF 2 A_FaceTarget
+       BOS3 G 2 A_CustomMissile("PhazoLaser",28,0,0)	
+	   BOS3 ST 2 A_FaceTarget
+       BOS3 U 2 A_CustomMissile("PhazoLaser",28,0,0)
+	   BOS3 EF 2 A_FaceTarget
+       BOS3 G 2 A_CustomMissile("PhazoLaser",28,0,0)	
+	   BOS3 ST 2 A_FaceTarget
+       BOS3 U 2 A_CustomMissile("PhazoLaser",28,0,0)
+	   BOS3 EF 2 A_FaceTarget
+       BOS3 G 2 A_CustomMissile("PhazoLaser",28,0,0)	
+	   BOS3 ST 2 A_FaceTarget
+       BOS3 U 2 A_CustomMissile("PhazoLaser",28,0,0)	
+	   TNT1 A 0 A_Jump(88,"Spread")
+	   Goto See
+	Spread:
+	   BOS3 HI 6 A_FaceTarget 
+	   BOS3 J 0 A_CustomMissile("PhazoFastShot",28,0,4)
+	   BOS3 J 0 A_CustomMissile("PhazoFastShot",28,0,-4)
+	   BOS3 J 0 A_CustomMissile("PhazoFastShot",28,0,2)
+	   BOS3 J 0 A_CustomMissile("PhazoFastShot",28,0,-2)
+       BOS3 J 4 A_CustomMissile("PhazoFastShot",28,0,0)
+	   BOS3 HI 6 A_FaceTarget 
+	   BOS3 J 0 A_CustomMissile("PhazoFastShot",28,0,4)
+	   BOS3 J 0 A_CustomMissile("PhazoFastShot",28,0,-4)
+	   BOS3 J 0 A_CustomMissile("PhazoFastShot",28,0,2)
+	   BOS3 J 0 A_CustomMissile("PhazoFastShot",28,0,-2)
+       BOS3 J 4 A_CustomMissile("PhazoFastShot",28,0,0)
+	   TNT1 A 0 A_Jump(88,"Comet")
+       Goto See	   
+	Comet:
+       BOS3 HI 8 A_FaceTarget
+       //TNT1 A 0 A_SpawnItem("PHellionSmokeSpawner",0,0,0,0)
+       //TNT1 A 0 A_SpawnItem("PHellionSmokeSpawner",0,0,0,0)
+       BOS3 J 0 Bright A_Custommissile("PArchonComet",32,0,0)
+	   BOS3 J 0 Bright A_Custommissile("PArchonComet",32,0,5)
+	   BOS3 J 0 Bright A_Custommissile("PArchonComet",32,0,-5)
+	   BOS3 J 7 Bright A_Custommissile("PArchonComet",32,0,10)
+       Goto See
+   Melee:
+       TNT1 A 0 A_UnHideThing
+       TNT1 A 0 A_SetTranslucent(1)
+	   BOS3 EF 8 A_FaceTarget 
+	   //TNT1 A 0 A_SpawnItem("PHellionSmokeSpawner",0,0,0,0)
+       BOS3 G 6 A_MeleeAttack
+	   //TNT1 A 0 A_SpawnItem("PHellionSmokeSpawner",0,0,0,0)
+       BOS3 G 0 A_Jump (128,1)
+       //TNT1 A 0 A_SpawnItem("PHellionSmokeSpawner",0,0,0,0)
+	   Goto See
+       BOS3 ST 8 A_FaceTarget
+	   //TNT1 A 0 A_SpawnItem("PHellionSmokeSpawner",0,0,0,0)
+       BOS3 U 6 A_MeleeAttack
+	   //TNT1 A 0 A_SpawnItem("PHellionSmokeSpawner",0,0,0,0)
+       BOS3 G 0 A_Jump (64,1)
+	   //TNT1 A 0 A_SpawnItem("PHellionSmokeSpawner",0,0,0,0)
+       Goto See
+       BOS3 HI 8 A_FaceTarget
+	   //TNT1 A 0 A_SpawnItem("PHellionSmokeSpawner",0,0,0,0)
+       BOS3 J 0 A_MeleeAttack
+	   //TNT1 A 0 A_SpawnItem("PHellionSmokeSpawner",0,0,0,0)
+       BOS3 J 6 A_MeleeAttack
+       //TNT1 A 0 A_SpawnItem("PHellionSmokeSpawner",0,0,0,0)
+	   Goto See
+   Pain: 
+       TNT1 A 0 A_UnHideThing
+       TNT1 A 0 A_SetTranslucent(1)
+	   BOS3 K 2 
+       BOS3 K 2 A_Pain 
+       Goto See 
+   Death: 
+       TNT1 A 0 A_UnHideThing
+       TNT1 A 0 A_SetTranslucent(1)
+	   BOS3 L 8 
+       BOS3 M 8 A_Scream 
+       BOS3 N 8 
+       BOS3 O 8 A_NoBlocking 
+       BOS3 PQ 8 
+       BOS3 R -1
+       Stop
+   XDeath:
+       TNT1 A 0 A_UnHideThing
+       TNT1 A 0 A_SetTranslucent(1)
+	   XARC A 5
+       XARC B 0 A_SpawnItemEx("MutantGibbedGenerator",0,0,0,0,0,0,0,128,0)
+	   XARC B 5 A_XScream
+       XARC C 5 A_NoBlocking
+       XARC DEFGH 5
+       XARC I -1
+       stop
+   } 
+}
+
+ACTOR PArchonComet
+{
+   Radius 8
+   Height 12
+   Speed 25
+   Damage 20
+   Scale 1.0
+   SpawnID 251
+   PROJECTILE
+   RENDERSTYLE Normal
+   +THRUGHOST
+   SeeSound "weapons/firbfi"
+   DeathSound "weapons/hellex"
+   DONTHURTSHOOTER
+   +FIREDAMAGE
+   States
+   {
+   Spawn: 
+      LRCB AAAABBBBCCCC 1 Bright A_SpawnItem("PArchonCometTrail",0,0)
+      loop
+   Death:
+      LRCB J 0 Bright A_SetTranslucent (0.67,1)
+      LRCB J 3 Bright
+      LRCB K 3 Bright A_Explode(128,128,0)
+      LRCB LMN 3 Bright
+      stop
+   }
+}
+
+ACTOR PArchonCometTrail
+{   
+   Radius 3
+   Height 3
+   Scale 0.75
+   Speed 0
+   PROJECTILE
+   RENDERSTYLE ADD
+   +CLIENTSIDEONLY
+   ALPHA 0.67
+   States
+   {
+   Spawn:
+       TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+      NULL A 3 Bright
+      LRCB DEFGHI 3 BRIGHT
+      Stop
+  Toaster:
+    TNT1 A 0
+	Stop		  
+   }
+}
+ACTOR OverlordGhostA
+{
+Scale 1.1
+Radius 2
+Height 2
+Speed 0
+Alpha 0.7
+PROJECTILE
+RENDERSTYLE Translucent
++CLIENTSIDEONLY
++DONTSPLASH
++THRUACTORS
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    TNT1 A 1
+    BOS3 A 2 A_FadeOut(0.10)
+    Goto Spawn+1
+  Toaster:
+    TNT1 A 0
+	Stop	
+    }
+}
+
+ACTOR OverlorddGhostB : OverlordGhostA
+{   
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    TNT1 A 1
+    BOS3 B 2 A_FadeOut(0.10)
+    Goto Spawn+1
+    }
+}
+
+ACTOR OverlordGhostC : OverlordGhostA
+{   
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    TNT1 A 1
+    BOS3 C 2 A_FadeOut(0.10)
+    Goto Spawn+1
+    }
+}
+
+ACTOR OverlorddGhostD : OverlordGhostA
+{   
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    TNT1 A 1
+    BOS3 D 2 A_FadeOut(0.10)
+    Goto Spawn+1
+    }
+}
+
+ACTOR PHellionSmoke
+{
++MISSILE
++DONTSPLASH
++NOBLOCKMAP
++NOGRAVITY
++NOTELEPORT
++FORCEXYBILLBOARD
++THRUACTORS
+Scale 0.4
+RenderStyle Normal
+States
+{
+Spawn:
+PMKE ABCDEFGHIJKL 2 Bright A_FadeOut
+Stop
+}
+}
+
+ACTOR PHellionSmoke2 : PHellionSmoke
+{
+Scale 0.6
+}
+
+ACTOR PSoulSmoke : PHellionSmoke
+{
+Scale 0.12
+}
+
+ACTOR PHellionSmokeSpawner : RedParticleSpawner
+{
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    TNT1 AAA 0 A_SpawnItemEx("PHellionSmoke",random(12,-12),random(12,-12),random(12,64),0,0,random(1,3),0,128,0)
+    TNT1 A 1
+    Stop
+  }
+}
+
+ACTOR PHellionSmokeAttackSpawner : RedParticleSpawner
+{
+  States
+  {
+  Spawn:   
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    TNT1 A 0 A_SpawnItemEx("PHellionSmoke2",random(12,-12),random(12,-12),random(12,18),0,0,random(6,9),0,128,0)
+	TNT1 A 0 A_SpawnItemEx("PHellionSmoke2",random(22,-22),random(22,-22),random(6,12),0,0,random(3,6),0,128,0)
+    TNT1 A 1
+    Stop
+  }
+}
+
+ACTOR PhaseBaronBall
+{
+    Radius 5
+    Height 5
+    Speed 15
+	FastSpeed 20
+    Damage 5
+    PROJECTILE
+    +SEEKERMISSILE
+	+RIPPER
+	+THRUSPECIES
+	+BLOODLESSIMPACT
+	Species "Imps"
+    SeeSound "Null"
+    DeathSound "phaseimp/shotx"
+    RENDERSTYLE ADD
+    Decal DoomImpScorch
+    States
+    {
+    Spawn:
+	    TNT1 A 0 Bright A_SeekerMissile(12,0)
+        DIMB AB 1 Bright A_SpawnItemEx("PhaseBallTrail",0,0,0,0,0,0,0,128,0)
+        Loop
+    Death:
+	    TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("PurpleParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+		TNT1 AAA 0 A_CustomMissile("Kaboom8", 0, 0, random(0,360), 2, random(0,360))
+		TNT1 AAA 0 A_CustomMissile("SmokeFX4", 0, 0, random(0,360), 2, random(0,360))	
+        DIMB CDE 3 Bright
+        Stop
+		}
+}
+
+Actor PhazoFastShot : GuardianTracer
+{
+SeeSound "monsters/newfireshoot"
+DeathSound "monsters/newfireexplode"
+RenderStyle Translucent
+Alpha 0.85
+Decal BaronScorch
+-SEEKERMISSILE
+Damage 12
+Speed 24
+FastSpeed 26
+States
+{
+    Spawn:
+	 PPB2 AAABBB 1 Bright A_SpawnItemEx("PhazoFastShotTrail",0,0,0,0,0,0,0,128)
+	 Loop
+	Death:
+	 TNT1 A 0
+     TNT1 A 0 A_SpawnItemEx("PurpleParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+	 TNT1 AAA 0 A_CustomMissile("Kaboom8", 0, 0, random(0,360), 2, random(0,360))
+	 TNT1 AAA 0 A_CustomMissile("SmokeFX4", 0, 0, random(0,360), 2, random(0,360))	
+     PPB2 DEFG 3 Bright
+     Stop
+}
+}
+
+Actor PhazoFastShotTrail : BFG9500Trail
+{
+Scale 0.85
+ States
+  {
+Spawn:
+    TNT1 A 0
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 1
+    PPB2 AB 1 A_FadeOut
+    Goto Spawn+1
+    }
+}
+
+Actor PhazoLaser : FastProjectile
+{
+ Height 6
+ Radius 6
+ Damage 4
+ SeeSound "baron/attack"
+ Damagetype "CacoLich"
+ DeathSound "baron/shotx"
+ -RIPPER
+ +NoExplodeFLoor
+ Speed 120
+ Scale 0.75
+ MissileType "PhazoLaserTrail"
+ Renderstyle Add
+  States
+   {
+    Spawn:
+	 PPB1 ABCB 1 Bright //A_Weave(0,4,0,2)
+	 Loop
+	Death:
+	 TNT1 A 0
+	 TNT1 A 0 A_SpawnItemEx("PurpleParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	 TNT1 AAA 0 A_CustomMissile("Kaboom8", 0, 0, random(0,360), 2, random(0,360))
+	 TNT1 AAA 0 A_CustomMissile("SmokeFX4", 0, 0, random(0,360), 2, random(0,360))
+	 PPB1 DDFFGGGGG 2 Bright A_FadeOut
+	 Stop
+   }
+}
+
+Actor CyLaser : PhazoLaser
+{
+Damagetype "NobleComet"
+States
+   {
+   Death:
+	 TNT1 A 0
+	 TNT1 A 0 A_SpawnItemEx("PurpleParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	 TNT1 AAA 0 A_CustomMissile("Kaboom8", 0, 0, random(0,360), 2, random(0,360))
+	 TNT1 AAA 0 A_CustomMissile("SmokeFX4", 0, 0, random(0,360), 2, random(0,360))
+	 PPB1 DDFFGGGGG 2 Bright A_FadeOut
+	 Stop
+   }
+}
+
+Actor PhazoLaserTrail
+{
+Scale 0.1
+Renderstyle Add
++NOBLOCKMAP
++NOGRAVITY
++NOTELEPORT
++CANNOTPUSH
++NODAMAGETHRUST
++CLIENTSIDEONLY
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+  TNT1 A 1 Bright A_SpawnItemEx("PhazoLaserTrail2",0,0,8)
+  Stop
+  Toaster:
+    TNT1 A 0
+	Stop	  
+}
+}
+
+Actor PhazoLaserTrail2
+{
+ Scale 0.75
+ +Nogravity
+ +CLIENTSIDEONLY
+ Alpha 0.85
+ Renderstyle Add
+  States
+   {
+    Spawn:
+	    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	 PPB1 AAA 3 Bright 
+	 PPB1 DDFFGGGGG 1 Bright A_FadeOut
+	 Wait
+	  Toaster:
+    TNT1 A 0
+	Stop	 
+   }
+}
+
+ACTOR PurpleWalkFire
+{
+  Scale 1.4
+  Speed 0
+  RenderStyle Add
+  Alpha 0.75
+  Damage 1
+  DamageType "NobleComet"
+  +NOCLIP
+  +MISSILE
+  +DROPOFF
+  +RANDOMIZE
+  +DONTSPLASH
+  +NOTELEPORT
+  +DONTHURTSPECIES
+  +THRUSPECIES
+  +CLIENTSIDEONLY
+  Species "Nobles"
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    TNT1 A 10
+    PRTF ABC 3 Bright
+    TNT1 A 0 A_Jump(191,3)
+    TNT1 A 0 A_CustomMissile("PurpleWalkFire", 0, 24, 0)
+    TNT1 A 0 A_CustomMissile("PurpleWalkFire", 0, -24, 0)
+    PRTF DEFGHIJKLMNO 3 Bright
+    Stop
+  Toaster:
+    TNT1 A 0
+	Stop
+    }
+}

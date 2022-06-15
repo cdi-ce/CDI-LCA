@@ -1,0 +1,163 @@
+#library "scmnds"
+#include "zcommon.acs"
+
+#define COMPLEXDOOM_CL_VERSION 2402
+
+Script 289 (void) CLIENTSIDE
+{
+    FadeTo(255,255,0,0.8,0.7);
+	ActivatorSound("misc/k_pkup",127);
+	HudMessage(s:"Red Keycard";
+	HUDMSG_FADEINOUT | HUDMSG_LOG, 905, CR_RED, 0.5, 0.26, 1.5, 0.35);
+	Delay(4);
+	CancelFade();
+}
+
+Script 290 (void) CLIENTSIDE
+{
+    FadeTo(255,255,0,0.8,0.7);
+	ActivatorSound("misc/k_pkup",127);
+	HudMessage(s:"Yellow Keycard";
+	HUDMSG_FADEINOUT | HUDMSG_LOG, 905, CR_YELLOW, 0.5, 0.26, 1.5, 0.35);
+	Delay(4);
+	CancelFade();
+}
+
+Script 291 (void) CLIENTSIDE
+{
+    FadeTo(255,255,0,0.8,0.7);
+	ActivatorSound("misc/k_pkup",127);
+	HudMessage(s:"Blue Keycard";
+	HUDMSG_FADEINOUT | HUDMSG_LOG, 905, CR_BLUE, 0.5, 0.26, 1.5, 0.35);
+	Delay(4);
+	CancelFade();
+}
+
+Script 292 (void) CLIENTSIDE
+{
+    FadeTo(255,255,0,0.8,0.7);
+	ActivatorSound("misc/s_pkup",127);
+	HudMessage(s:"Ruby Skull";
+	HUDMSG_FADEINOUT | HUDMSG_LOG, 905, CR_RED, 0.5, 0.26, 1.5, 0.35);
+	Delay(4);
+	CancelFade();
+}
+
+Script 293 (void) CLIENTSIDE
+{
+    FadeTo(255,255,0,0.8,0.7);
+	ActivatorSound("misc/s_pkup",127);
+	HudMessage(s:"Topaz Skull";
+	HUDMSG_FADEINOUT | HUDMSG_LOG, 905, CR_YELLOW, 0.5, 0.26, 1.5, 0.35);
+	Delay(4);
+	CancelFade();
+}
+
+Script 294 (void) CLIENTSIDE
+{
+    FadeTo(255,255,0,0.8,0.7);
+	ActivatorSound("misc/s_pkup",127);
+	HudMessage(s:"Sapphire Skull";
+	HUDMSG_FADEINOUT | HUDMSG_LOG, 905, CR_BLUE, 0.5, 0.26, 1.5, 0.35);
+	Delay(4);
+	CancelFade();
+}
+
+int key[3][6] = {{0,0,0,0,0,0},
+{"RedCard", "YellowCard", "BlueCard", "RedSkull", "YellowSkull", "BlueSkull"},
+{"\cgRed Keycard", "\ckYellow Keycard", "\chBlue Keycard", "\cgRuby Skull", "\ckTopaz Skull", "\chSapphire Skull"}};
+
+Script 295 ENTER 
+{
+	if (GetCVar("cd_sharedkeys") == 1)
+	{
+		while (PlayerInGame(PlayerNumber()))
+		{
+			for (int a = 0; a < 6; a++)
+			{
+				if (key[0][a] == 1)
+				{
+					GiveInventory(key[1][a], 1);
+				}
+			}
+			Delay(10);
+		}
+	}
+}
+
+Script 296 (int a)
+{
+	if(key[0][a] == 0)
+	{
+		SetFont("SMALLFONT");
+		HudMessageBold(n:0,s:" has picked up the ",s:key[2][a];
+		HUDMSG_FADEINOUT | HUDMSG_LOG, 900, CR_WHITE, 0.5, 0.26, 1.6, 0.35);
+	}
+	key[0][a] = 1;
+}
+
+Script 297 (void)
+{
+    SetResultValue(GetCVar("cd_sharedkeys"));
+}
+
+Script 298 (void)
+{
+	SetResultValue(GetCVar("cd_alwaysdrop"));
+}
+
+Script 299 (void) NET
+{
+	GiveInventory("HandGrenadeAction",1);
+}
+
+Script 300 (void) NET
+{
+	GiveInventory("MineAction",1);
+}
+
+Script 301 (void) NET
+{
+	GiveInventory("RailgunAction",1);
+}
+
+Script 302 OPEN CLIENTSIDE
+{
+	Delay(1);
+    if (GetCVar("cd_cl_exists") != COMPLEXDOOM_CL_VERSION)
+    {
+        ConsoleCommand(StrParam(s:"set cd_cl_exists", d:COMPLEXDOOM_CL_VERSION));
+        ConsoleCommand("archivecvar cd_cl_exists");
+		
+	if (!GetCVar("cd_cl_vanillamode"))
+	{   
+		ConsoleCommand("set cd_cl_vanillamode 0");
+		ConsoleCommand("archivecvar cd_cl_vanillamode"); }
+	}	
+}
+
+Script 303 (void) NET CLIENTSIDE
+{
+	if (GetCVar("cd_cl_vanillamode") == 1)
+	{
+	    ConsoleCommand("set cd_cl_vanillamode 0");
+		ConsoleCommand("archivecvar cd_cl_vanillamode");
+		SetFont("SMALLFONT");
+		HudMessage(s:"Vanilla mode OFF - All effects are enabled";
+		HUDMSG_FADEINOUT | HUDMSG_LOG, 1, CR_WHITE, 0.5, 0.24, 1.2, 0.5, 0.35);
+	}		
+	else if (GetCVar("cd_cl_vanillamode") == 0)
+	{
+	    ConsoleCommand("set cd_cl_vanillamode 1");
+		ConsoleCommand("archivecvar cd_cl_vanillamode");
+		SetFont("SMALLFONT");
+		HudMessage(s:"Vanilla mode ON - All effects are disabled";
+		HUDMSG_FADEINOUT | HUDMSG_LOG, 1, CR_GOLD, 0.5, 0.24, 1.2, 0.5, 0.35);
+	}	
+	Delay(1);
+}
+
+Script 304 (void)
+{
+    SetResultValue(GetCVar("cd_cl_vanillamode"));
+}

@@ -1,0 +1,447 @@
+Actor LegendarySoul
+{
+Monster
+Health 1000
+Radius 16
+Height 56
+Mass 100
+Speed 15
+Damage 11
+PainChance 50
++FLOAT
++NOGRAVITY
++NOTARGET
++NOINFIGHTING
++BOSS
++AVOIDMELEE
++NOTIMEFREEZE
++MISSILEMORE
++MISSILEEVENMORE
++NOICEDEATH
++DONTGIB
++NOTELEFRAG
++QUICKTORETALIATE
++DONTHARMSPECIES
++NORADIUSDMG
++EXTREMEDEATH
++DONTRIP
++DONTFALL
+BloodColor "Blue"
+Species "Souls"
+DamageFactor 0.6
+DamageFactor "SoulToxic", 0.0
+DamageFactor "BombBreath", 0.0
+DamageFactor "Legendary1", 0.0
+DamageFactor "LegendaryPlayer", 0.3
+DamageFactor "Legendary", 0.0
+DamageFactor "LegendaryGuru", 0.0
+DamageFactor "LegendaryGuruPlayer", 0.3
+DamageFactor "PDTBFG", 0.10
+DamageFactor "PDTBFGTracer", 0.10
+DamageFactor "PlayerDevBall", 0.110
+DamageFactor "PlayerDevBall2", 0.110
+DamageFactor "PlayerDTBFGRailgunSlug", 0.110
+DamageFactor "PlayerDevTracer", 0.110
+DamageFactor "DBFG10K2", 0.65
+DamageFactor "PlayerDBFG10K2", 0.65
+DamageFactor "DBFG2", 0.65
+DamageFactor "PlayerDBFG2", 0.65
+DropItem "LegendarySphere" 35 1
+DropItem "LDemonAmmoBox" 127
+DropItem "LDemonAmmo" 250
+DropItem "BossLifeEssence" 256
+DropItem "BossArmorBonusMax" 256
+DropItem "Legendary Plasmatic Rifle" 10 1
+SeeSound "legsoul/see"
+PainSound "legsoul/pain"
+DeathSound "legsoul/death"
+ActiveSound "legsoul/idle"
+AttackSound "legsoul/attack"
+Obituary "%o's energy was completely drained by a Legendary Soul."
+Scale 1.2
+var int user_delay;
+var int user_portal;
+var int user_timer;
+var int user_music;
+var int user_ragewait;
+States
+{
+  Spawn:
+    TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+    LSOL A 10 Bright A_Look
+    Loop
+  See:
+    TNT1 A 0 A_JumpIf(user_music == 1,3)
+    TNT1 A 0 ACS_ExecuteAlways(5432,0,21)
+	TNT1 A 0 A_SetUserVar("user_music",1)
+	TNT1 A 0 A_ChangeFlag(NOPAIN,0)
+	TNT1 A 0 A_SpawnItem("LHellionSmokeSpawner",0,0,0,0)
+    LSOL AAA 2 Bright A_Chase
+	TNT1 A 0 A_Jump(68,"Avoid","Rush","Teleport")
+    Loop	
+  Rush:
+    TNT1 A 0
+	LSOL AA 0 A_Chase
+    LSOL A 1 Bright A_SpawnItemEx("LegendarySoulGhost")
+	TNT1 A 0 A_Jump(12,"See")	
+    Loop
+  Avoid:
+	LSOL B 0
+	LSOL B 0 A_SetAngle(angle+random(0,359))
+	LSOL B 0 A_Recoil(-50)
+	LSOL B 0 A_FaceTarget
+	LSOL BBBBBBBBBBBBB 1 A_SpawnItemEx("LegendarySoulGhost2")
+	TNT1 A 0 A_Jump(127,"See")
+	LSOL B 1 A_Stop
+    Goto Avoid
+  Teleport:
+    LSOL A 1 A_UnSetShootable
+	LSOL AAAAAAAAAAA 1 A_FadeOut(0.1,0)
+	LSOL AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    LSOL A 1 A_PlayWeaponSound("boss/teleport")
+	LSOL AAAAAAAAAAA 1 A_FadeIn(0.1)
+    LSOL A 1 A_SetShootable
+    Goto See
+  Missile:
+    TNT1 A 0 A_SetTranslucent(1)
+    TNT1 A 0 A_Jump(58,"Super")
+	TNT1 A 0 A_Jump(48,"Rage")
+	TNT1 A 0 A_Jump(127,"Proj")
+  Normal:
+	LSOL B 10 Bright A_FaceTarget
+	TNT1 A 0 A_SpawnItem("BHellionSmokeSpawner",0,0,0,0)
+	LSOL B 2 Bright A_SkullAttack(50)
+	TNT1 A 0 A_SpawnItem("BHellionSmokeSpawner",0,0,0,0)
+	LSOL B 2 Bright A_CposRefire
+	TNT1 A 0 A_SpawnItem("BHellionSmokeSpawner",0,0,0,0)
+	LSOL B 2 Bright A_CposRefire
+	TNT1 A 0 A_SpawnItem("BHellionSmokeSpawner",0,0,0,0)
+	TNT1 A 0 A_JumpIf(velx != 0 || vely != 0,2)
+	TNT1 A 0 A_Jump(188,"See")
+	TNT1 A 0 A_Jump(16,"See")
+	LSOL B 2 Bright A_CposRefire
+	Goto Normal+1	
+  Proj:
+   	LSOL BBB 3 Bright A_FaceTarget
+	LSOL B 0 A_FaceTarget
+	LSOL B 4 Bright A_CustomMissile("LegSoulBall",20,0,random(-3,3))
+	LSOL B 0 A_FaceTarget
+	LSOL B 4 Bright A_CustomMissile("LegSoulBall",20,0,random(-3,3))
+	LSOL B 0 A_FaceTarget
+	LSOL B 4 Bright A_CustomMissile("LegSoulBall",20,0,random(-3,3))
+	LSOL B 0 A_FaceTarget
+	LSOL B 4 Bright A_CustomMissile("LegSoulBall",20,0,random(-3,3))
+	LSOL B 0 A_FaceTarget
+	LSOL B 4 Bright A_CustomMissile("LegSoulBall",20,0,random(-3,3))
+	LSOL B 0 A_FaceTarget
+	LSOL B 4 Bright A_CustomMissile("LegSoulBall",20,0,random(-3,3))
+	Goto See
+  Rage:	
+    LSOL B 1 A_JumpIfCloser(1500,1)
+    Goto Normal
+    LSOL B 1 Bright A_PlaySound("legsoul/see")
+	LSOL B 0 A_SetInvulnerable
+	LSOL B 1 Bright A_FaceTarget
+  RageWait:
+    TNT1 A 0 A_JumpIf(user_ragewait >= 28,"RageGo")
+	TNT1 A 0 A_SetUserVar("user_ragewait",user_ragewait+1)
+    LSOL B 0 A_JumpIfTargetInLos(2)
+	LSOL B 0 A_Jump(256,2)
+	LSOL B 0 A_FaceTarget
+	LSOL B 2 Bright A_SpawnItem("LFiendFlameSpawner",0,0,0,0)
+	Loop
+  RageGo:
+    TNT1 A 0 A_SetUserVar("user_ragewait",0) 
+	LFND G 0 A_UnSetInvulnerable
+	TNT1 A 0 A_ChangeFlag(NOPAIN,1)
+	TNT1 A 0 A_CustomMissile("LegSoulCharge",18,0,0,CMF_AIMDIRECTION)
+	TNT1 A 0 A_SpawnItemEx("LegendarySoulGhost2")
+	TNT1 A 0 A_SpawnItem("LFiendFlameSpawner",0,0,0,0)
+	LSOL B 2 Bright A_SkullAttack(75)
+	TNT1 A 0 A_CustomMissile("LegSoulCharge",18,0,0,CMF_AIMDIRECTION)
+	TNT1 A 0 A_SpawnItemEx("LegendarySoulGhost2")
+	TNT1 A 0 A_SpawnItem("LFiendFlameSpawner",0,0,0,0)
+	LSOL B 2 Bright A_CposRefire
+	TNT1 A 0 A_CustomMissile("LegSoulCharge",18,0,0,CMF_AIMDIRECTION)
+	TNT1 A 0 A_SpawnItemEx("LegendarySoulGhost2")
+	TNT1 A 0 A_SpawnItem("LFiendFlameSpawner",0,0,0,0)
+	LSOL B 2 Bright A_CposRefire
+	TNT1 A 0 A_CustomMissile("LegSoulCharge",18,0,0,CMF_AIMDIRECTION)
+	TNT1 A 0 A_SpawnItemEx("LegendarySoulGhost2")
+	TNT1 A 0 A_SpawnItem("LFiendFlameSpawner",0,0,0,0)
+	LSOL B 2 Bright A_CposRefire
+	Goto RageGo+3
+  Super:
+  	TNT1 A 0 Bright A_PlaySound("legsoul/see")
+	TNT1 A 0 A_SetInvulnerable
+	TNT1 A 0 A_FaceTarget
+	LSOL BBBBB 2 Bright A_SpawnItem("LSoulFlameSpawner",0,0,0,0)
+	TNT1 A 0 A_FaceTarget
+	LSOL BBBBB 2 Bright A_SpawnItem("LSoulFlameSpawner",0,0,0,0)
+	TNT1 A 0 A_FaceTarget
+	LSOL BBBBB 2 Bright A_SpawnItem("LSoulFlameSpawner",0,0,0,0)
+	TNT1 A 0 A_FaceTarget
+	LSOL BBBBB 2 Bright A_SpawnItem("LSoulFlameSpawner",0,0,0,0)
+	TNT1 A 0 A_FaceTarget
+	LSOL BBBBB 2 Bright A_SpawnItem("LSoulFlameSpawner",0,0,0,0)
+	TNT1 A 0 A_FaceTarget
+	LSOL BBBBB 2 Bright A_SpawnItem("LSoulFlameSpawner",0,0,0,0)
+	TNT1 A 0 A_FaceTarget
+	LSOL BBBBB 2 Bright A_SpawnItem("LSoulFlameSpawner",0,0,0,0)
+	LSOL B 4 Bright A_CustomMissile("LegSoulBigBall",20,0,0)
+	LSOL B 4 A_UnSetInvulnerable
+    Goto See
+  Pain:
+    TNT1 A 0
+	TNT1 A 0 A_KillChildren
+    TNT1 A 0 A_Jump(8,"Super")	
+  	TNT1 A 0 A_Jump(21,"Teleport")	
+	TNT1 A 0 A_Jump(128,"PainMissile")
+    LSOL C 2 Bright
+    LSOL C 2 Bright A_Pain
+    Goto See
+  PainMissile: 
+    LSOL C 2 Bright
+    LSOL C 2 Bright A_Pain
+    Goto Missile
+  Death:
+    TNT1 A 0
+    TNT1 A 0 A_SetTranslucent(0.75,1)
+	LSOL F 0 A_Scream
+    LSOL FFFFGGGG 2 Bright A_SpawnItemEx("BlueKaboom",random(-32,32),random(-40,40),random(16,48),random(-4,4),random(-4,4),random(0,4),0,SXF_TRANSFERPOINTERS)
+	TNT1 AA 0 A_SpawnItemEx("SoulPart1",0,0,Random(10,20),Random(8,-8),Random(8,-8),Random(6,8))
+	TNT1 A 0 A_SpawnItemEx("SoulPart2",0,0,Random(10,20),Random(8,-8),Random(8,-8),Random(6,8))
+	TNT1 AA 0 A_SpawnItemEx("SoulPart3",0,0,Random(10,20),Random(8,-8),Random(8,-8),Random(6,8))
+    LSOL H 4 Bright
+    TNT1 AA 0 A_SpawnItemEx("BlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128) 
+	TNT1 AAAA 0 A_CustomMissile("SmokeFX2", 0, 0, random(0,360), 2, random(0,360))
+    LSOL I 4 Bright A_NoBlocking
+    LSOL JK 4 Bright
+    Stop
+  }
+}
+
+ACTOR LegSoulBall
+{
+Radius 7
+Height 7
+Speed 40
+Damage 12
+Scale .75
+Projectile
+Seesound "legsoul/attack1"
+DeathSound "legsoul/explode1" 
+RenderStyle Translucent
+Decal DoomImpScorch
+Alpha 0.7
+States
+{
+  Spawn:
+    TNT1 A 0 A_SpawnItemEx("BFGTrailParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	LSA1 AB 3 Bright
+	TNT1 A 0 A_SpawnItemEx("BFGTrailParticleBlue",Random(-12,12),Random(-12,12),Random(-12,12),Random(-2,2),Random(-2,2),Random(-2,2),Random(-20,20),128)
+	LSA1 CD 3 Bright
+    Loop
+  Death:
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx("BlueParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+	TNT1 AAA 0 A_CustomMissile("Kaboom6", 0, 0, random(0,360), 2, random(0,360))
+	TNT1 AAA 0 A_CustomMissile("SmokeFX4", 0, 0, random(0,360), 2, random(0,360))
+    LSA1 EFGHIJ 3 Bright
+    LSA1 K 1
+    Stop
+  }
+}
+
+Actor LegSoulBigBall
+{
+Projectile
+Radius 8
+Height 6
+Speed 58
+Damage 75
+RENDERSTYLE ADD
+Scale 3.0
+Alpha 0.67
+Seesound "legsoul/attack2"
+DeathSound "legsoul/explode2"
+Decal BFG9500LightningGold
++FORCERADIUSDMG
+States
+{
+  Spawn:
+	LSA2 ABCD 2 Bright A_SpawnItemEx("LegSoulBigBallTrail",0,0,2,0,0,0,0,128,0)
+	Loop
+  Death:
+  
+  	TNT1 A 0 A_SpawnItemEx("BFGShockwaveGold", 0, 0, 0, 0, 0, 0, 0, 128)
+    TNT1 AAAAAA 0 A_CustomMissile("KaboomGold", 0, 0, random(0,360), 2, random(0,360))
+    TNT1 AAA 0 A_SpawnItemEx("LegendaryGoldParticleSpawner", 0, 0, 0, 0, 0, 0, 0, 128)
+	TNT1 A 0 A_Explode(356,300,0)
+	LSA2 EFG 4 Bright
+	Stop
+ }
+}
+
+ACTOR LegSoulBigBallTrail : BFG9500Trail
+{
+Scale 2.9
+Alpha 0.67
++NOTIMEFREEZE
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 1
+    LSA2 ABCDABCD 2 A_FadeOut(0.1)
+	Stop
+    }
+}
+
+ACTOR LegendarySoulGhost
+{
+Scale 1.1
+Radius 31
+Height 56
+Speed 0
+Alpha 0.7
+PROJECTILE
+RENDERSTYLE Translucent
++CLIENTSIDEONLY
++NOTIMEFREEZE
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 0
+	TNT1 A 0
+Fade:
+    TNT1 A 1
+    LSOL A 2 A_FadeOut(0.10)
+    Goto Fade+1
+Toaster:
+    TNT1 A 0
+    Stop
+    }
+}
+
+ACTOR LegendarySoulGhost2 : LegendarySoulGhost
+{
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+	TNT1 A 0
+	TNT1 A 0
+Fade:
+    TNT1 A 0
+    TNT1 A 1
+    LSOL B 2 A_FadeOut(0.10)
+    Goto Fade+2
+    }
+}
+
+ACTOR LegSoulCharge : BigLFLunge
+{
+Damagetype "SoulToxic"
+States
+{
+Spawn:
+TNT1 A 2
+TNT1 A 1 A_Explode(68,412,0)
+Stop
+Death:
+TNT1 A 2
+TNT1 A 1 A_Explode(68,412,0)
+Stop
+}
+}
+
+ACTOR LSoulFlameSpawner : LegendaryRedParticleSpawner
+{
+  +CLIENTSIDEONLY
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+    TNT1 AAAAAA 0 A_SpawnItemEx("LSoulFlameFlame",random(20,-20),random(20,-20),random(40,80),0,0,random(2,6),0,128,0)
+    TNT1 A 1
+    Stop
+  Toaster:
+    TNT1 A 0
+	Stop		
+  }
+}
+
+ACTOR LSoulFlameFlame
+{
++MISSILE
++DONTSPLASH
++CLIENTSIDEONLY
++NOBLOCKMAP
++NOGRAVITY
++NOTELEPORT
++FORCEXYBILLBOARD
++NOTIMEFREEZE
+RenderStyle Add
+Scale 1.1
+States
+{
+Spawn:
+    TNT1 A 0
+    TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(304) == 1, "Toaster")
+LMKE ABCDEFGHIJKL 2 Bright A_FadeOut
+Stop
+Toaster:
+    TNT1 A 0
+    Stop
+}
+}
+
+Actor LegSoulEvent : LegZombieStrafing
+{
++FORCERADIUSDMG
+States
+{
+  Pickup:
+    NULL A 1 
+	NULL A 1 A_SpawnItem("LegSoulEventSmokeSpawner",0,0,0,0)
+	NULL A 1 A_Explode(3,128)
+    Stop	
+  }
+}
+ACTOR LegSoulEventSmokeSpawner : LegendaryRedParticleSpawner
+{
+States
+{
+  Spawn:
+    TNT1 A 0
+    TNT1 AAA 0 A_SpawnItemEx("LegSoulEventSmoke",random(12,-12),random(12,-12),random(12,64),0,0,random(1,3),0,128,0)
+    TNT1 A 1
+    Stop
+  }
+}
+
+ACTOR LegSoulEventSmoke
+{
++MISSILE
++DONTSPLASH
++NOBLOCKMAP
++NOGRAVITY
++NOTELEPORT
++FORCEXYBILLBOARD
++THRUACTORS
++NOTIMEFREEZE
+Scale 0.4
+RenderStyle Normal
+States
+{
+  Spawn:
+	BMKE ABCDEFGHIJKL 2 Bright A_FadeOut
+	Stop
+}
+}
